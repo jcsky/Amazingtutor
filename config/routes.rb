@@ -2,11 +2,19 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :users 
+  resources :users do
+    resources :orders
+    resources :available_section, :controller => "user_available_sections"
 
+  end
 
+  resources :appointments do
+      resources :evalutions
+    end
 
-  resources :teachers 
+  resources :teachers do
+    resources :available_section
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

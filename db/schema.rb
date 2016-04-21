@@ -11,7 +11,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420153441) do
+ActiveRecord::Schema.define(version: 20160421040018) do
+
+  create_table "appointments", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "section"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "available_sections", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "appointment_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "evalutions", force: :cascade do |t|
+    t.string   "comment"
+    t.integer  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "teacher_id"
+    t.integer  "section"
+    t.integer  "amount"
+    t.string   "status"
+    t.string   "payment_status"
+    t.string   "attendance_status"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_available_sections", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "teacher_id"
+    t.integer  "available_section"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
