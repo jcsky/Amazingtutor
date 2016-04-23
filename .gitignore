@@ -17,3 +17,5 @@
 /tmp
 
 .idea/
+
+/config/facebook.yml

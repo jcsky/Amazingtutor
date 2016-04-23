@@ -17,6 +17,9 @@ gem 'coffee-rails', '~> 4.1.0'
 #devise
 gem 'devise'
 
+# omniauth
+gem 'omniauth-facebook'
+
 # http連線
 gem 'rest-client'
 
