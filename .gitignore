@@ -19,3 +19,4 @@
 .idea/
 
 /config/facebook.yml
+/config/google.yml
