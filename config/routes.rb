@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :orders
     resources :available_section, :controller => "user_available_sections"
-
+    resource  :profile , :controller=> "user_profiles_contoller"
   end
 
   resources :appointments do
