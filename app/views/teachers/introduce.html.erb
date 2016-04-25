@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Introduce</h1>
+  <%= form_for @teacher do |f| %>
+
+  <%= f.fields_for :second_tongues do |s| %>
+  <%= s.select :language, options_for_select([['中文', '1'],['ENGLISH', '2'],['日本の', '3'],['한국의', '4'],['русский', '5']]), { :prompt => "Please select"}, {:multiple => true, :class => "form-control language-select"}%>
+  <% end %>
+
+  <%= f.label :introduction, "First Name" %>
+  <%= f.text_area :introduction, :class => "form-control" %>
+
+  <%= f.submit 'save', :class => "btn btn-primary" %>
+  <% end %>
+</div>

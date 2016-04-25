@@ -9,13 +9,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resource  :teacher, controller: 'teacher_profiles' do
+  resource  :teacher do
     collection do
-      get 'introduce' => 'teacher#introduce'
-      get 'price'  => 'teacher#price'
-      get 'education' => 'teacher#education'
-      get 'youtube' => 'teacher#youtube'
-      get 'gethering' => 'teacher#gethering'
+      get 'introduce' => 'teachers#introduce'
+      get 'price'  => 'teachers#price'
+      get 'education' => 'teachers#education'
+      get 'youtube' => 'teachers#youtube'
+      get 'gethering' => 'teachers#gethering'
     end
   end
 
