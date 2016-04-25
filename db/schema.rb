@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20160425181517) do
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "authority"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
