@@ -10,16 +10,27 @@ class UserProfilesController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def edit
+  end
+
   def update
-    @profile = @user.get_profile
+    @user.get_profile
+    @user.update(user_params)
+    if @user.save
+        flash[:success] = "編輯成功"
+        redirect_to root_path
+      else
+        render 'edit'
+      end
   end
 
   private
   def find_user
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
-  def profile_params
-    params.require(:profile).permit(:username,:first_name,:last_name,:birthday,:time_zone,:tongue,:location,:currency,:born_form,:live_in,:gender)
+  def user_params
+    params.require(:user).permit(:email,:username,profile_attributes: [:first_name,:last_name,:birthday,:time_zone,:tongue,:location,:currency,:born_form,:live_in,:gender])
   end
+
 end

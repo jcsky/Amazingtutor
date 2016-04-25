@@ -10,7 +10,6 @@ class CreateProfiles < ActiveRecord::Migration
       t.datetime :time_zone
       t.integer  :user_id , :index=> true
       t.datetime :birthday
-      t.string   :username
       t.string   :first_name
       t.string   :last_name
 
