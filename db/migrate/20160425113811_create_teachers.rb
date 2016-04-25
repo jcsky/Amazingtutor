@@ -1,7 +1,7 @@
-class CreateTeacherProfiles < ActiveRecord::Migration
+class CreateTeachers < ActiveRecord::Migration
   def change
-    create_table :teacher_profiles do |t|
-      t.integer :teacher_id
+    create_table :teachers do |t|
+      t.integer :user_id
       t.string  :youtube
       t.text    :introduction
       t.integer :trial_fee

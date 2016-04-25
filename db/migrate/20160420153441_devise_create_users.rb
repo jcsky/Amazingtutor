@@ -20,6 +20,18 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :last_sign_in_ip
       t.string   :email
       t.string   :username
+      t.string   :first_name
+      t.string   :last_name
+      t.string   :location
+      t.string   :currency
+      t.string   :tongue
+      t.string   :born_form
+      t.string   :live_in
+      t.boolean  :gender
+      t.datetime :time_zone
+      t.integer  :user_id , :index=> true
+      t.datetime :birthday
+
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at

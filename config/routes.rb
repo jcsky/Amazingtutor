@@ -1,23 +1,27 @@
 Rails.application.routes.draw do
-
   devise_for :users
   root 'welcome#index'
   resources :users do
     resources :orders
-    resources :available_section, :controller => "user_available_sections"
-    resource  :profile , :controller=> "user_profiles"
-    resource  :teacher_profile , :controller=> "teacher_profiles" do
-      resource :introduce ,:only=> [:show , :update, :edit]
-      resource :price     ,:only=> [:show , :update, :edit]
-      resource :education ,:only=> [:show , :update, :edit]
-      resource :youtube   ,:only=> [:show , :update, :edit]
-      resource :gethering ,:only=> [:show , :update, :edit]
+    resources :available_section, controller: 'user_available_sections'
+    member do
+      get 'profile'
+    end
+  end
+
+  resource  :teacher, controller: 'teacher_profiles' do
+    collection do
+      get 'introduce' => 'teacher#introduce'
+      get 'price'  => 'teacher#price'
+      get 'education' => 'teacher#education'
+      get 'youtube' => 'teacher#youtube'
+      get 'gethering' => 'teacher#gethering'
     end
   end
 
   resources :appointments do
-      resources :evalutions
-    end
+    resources :evalutions
+  end
 
   resources :teachers do
     resources :available_section
