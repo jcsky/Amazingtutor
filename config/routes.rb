@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get 'price'  => 'teachers#price'
       get 'education' => 'teachers#education'
       get 'youtube' => 'teachers#youtube'
-      get 'gethering' => 'teachers#gethering'
+      get 'gathering' => 'teachers#gathering'
     end
   end
 

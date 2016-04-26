@@ -1,9 +1,17 @@
 <div class="container">
   <h1>Introduce</h1>
-  <%= form_for @teacher do |f| %>
+  <% @languages.each do |x| %>
+  <%= x.language %>
+  <% end %>
 
-  <%= f.fields_for :second_tongues do |s| %>
-  <%= s.select :language, options_for_select([['中文', '1'],['ENGLISH', '2'],['日本の', '3'],['한국의', '4'],['русский', '5']]), { :prompt => "Please select"}, {:multiple => true, :class => "form-control language-select"}%>
+    <div class="form-group">
+  <%= form_for @teacher do |f| %>
+  <%= f.add_nested_fields_link :languages, 'Add languages', class: 'btn btn-danger', role: 'button'  %>
+
+  <%= f.nested_fields_for :languages do |ff| %>
+  <%= ff.remove_nested_fields_link 'Remove me', class: 'btn btn-danger', role: 'button'%>
+  <%= ff.select :language, options_for_select([['ENGLISH', 'ENGLISH'],['日本の', '日本の'],['한국의', '한국의'],['русский', 'русский'],
+  ['中文', '中文']],:selected => ff.object.language), { :prompt => "Please select"}, {:class => "form-control language-select"}%>
   <% end %>
 
   <%= f.label :introduction, "First Name" %>
@@ -11,4 +19,5 @@
 
   <%= f.submit 'save', :class => "btn btn-primary" %>
   <% end %>
+</div>
 </div>

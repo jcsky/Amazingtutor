@@ -1,0 +1,20 @@
+<h1>PRICE</h1>
+<div class="container">
+  <div class="form-group">
+    <%= form_for @teacher do |f| %>
+    <%= f.label :trial_fee, "體驗課" %>
+    <%= f.text_field :trial_fee, :class => "form-control" %>
+
+    <%= f.label :one_fee, "單堂課" %>
+    <%= f.text_field :one_fee, :class => "form-control" %>
+
+    <%= f.label :five_fee, "五堂課" %>
+    <%= f.text_field :five_fee, :class => "form-control" %>
+
+    <%= f.label :ten_fee, "十堂課" %>
+    <%= f.text_field :ten_fee, :class => "form-control" %>
+
+    <%= f.submit 'save', :class => "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

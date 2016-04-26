@@ -1,0 +1,11 @@
+<h1>YOUYUBE</h1>
+<div class="container">
+  <div class="form-group">
+    <%= form_for @teacher do |f| %>
+    <%= f.label :youtube, "Youtube 連結" %>
+    <%= f.text_area :youtube, :class => "form-control" %>
+
+    <%= f.submit 'save', :class => "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
