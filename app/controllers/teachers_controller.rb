@@ -13,6 +13,7 @@ class TeachersController < ApplicationController
   end
 
   def gathering
+    @gathering = @teacher.gathering_way
   end
 
   def education
@@ -26,7 +27,12 @@ class TeachersController < ApplicationController
   def update
     @teacher = current_user.teacher
     @teacher.update(teacher_params)
-    @teacher.save ? (redirect_to root_path) : (render :introduce)
+    if @teacher.save
+     redirect_to :back
+     flash[:alert]= "Save success"
+   else
+      flash[:alert]= "Save fail"
+   end
   end
 
   private

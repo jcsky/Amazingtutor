@@ -1,5 +1,6 @@
 <div class="container">
   <h1>Introduce</h1>
+  <%= flash[:alert]  %>
   <% @languages.each do |x| %>
   <%= x.language %>
   <% end %>
