@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
 
   has_many :orders
   has_many :appointments
-  has_many :user_available_section
+  has_many :user_available_sections
+
+  def display_name
+    email.split("@").first
+  end
 
 end

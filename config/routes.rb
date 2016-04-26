@@ -1,12 +1,20 @@
 Rails.application.routes.draw do
 
+  post 'pay2go/return'
+  post 'pay2go/notify'
+
   devise_for :users
 
   resources :users do
-    resources :orders
+    resources :orders do
+      member do
+        post :checkout_pay2go 
+      end
     resources :available_section, :controller => "user_available_sections"
-
   end
+  end
+
+
 
   resources :appointments do
       resources :evalutions

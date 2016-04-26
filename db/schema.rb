@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421040018) do
+ActiveRecord::Schema.define(version: 20160425090107) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -44,9 +44,23 @@ ActiveRecord::Schema.define(version: 20160421040018) do
     t.string   "status"
     t.string   "payment_status"
     t.string   "attendance_status"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "paid",              default: false
+    t.string   "email"
   end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "payment_method"
+    t.integer  "amount"
+    t.boolean  "paid",           default: false
+    t.text     "params"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "payments", ["order_id"], name: "index_payments_on_order_id"
 
   create_table "teachers", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -57,9 +71,9 @@ ActiveRecord::Schema.define(version: 20160421040018) do
   create_table "user_available_sections", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "teacher_id"
-    t.integer  "available_section"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "available_section", default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "users", force: :cascade do |t|
