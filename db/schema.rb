@@ -92,7 +92,6 @@ ActiveRecord::Schema.define(version: 20160426072410) do
     t.string   "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "teacher_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -103,7 +102,7 @@ ActiveRecord::Schema.define(version: 20160426072410) do
     t.integer  "one_fee"
     t.integer  "five_fee"
     t.integer  "ten_fee"
-    t.integer  "gathering_way"
+    t.string   "gathering_way"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

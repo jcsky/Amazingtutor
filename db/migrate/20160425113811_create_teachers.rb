@@ -8,7 +8,7 @@ class CreateTeachers < ActiveRecord::Migration
       t.integer :one_fee
       t.integer :five_fee
       t.integer :ten_fee
-      t.integer :gathering_way
+      t.string :gathering_way
       t.timestamps null: false
     end
   end
