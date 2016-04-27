@@ -143,7 +143,6 @@ ActiveRecord::Schema.define(version: 20160426170300) do
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.text     "fb_profile"
     t.string   "fb_uid"
     t.string   "fb_token"
     t.text     "fb_raw_data"
