@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_one  :teacher
-  has_many :certificates
-  has_many :experiences
   has_many :remarks
   has_many :orders
   has_many :appointments

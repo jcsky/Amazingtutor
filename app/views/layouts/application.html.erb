@@ -16,6 +16,11 @@
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <%= link_to "education" ,education_teacher_path,:class=>"btn btn-primary"%>
+    <%= link_to "youtube" ,youtube_teacher_path,:class=>"btn btn-primary"%>
+    <%= link_to "gathering" ,gathering_teacher_path,:class=>"btn btn-primary"%>
+    <%= link_to "introduce" ,introduce_teacher_path,:class=>"btn btn-primary"%>
+    <%= link_to "price" ,price_teacher_path,:class=>"btn btn-primary"%>
     <% if current_user %>
              <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
              <%= link_to('修改密碼', edit_registration_path(:user)) %>

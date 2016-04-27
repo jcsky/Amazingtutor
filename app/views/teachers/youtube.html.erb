@@ -1,11 +1,16 @@
 <h1>YOUYUBE</h1>
 <div class="container">
+  <h1>ONLY ACCEPT YOUTUBE VIDEO</h1>
+<iframe width="640" height="360" src="<%= youtube_website %>" frameborder="0" allowfullscreen></iframe>
+
+
   <div class="form-group">
     <%= form_for @teacher do |f| %>
     <%= f.label :youtube, "Youtube 連結" %>
-    <%= f.text_area :youtube, :class => "form-control" %>
+    <%= f.text_field :youtube, :placeholder => "https://www.youtube.com/watch?xxxxxxxxx", :class => "form-control" %>
 
     <%= f.submit 'save', :class => "btn btn-primary" %>
     <% end %>
+
   </div>
 </div>
