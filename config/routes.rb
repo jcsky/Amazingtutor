@@ -16,6 +16,13 @@ Rails.application.routes.draw do
     resources :available_section
   end
 
+  resources :student_reservation do
+
+  end
+  resources :teacher_calendars do
+
+  end
+
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
