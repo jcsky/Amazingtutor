@@ -8,3 +8,7 @@ class CreateEvalutions < ActiveRecord::Migration
     end
   end
 end
+
+# 少appointments_id
+# 少user_id
+# 少teacher_id

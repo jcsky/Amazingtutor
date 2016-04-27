@@ -1,16 +1,27 @@
 Rails.application.routes.draw do
-
   devise_for :users
-
+  root 'welcome#index'
   resources :users do
     resources :orders
-    resources :available_section, :controller => "user_available_sections"
+    resources :available_section, controller: 'user_available_sections'
+    member do
+      get 'profile'
+    end
+  end
 
+  resource  :teacher do
+    collection do
+      get 'introduce' => 'teachers#introduce'
+      get 'price'  => 'teachers#price'
+      get 'education' => 'teachers#education'
+      get 'youtube' => 'teachers#youtube'
+      get 'gathering' => 'teachers#gathering'
+    end
   end
 
   resources :appointments do
-      resources :evalutions
-    end
+    resources :evalutions
+  end
 
   resources :teachers do
     resources :available_section
@@ -20,7 +31,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
