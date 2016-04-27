@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+gem 'faker'
 #devise
 gem 'devise'
 
@@ -31,6 +31,9 @@ gem 'populator'
 # 多國語系
 gem 'rails-i18n'
 
+gem "nested_form"
+gem 'nested_form_fields'
+gem 'awesome_rails_console'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -39,7 +42,11 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+gem "select2-rails"
+gem 'font-awesome-sass'
+gem 'bootstrap-slider-rails'
+gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass' ,' ~>3.3.6'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -48,6 +55,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -72,4 +81,3 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'growl'
 end
-

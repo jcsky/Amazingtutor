@@ -1,0 +1,13 @@
+<h1>YOUYUBE</h1>
+<div class="container">
+  <%= @teacher.gathering_way %>
+
+  <div class="form-group">
+    <%= form_for @teacher do |f| %>
+    <%= f.radio_button :gathering_way, "pay2go"%><span>智付寶</span>
+    <%= f.radio_button :gathering_way,"transfer" %><span>匯款</span>
+
+    <%= f.submit 'save', :class => "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

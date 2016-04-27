@@ -8,3 +8,4 @@ class CreateAppointments < ActiveRecord::Migration
     end
   end
 end
+# 少 user_id 

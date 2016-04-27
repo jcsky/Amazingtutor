@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable,
     :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
   has_one :teacher
-
+  has_many :remarks
   has_many :orders
   has_many :appointments
-  has_many :user_available_section
+  has_many :user_available_sections
+  accepts_nested_attributes_for :teacher
 
   serialize :fb_raw_data
   serialize :google_raw_data
