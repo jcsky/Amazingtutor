@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   before_action :authenticate_user!, except: :checkout_pay2go
-
+  before_action :set_student_section, :only => :show
   protect_from_forgery except: :checkout_pay2go
 
   def index
@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = current_user.orders.find( params[:id] )
   end
 
   def new
@@ -39,12 +38,15 @@ class OrdersController < ApplicationController
     end
   end
 
-
-
    protected
 
    def order_params
-     params.require(:order).permit(:name, :amount, :email)
+     params.require(:order).permit(:name, :amount, :email, :teacher_id )
+   end
+
+   def set_student_section
+     @order = current_user.orders.find(params[:id])
+     @student_available_section = @order.user.user_available_sections.where(:teacher_id => @order.teacher_id).first
    end
 
 
