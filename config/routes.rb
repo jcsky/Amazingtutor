@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
-  root 'welcome#index'
+
+  post 'pay2go/return'
+  post 'pay2go/notify'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
   resources :users do
-    resources :orders
-    resources :available_section, controller: 'user_available_sections'
-    member do
+    resources :orders do
+      member do
+        post :checkout_pay2go
+      end
+    end
+    resources :available_section, :controller => "user_available_sections"
+      member do
       get 'profile'
     end
   end
@@ -19,6 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
+
   resources :appointments do
     resources :evalutions
   end
@@ -27,6 +36,14 @@ Rails.application.routes.draw do
     resources :available_section
   end
 
+  resources :student_reservation do
+
+  end
+  resources :teacher_calendars do
+
+  end
+
+  root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

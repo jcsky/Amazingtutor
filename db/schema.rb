@@ -18,6 +18,9 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.integer  "section"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "student_id"
   end
 
   create_table "available_sections", force: :cascade do |t|
@@ -80,9 +83,24 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.string   "status"
     t.string   "payment_status"
     t.string   "attendance_status"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "paid",              default: false
+    t.string   "email"
   end
+
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "payment_method"
+    t.integer  "amount"
+    t.boolean  "paid",           default: false
+    t.text     "params"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "payments", ["order_id"], name: "index_payments_on_order_id"
 
   create_table "remarks", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -115,9 +133,9 @@ ActiveRecord::Schema.define(version: 20160427100712) do
   create_table "user_available_sections", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "teacher_id"
-    t.integer  "available_section"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "available_section", default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -145,10 +163,19 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "fb_uid"
+    t.string   "fb_token"
+    t.text     "fb_raw_data"
+    t.string   "google_uid"
+    t.string   "google_token"
+    t.text     "google_raw_data"
+    t.string   "locale"
     t.string   "authority"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["fb_uid"], name: "index_users_on_fb_uid"
+  add_index "users", ["google_uid"], name: "index_users_on_google_uid"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["user_id"], name: "index_users_on_user_id"
 
