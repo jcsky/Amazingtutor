@@ -6,8 +6,8 @@ class TeachersController < ApplicationController
   # language會存到重複的值
 
   def introduce
-    @language = @teacher.languages.build if @teacher.languages.empty?
-    @language = @teacher.languages
+    @teacher.teacher_languageships.new if @teacher.teacher_languageships.empty?
+  
   end
 
   def price
@@ -66,6 +66,7 @@ class TeachersController < ApplicationController
   def teacher_params
     params.require(:teacher).permit(:user_id, :youtube, :introduction, :trial_fee,
                                     :one_fee, :five_fee, :ten_fee, :gathering_way,
+                                    language_ids: [],
                                     languages_attributes: [:language, :_destroy, :id],
                                     experiences_attributes: [:company_name, :description, :_destroy, :id],
                                     educations_attributes: [:school, :major, :_destroy, :id],
