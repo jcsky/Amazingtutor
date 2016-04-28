@@ -1,0 +1,40 @@
+Teacher_id: <%= @appointment.teacher_id %>
+
+ <div id="rateYo"></div><div id="content"><%= @raty %></div>
+ <%= link_to "Give reviews", appointment_evalutions_path(@appointment), method: :post, remote: true, class: "button" %>
+
+
+ <script type="text/javascript" charset="utf-8">
+
+$(function () {
+  $("#rateYo").rateYo({
+    starWidth: "40px",
+    numStars: 5,
+    halfStar: true,
+    rating: <%= @raty %>
+  });
+});
+
+$(function () {
+
+  var $rateYo = $("#rateYo").rateYo();
+
+  $(".button").click(function () {
+    var rating = $rateYo.rateYo("rating");
+    var appointment_id =  <%= @appointment.id %>;
+    $.ajax({
+      type: 'POST',
+      url: "/appointments/" + appointment_id + "/evalutions",
+      dataType: 'JSON',
+      data: {
+        rating: rating
+      },
+      success: function(){
+      }
+    });
+  });
+});
+
+ </script>
+
+ </script>

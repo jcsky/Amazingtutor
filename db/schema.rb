@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426170300) do
+ActiveRecord::Schema.define(version: 20160427100712) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -48,9 +48,14 @@ ActiveRecord::Schema.define(version: 20160426170300) do
   create_table "evalutions", force: :cascade do |t|
     t.string   "comment"
     t.integer  "rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "appointment_id"
+    t.integer  "user_id"
   end
+
+  add_index "evalutions", ["appointment_id"], name: "index_evalutions_on_appointment_id"
+  add_index "evalutions", ["user_id"], name: "index_evalutions_on_user_id"
 
   create_table "experiences", force: :cascade do |t|
     t.integer  "teacher_id"
