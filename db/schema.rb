@@ -89,7 +89,6 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.string   "email"
   end
 
-
   create_table "payments", force: :cascade do |t|
     t.integer  "order_id"
     t.string   "payment_method"
@@ -163,6 +162,7 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "authority"
     t.string   "fb_uid"
     t.string   "fb_token"
     t.text     "fb_raw_data"
@@ -170,7 +170,6 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.string   "google_token"
     t.text     "google_raw_data"
     t.string   "locale"
-    t.string   "authority"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
