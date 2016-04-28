@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1' do
+    resources :sevalutions
+  end
+
   post 'pay2go/return'
   post 'pay2go/notify'
 

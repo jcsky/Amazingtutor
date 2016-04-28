@@ -28,6 +28,17 @@ class EvalutionsController < ApplicationController
 
   end
 
+  def show
+    @evalution = Evalution.find(params[:id])
+
+    respond_to do |format|
+       format.html
+       format.json {
+         render :json => { :id => @appointment.id, :rating => @evalution.rating }
+       }
+    end
+  end
+
   private
 
   def set_appointment
