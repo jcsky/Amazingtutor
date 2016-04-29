@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427100712) do
+ActiveRecord::Schema.define(version: 20160427163056) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 20160427100712) do
   end
 
   create_table "languages", force: :cascade do |t|
-    t.integer  "teacher_id"
     t.string   "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -114,6 +113,13 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.string   "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "teacher_languageships", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "language_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -162,7 +168,6 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "authority"
     t.string   "fb_uid"
     t.string   "fb_token"
     t.text     "fb_raw_data"
@@ -170,6 +175,7 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.string   "google_token"
     t.text     "google_raw_data"
     t.string   "locale"
+    t.string   "authority"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
