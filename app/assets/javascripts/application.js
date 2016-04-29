@@ -17,3 +17,4 @@
 //= require select2-full
 //= require bootstrap-slider
 //= require nested_form_fields
+//= require bootstrap-select.min
