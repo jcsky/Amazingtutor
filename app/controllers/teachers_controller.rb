@@ -3,11 +3,10 @@ class TeachersController < ApplicationController
   before_action :teacher_authority
   # 只有user裡面的author得值要等於teacher才可以進來 但大家都有第一次可能進來沒有teacher
   # 所以全部要before_action先建好teacher 如果已經有了就用已經有的
-  # language會存到重複的值
 
   def introduce
     @teacher.teacher_languageships.new if @teacher.teacher_languageships.empty?
-  
+
   end
 
   def price
@@ -33,10 +32,10 @@ class TeachersController < ApplicationController
         @teacher.save
         # redirect_to :back
         flash[:alert] = 'Save success'
-        redirect_to :back
+        render :back
       else
         flash[:alert] = 'Save fail'
-        redirect_to :back
+        render :back
       end
     else
       @teacher.update(teacher_params)
