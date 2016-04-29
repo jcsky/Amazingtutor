@@ -1,0 +1,19 @@
+<h1>Check out!</h1>
+
+<%= form_for @order, url: user_orders_path(current_user, @order) do |f| %>
+ <div class="form-group">
+   <%= f.label :teacher_id, "Teacher_ID: " %>
+   <%= f.text_field :teacher_id, :class => "form-control" %>
+ </div>
+  <div class="form-group">
+    <%= f.label :amount %>
+    <%= f.text_field :amount, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, :class => "form-control" %>
+  </div>
+
+  <%= f.submit "確認購買!", :class => "btn btn-primary btm-lg" %>
+<% end %>

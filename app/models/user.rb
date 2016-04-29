@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :appointments
   has_many :user_available_sections
+
+  def display_name
+    email.split("@").first
+  end
+
   accepts_nested_attributes_for :teacher
 
   serialize :fb_raw_data

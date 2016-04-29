@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426170300) do
+ActiveRecord::Schema.define(version: 20160427100712) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -51,9 +51,14 @@ ActiveRecord::Schema.define(version: 20160426170300) do
   create_table "evalutions", force: :cascade do |t|
     t.string   "comment"
     t.integer  "rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "appointment_id"
+    t.integer  "user_id"
   end
+
+  add_index "evalutions", ["appointment_id"], name: "index_evalutions_on_appointment_id"
+  add_index "evalutions", ["user_id"], name: "index_evalutions_on_user_id"
 
   create_table "experiences", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -78,9 +83,23 @@ ActiveRecord::Schema.define(version: 20160426170300) do
     t.string   "status"
     t.string   "payment_status"
     t.string   "attendance_status"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "paid",              default: false
+    t.string   "email"
   end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "payment_method"
+    t.integer  "amount"
+    t.boolean  "paid",           default: false
+    t.text     "params"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "payments", ["order_id"], name: "index_payments_on_order_id"
 
   create_table "remarks", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -113,9 +132,9 @@ ActiveRecord::Schema.define(version: 20160426170300) do
   create_table "user_available_sections", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "teacher_id"
-    t.integer  "available_section"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "available_section", default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -143,7 +162,7 @@ ActiveRecord::Schema.define(version: 20160426170300) do
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.text     "fb_profile"
+    t.string   "authority"
     t.string   "fb_uid"
     t.string   "fb_token"
     t.text     "fb_raw_data"
@@ -151,7 +170,6 @@ ActiveRecord::Schema.define(version: 20160426170300) do
     t.string   "google_token"
     t.text     "google_raw_data"
     t.string   "locale"
-    t.string   "authority"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
