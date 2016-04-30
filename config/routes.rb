@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     member do
       get :classes
       get :changepassword
-      get :feedback
+      get :remark
       get :editprofile
       get :mytutor
     end
@@ -23,22 +23,20 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :teacher do
+  resources :teachers do
     member do
+      get 'calendar' => 'teachers#calendar'
       get 'introduce' => 'teachers#introduce'
       get 'price' => 'teachers#price'
       get 'education' => 'teachers#education'
       get 'youtube' => 'teachers#youtube'
       get 'gathering' => 'teachers#gathering'
     end
+    resources :available_section
   end
 
   resources :appointments do
     resources :evalutions
-  end
-
-  resources :teachers do
-    resources :available_section
   end
 
   resources :student_reservation do
