@@ -13,6 +13,7 @@
  *= require select2
  *= require select2-bootstrap
  *= require bootstrap-slider
+ *= require bootstrap-datepicker
  */
  @import "varible";
  @import "bootstrap-sprockets";
@@ -31,3 +32,4 @@
  @import "scheduleds";
  @import "ios_background";
  @import "bootstrap-select.min";
+ @import "booking";

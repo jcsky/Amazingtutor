@@ -39,6 +39,7 @@
         });
 
         $(".selectpicker").selectpicker({});
+        $('#datepicker').datepicker()
       });
       $(document).ready(function () {
         $(".js-example-basic-single").select2();
@@ -80,9 +81,9 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Dashboard" %></li>
-                <li><%= link_to "教師資訊" %></li>
-                <li><%= link_to "授課日曆" %></li>
+                <li><%= link_to "Dashboard",classes_user_path(current_user) %></li>
+                <li><%= link_to "教師資訊" ,introduce_teacher_path(current_user.teacher.id)%></li>
+                <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.teacher.id)%></li>
                 <li>
                   <a href="#"><%= link_to('Log Out', destroy_user_session_path, :method => :delete)%></a>
                 </li>

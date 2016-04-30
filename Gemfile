@@ -15,8 +15,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 # gem 'faker'
 #devise
+gem 'bootstrap-datepicker-rails'
 gem 'devise'
-
 # omniauth
 gem 'omniauth-facebook'
 gem 'sinatra'
