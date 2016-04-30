@@ -1,32 +1,37 @@
 Rails.application.routes.draw do
-
   post 'pay2go/return'
   post 'pay2go/notify'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :users do
+    member do
+      get :classes
+      get :changepassword
+      get :feedback
+      get :editprofile
+      get :mytutor
+    end
     resources :orders do
       member do
         post :checkout_pay2go
       end
     end
-    resources :available_section, :controller => "user_available_sections"
-      member do
+    resources :available_section, controller: 'user_available_sections'
+    member do
       get 'profile'
     end
   end
 
-  resource  :teacher do
-    collection do
+  resources :teacher do
+    member do
       get 'introduce' => 'teachers#introduce'
-      get 'price'  => 'teachers#price'
+      get 'price' => 'teachers#price'
       get 'education' => 'teachers#education'
       get 'youtube' => 'teachers#youtube'
       get 'gathering' => 'teachers#gathering'
     end
   end
-
 
   resources :appointments do
     resources :evalutions
@@ -37,10 +42,8 @@ Rails.application.routes.draw do
   end
 
   resources :student_reservation do
-
   end
   resources :teacher_calendars do
-
   end
 
   root 'welcome#index'
