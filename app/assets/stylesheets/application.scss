@@ -14,8 +14,20 @@
  *= require select2-bootstrap
  *= require bootstrap-slider
  */
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "font-awesome-sprockets";
-@import "font-awesome";
-@import "users";
+ @import "varible";
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
+ @import "evaluations";
+ @import "payments";
+ @import "profiles";
+ @import "welcome";
+ @import "mystyle";
+ @import "star";
+ @import "profile-public";
+ @import "sidebar";
+ @import "scheduled-public";
+ @import "scheduleds";
+ @import "ios_background";
+ @import "bootstrap-select.min";

@@ -1,20 +1,19 @@
 class Teacher < ActiveRecord::Base
   belongs_to :user
-  has_many :languages
+  has_many :languages , :through => :teacher_languageships
+  has_many :teacher_languageships
   has_many :experiences
   has_many :certificates
   has_many :educations
+  accepts_nested_attributes_for :teacher_languageships , allow_destroy: true
   accepts_nested_attributes_for :languages , allow_destroy: true
   accepts_nested_attributes_for :experiences , allow_destroy: true
   accepts_nested_attributes_for :certificates , allow_destroy: true
   accepts_nested_attributes_for :educations , allow_destroy: true
 
   def uniq_language
-    x = params
     array = []
-    z = params[:teacher][:languages_attributes].count
-    for i in 0..count-1
-      params[:teacher][:languages_attributes][i]
-    end
+    params[:teacher][:languages_attributes].map{|x| array << x[:language]}
+    array.uniq
   end
 end
