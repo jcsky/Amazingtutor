@@ -1,7 +1,7 @@
 class Appointment < ActiveRecord::Base
   belongs_to :user
 
-  has_many :evaluations
+  has_many :evalutions
   has_many :available_section
 
   def self.appointment_check(start_time , end_time , teacher_id)

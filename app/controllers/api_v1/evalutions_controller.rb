@@ -16,4 +16,14 @@ class ApiV1::EvalutionsController < ApiController
     end
   end
 
+  def show
+    @evalution = Evalution.find(params[:id])
+  end
+
+  private
+
+  def set_appointment
+    @appointment = Appointment.find(params[:appointment_id])
+  end
+
 end
