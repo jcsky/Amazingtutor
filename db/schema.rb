@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427100712) do
+ActiveRecord::Schema.define(version: 20160430094543) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -21,7 +21,10 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.datetime "start"
     t.datetime "end"
     t.integer  "student_id"
+    t.integer  "user_id"
   end
+
+  add_index "appointments", ["user_id"], name: "index_appointments_on_user_id"
 
   create_table "available_sections", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -55,9 +58,11 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.datetime "updated_at",     null: false
     t.integer  "appointment_id"
     t.integer  "user_id"
+    t.integer  "teacher_id"
   end
 
   add_index "evalutions", ["appointment_id"], name: "index_evalutions_on_appointment_id"
+  add_index "evalutions", ["teacher_id"], name: "index_evalutions_on_teacher_id"
   add_index "evalutions", ["user_id"], name: "index_evalutions_on_user_id"
 
   create_table "experiences", force: :cascade do |t|
@@ -88,7 +93,6 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.boolean  "paid",              default: false
     t.string   "email"
   end
-
 
   create_table "payments", force: :cascade do |t|
     t.integer  "order_id"
@@ -163,6 +167,7 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "authority"
     t.string   "fb_uid"
     t.string   "fb_token"
     t.text     "fb_raw_data"
@@ -170,7 +175,6 @@ ActiveRecord::Schema.define(version: 20160427100712) do
     t.string   "google_token"
     t.text     "google_raw_data"
     t.string   "locale"
-    t.string   "authority"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
