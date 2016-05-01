@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :remarks
   has_many :orders
   has_many :appointments
+  has_many :evalutions
   has_many :user_available_sections
 
   def display_name
