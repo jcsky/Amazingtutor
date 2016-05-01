@@ -72,10 +72,10 @@
     border: 1px solid #7EB0EA;
     border-radius: 23px;
     width: 175px;
-    height: 45px;
+    height: 40px;
     background-color: #fff;
     color: #7EB0EA;
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 15px;
     font-weight: lighter;
     transform: translateX(50%);
@@ -92,12 +92,12 @@
     border: 1px solid #FF6969;
     border-radius: 23px;
     width: 175px;
-    height: 45px;
+    height: 40px;
     background-color: #fff;
     color: #FF6969;
     left: 50%;
     transform: translateX(50%);
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 15px;
     font-weight: lighter;
   }
@@ -256,6 +256,7 @@
     img {
       width: 202px;
       height: 137px;
+      border-bottom-left-radius:5px;
     }
   }
   .scheduled-text {

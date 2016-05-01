@@ -40,7 +40,6 @@
           $('#booking-bg').fadeOut(1)
         });
         $(".selectpicker").selectpicker({});
-        $('#datepicker').datepicker()
         $(".js-example-basic-single").select2();
         $("#priceslide").slider();
         $(".language-select").select2({placeholder: "Select a language"});
@@ -81,8 +80,10 @@
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Dashboard",classes_user_path(current_user) %></li>
+                <% if current_user.authority == "teacher" %>
                 <li><%= link_to "教師資訊" ,introduce_teacher_path(current_user.teacher.id)%></li>
                 <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.teacher.id)%></li>
+                <% end %>
                 <li>
                   <a href="#"><%= link_to('Log Out', destroy_user_session_path, :method => :delete)%></a>
                 </li>

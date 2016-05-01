@@ -11,6 +11,9 @@ class TeachersController < ApplicationController
   def calendar
   end
 
+  def classes
+  end
+
   def profile
   end
 
