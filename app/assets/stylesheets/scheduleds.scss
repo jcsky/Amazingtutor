@@ -197,10 +197,10 @@
       margin: 0 auto;
     }
   }
-  .scheduled-content .input-group{
+  .scheduled-content .input-group {
     width: 100%;
     padding-right: 30px;
-    input{
+    input {
       width: 100%;
     }
   }
@@ -227,7 +227,7 @@
       font-size: 22px;
     }
   }
-  .scheduled-dark {
+  .scheduled .scheduled-dark {
     width: 280px;
     border-top-right-radius: 0;
     border-bottom-left-radius: 5px;
@@ -263,11 +263,13 @@
       font-size: 22px;
     }
   }
-  .scheduled-dark {
-    width: 202px !important;
-  }
   .scheduled {
     padding: 0;
+    .scheduled-dark {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 5px;
+      width: 202px !important;
+    }
   }
   .scheduled-changepassword-fix {
     .input-group .form-control {
