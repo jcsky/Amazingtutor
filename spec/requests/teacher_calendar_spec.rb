@@ -19,13 +19,18 @@ RSpec.describe "Teacher_calendar", type: :request do
                                                              :available_section => 2)
     end
     it 'should return empty json' do
-      get "/teacher_calendars/#{@teacher1.id}" , :date => '2016-01-01'
-      data = [{"start"=>'2016-01-01 00:00:00 +0800'.to_time, "end"=>'2016-01-01 01:00:00 +0800'.to_time, "teacher_id" => 3.to_s, "status"=>true},
-          {"start"=>'2016-01-01 01:00:00 +0800'.to_time, "end"=>'2016-01-01 02:00:00 +0800'.to_time, "teacher_id"=>3.to_s, "status"=>true},
-          {"start"=>'2016-01-01 02:00:00 +0800'.to_time, "end"=>'2016-01-01 03:00:00 +0800'.to_time, "teacher_id"=>3.to_s, "status"=>true},
-          {"start"=>'2016-01-01 03:00:00 +0800'.to_time, "end"=>'2016-01-01 04:00:00 +0800'.to_time, "teacher_id"=>3.to_s, "status"=>false},
-          {"start"=>'2016-01-01 04:00:00 +0800'.to_time, "end"=>'2016-01-01 05:00:00 +0800'.to_time, "teacher_id"=>3.to_s, "status"=>false},
-          {"start"=>'2016-01-01 05:00:00 +0800'.to_time, "end"=>'2016-01-01 06:00:00 +0800'.to_time, "teacher_id"=>3.to_s, "status"=>true}]
+      get "/teacher_calendars/#{@teacher1.id}", :date => '2016-01-01'
+      data = [{"start" => '2016-01-01 00:00:00 +0800'.to_time, "end" => '2016-01-01 01:00:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => true},
+              {"start" => '2016-01-01 00:30:00 +0800'.to_time, "end" => '2016-01-01 01:30:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => true},
+              {"start" => '2016-01-01 01:00:00 +0800'.to_time, "end" => '2016-01-01 02:00:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => true},
+              {"start" => '2016-01-01 01:30:00 +0800'.to_time, "end" => '2016-01-01 02:30:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => true},
+              {"start" => '2016-01-01 02:00:00 +0800'.to_time, "end" => '2016-01-01 03:00:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => true},
+              {"start" => '2016-01-01 02:30:00 +0800'.to_time, "end" => '2016-01-01 03:30:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => true},
+              {"start" => '2016-01-01 03:00:00 +0800'.to_time, "end" => '2016-01-01 04:00:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => false},
+              {"start" => '2016-01-01 03:30:00 +0800'.to_time, "end" => '2016-01-01 04:30:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => false},
+              {"start" => '2016-01-01 04:00:00 +0800'.to_time, "end" => '2016-01-01 05:00:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => false},
+              {"start" => '2016-01-01 04:30:00 +0800'.to_time, "end" => '2016-01-01 05:30:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => true},
+              {"start" => '2016-01-01 05:00:00 +0800'.to_time, "end" => '2016-01-01 06:00:00 +0800'.to_time, "teacher_id" => 3.to_s, "status" => true}]
       expect(response.body).to eq(data.to_json)
     end
   end

@@ -1,14 +1,11 @@
 class TeacherCalendarsController < ApplicationController
   before_action :set_available_section, :only => [:create]
-  before_action :set_reservaton_list_params, :only => [:show]
+  before_action :set_reservaton_list_params, :only => [:show , :index ,:teacher_available , :booked_section]
 
   def index
-    @teacher_calendar = AvailableSection.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml { render :xml => @teacher_calendar.to_xml }
-      format.json { render :json => @teacher_calendar.to_json }
-    end
+    @teacher = User.find(@reservaton_list_params[:id]).teacher
+
+    @reservation_list = AvailableSection.query_reservation_time_list_by_date( @reservaton_list_params[:id] , @reservaton_list_params[:date])
   end
 
   def create
@@ -23,6 +20,14 @@ class TeacherCalendarsController < ApplicationController
   def show
     reservation_list = AvailableSection.query_reservation_time_list_by_date( @reservaton_list_params[:id] , @reservaton_list_params[:date])
     render :json => reservation_list.to_json
+  end
+
+  def teacher_available
+    render AvailableSection.teacher_available_by_date(@reservaton_list_params[:id] , @reservaton_list_params[:date]).to_json
+  end
+
+  def booked_section
+    render Appointment.booked_section_by_date(@reservaton_list_params[:id] , @reservaton_list_params[:date]).to_json
   end
 
   private
