@@ -123,22 +123,8 @@
     }
 }
 @media (max-width: $screen-sm-min) {
-    .payment-info {
-        button,
-        input,
-        select {
-            // width: 458px;
-        }
-    }
 }
 @media (min-width: $screen-sm-min)and (max-width: $screen-md-min) {
-    .payment-info {
-        button,
-        input,
-        select {
-            // width: 640px;
-        }
-    }
 }
 @media (min-width: $screen-md-min) {
     .payment-info {

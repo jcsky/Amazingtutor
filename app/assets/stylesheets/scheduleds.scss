@@ -19,7 +19,7 @@
 .scheduled {
   background-color: #fff;
   border-radius: 5px;
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 0 0 15px;
 }
 .scheduled-image {
@@ -100,7 +100,6 @@
     margin-top: 10px;
     font-size: 15px;
     font-weight: lighter;
-    // transform: translateX(-50%);
   }
   button:hover {
     background-color: #FF6969;
@@ -184,7 +183,7 @@
   .scheduled-editprofile-fix {
     .input-group {
       width: 100%;
-      margin: 10px -10px;
+      // margin: 10px -10px;
     }
   }
 }
@@ -196,6 +195,13 @@
   .ratingnow {
     button {
       margin: 0 auto;
+    }
+  }
+  .scheduled-content .input-group{
+    width: 100%;
+    padding-right: 30px;
+    input{
+      width: 100%;
     }
   }
 }
