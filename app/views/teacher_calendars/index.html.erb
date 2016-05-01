@@ -1,0 +1,23 @@
+<br/>
+<%= @teacher.youtube %>
+<br/>
+<%= @teacher.user.email %>
+<br/>
+----------------
+<br/>
+日期：<%= @reservation_list.first['start'].strftime("%Y-%m-%d") %>
+<br/>
+可選時段：
+<div class="btn-group" data-toggle="buttons">
+  <% @reservation_list.each do |r| %>
+      <% if r["status"] %>
+          <label class="btn btn-primary active">
+            <input type="radio" name="reservation_time" autocomplete="off" value="<%= r["start"].strftime("%H:%M:%S") %>"><%= r["start"].strftime("%H:%M:%S") %>
+            - <%= r["end"].strftime("%H:%M:%S") %>
+          </label>
+      <% else %>
+          <%= r["start"].strftime("%H:%M:%S") %>- <%= r["end"].strftime("%H:%M:%S") %>
+      <% end %>
+      <br/>
+  <% end %>
+</div>

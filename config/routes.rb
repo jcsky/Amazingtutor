@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   post 'pay2go/return'
   post 'pay2go/notify'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
 
   resources :users do
     resources :orders do
@@ -12,15 +12,15 @@ Rails.application.routes.draw do
       end
     end
     resources :available_section, :controller => "user_available_sections"
-      member do
+    member do
       get 'profile'
     end
   end
 
-  resource  :teacher do
+  resource :teacher do
     collection do
       get 'introduce' => 'teachers#introduce'
-      get 'price'  => 'teachers#price'
+      get 'price' => 'teachers#price'
       get 'education' => 'teachers#education'
       get 'youtube' => 'teachers#youtube'
       get 'gathering' => 'teachers#gathering'
@@ -40,7 +40,8 @@ Rails.application.routes.draw do
 
   end
   resources :teacher_calendars do
-
+    get 'teacher_available' => 'teacher_calendars#teacher_calendars'
+    get 'booked_section' => 'teacher_calendars#booked_section'
   end
 
   root 'welcome#index'
