@@ -17,8 +17,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resource  :teacher do
-    collection do
+  resources  :teacher do
+    member do
+      get :profile
+    end
+    member do
       get 'introduce' => 'teachers#introduce'
       get 'price'  => 'teachers#price'
       get 'education' => 'teachers#education'
