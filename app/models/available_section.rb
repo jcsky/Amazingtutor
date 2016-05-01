@@ -78,14 +78,14 @@ class AvailableSection < ActiveRecord::Base
                            date.to_time.at_beginning_of_day,
                            date.to_time.at_end_of_day).order('start').each do |a|
       start_time = a.start.to_time
-      while start_time < a.end.to_time do
-        end_time = start_time + (30.minute)*section
+      while start_time < a.end.to_time-(30.minute)*(section.to_i-1)  do
+        end_time = start_time + (30.minute)*section.to_i
         if !Appointment.appointment_check(start_time, end_time, teacher_id)
           reservation_list << {'start' => start_time, 'end' => end_time, 'teacher_id' => teacher_id, 'status' => true}
         else
           reservation_list << {'start' => start_time, 'end' => end_time, 'teacher_id' => teacher_id, 'status' => false}
         end
-        start_time = end_time
+        start_time = start_time + (30.minute)
       end
     end
     reservation_list

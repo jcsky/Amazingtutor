@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20160427163056) do
   end
 
   create_table "languages", force: :cascade do |t|
+    t.integer  "teacher_id"
     t.string   "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
