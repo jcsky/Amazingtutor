@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :teachers do
     member do
+      get 'profile' => 'teachers#profile'
       get 'calendar' => 'teachers#calendar'
       get 'introduce' => 'teachers#introduce'
       get 'price' => 'teachers#price'

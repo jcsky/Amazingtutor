@@ -6,11 +6,12 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.css">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script> -->
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
+
+    <script type="text/javascript">
       $(function () {
         $("#rateYo").rateYo({starWidth: "15px", rating: 2, fullStar: true, normalFill: "#A0A0A0", spacing: "5px"});
       });
@@ -40,9 +41,6 @@
         });
         $(".selectpicker").selectpicker({});
         $('#datepicker').datepicker()
-      });
-
-      $(document).ready(function () {
         $(".js-example-basic-single").select2();
         $("#priceslide").slider();
         $(".language-select").select2({placeholder: "Select a language"});
