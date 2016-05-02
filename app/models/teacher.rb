@@ -18,10 +18,10 @@ class Teacher < ActiveRecord::Base
   end
 
   def youtube_website
-    if self.youtube.empty?
+    if  self.youtube.blank?
       'https://www.youtube.com/embed/z3XVg9wRVmk'
     else
-      self.youtube.gsub('watch?v=', 'embed/')
+      self.youtube.gsub('watch?v=','embed/')
     end
   end
 end
