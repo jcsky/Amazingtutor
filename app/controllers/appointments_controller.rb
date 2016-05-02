@@ -1,4 +1,5 @@
 class AppointmentsController < ApplicationController
+  #user預約時 appointment 要包含teacher_id 和 user_id
   def show
     @appointment = Appointment.find(params[:id])
 

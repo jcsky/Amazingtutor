@@ -5,6 +5,13 @@ class TeachersController < ApplicationController
   # 所以全部要before_action先建好teacher 如果已經有了就用已經有的
   # language會存到重複的值
 
+  def index
+    @teachers = Teacher.all
+    @appointments = Appointment.all
+    @evalutions = Evalution.all
+
+  end
+
   def introduce
     @language = @teacher.languages.build if @teacher.languages.empty?
     @language = @teacher.languages
