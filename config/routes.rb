@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
+    resources :appointments
+  end
+
   post 'pay2go/return'
   post 'pay2go/notify'
 
