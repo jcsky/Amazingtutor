@@ -46,8 +46,8 @@
         $("#priceslide").slider();
         $(".language-select").select2({placeholder: "Select a language"});
 
-        // $('#login-white').hide();
-        // $('#login-black').hide();
+        $('#login-white').hide();
+        $('#login-black').hide();
         $('#login').click(function (e) {
           $('#login-black').fadeIn(1);
           $('#login-white').fadeIn(300);
@@ -84,6 +84,7 @@
               <a href="#">Apply a Teacher</a>
             </li>
             <li>
+               <%#= link_to(t("login"), new_session_path(:user), :class => "btn btn-default navbar-btn") %>
               <%= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>
             </li>
             <% if current_user %>
