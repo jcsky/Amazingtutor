@@ -1,7 +1,14 @@
 class Teacher < ActiveRecord::Base
   belongs_to :user
+
   has_many :languages, through: :teacher_languageships
   has_many :teacher_languageships
+
+
+  has_many :appointments
+  has_many :evalutions
+  has_many :languages
+
   has_many :experiences
   has_many :certificates
   has_many :educations
