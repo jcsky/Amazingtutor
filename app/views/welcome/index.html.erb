@@ -1,10 +1,3 @@
-<script type="text/javascript">
-$(document).ready(function() {
-  $(".js-example-basic-single").select2({
-     theme: "bootstrap"
-  });
-});
-</script>
 <div class="jumbotron jumbotron-modify">
   <div class="container">
     <div class="col-md-6 jumbotron-fix">
@@ -21,15 +14,15 @@ $(document).ready(function() {
       <div class="col-sm-4 col-md-4">
         <p>Tutor Speaks</p>
         <select class="js-example-basic-single" style="width: 100%">
-          <option value="AL">Alabama</option>
-          <option value="WY">Wyoming</option>
+          <option value="AL">english</option>
+          <option value="WY">中文</option>
         </select>
       </div>
       <div class="col-sm-4 col-md-4">
         <p>Availability</p>
         <select class="js-example-basic-single" style="width: 100%">
-          <option value="AL">Alabama</option>
-          <option value="WY">Wyoming</option>
+          <option value="AL">星期八</option>
+          <option value="WY">超級八</option>
         </select>
       </div>
       <div class="col-sm-4 col-md-4">
@@ -40,11 +33,12 @@ $(document).ready(function() {
   </div>
 </div>
 
+<% @teacher.each do |t| %>
 <div class="container">
   <div class="info">
     <div class="row">
       <div class="info-image col-sm-5">
-        <iframe src="https://www.youtube.com/embed/b-JD5I_B6LY?controls=0&enablejsapi=1&fs=0&rel=0&showinfo=0&color=white&iv_load_policy=3" frameborder="0" allowfullscreen></iframe>
+        <iframe src="<%= t.youtube_website %>?playlist=&version=3&controls=0&fs=0&rel=0&showinfo=0&iv_load_policy=3&theme=light" frameborder="0" allowfullscreen></iframe>
       </div>
       <div class="col-xs-12 col-sm-7">
         <div class="col-xs-12 clearfix flexmodify">
@@ -52,7 +46,8 @@ $(document).ready(function() {
             <%= image_tag("oval155.png") %>
           </div>
           <div class="info-eval col-xs-7">
-            <p>Abner Chao</p>
+            <p><%= User.find(t.user_id).first_name %>
+              <%= User.find(t.user_id).last_name %></p>
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
@@ -68,24 +63,29 @@ $(document).ready(function() {
           <i class="fa fa-comment-o"></i>
           <span>Speak
           </span>
-          <span>Chinese,English</span><br>
+          <span>
+            <% t.languages.each do |x| %>
+            <%= x.language %>
+            <% end %>
+          </span><br>
           <i class="fa fa-usd"></i>
           <span>Rate
           </span>
-          <span class="moneyred">400-650TW/hour</span><br>
+          <span class="moneyred"><%= t.ten_fee/10 %>~<%= t.one_fee %>
+            TW/hour</span><br>
           <i class="fa fa-rss"></i>
           <span>Trial
           </span>
           <span>Yes</span>
         </div>
         <div class="col-xs-12 info-pro">
-          <p>Hi! My name is Sarah, and I've been teaching English as a second language for the past 10 years. I completed my university studies in Sociology and Spanish,</p>
+          <p><%= t.introduction %></p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<% end %>
 <div class="container">
   <div class="info" style="border-radius: 5px; overflow: hidden;">
     <div class="row">

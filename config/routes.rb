@@ -28,8 +28,6 @@ Rails.application.routes.draw do
       get 'classes' => 'teachers#classes'
       get 'profile' => 'teachers#profile'
       get 'calendar' => 'teachers#calendar'
-    end
-    collection do
       get 'introduce' => 'teachers#introduce'
       get 'price' => 'teachers#price'
       get 'education' => 'teachers#education'

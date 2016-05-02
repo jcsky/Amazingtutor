@@ -27,18 +27,20 @@
           });
         });
       });
-
       $(document).ready(function () {
-        $('#booking').hide()
-        $('#booking-bg').hide()
+        $('#pop-booking').hide();
+        $('#pop-black').hide();
         $('#booknow').click(function (e) {
-          $('#booking-bg').fadeIn(1)
-          $('#booking').fadeIn(300)
+          $('#pop-black').fadeIn(1);
+          $('#pop-booking').fadeIn(300);
         });
-        $('#booking-bg').click(function (e) {
-          $('#booking').fadeOut(300)
-          $('#booking-bg').fadeOut(1)
+        $('#pop-black').click(function (e) {
+          $('#pop-booking').fadeOut(1);
+          $('#pop-black').fadeOut(1);
         });
+        $("#user_birthday_1i").selectpicker({width: '33%'});
+        $("#user_birthday_2i").selectpicker({width: '33%'});
+        $("#user_birthday_3i").selectpicker({width: '33%'});
         $(".selectpicker").selectpicker({});
         $(".js-example-basic-single").select2();
         $("#priceslide").slider();
@@ -65,13 +67,14 @@
           </button>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" style="content=" "">
+        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" ">
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a href="#">Apply a Teacher</a>
             </li>
             <li>
-              <%= link_to("Log In",new_session_path(:user)) if !current_user%>
+              <%#= link_to("Log In",new_session_path(:user),id:"login") if !current_user%>
+              <%= link_to("Log In",new_session_path(:user)) if !current_user %>
             </li>
             <% if current_user %>
             <li class="dropdown">
@@ -96,9 +99,7 @@
       </div>
       <!-- /.container-fluid -->
     </nav>
-    <div class="nav-top">
-    </div>
-      <%= yield %>
-
+    <div class="nav-top"></div>
+    <%= yield %>
   </body>
 </html>

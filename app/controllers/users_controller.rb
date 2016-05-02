@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :find_user
+  before_action :user_authority
+
   def classes
   end
   def remark
@@ -19,6 +21,11 @@ class UsersController < ApplicationController
       else
         render 'edit'
       end
+  end
+
+private
+  def user_authority
+    redirect_to root_path if current_user==nil 
   end
 
   def find_user

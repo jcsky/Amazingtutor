@@ -1,0 +1,26 @@
+.logasdin{
+  width: 554px;
+  height: 554px;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 9%;
+  left: 50%;
+  transform: translate(-50%);
+  background: #fff;
+  border-radius: 5px;
+  z-index: 1000;
+}
+.login{
+  margin: 0 auto;
+  width: 400px;
+  label{
+    display: inline;
+    float: left;
+    font-weight: lighter;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  input[type="submit"]{
+    background-color: #fff;
+  }
+}
