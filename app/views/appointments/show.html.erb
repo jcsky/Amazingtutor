@@ -30,12 +30,15 @@ $(function () {
     $.ajax({
       type: 'POST',
       url: "/appointments/" + appointment_id + "/evalutions",
-      dataType: 'JSON',
       data: {
         rating: rating,
         comment: comment
       },
       success: function(){
+        window.location.assign("http://localhost:3000/");
+      },
+      error: function() {
+        alert("failed");
       }
     });
   });

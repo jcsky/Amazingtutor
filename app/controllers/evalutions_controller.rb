@@ -11,31 +11,24 @@ class EvalutionsController < ApplicationController
   end
 
   def create
+    @evalution = @appointment.evalutions.where(user_id: current_user.id, teacher_id: @appointment.teacher_id ).first
 
 
-    @evalutions = @appointment.evalutions.where(user_id: 3)
-
-    if current_user != @appointment.user || @evalutions.count != 0
-      redirect_to root_path
+    if @evalution.present?
+      @evalution.update(:comment => params[:comment], :rating => params[:rating], :user_id => current_user.id, :appointment_id => @appointment.id, :teacher_id => @appointment.teacher_id )
+      respond_to do |format|
+        format.js
+      end
     else
       @evalution = Evalution.new(:comment => params[:comment], :rating => params[:rating], :user_id => current_user.id, :appointment_id => @appointment.id, :teacher_id => @appointment.teacher_id )
       @evalution.save
+
       flash[:notice] = "successfully created"
+      respond_to do |format|
+        format.js
+      end
+
     end
-
-
-    @evalutions = Evalution.where(appointment_id: @appointment)
-
-    if @evalutions.blank?
-      @raty = 0
-    else
-      @raty = @evalutions.average(:rating).round(2).to_f
-    end
-
-    respond_to do |format|
-      format.html
-    end
-
 
   end
 
@@ -48,6 +41,9 @@ class EvalutionsController < ApplicationController
         render :json => { :id => @appointment.id, :rating => @evalution.rating }
       }
     end
+  end
+
+  def update
   end
 
   private
