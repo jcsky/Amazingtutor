@@ -16,6 +16,7 @@ class TeachersController < ApplicationController
   end
 
   def profile
+    @teacher = Teacher.find(params[:id])
   end
 
   def price
