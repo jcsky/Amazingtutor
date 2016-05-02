@@ -1,26 +1,21 @@
-.logasdin{
-  width: 554px;
-  height: 554px;
-  margin-bottom: 20px;
+.loginbutton{
+  // line-height: 46px;
+  margin-top: 13px;
+  color: #fff;
+  background-color: #C73C3C;
+  border: none;
+  outline: 0px;
+  margin: 13px 12px;
+  background:transparent;
+}
+.login{
   position: absolute;
-  top: 9%;
+  top: 100px;
   left: 50%;
   transform: translate(-50%);
   background: #fff;
   border-radius: 5px;
   z-index: 1000;
-}
-.login{
-  margin: 0 auto;
-  width: 400px;
-  label{
-    display: inline;
-    float: left;
-    font-weight: lighter;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  input[type="submit"]{
-    background-color: #fff;
-  }
+  width: 417px;
+  height: 519px;
 }

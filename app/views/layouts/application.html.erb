@@ -38,13 +38,24 @@
           $('#pop-booking').fadeOut(1);
           $('#pop-black').fadeOut(1);
         });
-        $("#user_birthday_1i").selectpicker({width:'33%'});
-        $("#user_birthday_2i").selectpicker({width:'33%'});
-        $("#user_birthday_3i").selectpicker({width:'33%'});
+        $("#user_birthday_1i").selectpicker({width: '33%'});
+        $("#user_birthday_2i").selectpicker({width: '33%'});
+        $("#user_birthday_3i").selectpicker({width: '33%'});
         $(".selectpicker").selectpicker({});
         $(".js-example-basic-single").select2();
         $("#priceslide").slider();
         $(".language-select").select2({placeholder: "Select a language"});
+
+        // $('#login-white').hide();
+        // $('#login-black').hide();
+        $('#login').click(function (e) {
+          $('#login-black').fadeIn(1);
+          $('#login-white').fadeIn(300);
+        });
+        $('#login-black').click(function (e) {
+          $('#login-white').fadeOut(1);
+          $('#login-black').fadeOut(1);
+        });
       });
     </script>
   </head>
@@ -67,14 +78,13 @@
           </button>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" ">
+        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a href="#">Apply a Teacher</a>
             </li>
             <li>
-              <%#= link_to("Log In",new_session_path(:user),id:"login") if !current_user%>
-              <%= link_to("Log In",new_session_path(:user)) if !current_user%>
+              <%= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>
             </li>
             <% if current_user %>
             <li class="dropdown">
@@ -101,5 +111,6 @@
     </nav>
     <div class="nav-top"></div>
     <%= yield %>
+    <%= render :partial=>"welcome/login" %>
   </body>
 </html>
