@@ -1,21 +1,149 @@
-.loginbutton{
-  // line-height: 46px;
+.loginbutton {
   margin-top: 13px;
   color: #fff;
   background-color: #C73C3C;
   border: none;
-  outline: 0px;
+  outline: 0;
   margin: 13px 12px;
-  background:transparent;
+  background: transparent;
 }
-.login{
-  position: absolute;
-  top: 100px;
-  left: 50%;
-  transform: translate(-50%);
+.in {
+  height: 472px;
+}
+.reset {
+  height: 242px;
+  .logup_input input {
+    height: 50px;
+    border-color: #FDAFB1;
+  }
+  .goto {
+    position: absolute;
+    top: 147px;
+    left: 15px;
+    color: #bbb;
+    text-decoration: none;
+  }
+}
+.up {
+  height: 519px;
+  .facegoogle a:nth-child(3) {
+    position: absolute !important;
+    height: 145px !important;
+  }
+  .logup_input {
+    input {
+      position: absolute;
+      border-color: #FDAFB1;
+      height: 50px;
+      width: 93%;
+    }
+    input:nth-child(1) {
+      top: 258px;
+    }
+    input:nth-child(2) {
+      top: 313px;
+    }
+    input:nth-child(3) {
+      top: 368px;
+    }
+    em {
+      font-size: 12px;
+      position: absolute;
+      right: 23px;
+      bottom: 75px;
+      color: #bbb;
+    }
+  }
+  .account {
+    position: absolute;
+    left: 130px;
+    top: 214px;
+    text-decoration: none;
+    color: #bbb;
+  }
+}
+.log {
+  position: relative;
+  top: 20px;
+  margin: auto;
   background: #fff;
   border-radius: 5px;
-  z-index: 1000;
   width: 417px;
-  height: 519px;
+  hr {
+    margin-bottom: 10px;
+  }
+  h3 {
+    line-height: 0.9;
+    font-weight: lighter;
+    text-align: center;
+    padding-top: 10px;
+  }
+  p {
+    position: absolute;
+    top: 214px;
+    font-size: 19px;
+    left: 48%;
+  }
+  input[type=submit] {
+    position: absolute;
+    bottom: 0;
+    background-color: #FC6063;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    color: #fff;
+    font-size: 30px;
+    height: 58px;
+    border: 0;
+    width: 417px;
+    font-weight: lighter;
+  }
+  input[type=email] {
+    top: 257px;
+  }
+  input[type=password] {
+    bottom: 108px;
+  }
+  .login_input input {
+    position: absolute;
+    border-color: #FDAFB1;
+    height: 50px;
+    width: 93%;
+  }
+  .forgot,
+  .newcount {
+    position: absolute;
+    bottom: 80px;
+    color: #bbb;
+    text-decoration: none;
+  }
+  .newcount {
+    right: 15px;
+  }
+  .facegoogle {
+    text-align: center;
+    width: 400px;
+    a {
+      font-weight: lighter;
+      font-size: 16px;
+      line-height: 50px;
+      display: block;
+      width: 388px;
+      height: 50px;
+      color: #fff;
+      border-radius: 4px;
+      position: absolute;
+      text-decoration: none;
+    }
+    a:nth-child(1) {
+      background-color: #4E92DF;
+      top: 87px;
+    }
+    a:nth-child(2) {
+      background-color: #DD6575;
+      top: 145px;
+    }
+  }
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
