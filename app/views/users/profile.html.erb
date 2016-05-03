@@ -12,16 +12,6 @@
         <div class="form-group">
           <%= form_for @user do |f| %>
 
-            <%= f.file_field :image %>
-            <% if @user.image.exists? %>
-              <%= check_box_tag "_remove_image", "1" %>Remove image
-            <% end %>
-            <% if @user.image.exists? %>
-              <%= image_tag(@user.image.url(:thumb)) %>
-            <% else %>
-              None image
-            <% end %>
-
             <div class="input-group clearfix">
               <%= f.label :username, "UserName" %>
               <%= f.text_field :username, :class => "form-control" %>

@@ -49,10 +49,10 @@ class TeachersController < ApplicationController
         @teacher.save
         # redirect_to :back
         flash[:alert] = 'Save success'
-        render :back
+        redirect_to :back
       else
         flash[:alert] = 'Save fail'
-        render :back
+        redirect_to :back
       end
     else
       @teacher.update(teacher_params)
