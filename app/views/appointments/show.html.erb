@@ -1,11 +1,19 @@
+<p><button class="click">open</button></p>
+<div class="mask"></div>
+
+<div class="content">
+  <div class="contentInside">
 
   <div id="rateYo"></div>
   <div id="content"><%= @raty %></div>
-<% if current_user && @appointment.user == current_user %>
-  <input type="text" id="comment" value="add a comment"/>
-  <button class="button" >Create</button>
-<% end %>
+  <% if current_user && @appointment.user == current_user %>
+    <input type="text" id="comment" value="<%= @evalution.first.comment %>">
+    <button class="button" >Create</button>
+  <% end %>
 
+  <button class="click1">close</button>
+  </div>
+</div>
 
 <script type="text/javascript" charset="utf-8">
 
@@ -41,6 +49,17 @@ $(function () {
         alert("failed");
       }
     });
+  });
+});
+
+$(document).ready(function(){
+  $('.click').click(function(){
+   $('.mask').css({"display":"block"});
+   $('.content').css({"display":"block"});
+  });
+  $('.click1').click(function(){
+   $('.mask').css({"display":"none"});
+   $('.content').css({"display":"none"});
   });
 });
 
