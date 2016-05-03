@@ -1,3 +1,18 @@
+<script>
+  $(document).ready(function () {
+    $('#evaluation-white').hide();
+    $('#pop-black').hide();
+    $('#rating').click(function (e) {
+      $('#pop-black').fadeIn(1);
+      $('#evaluation-white').fadeIn(300);
+    });
+    $('#pop-black').click(function (e) {
+      $('#evaluation-white').fadeOut(1);
+      $('#pop-black').fadeOut(1);
+    });
+  });
+</script>
+
 <div class="container">
   <div class="row">
     <div class="col-md-5 text-center">
@@ -112,16 +127,3 @@ What did you like about your teacher, and what could your teacher improve?"></te
     </div>
   </div>
 </div>
-
-<script>
-  $('#evaluation-white').hide();
-  $('#pop-black').hide();
-  $('#rating').click(function (e) {
-    $('#pop-black').fadeIn(1);
-    $('#evaluation-white').fadeIn(300);
-  });
-  $('#pop-black').click(function (e) {
-    $('#evaluation-white').fadeOut(1);
-    $('#pop-black').fadeOut(1);
-  });
-</script>
