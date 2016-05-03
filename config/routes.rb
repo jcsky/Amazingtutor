@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+
+  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
+    resources :appointments
+  end
+
   post 'pay2go/return'
   post 'pay2go/notify'
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
 
   resources :users do
     member do
@@ -26,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :teachers do
     member do
+      get 'classes' => 'teachers#classes'
       get 'profile' => 'teachers#profile'
       post 'profile' => 'teachers#profile#create'
       get 'calendar' => 'teachers#calendar'
@@ -45,8 +51,11 @@ Rails.application.routes.draw do
   resources :student_reservation do
   end
   resources :teacher_calendars do
+    get 'teacher_available_section' => 'teacher_calendars#teacher_available_section'
+    get 'booked_section' => 'teacher_calendars#booked_section'
   end
 
+  get  'apply_teacher'=> "welcome#apply_teacher"
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

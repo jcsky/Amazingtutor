@@ -45,7 +45,7 @@
     resize: none;
   }
 }
-.public-save button {
+.public-save input {
   float: right;
   margin: 20px 0;
   color: #fff;
@@ -99,7 +99,7 @@
       height: 120px;
     }}
   }
-  .public-save button {
+  .public-save input {
     width: 100%;
   }
 }
@@ -125,11 +125,11 @@
       width: 400px !important;
     }
   }
-  .public-save button {
+  .public-save input {
     margin-right: -30px;
   }
   .input-group .form-control {
-    width: 280px;
+    // width: 280px;
     // height: 40px;
   }
 }

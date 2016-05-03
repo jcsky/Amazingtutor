@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'country_select'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
@@ -30,6 +30,14 @@ gem 'populator'
 
 # 多國語系
 gem 'rails-i18n'
+
+#paperclip
+gem "paperclip"
+
+# fullcalendar
+gem 'fullcalendar-rails'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'jquery-ui-rails'
 
 gem "nested_form"
 gem 'nested_form_fields'

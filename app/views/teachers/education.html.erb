@@ -1,38 +1,53 @@
 <div class="container">
-  <h1>Education</h1>
-  <%= flash[:alert]  %>
+  <div class="row">
+    <div class="col-md-1 sidebar">
+      <%= render "sidebar" %>
+    </div>
+    <div class="col-md-8">
+      <div class="public-content">
+        <%= form_for @teacher do |f| %>
+        <div class="public-head">
+          <h4>教學經驗</h4>
+        </div>
+        <h5 class="add_nested_fix">學歷</h5>
+        <%= f.add_nested_fields_link :educations, '+', class: 'btn btn-danger', role: 'button'  %>
+        <%= f.nested_fields_for :educations do |ff| %>
+        <%= ff.remove_nested_fields_link '--', class: 'btn btn-danger', role: 'button'%>
+        <div class="input-group clearfix">
+          <%= ff.label :school, "學校" %>
+          <%= ff.text_field :school, :class => "form-control" %>
+        </div>
+        <div class="input-group clearfix">
+          <%= ff.label :major, "科系" %>
+          <%= ff.text_field :major, :class => "form-control" %>
+        </div>
 
-    <div class="form-group">
-  <%= form_for @teacher do |f| %>
-  <%= f.add_nested_fields_link :educations, '學校', class: 'btn btn-danger', role: 'button'  %>
-
-  <%= f.nested_fields_for :educations do |ff| %>
-    <%= ff.remove_nested_fields_link 'Remove me', class: 'btn btn-danger', role: 'button'%>
-    <%= ff.label :school, "學校" %>
-    <%= ff.text_field :school, :class => "form-control" %>
-    <%= ff.label :major, "科系" %>
-    <%= ff.text_field :major, :class => "form-control" %>
-  <% end %>
-
-  <%= f.add_nested_fields_link :experiences, '經歷', class: 'btn btn-danger', role: 'button'  %>
-  <%= f.nested_fields_for :experiences do |ff| %>
-    <%= ff.remove_nested_fields_link 'Remove me', class: 'btn btn-danger', role: 'button'%>
-    <%= ff.label :company_name, "名稱" %>
-    <%= ff.text_field :company_name, :class => "form-control" %>
-    <%= ff.label :description, "服務內容" %>
-    <%= ff.text_field :description, :class => "form-control" %>
-  <% end %>
-
-  <%= f.add_nested_fields_link :certificates, '證照', class: 'btn btn-danger', role: 'button'  %>
-  <%= f.nested_fields_for :certificates do |ff| %>
-    <%= ff.remove_nested_fields_link 'Remove me', class: 'btn btn-danger', role: 'button'%>
-    <%= ff.label :name, "執照" %>
-    <%= ff.text_field :name, :class => "form-control" %>
-    <%= ff.label :score, "分數" %>
-    <%= ff.text_field :score, :class => "form-control" %>
-  <% end %>
-
-  <%= f.submit 'save', :class => "btn btn-primary" %>
-  <% end %>
-</div>
+        <% end %>
+        <h6>小提醒：建議使用英文填寫，如學歷越詳細，學員能更了解教師唷!</h6>
+        <hr>
+        <h5 class="add_nested_fix">工作經驗</h5>
+        <%= f.add_nested_fields_link :experiences, '+', class: 'btn btn-danger', role: 'button'  %>
+        <%= f.nested_fields_for :experiences do |ff| %>
+        <%= ff.remove_nested_fields_link '--', class: 'btn btn-danger', role: 'button'%>
+        <div class="input-group clearfix">
+          <%= ff.label :company_name, "單位名稱" %>
+          <%= ff.text_field :company_name, :class => "form-control" %>
+        </div>
+        <div class="input-group clearfix">
+          <%= ff.label :description, "服務內容" %>
+          <%= ff.text_field :description, :class => "form-control" %>
+        </div>
+        <% end %>
+        <hr>
+        <div class="public-note">
+          <h5>小提醒：</h5>
+          <h6>小提醒：建議使用英文填寫，如工作經歷跟語言教學有關，會更吸引學員的目光唷!</h6>
+        </div>
+      </div>
+      <div class="public-save">
+        <%= f.submit 'SAVE', :class => "btn" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
 </div>

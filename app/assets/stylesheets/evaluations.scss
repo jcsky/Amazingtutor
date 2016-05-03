@@ -1,3 +1,4 @@
+
 // Place all the styles related to the evaluations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
@@ -10,10 +11,8 @@
   }
 }
 .evaluation {
-  position: fixed;
-  left: 0;
-  top: 0;
   background-color: #F6F6F6;
+  border-radius: 5px;
   img {
     width: 100px;
     border-radius: 50%;
@@ -55,3 +54,40 @@
     font-size: 13px;
   }
 }
+.evaluation-white{
+  height: 551px;
+  width: 497px;
+  z-index: 5000;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 9%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.mask{
+  display:none;
+  position: fixed;
+  width:100%;
+  height:100%;
+  background:#000;
+  z-index:1;
+  top:0;
+  left:0;
+  opacity:0.5;
+}
+.content{
+  display:none;
+  position: relative;
+  width:100px;
+  height:200px;
+  z-index:2;
+  top:0;
+  left:0;
+
+}
+.contentInside{
+  margin:0 auto;
+  width: 50px;
+}
+

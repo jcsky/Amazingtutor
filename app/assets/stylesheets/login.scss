@@ -1,0 +1,21 @@
+.loginbutton{
+  // line-height: 46px;
+  margin-top: 13px;
+  color: #fff;
+  background-color: #C73C3C;
+  border: none;
+  outline: 0px;
+  margin: 13px 12px;
+  background:transparent;
+}
+.login{
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%);
+  background: #fff;
+  border-radius: 5px;
+  z-index: 1000;
+  width: 417px;
+  height: 519px;
+}

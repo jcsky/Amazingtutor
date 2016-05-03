@@ -60,7 +60,7 @@
   button {
     background-color: #FC6063;
     width: 100%;
-      color: #fff;
+    color: #fff;
   }
   p {
     font-size: 10px;
@@ -142,6 +142,9 @@
 .language-select-fix {
   margin-right: 15px;
   margin-top: -5px;
+  label {
+    margin-right: 27px;
+  }
 }
 .youtube-fram {
   width: 100%;
@@ -149,6 +152,28 @@
   border-radius: 5px;
   background-color: #000;
   margin-bottom: 20px;
+}
+.public-content {
+  .add_nested_fields_link, {
+      color: #bbb;
+      font-weight: lighter;
+      font-size: 14px;
+      border:1px solid #bbb;
+      border-radius: 30px;
+      background-color: #fff;
+  }
+  .remove_nested_fields_link{
+    color: #bbb;
+    font-size: 14px;
+    border:1px solid #bbb;
+    border-radius: 25px;
+    background-color: #fff;
+    float: right;
+    font-weight: lighter;
+  }
+  .add_nested_fix{
+    display: inline;
+  }
 }
 @media (max-width: $screen-xs-min) {
   .profile-container .profile-info {
@@ -293,6 +318,10 @@
   }
   .gethering-fix {
     height: 300px;
+    input[type="radio"] {
+      margin-left: -5px;
+      margin-right: 5px;
+    }
   }
   .youtube-fix {
     height: auto;

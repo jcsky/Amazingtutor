@@ -72,10 +72,10 @@
     border: 1px solid #7EB0EA;
     border-radius: 23px;
     width: 175px;
-    height: 45px;
+    height: 40px;
     background-color: #fff;
     color: #7EB0EA;
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 15px;
     font-weight: lighter;
     transform: translateX(50%);
@@ -92,12 +92,12 @@
     border: 1px solid #FF6969;
     border-radius: 23px;
     width: 175px;
-    height: 45px;
+    height: 40px;
     background-color: #fff;
     color: #FF6969;
     left: 50%;
     transform: translateX(50%);
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 15px;
     font-weight: lighter;
   }
@@ -129,10 +129,14 @@
   }
 }
 .scheduled-editprofile-fix {
+  label{
+    display: inline-block;
+  }
   .input-group {
     width: 100%;
     .form-control {
       float: right;
+      width: 75%;
     }
   }
 }
@@ -166,6 +170,7 @@
     border-radius: 5px;
   }
 }
+
 @media (max-width: $screen-xs-min) {
   .scheduled-text {
     h1 {
@@ -204,13 +209,20 @@
       width: 100%;
     }
   }
+  .scheduled-editprofile-fix {
+    .birthday-fix{
+      label{
+        margin-right: 40px;
+      }
+      .bootstrap-select{
+      width: 100px;
+      }
+    }
+  }
 }
 @media (min-width: $screen-sm-min)and (max-width: $screen-md-min) {
   .scheduled {
     padding: 0;
-  }
-  .scheduled-editprofile-fix .input-group .form-control {
-    width: 100% !important;
   }
   .scheduled-white {
     img {
@@ -236,6 +248,11 @@
     .input-group {
       width: 600px;
     }
+      .birthday-fix{
+        label{
+          margin-right: 60px;
+        }
+      }
     .input-group .form-control {
       width: 500px;
     }
@@ -256,6 +273,7 @@
     img {
       width: 202px;
       height: 137px;
+      border-bottom-left-radius:5px;
     }
   }
   .scheduled-text {
@@ -278,8 +296,17 @@
     }
   }
   .scheduled-editprofile-fix {
+    .birthday-fix{
+      // width: 320px;
+      label{
+        margin-right: 35px;
+      }
+    }
     .input-group {
-      width: 380px;
+      padding-right: 30px;
+      .form-control{
+        width: 320px;
+      }
     }
   }
   .tutor-info {

@@ -14,6 +14,7 @@
  *= require select2-bootstrap
  *= require bootstrap-slider
  */
+
  @import "varible";
  @import "bootstrap-sprockets";
  @import "bootstrap";
@@ -30,4 +31,13 @@
  @import "scheduled-public";
  @import "scheduleds";
  @import "ios_background";
+ @import "booking_popup";
+ @import "login";
+ @import "apply_teacher";
  @import "booking";
+
+ //fullcalendar新增的 如果影響到畫面可以從這邊調整
+ @import "jquery-ui/core";
+ @import "jquery-ui/theme";
+ @import "jquery-ui";
+ @import "fullcalendar";

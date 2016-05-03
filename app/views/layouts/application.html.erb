@@ -27,23 +27,35 @@
           });
         });
       });
-
       $(document).ready(function () {
-        $('#booking').hide()
-        $('#booking-bg').hide()
+        $('#pop-booking').hide();
+        $('#pop-black').hide();
         $('#booknow').click(function (e) {
-          $('#booking-bg').fadeIn(1)
-          $('#booking').fadeIn(300)
+          $('#pop-black').fadeIn(1);
+          $('#pop-booking').fadeIn(300);
         });
-        $('#booking-bg').click(function (e) {
-          $('#booking').fadeOut(300)
-          $('#booking-bg').fadeOut(1)
+        $('#pop-black').click(function (e) {
+          $('#pop-booking').fadeOut(1);
+          $('#pop-black').fadeOut(1);
         });
+        $("#user_birthday_1i").selectpicker({width: '33%'});
+        $("#user_birthday_2i").selectpicker({width: '33%'});
+        $("#user_birthday_3i").selectpicker({width: '33%'});
         $(".selectpicker").selectpicker({});
-        $('#datepicker').datepicker()
         $(".js-example-basic-single").select2();
         $("#priceslide").slider();
         $(".language-select").select2({placeholder: "Select a language"});
+
+        $('#login-white').hide();
+        $('#login-black').hide();
+        $('#login').click(function (e) {
+          $('#login-black').fadeIn(1);
+          $('#login-white').fadeIn(300);
+        });
+        $('#login-black').click(function (e) {
+          $('#login-white').fadeOut(1);
+          $('#login-black').fadeOut(1);
+        });
       });
     </script>
   </head>
@@ -53,8 +65,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header brand-center">
           <%= link_to root_path , :class=>"navbar-brand" do%>
-          <span>Amazing</span>
-          <span>tutor</span>
+          <span class="brand1">Amazing</span><span class="brand2">tutor</span>
           <% end %>
         </div>
         <div class="navbar-header">
@@ -66,13 +77,14 @@
           </button>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" style="content=" "">
+        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" >
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="#">Apply a Teacher</a>
+            <%= link_to("Apply a Teacher", apply_teacher_path(:user))%>
             </li>
             <li>
-              <%= link_to("Log In",new_session_path(:user)) if !current_user%>
+              <%#= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>
+              <%= link_to(t("Log In"), new_session_path(:user))if !current_user%>
             </li>
             <% if current_user %>
             <li class="dropdown">
@@ -80,9 +92,12 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
+
                 <li><%= link_to "Dashboard",classes_user_path(current_user) %></li>
-                <li><%= link_to "教師資訊" ,introduce_teacher_path(current_user.teacher.id)%></li>
-                <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.teacher.id)%></li>
+                <% if current_user.authority == "teacher" %>
+                <li><%= link_to "教師資訊" ,introduce_teacher_path(current_user.get_teacher.id)%></li>
+                <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.get_teacher.id)%></li>
+                <% end %>
                 <li>
                   <a href="#"><%= link_to('Log Out', destroy_user_session_path, :method => :delete)%></a>
                 </li>
@@ -95,8 +110,8 @@
       </div>
       <!-- /.container-fluid -->
     </nav>
-    <div class="nav-top">
-      <%= yield %>
-    </div>
+    <div class="nav-top"></div>
+    <%= yield %>
+    <%= render :partial=>"welcome/login" %>
   </body>
 </html>

@@ -1,10 +1,21 @@
-Teacher_id: <%= @appointment.teacher_id %>
+<p><button class="click">open</button></p>
+<div class="mask"></div>
 
- <div id="rateYo"></div><div id="content"><%= @raty %></div>
- <%= link_to "Give reviews", appointment_evalutions_path(@appointment), method: :post, remote: true, class: "button" %>
+<div class="content">
+  <div class="contentInside">
 
+  <div id="rateYo"></div>
+  <div id="content"><%= @raty %></div>
+  <% if current_user && @appointment.user == current_user %>
+    <input type="text" id="comment" value="<%= @evalution.first.comment %>">
+    <button class="button" >Create</button>
+  <% end %>
 
- <script type="text/javascript" charset="utf-8">
+  <button class="click1">close</button>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
 
 $(function () {
   $("#rateYo").rateYo({
@@ -21,20 +32,36 @@ $(function () {
 
   $(".button").click(function () {
     var rating = $rateYo.rateYo("rating");
+    var comment = document.getElementById("comment").value;
+
     var appointment_id =  <%= @appointment.id %>;
     $.ajax({
       type: 'POST',
       url: "/appointments/" + appointment_id + "/evalutions",
-      dataType: 'JSON',
       data: {
-        rating: rating
+        rating: rating,
+        comment: comment
       },
       success: function(){
+        window.location.assign("http://localhost:3000/");
+      },
+      error: function() {
+        alert("failed");
       }
     });
   });
 });
 
- </script>
+$(document).ready(function(){
+  $('.click').click(function(){
+   $('.mask').css({"display":"block"});
+   $('.content').css({"display":"block"});
+  });
+  $('.click1').click(function(){
+   $('.mask').css({"display":"none"});
+   $('.content').css({"display":"none"});
+  });
+});
 
- </script>
+</script>
+

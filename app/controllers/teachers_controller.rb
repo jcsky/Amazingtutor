@@ -1,14 +1,25 @@
 class TeachersController < ApplicationController
-  before_action :get_teacher
-  before_action :teacher_authority
+  before_action :teacher_authority ,except: :profile
+  before_action :get_teacher,except: :profile
+
   # 只有user裡面的author得值要等於teacher才可以進來 但大家都有第一次可能進來沒有teacher
   # 所以全部要before_action先建好teacher 如果已經有了就用已經有的
+
+  def index
+    @teachers = Teacher.all
+    @appointments = Appointment.all
+    @evalutions = Evalution.all
+
+  end
 
   def introduce
     @teacher.teacher_languageships.new if @teacher.teacher_languageships.empty?
   end
 
   def calendar
+  end
+
+  def classes
   end
 
   def profile
@@ -39,10 +50,10 @@ class TeachersController < ApplicationController
         @teacher.save
         # redirect_to :back
         flash[:alert] = 'Save success'
-        render :back
+        redirect_to :back
       else
         flash[:alert] = 'Save fail'
-        render :back
+        redirect_to :back
       end
     else
       @teacher.update(teacher_params)
@@ -66,7 +77,9 @@ class TeachersController < ApplicationController
   end
 
   def teacher_authority
-    redirect_to root_path if current_user.authority != 'teacher'
+     if current_user == nil || current_user.authority != 'teacher'
+       redirect_to root_path
+     end
   end
 
   def teacher_params
