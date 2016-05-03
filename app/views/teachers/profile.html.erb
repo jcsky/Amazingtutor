@@ -3,7 +3,7 @@
     <div class="profile-info col-xs-12">
       <div class="row">
         <div class="profile-image col-sm-5 col-md-12">
-          <iframe src="https://www.youtube.com/embed/IcrbM1l_BoI?controls=0&enablejsapi=1&fs=0&rel=0&showinfo=0&color=white&iv_load_policy=3" frameborder="0" allowfullscreen></iframe>
+          <iframe src="<%= @teacher.youtube_website %>?playlist=&version=3&controls=0&fs=0&rel=0&showinfo=0&iv_load_policy=3&theme=light" frameborder="0" allowfullscreen></iframe>
         </div>
         <div class="col-xs-12 col-sm-7 col-md-12">
           <div class="col-xs-12 clearfix flexmodify">
@@ -11,7 +11,8 @@
               <%= image_tag("oval155.png") %>
             </div>
             <div class="info-eval col-xs-7">
-              <p>Abner Chao</p>
+              <p><%= User.find(@teacher.user_id).first_name %>
+                <%= User.find(@teacher.user_id).last_name %></p>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
@@ -27,18 +28,21 @@
             <i class="fa fa-comment-o"></i>
             <span>Speak
             </span>
-            <span>Chinese,English</span><br>
+            <span>
+              <% @teacher.languages.each do |x| %>
+              <%= x.language %>
+              <% end %></span><br>
             <i class="fa fa-usd"></i>
             <span>Rate
             </span>
-            <span class="moneyred">400-650TW/hour</span><br>
+            <span class="moneyred"><%= @teacher.ten_fee/10 %>~<%= @teacher.one_fee %>TW/hour</span><br>
             <i class="fa fa-rss"></i>
             <span>Trial
             </span>
             <span>Yes</span>
           </div>
           <div class="col-xs-12 info-pro">
-            <p>Hi! My name is Sarah, and I've been teaching English as a second language for the past 10 years. I completed my university studies in Sociology and Spanish,</p>
+            <p><%= @teacher.introduction %></p>
           </div>
         </div>
       </div>
@@ -51,8 +55,8 @@
           <h5>Trial session</h5>
           <p>with sarah</p>
         </div>
-        <div class="col-xs-4 col-xs-push-2 text-right">
-          <h5 class="moneyred">200 TWD</h5>
+        <div class="col-xs-5 col-xs-push-1 text-right">
+          <h5 class="moneyred"><%= @teacher.trial_fee %> TWD</h5>
           <p>20 min</p>
         </div>
         <div class="col-xs-12">
@@ -71,40 +75,28 @@
 
         <div class="col-xs-12 private-money">
           <div class="col-xs-6">
-            <div class="payment-radio">
-              <input type="radio" id="radio-1-1" name="radio-1-set" class="regular-radio" checked/>
-              <label for="radio-1-1"></label>
-            </div>
             <h6>&nbsp;&nbsp;1 session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred">400 TWD</h5>
+            <h5 class="moneyred"><%= @teacher.one_fee %> TWD</h5>
             <p>per hour</p>
           </div>
         </div>
         <div class="col-xs-12 private-money ">
           <div class="col-xs-6">
-            <div class="payment-radio">
-              <input type="radio" id="radio-1-2" name="radio-1-set" class="regular-radio"/>
-              <label for="radio-1-2"></label>
-            </div>
             <h6>&nbsp;&nbsp;5 session</h6>
           </div>
           <div class="col-xs-6 text-right ">
-            <h5 class="moneyred">1900 TWD</h5>
+            <h5 class="moneyred"><%= @teacher.five_fee %> TWD</h5>
             <p>per hour</p>
           </div>
         </div>
         <div class="col-xs-12 private-money">
           <div class="col-xs-6 ">
-            <div class="payment-radio">
-              <input type="radio" id="radio-1-3" name="radio-1-set" class="regular-radio"/>
-              <label for="radio-1-3"></label>
-            </div>
             <h6>&nbsp;&nbsp;10 session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred">3500 TWD</h5>
+            <h5 class="moneyred"><%= @teacher.ten_fee %> TWD</h5>
             <p>per hour</p>
           </div>
         </div>
