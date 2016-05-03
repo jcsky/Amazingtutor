@@ -7,8 +7,8 @@ RSpec.describe Appointment, type: :model do
     @user2 = create_user
     @teacher1 = Teacher.create(:user => @user1)
     @teacher2 = Teacher.create(:user => @user2)
-    Appointment.create(:teacher_id => @teacher1.id,
-                       :student_id => @student2.id,
+    Appointment.create(:teacher => @teacher1,
+                       :user => @student2,
                        :start => '2016-01-01 03:30:00'.to_time,
                        :end =>'2016-01-01 04:30:00'.to_time)
   end
@@ -44,7 +44,7 @@ RSpec.describe Appointment, type: :model do
   end
   describe 'appointment create spec' do
     it 'should create in database' do
-      appointment = Appointment.create_appointment('2016-01-01 01:30:00'.to_time,'2016-01-01 02:30:00'.to_time,@teacher1.id , @student1)
+      appointment = Appointment.create_appointment('2016-01-01 01:30:00'.to_time,'2016-01-01 02:30:00'.to_time,@teacher1 , @student1)
       expect(appointment).to eq(Appointment.last)
     end
   end

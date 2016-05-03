@@ -3,7 +3,7 @@ class TeacherCalendarsController < ApplicationController
   before_action :set_reservaton_list_params, :only => [:show, :index, :teacher_available, :booked_section]
   skip_before_filter :verify_authenticity_token, :only => [:create]
   def index
-    @teacher = User.find(@reservaton_list_params[:id]).teacher
+    @teacher = Teacher.find(@reservaton_list_params[:id])
     if @reservaton_list_params[:date] != nil
       begin
         Date.parse(@reservaton_list_params[:date])
@@ -43,7 +43,7 @@ class TeacherCalendarsController < ApplicationController
     current_user = User.third
     start_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:start].to_time, 'after')
     end_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:end].to_time, 'before')
-    @return_insert_sections = AvailableSection.check_section_insertalbe_and_bluk_insert(start_time, end_time,current_user.id)
+    @return_insert_sections = AvailableSection.check_section_insertalbe_and_bluk_insert(start_time, end_time,current_user.teacher.id)
 
   end
 

@@ -14,23 +14,26 @@ UserAvailableSection.delete_all
                          :password => 'qwer4321')
 @student2 = User.create!(:email => Faker::Internet.email,
                          :password => 'qwer4321')
-@teacher1 = User.create!(:email => Faker::Internet.email,
+@user1 = User.create!(:email => Faker::Internet.email,
                          :password => 'qwer4321')
-@teacher2 = User.create!(:email => Faker::Internet.email,
+@user2 = User.create!(:email => Faker::Internet.email,
                          :password => 'qwer4321')
-Teacher.create(:user_id => @teacher1.id,
-               :introduction => Faker::Lorem,
-               :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ'
-)
+@teacher1 = Teacher.create!(:user => @user1,
+                            :introduction => 'FakerLorem',
+                            :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ')
+@teacher2 = Teacher.create!(:user => @user2,
+                            :introduction => 'FakerLorem',
+                            :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ')
+
 @avaiablesection=AvailableSection.create(:start => Time.now.at_beginning_of_day,
                                          :end => Time.now.at_beginning_of_day + 6.hours,
-                                         :teacher_id => @teacher1.id)
+                                         :teacher => @teacher1)
 @avaiablesection=AvailableSection.create(:start => Time.now.at_beginning_of_day + 7.hours,
                                          :end => Time.now.at_beginning_of_day + 15.hours,
-                                         :teacher_id => @teacher1.id)
-Appointment.create(:teacher_id => @teacher1.id,
-                   :student_id => @student2.id,
+                                         :teacher => @teacher1)
+Appointment.create(:teacher => @teacher1,
+                   :user => @student2,
                    :section => 2,
                    :start => Time.now.at_beginning_of_day + 4.hours + 30*60,
                    :end => Time.now.at_beginning_of_day  + 5.hours + 30*60 )
-UserAvailableSection.create(:teacher_id => @teacher1.id,:user_id=>@student1.id,:available_section => 20)
+UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_section => 20)

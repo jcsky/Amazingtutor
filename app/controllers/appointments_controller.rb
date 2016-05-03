@@ -2,9 +2,7 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment_params, :only => [:create]
 
   def index
-    current_user = User.first
-    @appointments = current_user.appointments
-
+    @appointments=Appointment.find_by_user_id(User.first)
   end
 
   def show
@@ -22,7 +20,8 @@ class AppointmentsController < ApplicationController
   def create
     appointment = Appointment.new(set_appointment_params)
     current_user = User.first
-    appointment.student_id = current_user.id
+    appointment.user = current_user
+    appointment.section = (appointment.end.to_time - appointment.start.to_time) / 30.minute
     # appointment.student_id = 1
     ActiveRecord::Base.transaction do
       # 查詢該時段是不是可被預約的時間
@@ -38,12 +37,13 @@ class AppointmentsController < ApplicationController
       calc_section = (appointment.end.to_time - appointment.start.to_time) / 30.minute
       if avaiable_section_check and !appointment_check and credit[:available_section] >= calc_section.to_i
         # 設定預約課程
-        Appointment.create_appointment(appointment.start,
-                                       appointment.end,
-                                       appointment.teacher_id,
-                                       current_user)
+        # Appointment.create_appointment(appointment.start,
+        #                                appointment.end,
+        #                                appointment.teacher_id,
+        #                                current_user)
+        appointment.save
         # 扣掉預約後的堂數
-        UserAvailableSection.update_credit(credit, calc_section, 'less')
+        UserAvailableSection.update_credit(credit, appointment.section, 'less')
       end
     end
     redirect_to appointments_path

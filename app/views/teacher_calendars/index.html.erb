@@ -9,7 +9,7 @@
 <br/>
 可選時段：
 <%= form_for @appointments, url: appointments_path, method: :post do |f| %>
-    <%= f.hidden_field :teacher_id, {:value => @teacher.user_id} %>
+    <%= f.hidden_field :teacher_id, {:value => @teacher.id} %>
     <% @reservation_list.each do |r| %>
         <% if r["status"] %>
             <label class="c-input c-radio">

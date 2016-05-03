@@ -13,7 +13,7 @@
 <br/>
 
 <%= form_tag(teacher_calendars_path, method: "get") do %>
-    <%= hidden_field_tag(:id, @teacher.user_id) %>
+    <%= hidden_field_tag(:id, @teacher.id) %>
     <% @recent_14_days.each do |r| %>
         <label class="btn btn-primary active">
           <input type="radio" name="date" autocomplete="off" value="<%= r %>"><%= r %>

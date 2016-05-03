@@ -32,11 +32,11 @@ class Appointment < ActiveRecord::Base
                       teacher_id).exists?
   end
 
-  def self.create_appointment(start_time, end_time, teacher_id, student)
+  def self.create_appointment(start_time, end_time, teacher, student)
     Appointment.create!(:start => start_time,
                         :end => end_time,
-                        :teacher_id => teacher_id,
-                        :student_id => student.id,
+                        :teacher => teacher,
+                        :user => student,
                         :section => (end_time - start_time) / 30.minute)
   end
 
