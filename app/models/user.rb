@@ -11,6 +11,16 @@ class User < ActiveRecord::Base
   has_many :evalutions
   has_many :user_available_sections
 
+  def get_teacher
+    if self.authority == "teacher"
+      if self.teacher == nil
+        self.create_teacher
+      else
+        self.teacher
+      end
+    end
+  end
+
   def display_name
     email.split("@").first
   end
