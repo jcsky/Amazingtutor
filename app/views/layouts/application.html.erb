@@ -81,10 +81,11 @@
         <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li>
+              <%= link_to(t("login"), new_session_path(:user), :class => "btn") %></li>
+            <li>
               <a href="#">Apply a Teacher</a>
             </li>
             <li>
-               <%#= link_to(t("login"), new_session_path(:user), :class => "btn btn-default navbar-btn") %>
               <%= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>
             </li>
             <% if current_user %>
