@@ -80,7 +80,7 @@
         <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="#">Apply a Teacher</a>
+            <%= link_to("Apply a Teacher", apply_teacher_path(:user))%>
             </li>
             <li>
               <%= link_to(t("Log In"), new_session_path(:user))if !current_user%>
