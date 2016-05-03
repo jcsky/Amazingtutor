@@ -34,3 +34,10 @@
  @import "booking_popup";
  @import "login";
  @import "apply_teacher";
+ @import "booking";
+
+ //fullcalendar新增的 如果影響到畫面可以從這邊調整
+ @import "jquery-ui/core";
+ @import "jquery-ui/theme";
+ @import "jquery-ui";
+ @import "fullcalendar";
