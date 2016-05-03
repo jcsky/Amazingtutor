@@ -7,7 +7,7 @@
   <div id="rateYo"></div>
   <div id="content"><%= @raty %></div>
   <% if current_user && @appointment.user == current_user %>
-    <input type="text" id="comment" value="add a comment"/>
+    <input type="text" id="comment" value="<%= @evalution.first.comment %>">
     <button class="button" >Create</button>
   <% end %>
 
