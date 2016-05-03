@@ -31,6 +31,9 @@ gem 'populator'
 # 多國語系
 gem 'rails-i18n'
 
+#paperclip
+gem "paperclip"
+
 gem "nested_form"
 gem 'nested_form_fields'
 gem 'awesome_rails_console'
