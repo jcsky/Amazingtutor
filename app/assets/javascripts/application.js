@@ -5,3 +5,5 @@
 //= require nested_form_fields
 //= require select2
 //= require select2-full
+//= require bootstrap-select.min
+//= require rateyo.min
