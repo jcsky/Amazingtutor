@@ -1,6 +1,6 @@
 class TeachersController < ApplicationController
-  before_action :teacher_authority ,except: :profile
-  before_action :get_teacher,except: :profile
+  before_action :teacher_authority, except: :profile
+  before_action :get_teacher, except: :profile
 
   # 只有user裡面的author得值要等於teacher才可以進來 但大家都有第一次可能進來沒有teacher
   # 所以全部要before_action先建好teacher 如果已經有了就用已經有的
@@ -9,7 +9,6 @@ class TeachersController < ApplicationController
     @teachers = Teacher.all
     @appointments = Appointment.all
     @evalutions = Evalution.all
-
   end
 
   def introduce
@@ -23,6 +22,7 @@ class TeachersController < ApplicationController
   end
 
   def profile
+    @teacher = Teacher.find(params[:id])
   end
 
   def price
@@ -67,15 +67,17 @@ class TeachersController < ApplicationController
   private
 
   def get_teacher
-    if current_user.teacher
-      @teacher =current_user.teacher
-     else
-      @teacher = current_user.create_teacher
-    end
+    @teacher = if current_user.teacher
+                 current_user.teacher
+               else
+                 current_user.create_teacher
+               end
   end
 
   def teacher_authority
-    redirect_to root_path if current_user.authority != 'teacher'
+    if current_user.nil? || current_user.authority != 'teacher'
+      redirect_to root_path
+    end
   end
 
   def teacher_params

@@ -10,10 +10,8 @@
   }
 }
 .evaluation {
-  position: fixed;
-  left: 0;
-  top: 0;
   background-color: #F6F6F6;
+  border-radius: 5px;
   img {
     width: 100px;
     border-radius: 50%;
@@ -54,4 +52,14 @@
     box-shadow: none;
     font-size: 13px;
   }
+}
+.evaluation-white{
+  height: 551px;
+  width: 497px;
+  z-index: 5000;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 9%;
+  left: 50%;
+  transform: translate(-50%);
 }
