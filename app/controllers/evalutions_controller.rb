@@ -10,7 +10,10 @@ class EvalutionsController < ApplicationController
     @evalution = Evalution.new
   end
 
+
   def create
+
+
     @evalution = @appointment.evalutions.where(user_id: current_user.id, teacher_id: @appointment.teacher_id ).first
 
 
