@@ -16,11 +16,8 @@
             <% if @user.image.exists? %>
               <%= check_box_tag "_remove_image", "1" %>Remove image
             <% end %>
-            <% if @user.image.exists? %>
-              <%= image_tag(@user.image.url(:thumb)) %>
-            <% else %>
-              None image
-            <% end %>
+
+              <%= image_tag(@user.image.url(:medium)) %>
 
             <div class="input-group clearfix">
               <%= f.label :username, "UserName" %>

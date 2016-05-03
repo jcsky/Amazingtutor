@@ -10,8 +10,9 @@ class User < ActiveRecord::Base
   has_many :appointments
   has_many :evalutions
   has_many :user_available_sections
-  # has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-  # validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  has_attached_file :image, styles: { medium: "100x100>", thumb: "50x50>" }, default_url: "user_default.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def get_teacher
     if self.authority == "teacher"
@@ -100,4 +101,5 @@ class User < ActiveRecord::Base
     user.save!
     return user
   end
+
 end
