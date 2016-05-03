@@ -56,11 +56,18 @@
           <p>with sarah</p>
         </div>
         <div class="col-xs-5 col-xs-push-1 text-right">
-          <h5 class="moneyred"><%= @teacher.trial_fee %> TWD</h5>
+
+            <% if @teacher.trial_fee == 0 %>
+              <h5 class="moneyred"><%= "FREE" %></h5>
+            <% elsif @teacher.trial_fee == nil %>
+          <h5 class="moneyred"><%= "NOT TRIAL" %></h5>
+            <% else %>
+            <h5 class="moneyred"><%= @teacher.trial_fee %> TWD</h5>
+            <% end %>
           <p>20 min</p>
         </div>
         <div class="col-xs-12">
-          <%= button_tag "Book Trial", :class => "btn " %>
+          <%= button_tag("Book Trial", :class => "btn ") if @teacher.trial_fee != nil %>
         </div>
       </div>
     </div>
@@ -78,7 +85,8 @@
             <h6>&nbsp;&nbsp;1 session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred"><%= @teacher.one_fee %> TWD</h5>
+            <h5 class="moneyred"><%= @teacher.one_fee %>
+              TWD</h5>
             <p>per hour</p>
           </div>
         </div>
@@ -87,7 +95,8 @@
             <h6>&nbsp;&nbsp;5 session</h6>
           </div>
           <div class="col-xs-6 text-right ">
-            <h5 class="moneyred"><%= @teacher.five_fee %> TWD</h5>
+            <h5 class="moneyred"><%= @teacher.five_fee %>
+              TWD</h5>
             <p>per hour</p>
           </div>
         </div>
@@ -96,7 +105,8 @@
             <h6>&nbsp;&nbsp;10 session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred"><%= @teacher.ten_fee %> TWD</h5>
+            <h5 class="moneyred"><%= @teacher.ten_fee %>
+              TWD</h5>
             <p>per hour</p>
           </div>
         </div>
