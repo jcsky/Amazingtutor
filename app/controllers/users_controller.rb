@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
   before_action :find_user
-
+  def classes
+  end
+  def remark
+  end
+  def changepassword
+  end
+  def mytutor
+  end
   def profile
   end
 
@@ -19,6 +26,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email,:username,:first_name,:last_name,:birthday,:time_zone,:tongue,:location,:currency,:born_form,:live_in,:gender)
+    params.require(:user).permit(:email,:username,:first_name,:last_name,:birthday,
+    :time_zone,:tongue,:location,:currency,:born_form,:live_in,:gender)
   end
 end

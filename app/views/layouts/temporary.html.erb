@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Amazingtutor</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
+    <%= csrf_meta_tags %>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $(".language-select").select2({placeholder: "Select a language"});
+      });
+    </script>
+
+  </head>
+  <body>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= link_to "education" ,education_teacher_path,:class=>"btn btn-primary"%>
+    <%= link_to "youtube" ,youtube_teacher_path,:class=>"btn btn-primary"%>
+    <%= link_to "gathering" ,gathering_teacher_path,:class=>"btn btn-primary"%>
+    <%= link_to "introduce" ,introduce_teacher_path,:class=>"btn btn-primary"%>
+    <%= link_to "price" ,price_teacher_path,:class=>"btn btn-primary"%>
+    <% if current_user %>
+             <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
+             <%= link_to('修改密碼', edit_registration_path(:user)) %>
+         <% else %>
+             <%= link_to('註冊', new_registration_path(:user)) %> |
+             <%= link_to('登入', new_session_path(:user)) %>
+         <% end %>
+    <%= yield %>
+
+  </body>
+</html>

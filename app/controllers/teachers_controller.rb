@@ -6,7 +6,14 @@ class TeachersController < ApplicationController
 
   def introduce
     @teacher.teacher_languageships.new if @teacher.teacher_languageships.empty?
+  end
 
+  def calendar
+  end
+
+  def profile
+    @user = current_user
+    @teacher = Teacher.find(params[:id])
   end
 
   def price

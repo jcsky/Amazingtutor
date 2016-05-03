@@ -19,19 +19,23 @@ class Pay2goController < ApplicationController
         ActiveRecord::Base.transaction do
           @order.paid = true
           @order.save!
-          @teacher_available_section = @order.user.user_available_sections.where(:teacher_id => @order.teacher_id).first
-          if  @teacher_available_section
-              @teacher_available_section.available_section += 2
-              @teacher_available_section.save
-          else
-            @teacher_available_section = @order.user.user_available_sections.new( :teacher_id => @order.teacher_id )
-            @teacher_available_section.available_section = 2
-            @teacher_available_section.save!
-          end
+          @teacher_available_section = @order.user.user_available_sections.find_or_create_by(:teacher_id => @order.teacher_id)
+          new_section = case @order.session
+                        when '1'  then 2
+                        when '5'  then 10
+                        when '10' then 20
+                        else # 'trial'
+                          @teacher_available_section.trailed = true
+                          @teacher_available_section.save
+                          1
+                        end
+          # @teacher_available_section.available_section should have default 0
+          @teacher_available_section.available_section += new_section
+          @teacher_available_section.save
         end
       end
 
-      redirect_to user_order_path(@order.user, @order)
+      redirect_to mytutor_user_path(@order.user)
     end
 
     def notify

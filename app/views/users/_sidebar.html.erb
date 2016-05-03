@@ -1,0 +1,28 @@
+<div class="col-xs-12 scheduled-head">
+  <div class="col-xs-4">
+    <h4>3</h4>
+    <p>Scheduled</p>
+  </div>
+  <div class="col-xs-4">
+    <h4>1</h4>
+    <p>Past</p>
+  </div>
+  <div class="col-xs-4">
+    <h4>0</h4>
+    <p>Unscheduled</p>
+  </div>
+</div>
+<div class="col-xs-12 user-list">
+  <div>
+    <%= link_to "Class",classes_user_path(current_user) %>
+  </div>
+  <div><%= link_to "ChangePassword",changepassword_user_path %>
+  </div>
+  <div><%= link_to "FeedBack",remark_user_path %>
+  </div>
+  <div><%= link_to "My Tutor",mytutor_user_path %>
+  </div>
+  <div>
+    <%= link_to "EditProfile",profile_user_path %>
+  </div>
+</div>

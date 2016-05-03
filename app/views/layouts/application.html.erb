@@ -1,36 +1,102 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Amazingtutor</title>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <title>Amazingtotur</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
-    <%= csrf_meta_tags %>
+
     <script type="text/javascript">
-    $(document).ready(function () {
+      $(function () {
+        $("#rateYo").rateYo({starWidth: "15px", rating: 2, fullStar: true, normalFill: "#A0A0A0", spacing: "5px"});
+      });
+      $(function () {
+        $("#rateYo").rateYo().on("rateyo.set", function (e, data) {
+          $.ajax({
+            type: "POST",
+            url: "/evaluations",
+            dataType: 'JSON',
+            data: {
+              rating_count: data.rating
+            }
+          });
+        });
+      });
+
+      $(document).ready(function () {
+        $('#booking').hide()
+        $('#booking-bg').hide()
+        $('#booknow').click(function (e) {
+          $('#booking-bg').fadeIn(1)
+          $('#booking').fadeIn(300)
+        });
+        $('#booking-bg').click(function (e) {
+          $('#booking').fadeOut(300)
+          $('#booking-bg').fadeOut(1)
+        });
+        $(".selectpicker").selectpicker({});
+        $('#datepicker').datepicker()
+        $(".js-example-basic-single").select2();
+        $("#priceslide").slider();
         $(".language-select").select2({placeholder: "Select a language"});
       });
     </script>
-
   </head>
   <body>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= link_to "education" ,education_teacher_path,:class=>"btn btn-primary"%>
-    <%= link_to "youtube" ,youtube_teacher_path,:class=>"btn btn-primary"%>
-    <%= link_to "gathering" ,gathering_teacher_path,:class=>"btn btn-primary"%>
-    <%= link_to "introduce" ,introduce_teacher_path,:class=>"btn btn-primary"%>
-    <%= link_to "price" ,price_teacher_path,:class=>"btn btn-primary"%>
-    <% if current_user %>
-             <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
-             <%= link_to('修改密碼', edit_registration_path(:user)) %>
-         <% else %>
-             <%= link_to('註冊', new_registration_path(:user)) %> |
-             <%= link_to('登入', new_session_path(:user)) %>
-         <% end %>
-    <%= yield %>
-
+    <nav class="navbar navbar-default nav-modify navbar-fixed-top" id="nav">
+      <div class="container nav-relative">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header brand-center">
+          <%= link_to root_path , :class=>"navbar-brand" do%>
+          <span>Amazing</span>
+          <span>tutor</span>
+          <% end %>
+        </div>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" style="content=" "">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#">Apply a Teacher</a>
+            </li>
+            <li>
+              <%= link_to("Log In",new_session_path(:user)) if !current_user%>
+            </li>
+            <% if current_user %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User ID
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Dashboard",classes_user_path(current_user) %></li>
+                <li><%= link_to "教師資訊" ,introduce_teacher_path(current_user.teacher.id)%></li>
+                <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.teacher.id)%></li>
+                <li>
+                  <a href="#"><%= link_to('Log Out', destroy_user_session_path, :method => :delete)%></a>
+                </li>
+              </ul>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    <div class="nav-top">
+      <%= yield %>
+    </div>
   </body>
 </html>

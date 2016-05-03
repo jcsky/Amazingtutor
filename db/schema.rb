@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427163056) do
+ActiveRecord::Schema.define(version: 20160503092932) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20160427163056) do
     t.datetime "updated_at",                        null: false
     t.boolean  "paid",              default: false
     t.string   "email"
+    t.string   "session"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -140,8 +141,9 @@ ActiveRecord::Schema.define(version: 20160427163056) do
     t.integer  "user_id"
     t.integer  "teacher_id"
     t.integer  "available_section", default: 0
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "trailed",           default: false
   end
 
   create_table "users", force: :cascade do |t|
