@@ -31,6 +31,11 @@ gem 'populator'
 # 多國語系
 gem 'rails-i18n'
 
+# fullcalendar
+gem 'fullcalendar-rails'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'jquery-ui-rails'
+
 gem "nested_form"
 gem 'nested_form_fields'
 gem 'awesome_rails_console'

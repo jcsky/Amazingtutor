@@ -5,6 +5,7 @@ class Teacher < ActiveRecord::Base
   has_many :experiences
   has_many :certificates
   has_many :educations
+  has_many :appointments
   accepts_nested_attributes_for :teacher_languageships , allow_destroy: true
   accepts_nested_attributes_for :languages , allow_destroy: true
   accepts_nested_attributes_for :experiences , allow_destroy: true

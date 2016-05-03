@@ -1,0 +1,5 @@
+<%@appointments.each do |appointment|%>
+<%= appointment.start.to_time %>~
+<%= appointment.end.to_time %>
+<br />
+<%end%>

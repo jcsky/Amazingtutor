@@ -3,8 +3,10 @@ RSpec.describe Appointment, type: :model do
   before do
     @student1 = create_user
     @student2 = create_user
-    @teacher1 = create_user
-    @teacher2 = create_user
+    @user1 = create_user
+    @user2 = create_user
+    @teacher1 = Teacher.create(:user => @user1)
+    @teacher2 = Teacher.create(:user => @user2)
     Appointment.create(:teacher_id => @teacher1.id,
                        :student_id => @student2.id,
                        :start => '2016-01-01 03:30:00'.to_time,

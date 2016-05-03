@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_one :teacher
   has_many :remarks
   has_many :orders
-  has_many :appointments
+  has_many :appointments , :foreign_key => "student_id"
   has_many :user_available_sections
 
   def display_name

@@ -5,3 +5,6 @@
 //= require nested_form_fields
 //= require select2
 //= require select2-full
+//= require moment
+//= require jquery-ui
+//= require fullcalendar
