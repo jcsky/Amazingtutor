@@ -34,7 +34,7 @@
 
           <div class="input-group clearfix">
             <%= f.label :location, "Location" %>
-            <%= f.country_select(:location ,{ priority_countries: ["GB", "FR"], selected: "GB" }, {:class => "form-control"} )%>
+            <%= f.country_select( "location", { priority_countries: ["GB", "FR"], selected: "GB" }, { class: 'form-control'}) %>
           </div>
           <div class="input-group clearfix">
             <%= f.label :currency, "Currency" %>
