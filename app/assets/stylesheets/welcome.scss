@@ -117,7 +117,6 @@ h2 {
 }
 .info-pro {
   display: none;
-  overflow: auto;
 }
 .info-pro-fix {
   font-size: 12px;
@@ -149,6 +148,7 @@ h2 {
     font-size: 12px;
   }
   .info {
+    height: 220px;
     embed,
     iframe,
     object {
@@ -156,17 +156,21 @@ h2 {
       -moz-border-bottom-left-radius: 5px;
       border-bottom-left-radius: 5px;
         width: 320px;
-        height: 230px;
+        height: 220px;
     }
   }
   .flexmodify ,.info-tag,.info-pro{
-    margin: 10px 0px 10px 23px;
+    margin: 10px 0px 0px 23px;
+  }
+  .info-pro{
+    margin-top: 3px;
   }
 }
 @media (min-width: $screen-md-min) {
   .info-pro {
     display: block;
     font-size: 12px;
+    margin-top: -5px;
   }
   .info {
     width: 800px;
