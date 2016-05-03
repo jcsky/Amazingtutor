@@ -1,3 +1,4 @@
+
 class OrdersController < ApplicationController
 
   before_action :authenticate_user!, except: :checkout_pay2go
@@ -13,6 +14,8 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @order.teacher_id = params[:teacher_id]
+
   end
 
   def create
@@ -41,7 +44,7 @@ class OrdersController < ApplicationController
    protected
 
    def order_params
-     params.require(:order).permit(:name, :amount, :email, :teacher_id )
+     params.require(:order).permit(:name, :amount, :email, :teacher_id, :session )
    end
 
    def set_student_section

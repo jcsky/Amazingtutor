@@ -55,6 +55,7 @@
           <h5>Trial session</h5>
           <p>with sarah</p>
         </div>
+
         <div class="col-xs-5 col-xs-push-1 text-right">
 
             <% if @teacher.trial_fee == 0 %>
@@ -64,7 +65,7 @@
             <% else %>
             <h5 class="moneyred"><%= @teacher.trial_fee %> TWD</h5>
             <% end %>
-          <p>20 min</p>
+          <p>30 min</p>
         </div>
         <div class="col-xs-12">
           <%= button_tag("Book Trial", :class => "btn ") if @teacher.trial_fee != nil %>
@@ -112,7 +113,9 @@
         </div>
 
         <div class="col-xs-12">
-          <%= button_tag "Book Now", {:class => "btn", :id=>"booknow" }%>
+          <div id="booknow">
+           <%= link_to "Book Now", new_user_order_path(@user, :teacher_id => params[:id]),:class => "btn btn-primary btn-lg" %>
+          </div>
         </div>
 
         <div class="col-xs-12 text-center">

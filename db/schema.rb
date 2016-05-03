@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503054423) do
+
+ActiveRecord::Schema.define(version: 20160503095326) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -20,7 +21,6 @@ ActiveRecord::Schema.define(version: 20160503054423) do
     t.datetime "updated_at", null: false
     t.datetime "start"
     t.datetime "end"
-    t.integer  "student_id"
     t.integer  "user_id"
   end
 
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160503054423) do
   end
 
   create_table "languages", force: :cascade do |t|
+    t.integer  "teacher_id"
     t.string   "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 20160503054423) do
     t.datetime "updated_at",                        null: false
     t.boolean  "paid",              default: false
     t.string   "email"
+    t.string   "session"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -145,8 +147,9 @@ ActiveRecord::Schema.define(version: 20160503054423) do
     t.integer  "user_id"
     t.integer  "teacher_id"
     t.integer  "available_section", default: 0
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "trailed",           default: false
   end
 
   create_table "users", force: :cascade do |t|

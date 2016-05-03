@@ -23,6 +23,7 @@ class TeachersController < ApplicationController
   end
 
   def profile
+    @user = current_user
     @teacher = Teacher.find(params[:id])
   end
 

@@ -7,3 +7,6 @@
 //= require select2-full
 //= require bootstrap-select.min
 //= require rateyo.min
+//= require moment
+//= require jquery-ui
+//= require fullcalendar

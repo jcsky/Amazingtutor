@@ -1,0 +1,24 @@
+$(document).ready(function () {
+  $('#calendar').fullCalendar({
+    theme: true,
+    //24小時制 大寫H
+    timeFormat: 'H:mm',
+    allDaySlot: false,
+    defaultDate: '<%=Time.now.strftime("%Y-%m-%d")%>',
+    defaultView: 'agendaWeek',
+    ignoreTimezone: false,
+    eventLimit: true, // allow "more" link when too many events
+    eventSources: [
+      {
+        //teacher events source
+        url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
+        backgroundColor: 'blue',
+        rendering: 'background',
+      },
+      {
+        url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/booked_section.json', // use the `url` property
+        backgroundColor: 'gray',
+      }
+    ]
+  });
+});

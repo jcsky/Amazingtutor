@@ -28,10 +28,12 @@ Rails.application.routes.draw do
     end
   end
 
+
   resources :teachers do
     member do
       get 'classes' => 'teachers#classes'
       get 'profile' => 'teachers#profile'
+      post 'profile' => 'teachers#profile#create'
       get 'calendar' => 'teachers#calendar'
       get 'introduce' => 'teachers#introduce'
       get 'price' => 'teachers#price'
@@ -49,7 +51,7 @@ Rails.application.routes.draw do
   resources :student_reservation do
   end
   resources :teacher_calendars do
-    get 'teacher_available' => 'teacher_calendars#teacher_calendars'
+    get 'teacher_available_section' => 'teacher_calendars#teacher_available_section'
     get 'booked_section' => 'teacher_calendars#booked_section'
   end
 

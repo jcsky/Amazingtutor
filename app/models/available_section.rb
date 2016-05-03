@@ -49,7 +49,15 @@ class AvailableSection < ActiveRecord::Base
   def self.check_section_insertalbe_and_bluk_insert(start_time, end_time, teacher_id)
     end_time = end_time.to_time
     start_time = start_time.to_time
-    check_exist = AvailableSection.where("(start between ? and ?) AND (end between ? and ?) AND teacher_id = ?", start_time, end_time, start_time, end_time, teacher_id)
+    check_exist = AvailableSection.where("((start >= ? and start <= ?) OR (end >= ? and end <= ?)) AND teacher_id = ?", start_time, end_time, start_time, end_time, teacher_id)
+    check_exist.each do |avaiable|
+      if avaiable.start.to_time < start_time.to_time
+        start_time = avaiable.start.to_time
+      end
+      if avaiable.end.to_time > end_time.to_time
+        end_time = avaiable.end.to_time
+      end
+    end
     check_exist.delete_all
     AvailableSection.create(:start => start_time, :end => end_time, :teacher_id => teacher_id)
   end
@@ -78,7 +86,7 @@ class AvailableSection < ActiveRecord::Base
                            date.to_time.at_beginning_of_day,
                            date.to_time.at_end_of_day).order('start').each do |a|
       start_time = a.start.to_time
-      while start_time < a.end.to_time-(30.minute)*(section.to_i-1)  do
+      while start_time < a.end.to_time-(30.minute)*(section.to_i-1) do
         end_time = start_time + (30.minute)*section.to_i
         if !Appointment.appointment_check(start_time, end_time, teacher_id)
           reservation_list << {'start' => start_time, 'end' => end_time, 'teacher_id' => teacher_id, 'status' => true}
@@ -89,5 +97,25 @@ class AvailableSection < ActiveRecord::Base
       end
     end
     reservation_list
+  end
+
+  def self.teacher_available_section(teacher_id)
+    AvailableSection.where('teacher_id = ? and end >= ? and start <= ?',
+                           teacher_id,
+                           Time.now.to_time.at_beginning_of_day,
+                           14.days.from_now.to_time.at_end_of_day)
+  end
+
+  def self.recent_14_days(teacher_id)
+    available_section = AvailableSection.where('teacher_id = ? and end >= ? and start <= ?',
+                                               teacher_id,
+                                               Time.now.to_time.at_beginning_of_day,
+                                               14.days.from_now.to_time.at_end_of_day)
+    available_date = []
+    available_section.each do |available|
+      available_date << available.start.to_time.to_date
+      available_date << available.end.to_time.to_date
+    end
+    available_date.uniq.map { |d| d.strftime("%Y-%m-%d") }
   end
 end
