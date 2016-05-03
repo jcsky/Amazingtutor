@@ -65,8 +65,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header brand-center">
           <%= link_to root_path , :class=>"navbar-brand" do%>
-          <span>Amazing</span>
-          <span>tutor</span>
+          <span class="brand1">Amazing</span><span class="brand2">tutor</span>
           <% end %>
         </div>
         <div class="navbar-header">
@@ -81,11 +80,11 @@
         <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" >
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="#">Apply a Teacher</a>
+            <%= link_to("Apply a Teacher", apply_teacher_path(:user))%>
             </li>
             <li>
-              <%= link_to("Log In",new_session_path(:user),id:"login") if !current_user%>
               <%#= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>
+              <%= link_to(t("Log In"), new_session_path(:user))if !current_user%>
             </li>
             <% if current_user %>
             <li class="dropdown">

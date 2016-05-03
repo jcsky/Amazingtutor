@@ -1,0 +1,28 @@
+<br/>
+<%= @teacher.try(:youtube) %>
+<br/>
+<%= @teacher.user.email %>
+<br/>
+----------------
+
+<p class="notice"><%= notice %></p>
+
+----------------
+<br/>
+可選日期：
+<br/>
+
+<%= form_tag(teacher_calendars_path, method: "get") do %>
+    <%= hidden_field_tag(:id, @teacher.id) %>
+    <% @recent_14_days.each do |r| %>
+        <label class="btn btn-primary active">
+          <input type="radio" name="date" autocomplete="off" value="<%= r %>"><%= r %>
+        </label>
+        <br/>
+    <% end %>
+    <%= submit_tag("Search", :class => "btn btn-primary") %>
+<% end %>
+<div id='calendar' style="width:100% ; height:100%"></div>
+<script>
+  <%= render 'fullcalendar_show' %>
+</script>

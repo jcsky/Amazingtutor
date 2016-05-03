@@ -49,10 +49,11 @@ Rails.application.routes.draw do
   resources :student_reservation do
   end
   resources :teacher_calendars do
-    get 'teacher_available' => 'teacher_calendars#teacher_calendars'
+    get 'teacher_available_section' => 'teacher_calendars#teacher_available_section'
     get 'booked_section' => 'teacher_calendars#booked_section'
   end
 
+  get  'apply_teacher'=> "welcome#apply_teacher"
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,5 +1,5 @@
 <br/>
-<%= @teacher.youtube %>
+<%= @teacher.try(:youtube) %>
 <br/>
 <%= @teacher.user.email %>
 <br/>
@@ -8,16 +8,19 @@
 日期：<%= @reservation_list.first['start'].strftime("%Y-%m-%d") %>
 <br/>
 可選時段：
-<div class="btn-group" data-toggle="buttons">
-  <% @reservation_list.each do |r| %>
-      <% if r["status"] %>
-          <label class="btn btn-primary active">
-            <input type="radio" name="reservation_time" autocomplete="off" value="<%= r["start"].strftime("%H:%M:%S") %>"><%= r["start"].strftime("%H:%M:%S") %>
-            - <%= r["end"].strftime("%H:%M:%S") %>
-          </label>
-      <% else %>
-          <%= r["start"].strftime("%H:%M:%S") %>- <%= r["end"].strftime("%H:%M:%S") %>
-      <% end %>
-      <br/>
-  <% end %>
-</div>
+<%= form_for @appointments, url: appointments_path, method: :post do |f| %>
+    <%= f.hidden_field :teacher_id, {:value => @teacher.id} %>
+    <% @reservation_list.each do |r| %>
+        <% if r["status"] %>
+            <label class="c-input c-radio">
+              <span class="c-indicator"></span>
+              <%= f.radio_button :book_section, r["start"].strftime("%Y-%m-%d %H:%M:%S")+'~'+r["end"].strftime("%Y-%m-%d %H:%M:%S"), class: "form_control" %><%= r["start"].strftime("%H:%M:%S")+'~'+r["end"].strftime("%H:%M:%S") %>
+            </label>
+        <% end %>
+    <% end %>
+    <%= submit_tag("booking", :class => "btn btn-primary") %>
+<% end %>
+<div id='calendar' style="width:100% ; height:100%"></div>
+<script>
+  <%= render 'fullcalendar_show' %>
+</script>
