@@ -64,20 +64,21 @@ class User < ActiveRecord::Base
     return user
   end
 
-  def self.connect_to_facebook(auth, current_user)
+  def connect_to_facebook(auth)
     #   檢查這個帳戶是不是有被關聯過
-    user = User.find_by_fb_uid(auth.uid)
-    if user and current_user.fb_uid != auth.uid
+    # user = User.find_by_fb_uid(auth.uid)
+
+    if User.find_by_fb_uid(auth.uid).id != self.id
       return false
     else
-      current_user.fb_uid = auth.uid
-      current_user.fb_token = auth.credentials.token
-      current_user.fb_raw_data = auth
-      current_user.save!
-      if user and current_user.fb_uid == auth.uid
-        return 'update'
-      else
+      self.fb_uid = auth.uid
+      self.fb_token = auth.credentials.token
+      self.fb_raw_data = auth
+      self.save!
+      if self.fb_uid == nil
         return true
+      elsif self.fb_uid == auth.uid
+        return 'update'
       end
     end
   end
@@ -120,20 +121,19 @@ class User < ActiveRecord::Base
     return user
   end
 
-  def self.connect_to_google_omniauth(auth, current_user)
+  def connect_to_google_omniauth(auth)
     #   檢查這個帳戶是不是有被關聯過
-    user = User.find_by_google_uid(auth.uid)
-    if user and current_user.google_uid !=auth.uid
+    if User.find_by_google_uid(auth.uid).id != self.id
       return false
     else
-      current_user.google_uid = auth.uid
-      current_user.google_token = auth.credentials.token
-      current_user.google_raw_data = auth
-      current_user.save!
-      if user and current_user.google_uid == auth.uid
-        return 'update'
-      else
+      self.google_uid = auth.uid
+      self.google_token = auth.credentials.token
+      self.google_raw_data = auth
+      self.save!
+      if self.google_uid == nil
         return true
+      elsif self.google_uid == auth.uid
+        return 'update'
       end
     end
   end
