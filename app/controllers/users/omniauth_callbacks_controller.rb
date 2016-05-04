@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     if user_signed_in?
-      result = User.connect_to_facebook(request.env["omniauth.auth"], current_user)
+      result = current_user.connect_to_facebook(request.env["omniauth.auth"])
       if result =='update'
         set_flash_message(:notice, :updated, :kind => "Facebook") if is_navigational_format?
       elsif result
@@ -29,7 +29,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google_oauth2
     if user_signed_in?
-      result = User.connect_to_google_omniauth(request.env["omniauth.auth"], current_user)
+      result = current_user.connect_to_google_omniauth(request.env["omniauth.auth"])
       if result =='update'
         set_flash_message(:notice, :updated, :kind => "Google+") if is_navigational_format?
       elsif result
