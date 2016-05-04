@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504013759) do
+ActiveRecord::Schema.define(version: 20160504090602) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 20160504013759) do
   end
 
   create_table "languages", force: :cascade do |t|
-    t.integer  "teacher_id"
     t.string   "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -171,12 +170,11 @@ ActiveRecord::Schema.define(version: 20160504013759) do
     t.string   "born_form"
     t.string   "live_in"
     t.boolean  "gender"
-    t.datetime "time_zone"
+    t.string   "time_zone"
     t.integer  "user_id"
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "authority"
     t.string   "fb_uid"
     t.string   "fb_token"
     t.text     "fb_raw_data"
@@ -184,6 +182,7 @@ ActiveRecord::Schema.define(version: 20160504013759) do
     t.string   "google_token"
     t.text     "google_raw_data"
     t.string   "locale"
+    t.string   "authority"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"

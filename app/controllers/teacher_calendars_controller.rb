@@ -10,7 +10,7 @@ class TeacherCalendarsController < ApplicationController
       rescue ArgumentError
         date_is_nil('invalid date' , @reservaton_list_params[:id])
       else
-        if @reservaton_list_params[:date] > Time.now.to_time.at_beginning_of_day
+        if @reservaton_list_params[:date] > Time.now.in_time_zone.at_beginning_of_day
           @reservation_list = AvailableSection.query_reservation_time_list_by_date(@reservaton_list_params[:id], @reservaton_list_params[:date])
           if @reservation_list.count == 0
             date_is_nil('no available sections' , @reservaton_list_params[:id])
@@ -18,7 +18,7 @@ class TeacherCalendarsController < ApplicationController
             @appointments = Appointment.new
             render :index
           end
-        elsif @reservaton_list_params[:date] < Time.now.to_time.at_beginning_of_day
+        elsif @reservaton_list_params[:date] < Time.now.in_time_zone.at_beginning_of_day
           date_is_nil('can not choose day before today' , @reservaton_list_params[:id])
         end
       end
@@ -41,8 +41,8 @@ class TeacherCalendarsController < ApplicationController
 
   def create
     current_user = User.third
-    start_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:start].to_time, 'after')
-    end_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:end].to_time, 'before')
+    start_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:start].in_time_zone, 'after')
+    end_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:end].in_time_zone, 'before')
     @return_insert_sections = AvailableSection.check_section_insertalbe_and_bluk_insert(start_time, end_time,current_user.teacher.id)
 
   end
