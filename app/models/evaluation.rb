@@ -1,4 +1,4 @@
-class Evalution < ActiveRecord::Base
+class Evaluation < ActiveRecord::Base
   belongs_to :appointment
   belongs_to :user
   belongs_to :teacher
@@ -8,8 +8,8 @@ class Evalution < ActiveRecord::Base
   def update_average
     sum = 0
     teacher = self.teacher
-    count = teacher.evalutions.count
-    teacher.evalutions.each do |e|
+    count = teacher.evaluations.count
+    teacher.evaluations.each do |e|
       value = e.rating
       sum = sum + value
     end

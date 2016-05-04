@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   end
 
   resources :appointments do
-    resources :evalutions
+    resources :evaluations
   end
 
   resources :student_reservation do

@@ -7,7 +7,7 @@
   <div id="rateYo"></div>
   <div id="content"><%= @raty %></div>
   <% if current_user && @appointment.user == current_user %>
-    <input type="text" id="comment" value="<%= @evalution.first.comment %>">
+    <input type="text" id="comment" value="<%= @evaluation.first.comment %>">
     <button class="button" >Create</button>
   <% end %>
 
@@ -37,7 +37,7 @@ $(function () {
     var appointment_id =  <%= @appointment.id %>;
     $.ajax({
       type: 'POST',
-      url: "/appointments/" + appointment_id + "/evalutions",
+      url: "/appointments/" + appointment_id + "/evaluations",
       data: {
         rating: rating,
         comment: comment
