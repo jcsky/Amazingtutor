@@ -8,7 +8,7 @@ class TeachersController < ApplicationController
   def index
     @teachers = Teacher.all
     @appointments = Appointment.all
-    @evalutions = Evalution.all
+    @evaluations = Evaluation.all
 
   end
 
