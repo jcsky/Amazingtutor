@@ -9,18 +9,17 @@
     <td>Teacher_ID:  <%= @order.teacher_id %></td>
     <td>User E-mail: <%= @order.user.email %></td>
     <td>Amount $ <%= @order.amount %></td>
-
-    <td>Avaliable section: <%= @student_available_section.available_section %></td>
+    <td>Session $ <%= @order.session %></td>
   </tr>
 </table>
 
 <% if @order.paid %>
-  <p>已付款</p>
+  <p>Paid</p>
 <% else %>
-  <p>請付款</p>
+  <p>Please Pay before booking </p>
 
   <p>
-    <%= link_to "刷卡", checkout_pay2go_user_order_path(@order.user_id, @order, :payment_method => "Credit"), :class => "btn btn-primary btn-lg", :method => :post %>
+    <%= link_to "Pay", checkout_pay2go_user_order_path(@order.user_id, @order, :payment_method => "Credit"), :class => "btn btn-primary btn-lg", :method => :post %>
   </p>
 
 <% end %>

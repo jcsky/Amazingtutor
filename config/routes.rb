@@ -28,10 +28,12 @@ Rails.application.routes.draw do
     end
   end
 
+
   resources :teachers do
     member do
       get 'classes' => 'teachers#classes'
       get 'profile' => 'teachers#profile'
+      post 'profile' => 'teachers#profile#create'
       get 'calendar' => 'teachers#calendar'
       get 'introduce' => 'teachers#introduce'
       get 'price' => 'teachers#price'

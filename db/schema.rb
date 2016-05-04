@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20160503095326) do
     t.datetime "updated_at",                        null: false
     t.boolean  "paid",              default: false
     t.string   "email"
+    t.string   "session"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -145,8 +146,9 @@ ActiveRecord::Schema.define(version: 20160503095326) do
     t.integer  "user_id"
     t.integer  "teacher_id"
     t.integer  "available_section", default: 0
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "trailed",           default: false
   end
 
   create_table "users", force: :cascade do |t|
