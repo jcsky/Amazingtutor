@@ -1,5 +1,5 @@
-//= require jquery-ui
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require bootstrap-slider
@@ -10,3 +10,4 @@
 //= require rateyo.min
 //= require moment
 //= require fullcalendar
+//= require jstz.min
