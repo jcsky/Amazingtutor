@@ -1,1 +1,1 @@
-json.partial! 'appointment', evalution: @evalution
+json.partial! 'appointment', evaluation: @evaluation

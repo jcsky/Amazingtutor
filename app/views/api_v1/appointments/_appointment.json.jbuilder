@@ -1,1 +1,1 @@
-json.rating evalution.rating
+json.rating evaluation.rating

@@ -5,7 +5,7 @@ class Teacher < ActiveRecord::Base
   has_many :languages, through: :teacher_languageships
 
   has_many :appointments
-  has_many :evalutions
+  has_many :evaluations
 
   has_many :experiences
   has_many :certificates

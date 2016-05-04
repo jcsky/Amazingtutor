@@ -1,7 +1,7 @@
 class Appointment < ActiveRecord::Base
   belongs_to :user
   belongs_to :teacher
-  has_many :evalutions
+  has_many :evaluations
   has_many :available_section
 
   def book_section

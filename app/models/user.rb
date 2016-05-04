@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :remarks
   has_many :orders
   has_many :appointments
-  has_many :evalutions
+  has_many :evaluations
   has_many :user_available_sections
 
   has_attached_file :image, styles: {medium: "100x100>", thumb: "50x50>"}, default_url: "user_default.png"
