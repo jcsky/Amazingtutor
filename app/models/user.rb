@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable,
-    :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
   has_one :teacher
   has_many :remarks
   has_many :orders
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :evalutions
   has_many :user_available_sections
 
-  has_attached_file :image, styles: { medium: "100x100>", thumb: "50x50>" }, default_url: "user_default.png"
+  has_attached_file :image, styles: {medium: "100x100>", thumb: "50x50>"}, default_url: "user_default.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def get_teacher
@@ -64,6 +64,24 @@ class User < ActiveRecord::Base
     return user
   end
 
+  def self.connect_to_facebook(auth, current_user)
+    #   檢查這個帳戶是不是有被關聯過
+    user = User.find_by_fb_uid(auth.uid)
+    if user and current_user.fb_uid != auth.uid
+      return false
+    else
+      current_user.fb_uid = auth.uid
+      current_user.fb_token = auth.credentials.token
+      current_user.fb_raw_data = auth
+      current_user.save!
+      if user and current_user.fb_uid == auth.uid
+        return 'update'
+      else
+        return true
+      end
+    end
+  end
+
 
   def self.from_google_omniauth(auth)
     # 可用參數
@@ -100,6 +118,24 @@ class User < ActiveRecord::Base
     user.locale = auth.extra.raw_info.locale
     user.save!
     return user
+  end
+
+  def self.connect_to_google_omniauth(auth, current_user)
+    #   檢查這個帳戶是不是有被關聯過
+    user = User.find_by_google_uid(auth.uid)
+    if user and current_user.google_uid !=auth.uid
+      return false
+    else
+      current_user.google_uid = auth.uid
+      current_user.google_token = auth.credentials.token
+      current_user.google_raw_data = auth
+      current_user.save!
+      if user and current_user.google_uid == auth.uid
+        return 'update'
+      else
+        return true
+      end
+    end
   end
 
 end
