@@ -10,14 +10,9 @@ class AppointmentsController < ApplicationController
   def show
     @appointment = Appointment.find(params[:id])
 
-    @evaluation = Evaluation.where(appointment_id: @appointment, user_id: current_user.id, teacher_id: @appointment.teacher_id)
-    @evaluations = Evaluation.where(appointment_id: @appointment)
+    @evaluationsArray = Evaluation.where(appointment_id: @appointment, user_id: current_user.id, teacher_id: @appointment.teacher_id)
 
-    if @evaluations.blank?
-      @raty = 0
-    else
-      @raty = @evaluations.average(:rating).round(2).to_f
-    end
+    @raty = @evaluationsArray.first.rating
   end
 
   def create

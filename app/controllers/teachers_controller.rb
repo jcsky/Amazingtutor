@@ -25,6 +25,7 @@ class TeachersController < ApplicationController
   def profile
     @user = current_user
     @teacher = Teacher.find(params[:id])
+
   end
 
   def price
@@ -62,8 +63,8 @@ class TeachersController < ApplicationController
         flash[:alert] = 'Save success'
       else
         flash[:alert] = 'Save fail'
-     end
- end
+      end
+    end
   end
 
   private
@@ -71,15 +72,15 @@ class TeachersController < ApplicationController
   def get_teacher
     if current_user.teacher
       @teacher =current_user.teacher
-     else
+    else
       @teacher = current_user.create_teacher
     end
   end
 
   def teacher_authority
-     if current_user == nil || current_user.authority != 'teacher'
-       redirect_to root_path
-     end
+    if current_user == nil || current_user.authority != 'teacher'
+      redirect_to root_path
+    end
   end
 
   def teacher_params

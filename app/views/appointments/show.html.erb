@@ -1,4 +1,4 @@
-<p><button class="click">open</button></p>
+<p><button class="click55">open</button></p>
 <div class="mask"></div>
 
 <div class="content">
@@ -7,7 +7,7 @@
   <div id="rateYo"></div>
   <div id="content"><%= @raty %></div>
   <% if current_user && @appointment.user == current_user %>
-    <input type="text" id="comment" value="<%= @evaluation.first.comment %>">
+    <input type="text" id="comment" value="<%= @evaluationsArray.first.try(:comment) %>">
     <button class="button" >Create</button>
   <% end %>
 
@@ -21,7 +21,7 @@ $(function () {
   $("#rateYo").rateYo({
     starWidth: "40px",
     numStars: 5,
-    halfStar: true,
+    fullStar: true,
     rating: <%= @raty %>
   });
 });
@@ -53,7 +53,7 @@ $(function () {
 });
 
 $(document).ready(function(){
-  $('.click').click(function(){
+  $('.click55').click(function(){
    $('.mask').css({"display":"block"});
    $('.content').css({"display":"block"});
   });

@@ -7,21 +7,7 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
-      $(function () {
-        $("#rateYo").rateYo({starWidth: "15px", rating: 2, fullStar: true, normalFill: "#A0A0A0", spacing: "5px"});
-      });
-      $(function () {
-        $("#rateYo").rateYo().on("rateyo.set", function (e, data) {
-          $.ajax({
-            type: "POST",
-            url: "/evaluations",
-            dataType: 'JSON',
-            data: {
-              rating_count: data.rating
-            }
-          });
-        });
-      });
+
       $(document).ready(function () {
         $('#pop-booking').hide();
         $('#pop-black').hide();
