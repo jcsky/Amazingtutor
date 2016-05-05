@@ -46,14 +46,17 @@
     font-size: 10px;
     line-height: 0.6;
   }
-  button {
-    width: 100%;
-    color: #fff;
-    background-color: #FC6063;
+  a{
+    height: 35px;
+    font-size: 14px;
+    line-height: 15px;
     &:hover {
-      color: #fff;
+      background-color: #FC6063;
+      border:none;
+      line-height: 17px;
     }
   }
+
 }
 .private {
   background-color: #fff;
