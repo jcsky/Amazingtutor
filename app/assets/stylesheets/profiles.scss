@@ -71,6 +71,9 @@
     &:hover {
       background-color: #FC6063;
     }
+    &:active{
+      background-color: #FC6063;
+    }
   }
   p {
     font-size: 10px;
@@ -164,7 +167,6 @@
   margin-bottom: 20px;
 }
 .public-content {
-  ,
   .add_nested_fields_link {
     color: #bbb;
     font-weight: lighter;
@@ -198,7 +200,7 @@
     background-color: #64A0DD;
     margin-bottom: 15px;
   }
-  input:nth-child(2) {
+  input[value="Connect to Google+"] {
     background-color: #DD6575;
   }
 }
