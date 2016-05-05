@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504013759) do
+ActiveRecord::Schema.define(version: 20160505103409) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20160504013759) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "avg_rating",    default: 0
+    t.string   "check"
   end
 
   create_table "user_available_sections", force: :cascade do |t|
