@@ -142,8 +142,29 @@
       background-color: #DD6575;
       top: 145px;
     }
+    .h2{
+      font-weight: 16px;
+      color: #DD6575;
+    }
   }
 }
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+@media (max-width: $login-fix) {
+  .log {
+    width: 310px;
+    input[type=submit] {
+      width: 310px;
+    }
+    .facegoogle a {
+      width: 280px;
+    }
+    input[type=email] {
+    margin-left: -2px;
+    }
+    input[type=password] {
+      margin-left: -2px;
+    }
+  }
 }
