@@ -67,7 +67,7 @@
               <div class="col-xs-12">
                 <div class="clearfix flexmodify">
                   <div class="info-mypic col-xs-3 pull-left">
-                    <%= image_tag(@user.teacher.user.image) %>
+                    <%= image_tag(a.teacher.user.image) %>
                   </div>
                   <div class="info-eval col-xs-7">
                     <p>Abner Chao</p>
@@ -91,14 +91,13 @@
             </div>
           </div>
 
-
   <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
       <div id="evaluation-white-<%= a.id %>" class="evaluation-white">
         <div class="evaluation col-xs-12">
           <div class="evaluation-button clearfix">
             <%= link_to "Back" ,root_path ,:class=>"pull-left"%>
-            <button class="pull-right" id ="eval-send">Send</button>
-          </div>
+           <!--  <button class="pull-right" id ="eval-send">Send</button>
+          </div> -->
           <div class="evaluation-block col-xs-10 col-xs-push-1">
             <div class="evaluation-me text-center">
               <%= image_tag(@user.image) %>
@@ -118,7 +117,9 @@
           </div>
         </div>
       </div>
+      </div>
       <% end %>
+
     </div>
   </div>
 </div>
@@ -126,8 +127,8 @@
 <script>
   $(document).ready(function () {
     <% @user.appointments.each do |a|%>
+     $('#pop-black-<%= a.id %>').hide();
       $('#evaluation-white-<%= a.id %>').hide();
-      $('#pop-black-<%= a.id %>').hide();
       $('#rating-<%= a.id %>').click(function (e) {
         $('#pop-black-<%= a.id %>').fadeIn(1);
         $('#evaluation-white-<%= a.id %>').fadeIn(300);

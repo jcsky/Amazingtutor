@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504153106) do
+ActiveRecord::Schema.define(version: 20160505082518) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -52,17 +52,18 @@ ActiveRecord::Schema.define(version: 20160504153106) do
 
   create_table "evaluations", force: :cascade do |t|
     t.string   "comment"
-    t.integer  "rating",         default: 5
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "rating",           default: 5
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "appointment_id"
-    t.integer  "user_id"
-    t.integer  "teacher_id"
+    t.integer  "evaluatable_id"
+    t.string   "evaluatable_type"
+    t.integer  "evaluated_id"
   end
 
   add_index "evaluations", ["appointment_id"], name: "index_evaluations_on_appointment_id"
-  add_index "evaluations", ["teacher_id"], name: "index_evaluations_on_teacher_id"
-  add_index "evaluations", ["user_id"], name: "index_evaluations_on_user_id"
+  add_index "evaluations", ["evaluatable_id"], name: "index_evaluations_on_evaluatable_id"
+  add_index "evaluations", ["evaluated_id"], name: "index_evaluations_on_evaluated_id"
 
   create_table "experiences", force: :cascade do |t|
     t.integer  "teacher_id"

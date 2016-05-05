@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :teacher_authority ,except: :profile
+  before_action :teacher_authority , :except => [:profile, :index]
   before_action :get_teacher,except: :profile
 
   # 只有user裡面的author得值要等於teacher才可以進來 但大家都有第一次可能進來沒有teacher

@@ -1,21 +1,17 @@
 class Evaluation < ActiveRecord::Base
   belongs_to :appointment
-  belongs_to :user
-  belongs_to :teacher
+  belongs_to :evaluatable, :polymorphic => true
+
 
   after_save :update_average
 
   def update_average
-    sum = 0
-    teacher = self.teacher
-    count = teacher.evaluations.count
-    teacher.evaluations.each do |e|
-      value = e.rating
-      sum = sum + value
+    if evaluatable_type == 'User'
+      teacher = Teacher.find(evaluated_id)
+      average = Evaluation.where(evaluated_id: teacher.id).average("rating")
+      teacher.avg_rating = average
+      teacher.save!
     end
-    teacher.avg_rating = (sum/count).to_f
-    teacher.save!
-
   end
 
 end
