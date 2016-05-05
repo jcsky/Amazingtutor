@@ -1,9 +1,9 @@
 <div class="jumbotron jumbotron-modify">
   <div class="container">
-    <div class="col-md-6 jumbotron-fix">
+    <div class="col-md-12 jumbotron-fix">
       <h2>Find a Chinese Tutor</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad aliquam amet animi architecto atque autem dignissimos dolor eaque fuga fugiat laudantium modi neque
-      </p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid saepe in sequi voluptatum ducimus id, error ex, esse nisi ipsam mollitia quisquam atque repudiandae dolorum. Aspernatur quod ducimus dicta laborum explicabo totam inventore neque doloremque, reprehenderit temporibus excepturi facere. Error unde voluptates cum reiciendis labore, dolorem, modi vero sed impedit.</p>
+
     </div>
   </div>
 </div>
@@ -12,7 +12,7 @@
   <div class="row-fluid">
     <div class="container">
       <div class="col-sm-4 col-md-4">
-        <p>Tutor Speaks</p>
+        <p>Tutor Sub-languages</p>
         <select class="js-example-basic-single" style="width: 100%">
           <option value="AL">english</option>
           <option value="WY">中文</option>
@@ -34,7 +34,7 @@
 </div>
 
 <% @teacher.each do |t| %>
-<% if t.youtube && t.introduction && t.trial_fee && t.one_fee && t.five_fee && t.ten_fee %>
+<% if t.check == "checked" %>
 <div class="container">
   <div class="info">
     <div class="row">

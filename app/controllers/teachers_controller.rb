@@ -1,7 +1,6 @@
 class TeachersController < ApplicationController
   before_action :teacher_authority ,except: :profile
   before_action :get_teacher,except: :profile
-
   # 只有user裡面的author得值要等於teacher才可以進來 但大家都有第一次可能進來沒有teacher
   # 所以全部要before_action先建好teacher 如果已經有了就用已經有的
 
@@ -25,6 +24,7 @@ class TeachersController < ApplicationController
   def profile
     @user = current_user
     @teacher = Teacher.find(params[:id])
+    redirect_to root_path if @teacher.check != "checked" 
   end
 
   def price

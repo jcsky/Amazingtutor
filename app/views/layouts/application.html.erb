@@ -90,7 +90,7 @@
 
                 <li><%= link_to "Dashboard",classes_user_path(current_user) %></li>
                 <% if current_user.authority == "teacher" %>
-                <li><%= link_to "教師資訊" ,introduce_teacher_path(current_user.get_teacher.id)%></li>
+                <li><%= link_to "教師資訊" ,classes_teacher_path(current_user.get_teacher.id)%></li>
                 <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.get_teacher.id)%></li>
                 <% end %>
                 <li>
