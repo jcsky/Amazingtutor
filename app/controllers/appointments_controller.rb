@@ -47,6 +47,10 @@ class AppointmentsController < ApplicationController
         appointment.save
         # 扣掉預約後的堂數
         UserAvailableSection.update_credit(credit, appointment.section, 'less')
+        if calc_section ==1
+          credit.trailed = false
+          credit.save!
+        end
       end
     end
     redirect_to appointments_path

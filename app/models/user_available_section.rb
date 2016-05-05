@@ -12,6 +12,7 @@ class UserAvailableSection < ActiveRecord::Base
     elsif cacl == 'plus'
       available_sections =credit[:available_section] + calc_section
     end
+
     credit.update!(:available_section => available_sections)
   end
 end
