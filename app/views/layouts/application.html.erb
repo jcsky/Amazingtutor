@@ -39,14 +39,14 @@
         $("#js-example-basic-single").select2();
         $("#index_languages").select2().on("change", function(e) {
           var lan_id = $("#index_languages").val();
-          if (lan_id != "") {
-            $.ajax({
-              type: 'get',
-              url: "/welcome",
-              data: {
-              lan_id: lan_id
-              }
-          };
+          // if (lan_id != "") {
+          //   $.ajax({
+          //     type: 'get',
+          //     url: "/welcome",
+          //     data: {
+          //     lan_id: lan_id
+          //     }
+          // };
         });
 
 
