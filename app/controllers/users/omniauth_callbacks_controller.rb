@@ -12,7 +12,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
       redirect_to profile_user_path(current_user)
     else
-      @user = User.from_facebook_omniauth(request.env["omniauth.auth"])
+      @user = User.from_facebook_omniauth(request.env["omniauth.auth"],cookies['browser.timezone'])
       if @user.persisted?
         sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
         set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
@@ -39,7 +39,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
       redirect_to profile_user_path(current_user)
     else
-      @user = User.from_google_omniauth(request.env["omniauth.auth"])
+      @user = User.from_google_omniauth(request.env["omniauth.auth"],cookies['browser.timezone'])
       if @user.persisted?
         flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
         sign_in_and_redirect @user, :event => :authentication

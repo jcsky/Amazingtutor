@@ -1,5 +1,10 @@
 <br/>
 <%= @teacher.try(:youtube) %>
+<% if @teacher.trial_fee > 0 or !@teacher.trial_fee.nil? %>
+    可試上：半小時<%= @teacher.trial_fee %>
+<% else %>
+    不能試上 不顯示
+<% end %>
 <br/>
 <%= @teacher.user.email %>
 <br/>
