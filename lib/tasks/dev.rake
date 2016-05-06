@@ -8,7 +8,7 @@ namespace :dev do
     1.times do
       @user = User.create
       @user.update(first_name: "LU", last_name: "Yi",
-                   email: "et3216@gmail.com", password: 12345678,admin: true )
+                   email: "et3216@gmail.com", password: 12345678,admin: true ,authority: "teacher")
     end
     30.times do
       @user = User.create
