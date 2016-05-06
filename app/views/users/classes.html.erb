@@ -110,7 +110,7 @@
             <div class="evaluation-comment">
               <h5>Comments</h5>
               <hr>
-              <%= a.evaluations.first.comment %>
+              <%= a.evaluations.where(evaluatable_type: "User").first.comment %>
               <textarea id="comment" placeholder="You can ENTER your comment here!!
       What did you like about your teacher, and what could your teacher improve?"></textarea>
             </div>
@@ -143,7 +143,7 @@
         numStars: 5,
         fullStar: true,
         readOnly: true,
-        rating: <%= a.evaluations.first.rating %>
+        rating: <%= a.evaluations.where(evaluatable_type: "User").first.rating %>
        });
     <% end %>
   });
