@@ -41,6 +41,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  def checkout_paypal
+    @order = current_user.orders.find(params[:id])
+
+    if @order.paid?
+      redirect_to :back, alert: 'already paid!'
+    else
+      @payment = Payment.create!( :order => @order, :payment_method => "paypal" )
+      render :layout => false
+    end
+  end
+
+
    protected
 
    def order_params

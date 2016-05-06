@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20160505185649) do
+
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -88,11 +90,20 @@ ActiveRecord::Schema.define(version: 20160505185649) do
     t.string   "status"
     t.string   "payment_status"
     t.string   "attendance_status"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "paid",              default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "paid",                  default: false
     t.string   "email"
     t.string   "session"
+    t.datetime "paid_at"
+    t.string   "paypal_status"
+    t.string   "paypal_transaction_id"
+    t.text     "paypal_params"
+  end
+
+  create_table "payapl_payments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "payments", force: :cascade do |t|

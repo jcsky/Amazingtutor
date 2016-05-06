@@ -13,4 +13,17 @@ class Payment < ActiveRecord::Base
     payment
   end
 
+  def self.find_and_process_for_paypal(params)
+    payment = self.find( params[:invoice] )
+
+    if Rails.env.development?
+      payment.paid = ( params[:payment_status] == 'Pending' )
+    else
+      payment.paid = ( params[:payment_status] == 'Completed' )
+    end
+
+    payment.params = params
+    payment
+  end
+
 end

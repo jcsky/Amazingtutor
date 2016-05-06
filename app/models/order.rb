@@ -4,4 +4,6 @@ class Order < ActiveRecord::Base
 
   has_many :payments
 
+  serialize :paypal_params
+
 end

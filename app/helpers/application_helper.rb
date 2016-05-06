@@ -32,4 +32,21 @@ module ApplicationHelper
         pay2go_params
     end
 
+    def generate_paypal_params(payment)
+      {
+          business: Rails.application.secrets.paypal_account,
+          cmd: "_xclick",
+          upload: 1,
+          return: "#{Rails.application.secrets.app_host}/paypal/redirect",
+          invoice: payment.id,
+          amount: payment.order.amount,
+          currency_code: "TWD",
+          item_name: "Chinese Tutor Class",
+          item_number: payment.id,
+          quantity: "1",
+          notify_url: "#{Rails.application.secrets.app_host}/paypal/webhook"
+      }
+    end
+
+
 end
