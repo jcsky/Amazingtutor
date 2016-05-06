@@ -21,5 +21,10 @@
     <%= f.submit "Log in" , :class => "form-control"%>
   </div>
   <% end %>
-
 </div>
+
+<script>
+  $(document).ready(function(){
+    document.cookie = "browser.timezone="+jstz.determine().name()+"; expires=365; path=/";
+  })
+</script>

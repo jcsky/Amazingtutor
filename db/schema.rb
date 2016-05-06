@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 20160505082518) do
     t.string   "born_form"
     t.string   "live_in"
     t.boolean  "gender"
-    t.datetime "time_zone"
+    t.string   "time_zone"
     t.integer  "user_id"
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
@@ -188,6 +188,7 @@ ActiveRecord::Schema.define(version: 20160505082518) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

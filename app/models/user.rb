@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
 
   has_attached_file :image, styles: {medium: "100x100>", thumb: "50x50>"}, default_url: "user_default.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  before_create :generate_authentication_token
+
+  def generate_authentication_token
+    self.authentication_token = Devise.friendly_token
+  end
 
   def get_teacher
     if self.authority == "teacher"
@@ -33,7 +38,7 @@ class User < ActiveRecord::Base
   serialize :fb_raw_data
   serialize :google_raw_data
 
-  def self.from_facebook_omniauth(auth)
+  def self.from_facebook_omniauth(auth,browser_time_zone)
     # Case 1: Find existing user by facebook uid
     user = User.find_by_fb_uid(auth.uid)
     if user
@@ -60,6 +65,7 @@ class User < ActiveRecord::Base
     user.email = auth.info.email
     user.password = Devise.friendly_token[0, 20]
     user.fb_raw_data = auth
+    user.time_zone = browser_time_zone
     user.save!
     return user
   end
@@ -84,7 +90,7 @@ class User < ActiveRecord::Base
   end
 
 
-  def self.from_google_omniauth(auth)
+  def self.from_google_omniauth(auth,browser_time_zone)
     # 可用參數
     # auth.uid
     # auth.credentialscredentials.token
@@ -117,6 +123,7 @@ class User < ActiveRecord::Base
     user.password = Devise.friendly_token[0, 20]
     user.google_raw_data = auth
     user.locale = auth.extra.raw_info.locale
+    user.time_zone = browser_time_zone
     user.save!
     return user
   end
