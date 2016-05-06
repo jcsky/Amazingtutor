@@ -11,13 +11,19 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
     @user= current_user
 
-    @evaluationsArray = Evaluation.where(evaluatable_type: "User", evaluatable_id: current_user, appointment_id: @appointment)
+    @evaluationsArray = Evaluation.where(evaluatable_type: "User",
+                                         evaluatable_id: current_user, appointment_id: @appointment)
 
     if @evaluationsArray.blank?
       @raty = 0
     else
       @raty = @evaluationsArray.first.rating
     end
+
+    @evaluationsArrayTa = Evaluation.where(evaluatable_type: "Teacher",
+                                           evaluatable_id: current_user.teacher, appointment_id: @appointment)
+
+    @commentTa = @evaluationsArrayTa.first.try(:comment)
 
   end
 

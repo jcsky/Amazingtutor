@@ -13,29 +13,42 @@ class EvaluationsController < ApplicationController
 
   def create
 
+    if params[:type].to_i == 0
 
-    @evaluation = @appointment.evaluations.where(evaluatable_id: current_user.id, evaluated_id: @appointment.teacher_id ).first
 
+      @evaluation = @appointment.evaluations.where(evaluatable_type: "User",
+                                                    evaluatable_id: current_user.id, evaluated_id: @appointment.teacher_id ).first
+      if @evaluation.present?
 
-    if @evaluation.present?
-      @evaluation.update(:comment => params[:comment], :rating => params[:rating],
-                         :evaluatable_id => current_user.id, :appointment_id => @appointment.id,
-                         :evaluated_id => @appointment.teacher_id, :evaluatable_type => "User")
-      respond_to do |format|
-        format.js
+      else
+        @evaluation = current_user.evaluations.create(:comment => params[:comment], :rating => params[:rating],
+                                                      :appointment_id => @appointment.id,
+                                                      :evaluated_id => @appointment.teacher_id )
+        flash[:notice] = "successfully created"
+        respond_to do |format|
+          format.js
+        end
       end
+
     else
-      @evaluation = current_user.evaluations.create(:comment => params[:comment], :rating => params[:rating],
-                                                    :appointment_id => @appointment.id,
-                                                    :evaluated_id => @appointment.teacher_id )
-      # @evaluation.save
+      @evaluation = @appointment.evaluations.where(evaluatable_type: "Teacher",
+                                                  evaluatable_id: current_user.teacher, evaluated_id: @appointment.user_id ).first
 
-      flash[:notice] = "successfully created"
-      respond_to do |format|
-        format.js
+      if @evaluation.present?
+
+        flash[:notice] = "noooo"
+      else
+        @evaluation = current_user.teacher.evaluations.create(:comment => params[:commentTa],
+                                                      :appointment_id => @appointment.id,
+                                                      :evaluated_id => @appointment.user_id )
+
+        flash[:notice] = "successfully created"
+        respond_to do |format|
+          format.js
+        end
       end
-
     end
+
 
   end
 
