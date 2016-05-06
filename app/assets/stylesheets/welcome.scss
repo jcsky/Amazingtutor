@@ -53,12 +53,13 @@ h2 {
   margin-top: 15px;
   border-radius: 5px;
   overflow: hidden;
-  a:hover{
-    color: #000;
+  p{color: #000;}
+  a{
+  color: #000;
   }
-  a:visited{
-    color: #000;
-  }
+  // span{
+  //   color: inherit;
+  // }
   embed,
   iframe,
   object {
@@ -93,9 +94,15 @@ h2 {
   margin: 10px -10px;
 }
 .info-mypic {
+  // width: 50px;
+  // height: 50px;
+  // border: 50%;
+  overflow: hidden;
   img {
     width: 50px;
     height: auto;
+    background-color: #000;
+    border-radius: 50%;
   }
 }
 .info-eval {

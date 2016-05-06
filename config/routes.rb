@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/super', as: 'rails_admin'
+
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
     resources :appointments
   end
@@ -27,7 +29,6 @@ Rails.application.routes.draw do
       get 'profile'
     end
   end
-
 
   resources :teachers do
     member do

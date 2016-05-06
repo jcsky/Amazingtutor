@@ -68,7 +68,13 @@
           <p>30 min</p>
         </div>
         <div class="col-xs-12">
-          <%= button_tag("Book Trial", :class => "btn ") if @teacher.trial_fee != nil %>
+          <% if @teacher.trial_fee == nil %>
+          <%#= link_to ""%>
+          <% elsif current_user == nil%>
+           <%= link_to "Book Now", new_session_path(:user),:class => "btn btn-primary btn-lg" %>
+            <% else%>
+           <%= link_to "Book Now", new_user_order_path(current_user, :teacher_id => params[:id]),:class => "btn btn-primary btn-lg" %>
+         <% end %>
         </div>
       </div>
     </div>
@@ -114,7 +120,11 @@
 
         <div class="col-xs-12">
           <div id="booknow">
-           <%= link_to "Book Now", new_user_order_path(current_user, :teacher_id => params[:id]),:class => "btn btn-primary btn-lg" %>
+            <% if current_user == nil%>
+             <%= link_to "Book Now", new_session_path(:user),:class => "btn btn-primary btn-lg" %>
+              <% else%>
+             <%= link_to "Book Now", new_user_order_path(current_user, :teacher_id => params[:id]),:class => "btn btn-primary btn-lg" %>
+           <% end %>
           </div>
         </div>
 

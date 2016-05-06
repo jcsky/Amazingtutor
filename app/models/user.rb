@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   has_one :teacher
   has_many :remarks
   has_many :orders
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :evaluations, :as => :evaluatable
   has_many :user_available_sections
 
-  has_attached_file :image, styles: {medium: "100x100>", thumb: "50x50>"}, default_url: "user_default.png"
+  has_attached_file :image, styles: { medium: '100x100>', thumb: '50x50>' }, default_url: 'user_default.png'
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   before_create :generate_authentication_token
 
@@ -20,17 +20,21 @@ class User < ActiveRecord::Base
   end
 
   def get_teacher
-    if self.authority == "teacher"
-      if self.teacher == nil
-        self.create_teacher
+    if authority == 'teacher'
+      if teacher.nil?
+        create_teacher
       else
-        self.teacher
+        teacher
       end
     end
   end
 
   def display_name
-    email.split("@").first
+    if first_name && last_name
+    a = first_name+" "+last_name
+    else
+      email.split('@').first
+    end
   end
 
   accepts_nested_attributes_for :teacher
@@ -67,27 +71,28 @@ class User < ActiveRecord::Base
     user.fb_raw_data = auth
     user.time_zone = browser_time_zone
     user.save!
-    return user
+    user
   end
 
   def connect_to_facebook(auth)
     #   檢查這個帳戶是不是有被關聯過
     # user = User.find_by_fb_uid(auth.uid)
 
-    if User.find_by_fb_uid(auth.uid).id != self.id
+    if User.find_by_fb_uid(auth.uid).id != id
       return false
     else
       self.fb_uid = auth.uid
       self.fb_token = auth.credentials.token
       self.fb_raw_data = auth
-      self.save!
-      if self.fb_uid == nil
+      save!
+      if fb_uid.nil?
         return true
-      elsif self.fb_uid == auth.uid
+      elsif fb_uid == auth.uid
         return 'update'
       end
     end
   end
+
 
 
   def self.from_google_omniauth(auth,browser_time_zone)
@@ -125,24 +130,23 @@ class User < ActiveRecord::Base
     user.locale = auth.extra.raw_info.locale
     user.time_zone = browser_time_zone
     user.save!
-    return user
+    user
   end
 
   def connect_to_google_omniauth(auth)
     #   檢查這個帳戶是不是有被關聯過
-    if User.find_by_google_uid(auth.uid).id != self.id
+    if User.find_by_google_uid(auth.uid).id != id
       return false
     else
       self.google_uid = auth.uid
       self.google_token = auth.credentials.token
       self.google_raw_data = auth
-      self.save!
-      if self.google_uid == nil
+      save!
+      if google_uid.nil?
         return true
-      elsif self.google_uid == auth.uid
+      elsif google_uid == auth.uid
         return 'update'
       end
     end
   end
-
 end

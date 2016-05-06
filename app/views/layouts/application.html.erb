@@ -23,10 +23,8 @@
         $("#user_birthday_2i").selectpicker({width: '33%'});
         $("#user_birthday_3i").selectpicker({width: '33%'});
         $(".selectpicker").selectpicker({});
-        $(".js-example-basic-single").select2();
         $("#priceslide").slider();
         $(".language-select").select2({placeholder: "Select a language"});
-
         $('#login-white').hide();
         $('#login-black').hide();
         $('#login').click(function (e) {
@@ -37,6 +35,22 @@
           $('#login-white').fadeOut(1);
           $('#login-black').fadeOut(1);
         });
+
+        $("#js-example-basic-single").select2();
+        $("#index_languages").select2().on("change", function(e) {
+          var lan_id = $("#index_languages").val();
+          if (lan_id != "") {
+            $.ajax({
+              type: 'get',
+              url: "/welcome",
+              data: {
+              lan_id: lan_id
+              }
+          };
+        });
+
+
+
       });
     </script>
   </head>
@@ -69,14 +83,14 @@
             </li>
             <% if current_user %>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User ID
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.display_name %>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
 
                 <li><%= link_to "Dashboard",classes_user_path(current_user) %></li>
                 <% if current_user.authority == "teacher" %>
-                <li><%= link_to "教師資訊" ,introduce_teacher_path(current_user.get_teacher.id)%></li>
+                <li><%= link_to "教師資訊" ,classes_teacher_path(current_user.get_teacher.id)%></li>
                 <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.get_teacher.id)%></li>
                 <% end %>
                 <li>

@@ -26,6 +26,8 @@ class TeachersController < ApplicationController
 
   def profile
     @user = current_user
+    @teacher = Teacher.find(params[:id])
+    redirect_to root_path if @teacher.check != "checked"
   end
 
   def price
