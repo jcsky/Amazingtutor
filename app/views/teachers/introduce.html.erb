@@ -10,11 +10,11 @@
           <h4>基本資料</h4>
         </div>
         <div class="input-group clearfix language-select-fix">
-          <%= flash[:alert]  %>
+          <div class="alert">
+            <span><%= flash[:alert]  %></span>
+          </div>
           <label for="#your-input" class="pull-left ">第二外語</label>
-          <%= form_for @teacher do |f| %>
           <%= f.collection_select(:language_ids, Language.all, :id, :language,{}, {:multiple => true, :class => "form-control language-select",:style=>"width:80%;" }) %>
-          <% end %>
         </div>
         <h6>小提醒：如果您會其他外語歡迎填寫，這樣對學員來說會格外親切
         </h6>
