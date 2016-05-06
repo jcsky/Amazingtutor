@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505082518) do
+ActiveRecord::Schema.define(version: 20160505185649) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20160505082518) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "avg_rating",    default: 0
+    t.string   "check"
   end
 
   create_table "user_available_sections", force: :cascade do |t|
@@ -188,6 +189,7 @@ ActiveRecord::Schema.define(version: 20160505082518) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.boolean  "admin"
     t.string   "authentication_token"
   end
 
