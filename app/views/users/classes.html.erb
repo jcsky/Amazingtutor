@@ -1,18 +1,3 @@
-<script>
-  $(document).ready(function () {
-    $('#evaluation-white').hide();
-    $('#pop-black').hide();
-    $('#rating').click(function (e) {
-      $('#pop-black').fadeIn(1);
-      $('#evaluation-white').fadeIn(300);
-    });
-    $('#pop-black').click(function (e) {
-      $('#evaluation-white').fadeOut(1);
-      $('#pop-black').fadeOut(1);
-    });
-  });
-</script>
-
 <div class="container">
   <div class="row">
     <div class="col-md-5 text-center">
@@ -59,71 +44,110 @@
           </div>
         </div>
       </div>
-      <div class="scheduled col-xs-12">
-        <div class="col-sm-5 scheduled-image img-responsive center-block">
-          <div class="scheduled-dark"></div>
-          <div class="scheduled-white">
-            <%= image_tag("scheduled.png") %>
-          </div>
-          <div class="scheduled-text">
-            <h5>SCHEDULED</h5>
-            <h1>14:00 AM</h1>
-            <h6>Sun, March27,2016</h6>
-          </div>
-        </div>
-        <div class="col-sm-7">
-          <div class="col-xs-12">
-            <div class="clearfix flexmodify">
-              <div class="info-mypic col-xs-3 pull-left">
-                <%= image_tag("oval155.png") %>
+    </div>
+
+
+
+    <div class="col-md-7">
+        <% @user.appointments.each do |a|%>
+
+          <div class="scheduled col-xs-12">
+            <div class="col-sm-5 scheduled-image img-responsive center-block">
+              <div class="scheduled-dark"></div>
+              <div class="scheduled-white">
+                <%= image_tag("scheduled.png") %>
               </div>
-              <div class="info-eval col-xs-7">
-                <p>Abner Chao</p>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                <i class="fa fa-star-o"></i>
-                <span>(132)</span>
-              </div>
-              <div class=" col-xs-2 info-flag">
-                <%= image_tag("flag.png") %>
+              <div class="scheduled-text">
+                <h5>SCHEDULED</h5>
+                <h1>14:00 AM</h1>
+                <h6>Sun, March27,2016</h6>
               </div>
             </div>
-            <div class="clearfix ratingnow">
-              <div class="conatiner-fluid">
-                <button id="rating">Rating Now</button>
+            <div class="col-sm-7">
+              <div class="col-xs-12">
+                <div class="clearfix flexmodify">
+                  <div class="info-mypic col-xs-3 pull-left">
+                    <%= image_tag(a.teacher.user.image) %>
+                  </div>
+                  <div class="info-eval col-xs-7">
+                    <p>Abner Chao</p>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <span>(132)</span>
+                  </div>
+                  <div class=" col-xs-2 info-flag">
+                    <%= image_tag("flag.png") %>
+                  </div>
+                </div>
+                <div class="clearfix ratingnow">
+                  <div class="conatiner-fluid">
+                    <button id="rating-<%= a.id %>">Rating Now</button>
+                  </div>
+                </div>
               </div>
+            </div>
+          </div>
+
+  <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
+      <div id="evaluation-white-<%= a.id %>" class="evaluation-white">
+        <div class="evaluation col-xs-12">
+          <div class="evaluation-button clearfix">
+            <%= link_to "Back" ,root_path ,:class=>"pull-left"%>
+           <!--  <button class="pull-right" id ="eval-send">Send</button>
+          </div> -->
+          <div class="evaluation-block col-xs-10 col-xs-push-1">
+            <div class="evaluation-me text-center">
+              <%= image_tag(@user.image) %>
+              <h4>Abner Chao</h4>
+              <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
+            </div>
+
+            <div id="rateYo-<%= a.id %>" class="star-rating"></div>
+
+            <div class="evaluation-comment">
+              <h5>Comments</h5>
+              <hr>
+              <%= a.evaluations.where(evaluatable_type: "User").first.comment %>
+              <textarea id="comment" placeholder="You can ENTER your comment here!!
+      What did you like about your teacher, and what could your teacher improve?"></textarea>
             </div>
           </div>
         </div>
       </div>
+      </div>
+      <% end %>
+
     </div>
   </div>
 </div>
 
-<div id="pop-black" class="pop-bg"></div>
-<div id="evaluation-white" class="evaluation-white">
-  <div class="evaluation col-xs-12">
-    <div class="evaluation-button clearfix">
-      <%= link_to "Back" ,root_path ,:class=>"pull-left"%>
-      <%= link_to "Send" ,root_path ,:class=>"pull-right",:id =>"eval-send"%>
-    </div>
-    <div class="evaluation-block col-xs-10 col-xs-push-1">
-      <div class="evaluation-me text-center">
-        <%= image_tag("ool.png") %>
-        <h4>Abner Chao</h4>
-        <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
-      </div>
+<script>
+  $(document).ready(function () {
+    <% @user.appointments.each do |a|%>
+     $('#pop-black-<%= a.id %>').hide();
+      $('#evaluation-white-<%= a.id %>').hide();
+      $('#rating-<%= a.id %>').click(function (e) {
+        $('#pop-black-<%= a.id %>').fadeIn(1);
+        $('#evaluation-white-<%= a.id %>').fadeIn(300);
+      });
+      $('#pop-black-<%= a.id %>').click(function (e) {
+        $('#evaluation-white-<%= a.id %>').fadeOut(1);
+        $('#pop-black-<%= a.id %>').fadeOut(1);
+      });
 
-      <div id="rateYo" class="star-rating"></div>
+      $("#rateYo-<%= a.id %>").rateYo({
+        starWidth: "40px",
+        numStars: 5,
+        fullStar: true,
+        readOnly: true,
+        rating: <%= a.evaluations.where(evaluatable_type: "User").first.rating %>
+       });
+    <% end %>
+  });
 
-      <div class="evaluation-comment">
-        <h5>Comments</h5>
-        <hr>
-        <textarea class="" placeholder="You can ENTER your comment here!!
-What did you like about your teacher, and what could your teacher improve?"></textarea>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+</script>

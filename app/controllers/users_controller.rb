@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :user_authority
 
   def classes
+    @appointments = @user.appointments
+
   end
   def remark
   end

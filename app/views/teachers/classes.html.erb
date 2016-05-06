@@ -43,6 +43,7 @@
           </div>
         </div>
       </div>
+      <% @teacher.appointments.each do |a|%>
       <div class="scheduled col-xs-12">
         <div class="col-sm-5 scheduled-image img-responsive center-block">
           <div class="scheduled-dark"></div>
@@ -76,19 +77,17 @@
             </div>
             <div class="clearfix ratingnow">
               <div class="conatiner-fluid">
-                <button id="rating">Rating Now</button>
+                <button id="rating-<%= a.id %>">Rating Now</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
 
-<div id="pop-black" class="pop-bg"></div>
-<div id="evaluation-white" class="evaluation-white">
+
+<div id="pop-black-<%= a.id %>" class="pop-bg"></div>
+<div id="evaluation-white-<%= a.id %>" class="evaluation-white">
   <div class="evaluation col-xs-12">
     <div class="evaluation-button clearfix">
       <%= link_to "Back" ,root_path ,:class=>"pull-left"%>
@@ -100,10 +99,11 @@
         <h4>Abner Chao</h4>
         <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
       </div>
-      <div id="rateYo" class="star-rating"></div>
+
       <div class="evaluation-comment">
         <h5>Comments</h5>
         <hr>
+        <%= a.evaluations.where(evaluatable_type: "Teacher").first.try(:comment) %>
         <textarea class="" placeholder="You can ENTER your comment here!!
 What did you like about your teacher, and what could your teacher improve?"></textarea>
       </div>
@@ -111,15 +111,24 @@ What did you like about your teacher, and what could your teacher improve?"></te
   </div>
 </div>
 
+ <% end %>
+    </div>
+  </div>
+</div>
+
 <script>
-  $('#evaluation-white').hide();
-  $('#pop-black').hide();
-  $('#rating').click(function (e) {
-    $('#pop-black').fadeIn(1);
-    $('#evaluation-white').fadeIn(300);
+$(document).ready(function () {
+  <% @teacher.appointments.each do |a|%>
+  $('#evaluation-white-<%= a.id %>').hide();
+  $('#pop-black-<%= a.id %>').hide();
+  $('#rating-<%= a.id %>').click(function (e) {
+    $('#pop-black-<%= a.id %>').fadeIn(1);
+    $('#evaluation-white-<%= a.id %>').fadeIn(300);
   });
-  $('#pop-black').click(function (e) {
-    $('#evaluation-white').fadeOut(1);
-    $('#pop-black').fadeOut(1);
+  $('#pop-black-<%= a.id %>').click(function (e) {
+    $('#evaluation-white-<%= a.id %>').fadeOut(1);
+    $('#pop-black-<%= a.id %>').fadeOut(1);
+  });
+  <% end %>
   });
 </script>

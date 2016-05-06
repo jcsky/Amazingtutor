@@ -18,13 +18,13 @@
 
 $(function () {
   <% @teachers.each do |t| %>
-  $("#rateYo-<%= t.id %>").rateYo({
-    starWidth: "40px",
-    numStars: 5,
-    halfStar: true,
-    readOnly: true,
-    rating: <%= t.avg_rating %>
-  });
+    $("#rateYo-<%= t.id %>").rateYo({
+      starWidth: "40px",
+      numStars: 5,
+      halfStar: true,
+      readOnly: true,
+      rating: <%= t.avg_rating %>
+    });
   <% end %>
 });
 
