@@ -26,6 +26,8 @@ class TeachersController < ApplicationController
 
   def profile
     @user = current_user
+
+    @evaluations = Evaluation.all.where(evaluatable_type: "User", evaluated_id: @teacher)
   end
 
   def price
