@@ -2,6 +2,7 @@ class AppointmentsController < ApplicationController
 
   #user預約時 appointment 要包含teacher_id 和 user_id
   before_action :set_appointment_params, :only => [:create]
+  before_action :user_authority, :only => [:show]
 
   def index
     @appointments=Appointment.find_by_user_id(User.first)
@@ -60,7 +61,16 @@ class AppointmentsController < ApplicationController
   end
 
   private
+
   def set_appointment_params
     params.require(:appointment).permit(:teacher_id, :book_section)
   end
+
+  def user_authority
+    @appointment = Appointment.find(params[:id])
+    if current_user == nil || (@appointment.user.id != @appointment.user_id && @appointment.teacher.id != @appointment.teacher_id)
+      redirect_to root_path
+    end
+  end
+
 end

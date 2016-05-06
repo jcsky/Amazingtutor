@@ -14,41 +14,30 @@ class EvaluationsController < ApplicationController
   def create
 
     if params[:type].to_i == 0
-
-
       @evaluation = @appointment.evaluations.where(evaluatable_type: "User",
                                                     evaluatable_id: current_user.id, evaluated_id: @appointment.teacher_id ).first
-      if @evaluation.present?
-
-      else
-        @evaluation = current_user.evaluations.create(:comment => params[:comment], :rating => params[:rating],
+      unless @evaluation.present?
+        @evaluation = current_user.evaluations.create!(:comment => params[:comment], :rating => params[:rating],
                                                       :appointment_id => @appointment.id,
                                                       :evaluated_id => @appointment.teacher_id )
-        flash[:notice] = "successfully created"
-        respond_to do |format|
-          format.js
-        end
+
       end
 
     else
       @evaluation = @appointment.evaluations.where(evaluatable_type: "Teacher",
                                                   evaluatable_id: current_user.teacher, evaluated_id: @appointment.user_id ).first
 
-      if @evaluation.present?
-
-        flash[:notice] = "noooo"
-      else
-        @evaluation = current_user.teacher.evaluations.create(:comment => params[:commentTa],
+      unless @evaluation.present?
+        @evaluation = current_user.teacher.evaluations.create!(:comment => params[:commentTa],
                                                       :appointment_id => @appointment.id,
                                                       :evaluated_id => @appointment.user_id )
-
-        flash[:notice] = "successfully created"
-        respond_to do |format|
-          format.js
-        end
       end
     end
 
+    flash[:notice] = "successfully created"
+    respond_to do |format|
+      format.js
+    end
 
   end
 

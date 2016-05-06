@@ -84,7 +84,13 @@
                 </div>
                 <div class="clearfix ratingnow">
                   <div class="conatiner-fluid">
-                    <button id="rating-<%= a.id %>">Rating Now</button>
+                    <% if a.evaluations.where(evaluatable_type: "User").blank? %>
+                      <form action="http://localhost:3000/appointments/<%= a.id %>">
+                        <button type="submit" >Rating Now</button>
+                      </form>
+                    <% else %>
+                       <button id="rating-<%= a.id %>">Rated</button>
+                <% end %>
                   </div>
                 </div>
               </div>
@@ -95,7 +101,7 @@
       <div id="evaluation-white-<%= a.id %>" class="evaluation-white">
         <div class="evaluation col-xs-12">
           <div class="evaluation-button clearfix">
-            <%= link_to "Back" ,root_path ,:class=>"pull-left"%>
+            <%= link_to "Back" ,classes_user_path ,:class=>"pull-left"%>
            <!--  <button class="pull-right" id ="eval-send">Send</button>
           </div> -->
           <div class="evaluation-block col-xs-10 col-xs-push-1">
@@ -110,9 +116,10 @@
             <div class="evaluation-comment">
               <h5>Comments</h5>
               <hr>
-              <%= a.evaluations.where(evaluatable_type: "User").first.comment %>
-              <textarea id="comment" placeholder="You can ENTER your comment here!!
-      What did you like about your teacher, and what could your teacher improve?"></textarea>
+              <%= a.evaluations.where(evaluatable_type: "User").first.try(:comment) %>
+              <textarea id="comment"></textarea>
+              <!-- <textarea id="comment" placeholder="You can ENTER your comment here!!
+      What did you like about your teacher, and what could your teacher improve?"></textarea> -->
             </div>
           </div>
         </div>
@@ -125,6 +132,7 @@
 </div>
 
 <script>
+
   $(document).ready(function () {
     <% @user.appointments.each do |a|%>
      $('#pop-black-<%= a.id %>').hide();
@@ -136,15 +144,21 @@
       $('#pop-black-<%= a.id %>').click(function (e) {
         $('#evaluation-white-<%= a.id %>').fadeOut(1);
         $('#pop-black-<%= a.id %>').fadeOut(1);
-      });
+    });
+
+      <% if a.evaluations.where(evaluatable_type: "User").blank? %>
+        <% @raty = 0 %>
+      <% else %>
+        <% @raty = a.evaluations.where(evaluatable_type: "User").first.rating %>
+      <% end %>
 
       $("#rateYo-<%= a.id %>").rateYo({
         starWidth: "40px",
         numStars: 5,
         fullStar: true,
         readOnly: true,
-        rating: <%= a.evaluations.where(evaluatable_type: "User").first.rating %>
-       });
+        rating: <%= @raty %>
+      });
     <% end %>
   });
 
