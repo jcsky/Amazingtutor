@@ -12,13 +12,13 @@
   <div class="row-fluid">
     <div class="container">
       <div class="col-sm-4 col-md-4">
-        <p>Tutor Sub-languages</p>
-        <%= collection_select({},:language_ids, Language.all, :id, :language,{}, { :class => "js-example-basic-single",:style=>"width:100%;" }) %>
+        <p>Tutor's Sub-languages</p>
+        <%= collection_select({},:language_ids, Language.all, :id, :language,{:prompt => "Teacher also know the ...."}, { :id => "index_languages",:style=>"width:100%;" }) %>
 
       </div>
       <div class="col-sm-4 col-md-4">
         <p>Availability</p>
-        <select class="js-example-basic-single" style="width: 100%">
+        <select id="js-example-basic-single" style="width: 100%">
           <option value="AL">星期八</option>
           <option value="WY">超級八</option>
         </select>
