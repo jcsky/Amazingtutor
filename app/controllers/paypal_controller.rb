@@ -9,7 +9,6 @@ class PaypalController < ApplicationController
 
   def redirect
     @order = @payment.order
-    byebug
     if @payment.paid?
 
       ActiveRecord::Base.transaction do
@@ -30,9 +29,7 @@ class PaypalController < ApplicationController
         @teacher_available_section.save
       end
     end
-    byebug
     redirect_to mytutor_user_path(@order.user)
-    byebug
   end
 
   protected
