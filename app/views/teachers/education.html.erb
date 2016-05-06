@@ -9,6 +9,9 @@
         <div class="public-head">
           <h4>教學經驗</h4>
         </div>
+        <div class="alert">
+          <span><%= flash[:alert]  %></span>
+        </div>
         <h5 class="add_nested_fix">學歷</h5>
         <%= f.add_nested_fields_link :educations, '+', class: 'btn btn-danger', role: 'button'  %>
         <%= f.nested_fields_for :educations do |ff| %>

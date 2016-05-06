@@ -46,21 +46,37 @@
     font-size: 10px;
     line-height: 0.6;
   }
-  button {
-    width: 100%;
-    color: #fff;
-    background-color: #FC6063;
+  a{
+    height: 35px;
+    font-size: 14px;
+    line-height: 15px;
+    &:hover {
+      background-color: #FC6063;
+      border:none;
+      line-height: 17px;
+    }
   }
+
 }
 .private {
   background-color: #fff;
   border-radius: 5px;
   padding: 0 0 10px;
   margin-top: 15px;
-  button {
+  a {
     background-color: #FC6063;
     width: 100%;
     color: #fff;
+    height: 35px;
+    border: none;
+    font-size: 14px;
+    line-height: 15px;
+    &:hover {
+      background-color: #FC6063;
+    }
+    &:active{
+      background-color: #FC6063;
+    }
   }
   p {
     font-size: 10px;
@@ -154,25 +170,49 @@
   margin-bottom: 20px;
 }
 .public-content {
-  .add_nested_fields_link, {
-      color: #bbb;
-      font-weight: lighter;
-      font-size: 14px;
-      border:1px solid #bbb;
-      border-radius: 30px;
-      background-color: #fff;
+  .add_nested_fields_link {
+    color: #bbb;
+    font-weight: lighter;
+    font-size: 14px;
+    border: 1px solid #bbb;
+    border-radius: 30px;
+    background-color: #fff;
   }
-  .remove_nested_fields_link{
+  .remove_nested_fields_link {
     color: #bbb;
     font-size: 14px;
-    border:1px solid #bbb;
+    border: 1px solid #bbb;
     border-radius: 25px;
     background-color: #fff;
     float: right;
     font-weight: lighter;
   }
-  .add_nested_fix{
+  .add_nested_fix {
     display: inline;
+  }
+}
+.scheduled-editprofile-fix .facegoogle {
+  input {
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    height: 50px;
+  }
+  input:nth-child(1) {
+    background-color: #64A0DD;
+    margin-bottom: 15px;
+  }
+  input[value="Connect to Google+"] {
+    background-color: #DD6575;
+    margin-bottom: 0;
+  }
+}
+.profile-container {
+  a {
+    width: 100%;
+    background-color: #FC6063;
+    color: #fff;
   }
 }
 @media (max-width: $screen-xs-min) {
@@ -271,6 +311,9 @@
       width: 315px;
       height: 230px;
     }
+    p {
+      margin-right: 15px;
+    }
   }
 }
 @media (min-width: $screen-md-min) {
@@ -299,6 +342,7 @@
     position: fixed;
     left: 58%;
     top: 52px;
+    a,
     button {
       background-color: #FC6063;
       border-color: #FC6063;

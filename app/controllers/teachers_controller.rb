@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
-  before_action :teacher_authority ,except: :profile
+  before_action :teacher_authority , :except => [:profile, :index]
   before_action :get_teacher,except: :profile
+  before_action :find_teacher, :only => [ :classes, :profile]
 
   # 只有user裡面的author得值要等於teacher才可以進來 但大家都有第一次可能進來沒有teacher
   # 所以全部要before_action先建好teacher 如果已經有了就用已經有的
@@ -8,7 +9,7 @@ class TeachersController < ApplicationController
   def index
     @teachers = Teacher.all
     @appointments = Appointment.all
-    @evalutions = Evalution.all
+    @evaluations = Evaluation.all
 
   end
 
@@ -20,11 +21,16 @@ class TeachersController < ApplicationController
   end
 
   def classes
+    @appointments = @teacher.appointments
   end
 
   def profile
     @user = current_user
-    @teacher = Teacher.find(params[:id])
+
+    redirect_to root_path if @teacher.check != "checked"
+
+    @evaluations = Evaluation.all.where(evaluatable_type: "User", evaluated_id: @teacher)
+
   end
 
   def price
@@ -62,24 +68,28 @@ class TeachersController < ApplicationController
         flash[:alert] = 'Save success'
       else
         flash[:alert] = 'Save fail'
-     end
- end
+      end
+    end
   end
 
   private
 
+  def find_teacher
+    @teacher = Teacher.find(params[:id])
+  end
+
   def get_teacher
     if current_user.teacher
       @teacher =current_user.teacher
-     else
+    else
       @teacher = current_user.create_teacher
     end
   end
 
   def teacher_authority
-     if current_user == nil || current_user.authority != 'teacher'
-       redirect_to root_path
-     end
+    if current_user == nil || current_user.authority != 'teacher'
+      redirect_to root_path
+    end
   end
 
   def teacher_params

@@ -2,29 +2,39 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable,
-    :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   has_one :teacher
   has_many :remarks
   has_many :orders
   has_many :appointments
-  has_many :evalutions
+  has_many :evaluations, :as => :evaluatable
   has_many :user_available_sections
-  # has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-  # validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  has_attached_file :image, styles: { medium: '100x100>', thumb: '50x50>' }, default_url: 'user_default.png'
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  before_create :generate_authentication_token
+
+  def generate_authentication_token
+    self.authentication_token = Devise.friendly_token
+  end
 
   def get_teacher
-    if self.authority == "teacher"
-      if self.teacher == nil
-        self.create_teacher
+    if authority == 'teacher'
+      if teacher.nil?
+        create_teacher
       else
-        self.teacher
+        teacher
       end
     end
   end
 
   def display_name
-    email.split("@").first
+    if first_name && last_name
+    a = first_name+" "+last_name
+    else
+      email.split('@').first
+    end
   end
 
   accepts_nested_attributes_for :teacher
@@ -32,7 +42,7 @@ class User < ActiveRecord::Base
   serialize :fb_raw_data
   serialize :google_raw_data
 
-  def self.from_facebook_omniauth(auth)
+  def self.from_facebook_omniauth(auth,browser_time_zone)
     # Case 1: Find existing user by facebook uid
     user = User.find_by_fb_uid(auth.uid)
     if user
@@ -59,12 +69,33 @@ class User < ActiveRecord::Base
     user.email = auth.info.email
     user.password = Devise.friendly_token[0, 20]
     user.fb_raw_data = auth
+    user.time_zone = browser_time_zone
     user.save!
-    return user
+    user
+  end
+
+  def connect_to_facebook(auth)
+    #   檢查這個帳戶是不是有被關聯過
+    # user = User.find_by_fb_uid(auth.uid)
+
+    if User.find_by_fb_uid(auth.uid).id != id
+      return false
+    else
+      self.fb_uid = auth.uid
+      self.fb_token = auth.credentials.token
+      self.fb_raw_data = auth
+      save!
+      if fb_uid.nil?
+        return true
+      elsif fb_uid == auth.uid
+        return 'update'
+      end
+    end
   end
 
 
-  def self.from_google_omniauth(auth)
+
+  def self.from_google_omniauth(auth,browser_time_zone)
     # 可用參數
     # auth.uid
     # auth.credentialscredentials.token
@@ -97,7 +128,25 @@ class User < ActiveRecord::Base
     user.password = Devise.friendly_token[0, 20]
     user.google_raw_data = auth
     user.locale = auth.extra.raw_info.locale
+    user.time_zone = browser_time_zone
     user.save!
-    return user
+    user
+  end
+
+  def connect_to_google_omniauth(auth)
+    #   檢查這個帳戶是不是有被關聯過
+    if User.find_by_google_uid(auth.uid).id != id
+      return false
+    else
+      self.google_uid = auth.uid
+      self.google_token = auth.credentials.token
+      self.google_raw_data = auth
+      save!
+      if google_uid.nil?
+        return true
+      elsif google_uid == auth.uid
+        return 'update'
+      end
+    end
   end
 end

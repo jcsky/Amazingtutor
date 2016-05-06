@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :user_authority
 
   def classes
+    @appointments = @user.appointments
+
   end
   def remark
   end
@@ -20,7 +22,7 @@ class UsersController < ApplicationController
     @user.update(user_params)
     if @user.save
       flash[:success] = "編輯成功"
-      redirect_to root_path
+      redirect_to "back"
     else
       render 'edit'
     end
@@ -32,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def user_params

@@ -6,27 +6,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
-
     <script type="text/javascript">
-      $(function () {
-        $("#rateYo").rateYo({starWidth: "15px", rating: 2, fullStar: true, normalFill: "#A0A0A0", spacing: "5px"});
-      });
-      $(function () {
-        $("#rateYo").rateYo().on("rateyo.set", function (e, data) {
-          $.ajax({
-            type: "POST",
-            url: "/evaluations",
-            dataType: 'JSON',
-            data: {
-              rating_count: data.rating
-            }
-          });
-        });
-      });
+
       $(document).ready(function () {
         $('#pop-booking').hide();
         $('#pop-black').hide();
@@ -42,10 +23,8 @@
         $("#user_birthday_2i").selectpicker({width: '33%'});
         $("#user_birthday_3i").selectpicker({width: '33%'});
         $(".selectpicker").selectpicker({});
-        $(".js-example-basic-single").select2();
         $("#priceslide").slider();
         $(".language-select").select2({placeholder: "Select a language"});
-
         $('#login-white').hide();
         $('#login-black').hide();
         $('#login').click(function (e) {
@@ -55,6 +34,19 @@
         $('#login-black').click(function (e) {
           $('#login-white').fadeOut(1);
           $('#login-black').fadeOut(1);
+        });
+
+        $("#js-example-basic-single").select2();
+        $("#index_languages").select2().on("change", function(e) {
+          var lan_id = $("#index_languages").val();
+          // if (lan_id != "") {
+          //   $.ajax({
+          //     type: 'get',
+          //     url: "/welcome",
+          //     data: {
+          //     lan_id: lan_id
+          //     }
+          // };
         });
       });
     </script>
@@ -80,7 +72,7 @@
         <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" >
           <ul class="nav navbar-nav navbar-right">
             <li>
-            <%= link_to("Apply a Teacher", apply_teacher_path(:user))%>
+            <%= link_to("Apply to Teach", apply_teacher_path(:user))%>
             </li>
             <li>
               <%#= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>
@@ -88,14 +80,14 @@
             </li>
             <% if current_user %>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User ID
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.display_name %>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
 
                 <li><%= link_to "Dashboard",classes_user_path(current_user) %></li>
                 <% if current_user.authority == "teacher" %>
-                <li><%= link_to "教師資訊" ,introduce_teacher_path(current_user.get_teacher.id)%></li>
+                <li><%= link_to "教師資訊" ,classes_teacher_path(current_user.get_teacher.id)%></li>
                 <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.get_teacher.id)%></li>
                 <% end %>
                 <li>

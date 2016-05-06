@@ -59,10 +59,10 @@
   width: 497px;
   z-index: 5000;
   margin-bottom: 20px;
-  position: absolute;
+  position: fixed;
   top: 9%;
-  left: 50%;
-  transform: translate(-50%);
+  left: 60%;
+  transform: translate(-77%);
 }
 
 .mask{
@@ -89,5 +89,10 @@
 .contentInside{
   margin:0 auto;
   width: 50px;
+}
+
+
+.user-comment{
+  font-size: 20px;
 }
 

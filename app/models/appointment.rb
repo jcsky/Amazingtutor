@@ -1,7 +1,7 @@
 class Appointment < ActiveRecord::Base
   belongs_to :user
   belongs_to :teacher
-  has_many :evalutions
+  has_many :evaluations
   has_many :available_section
 
   def book_section
@@ -10,8 +10,8 @@ class Appointment < ActiveRecord::Base
 
   def book_section=(sections)
     split = sections.split('~', 2)
-    self.start = split.first.to_time
-    self.end = split.last.to_time
+    self.start = split.first.in_time_zone
+    self.end = split.last.in_time_zone
   end
 
 
@@ -43,7 +43,7 @@ class Appointment < ActiveRecord::Base
   def self.booked_section(teacher_id)
     where('teacher_id=? and end > ? and start < ?',
           teacher_id,
-          Time.now.to_time.at_beginning_of_day,
-          14.days.from_now.to_time.at_end_of_day)
+          Time.now.in_time_zone.at_beginning_of_day,
+          14.days.from_now.in_time_zone.at_end_of_day)
   end
 end

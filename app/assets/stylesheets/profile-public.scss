@@ -22,7 +22,8 @@
     font-size: 12px;
     color: #9b9b9b;
   }
-  .input-group input,label {
+  .input-group input,
+  label {
     display: inline;
   }
   label {
@@ -53,34 +54,38 @@
   width: 130px;
   height: 40px;
 }
-.input-group input,select {
+.input-group input,
+select {
   height: 40px;
 }
 .public-note {
   padding-bottom: 10px;
 }
-.public-content{
-  h5,td{
+.public-content {
+  h5,
+  td {
     color: #6D6D6D;
     padding: 0 10px;
     line-height: 1.5;
   }
-  table{
+  table {
     margin-top: 30px;
   }
 }
 @media (max-width: $screen-xs-min) {
   .public-content {
     .input-group input,
-    textarea,select{
+    select,
+    textarea {
       width: 100% !important;
     }
   }
   .public-content {
-    .input-group textarea{
-    height: 100px;
-    width: 100%;
-    }}
+    .input-group textarea {
+      height: 100px;
+      width: 100%;
+    }
+  }
 }
 @media (max-width: $screen-sm-min) {
   .public-content {
@@ -95,12 +100,31 @@
     .input-group {
       width: 95%;
       textarea {
-      margin: 0 auto;
-      height: 120px;
-    }}
+        margin: 0 auto;
+        height: 120px;
+      }
+    }
   }
   .public-save input {
     width: 100%;
+  }
+  .info-p-minfix {
+    display: block;
+  }
+}
+.alert {
+  margin-bottom: 0;
+  padding: 0;
+  text-align: center;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  span {
+    text-align: center;
+    font-size: 18px;
+    color: #C73C3C;
+    font-weight: normal;
+    margin: auto;
+
   }
 }
 @media (min-width: $screen-sm-min)and (max-width: $screen-md-min) {
@@ -109,6 +133,10 @@
     textarea {
       width: 400px !important;
     }
+  }
+  .info-p-minfix {
+    height: 87px;
+    overflow: hidden;
   }
 }
 @media (min-width: $screen-md-min) {

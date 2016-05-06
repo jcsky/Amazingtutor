@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505105745) do
+
+ActiveRecord::Schema.define(version: 20160505185649) do
+
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -50,19 +52,20 @@ ActiveRecord::Schema.define(version: 20160505105745) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "evalutions", force: :cascade do |t|
+  create_table "evaluations", force: :cascade do |t|
     t.string   "comment"
-    t.integer  "rating"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "rating",           default: 5
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "appointment_id"
-    t.integer  "user_id"
-    t.integer  "teacher_id"
+    t.integer  "evaluatable_id"
+    t.string   "evaluatable_type"
+    t.integer  "evaluated_id"
   end
 
-  add_index "evalutions", ["appointment_id"], name: "index_evalutions_on_appointment_id"
-  add_index "evalutions", ["teacher_id"], name: "index_evalutions_on_teacher_id"
-  add_index "evalutions", ["user_id"], name: "index_evalutions_on_user_id"
+  add_index "evaluations", ["appointment_id"], name: "index_evaluations_on_appointment_id"
+  add_index "evaluations", ["evaluatable_id"], name: "index_evaluations_on_evaluatable_id"
+  add_index "evaluations", ["evaluated_id"], name: "index_evaluations_on_evaluated_id"
 
   create_table "experiences", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -149,6 +152,7 @@ ActiveRecord::Schema.define(version: 20160505105745) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "avg_rating",    default: 0
+    t.string   "check"
   end
 
   create_table "user_available_sections", force: :cascade do |t|
@@ -180,11 +184,12 @@ ActiveRecord::Schema.define(version: 20160505105745) do
     t.string   "born_form"
     t.string   "live_in"
     t.boolean  "gender"
-    t.datetime "time_zone"
+    t.string   "time_zone"
     t.integer  "user_id"
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "authority"
     t.string   "fb_uid"
     t.string   "fb_token"
     t.text     "fb_raw_data"
@@ -192,11 +197,12 @@ ActiveRecord::Schema.define(version: 20160505105745) do
     t.string   "google_token"
     t.text     "google_raw_data"
     t.string   "locale"
-    t.string   "authority"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.boolean  "admin"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

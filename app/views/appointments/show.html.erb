@@ -1,19 +1,59 @@
-<p><button class="click">open</button></p>
-<div class="mask"></div>
+<div id="pop-black" class="pop-bg"></div>
+      <div id="evaluation-white" class="evaluation-white">
+        <div class="evaluation col-xs-12">
+          <div class="evaluation-button clearfix">
+            <%= link_to "Back" ,classes_user_path ,:class=>"pull-left"%>
+           <!--  <button class="pull-right" id ="eval-send">Send</button>
+          </div> -->
+          <div class="evaluation-block col-xs-10 col-xs-push-1">
+            <div class="evaluation-me text-center">
+              <%= image_tag(@user.image) %>
+              <h4>Abner Chao</h4>
+              <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
+            </div>
 
-<div class="content">
-  <div class="contentInside">
+            <% if current_user == @appointment.user %>
 
-  <div id="rateYo"></div>
-  <div id="content"><%= @raty %></div>
-  <% if current_user && @appointment.user == current_user %>
-    <input type="text" id="comment" value="<%= @evalution.first.comment %>">
-    <button class="button" >Create</button>
-  <% end %>
+              <% if evaluatable_type_is_user(@appointment) %>
+                <div id="rateYo"></div><span id="content"></span>
+                <div class="evaluation-comment">
+                  <h5>Comments</h5>
+                  <hr>
+                <%= @appointment.evaluations.where(evaluatable_type: "User").first.comment %>
+                </div>
+              <% elsif @appointment.user == current_user %>
+                <div id="rateYo"></div><span id="content"></span>
+                <div class="evaluation-comment">
+                  <h5>Comments</h5>
+                  <hr>
+                <input type="text" id="comment" value="<%= @evaluationsArray.first.try(:comment) %>">
+                </div>
+                <button class="button pull-right" id ="eval-send">Create</button>
+              <% end %>
 
-  <button class="click1">close</button>
+          <% end %>
+
+          <% if current_user == @appointment.teacher.user %>
+            <div class="evaluation-comment">
+              <h5>Comments</h5>
+              <hr>
+            <% if evaluatable_type_is_teacher(@appointment) %>
+              <%= @appointment.evaluations.where(evaluatable_type: "Teacher").first.comment %>
+              <% elsif @appointment.teacher == current_user.teacher %>
+
+              <input type="text" id="commentTa" value="<%= @commentTa %>">
+              <button class="buttonTa" >Create</button>
+            <% end %>
+            </div>
+          <% end %>
+
+
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+
+
 
 <script type="text/javascript" charset="utf-8">
 
@@ -21,7 +61,7 @@ $(function () {
   $("#rateYo").rateYo({
     starWidth: "40px",
     numStars: 5,
-    halfStar: true,
+    fullStar: true,
     rating: <%= @raty %>
   });
 });
@@ -37,8 +77,9 @@ $(function () {
     var appointment_id =  <%= @appointment.id %>;
     $.ajax({
       type: 'POST',
-      url: "/appointments/" + appointment_id + "/evalutions",
+      url: "/appointments/" + appointment_id + "/evaluations",
       data: {
+        type: 0,
         rating: rating,
         comment: comment
       },
@@ -50,17 +91,28 @@ $(function () {
       }
     });
   });
-});
 
-$(document).ready(function(){
-  $('.click').click(function(){
-   $('.mask').css({"display":"block"});
-   $('.content').css({"display":"block"});
+
+  $(".buttonTa").click(function () {
+    var commentTa = document.getElementById("commentTa").value;
+
+     var appointment_id =  <%= @appointment.id %>;
+    $.ajax({
+      type: 'POST',
+      url: "/appointments/" + appointment_id + "/evaluations",
+      data: {
+        type: 1,
+        commentTa: commentTa
+      },
+      success: function(){
+        window.location.assign("http://localhost:3000/");
+      },
+      error: function() {
+        alert("failed");
+      }
+    });
   });
-  $('.click1').click(function(){
-   $('.mask').css({"display":"none"});
-   $('.content').css({"display":"none"});
-  });
+
 });
 
 </script>

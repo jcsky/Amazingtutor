@@ -1,4 +1,4 @@
-<div class="col-md-7 profile-body-padding">
+<div class="col-md-7 profile-body-padding col-lg-7">
   <div class="profile-container">
     <div class="profile-info col-xs-12">
       <div class="row">
@@ -41,7 +41,7 @@
             </span>
             <span>Yes</span>
           </div>
-          <div class="col-xs-12 info-pro">
+          <div class="col-xs-12 info-pro info-p-minfix">
             <p><%= @teacher.introduction %></p>
           </div>
         </div>
@@ -68,7 +68,13 @@
           <p>30 min</p>
         </div>
         <div class="col-xs-12">
-          <%= button_tag("Book Trial", :class => "btn ") if @teacher.trial_fee != nil %>
+          <% if @teacher.trial_fee == nil %>
+          <%#= link_to ""%>
+          <% elsif current_user == nil%>
+           <%= link_to "Book Now", new_session_path(:user),:class => "btn btn-primary btn-lg" %>
+            <% else%>
+           <%= link_to "Book Now", new_user_order_path(current_user, :teacher_id => params[:id]),:class => "btn btn-primary btn-lg" %>
+         <% end %>
         </div>
       </div>
     </div>
@@ -114,7 +120,11 @@
 
         <div class="col-xs-12">
           <div id="booknow">
-           <%= link_to "Book Now", new_user_order_path(@user, :teacher_id => params[:id]),:class => "btn btn-primary btn-lg" %>
+            <% if current_user == nil%>
+             <%= link_to "Book Now", new_session_path(:user),:class => "btn btn-primary btn-lg" %>
+              <% else%>
+             <%= link_to "Book Now", new_user_order_path(current_user, :teacher_id => params[:id]),:class => "btn btn-primary btn-lg" %>
+           <% end %>
           </div>
         </div>
 
@@ -179,63 +189,45 @@
         <h5>Rating</h5>
       </div>
 
-      <div class="rating-content col-xs-12">
-        <div class="col-xs-1">
-          <%= image_tag("oval156.png") %>
+
+      <% @evaluations.each do |e|%>
+
+        <div class="rating-content col-xs-12">
+          <div class="col-xs-1">
+            <%= image_tag(User.find(e.evaluatable_id).image) %>
+          </div>
+          <div class="col-xs-10 col-xs-push-1">
+            <span><%= User.find_by_id(e.evaluatable_id).first_name %></span>
+            <span><%= User.find_by_id(e.evaluatable_id).last_name %></span><br>
+
+              <div id="rateYo-<%= e.id %>"></div>
+            --
+            <span>Decemeber 9,2016</span>
+          </div>
+          <div class="col-xs-12 rating-comment">
+            <p><%= e.comment %></p>
+          </div>
         </div>
-        <div class="col-xs-10 col-xs-push-1">
-          <span>Ruben</span>
-          <span>Mexico</span><br>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          --
-          <span>Decemeber 9,2016</span>
-        </div>
-        <div class="col-xs-12 rating-comment">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum doloremque explicabo illum mollitia, ratione suscipit velit vero. Assumenda, veritatis.</p>
-        </div>
-      </div>
-      <div class="rating-content col-xs-12">
-        <div class="col-xs-1">
-          <%= image_tag("oval156.png") %>
-        </div>
-        <div class="col-xs-10 col-xs-push-1">
-          <span>Ruben</span>
-          <span>Mexico</span><br>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          --
-          <span>Decemeber 9,2016</span>
-        </div>
-        <div class="col-xs-12 rating-comment">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum doloremque explicabo illum mollitia, ratione sunda, veritatis.</p>
-        </div>
-      </div>
-      <div class="rating-content col-xs-12">
-        <div class="col-xs-1">
-          <%= image_tag("oval156.png") %>
-        </div>
-        <div class="col-xs-10 col-xs-push-1">
-          <span>Ruben</span>
-          <span>Mexico</span><br>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          --
-          <span>Decemeber 9,2016</span>
-        </div>
-        <div class="col-xs-12 rating-comment">
-          <p>Lorem ipsum dolor sitg elit. Alias cum doloremque explicabo illum mollitia, ratione suscipit velit vero. Assumenda, veritatis.</p>
-        </div>
-      </div>
+
+
+      <% end %>
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript" charset="utf-8">
+
+$(function () {
+  <% @evaluations.each do |e| %>
+    $("#rateYo-<%= e.id %>").rateYo({
+      starWidth: "20px",
+      numStars: 5,
+      halfStar: true,
+      readOnly: true,
+      rating: <%= e.rating %>
+    });
+  <% end %>
+});
+
+</script>

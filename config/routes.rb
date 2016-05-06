@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/super', as: 'rails_admin'
+
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
     resources :appointments
   end
@@ -7,10 +9,13 @@ Rails.application.routes.draw do
   post 'pay2go/return'
   post 'pay2go/notify'
 
+
   post "/paypal/webhook" => "paypal#webhook"
   post "/paypal/redirect" => "paypal#redirect" # for paypal return
 
-  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
+
+  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks',registrations: 'users/registrations'}
+
 
   resources :users do
     member do
@@ -32,7 +37,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :teachers do
     member do
       get 'classes' => 'teachers#classes'
@@ -49,7 +53,7 @@ Rails.application.routes.draw do
   end
 
   resources :appointments do
-    resources :evalutions
+    resources :evaluations
   end
 
   resources :student_reservation do

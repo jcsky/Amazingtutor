@@ -11,6 +11,9 @@
         </div>
         <h5>試上課程</h5>
         <div class="input-group clearfix">
+          <div class="alert">
+            <span><%= flash[:alert]  %></span>
+          </div>
           <%= f.label :trial_fee, "體驗課" %>
           <%= f.text_field :trial_fee, :placeholder=>"NT$000", :class => "form-control" %>
         </div>

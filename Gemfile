@@ -33,7 +33,7 @@ gem 'rails-i18n'
 
 #paperclip
 gem "paperclip"
-
+gem 'rails_admin'
 # fullcalendar
 gem 'fullcalendar-rails'
 gem 'momentjs-rails', '>= 2.9.0'

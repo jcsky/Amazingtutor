@@ -86,6 +86,9 @@
     background-color: #7EB0EA;
     color: #fff;
   }
+  button:focus{
+    outline: none;
+  }
 }
 .ratingnow {
   button {
@@ -104,6 +107,9 @@
   button:hover {
     background-color: #FF6969;
     color: #fff;
+  }
+  button:focus{
+    outline: none;
   }
 }
 .scheduled {
