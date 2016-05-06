@@ -5,6 +5,11 @@ namespace :dev do
     AvailableSection.delete_all
     Appointment.delete_all
     UserAvailableSection.delete_all
+    1.times do
+      @user = User.create
+      @user.update(first_name: "LU", last_name: "Yi",
+                   email: "et3216@gmail.com", password: 12345678,admin: true )
+    end
     30.times do
       @user = User.create
       @user.update(first_name: Faker::Name.name.split(' ').first, last_name: Faker::Name.name.split(' ').last,
@@ -21,5 +26,15 @@ namespace :dev do
         @user.teacher.teacher_languageships.create(language_id: rand(1..10))
       end
     end
+    Language.create(language: "English")
+    Language.create(language: "Chinese")
+    Language.create(language: "German")
+    Language.create(language: "Japan")
+    Language.create(language: "Indian")
+    Language.create(language: "Vietnamese")
+    Language.create(language: "Italian")
+    Language.create(language: "Korean")
+    Language.create(language: "Ukrainian")
+    Language.create(language: "French")
   end
 end
