@@ -1,5 +1,8 @@
 
-  json.array!(@available_section) do |available_section|
-    json.start available_section.start.in_time_zone
-    json.end available_section.end.in_time_zone
+  json.array!(@event_result) do |event_result|
+    json.id event_result[:id]
+    json.backgroundColor event_result[:backgroundColor]
+    json.rendering 'background'
+    json.start event_result[:start].in_time_zone
+    json.end event_result[:end].in_time_zone
   end

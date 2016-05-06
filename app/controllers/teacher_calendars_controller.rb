@@ -1,10 +1,10 @@
 class TeacherCalendarsController < ApplicationController
+  before_action :authenticate_user! , :only[:create]
   before_action :set_available_section, :only => [:create]
   before_action :set_reservaton_list_params, :only => [:show, :index, :teacher_available, :booked_section]
   skip_before_filter :verify_authenticity_token, :only => [:create]
 
   def index
-    current_user = User.find(5)
     if set_reservaton_list_params[:id].present?
       if Teacher.exists?(set_reservaton_list_params[:id])
         @teacher = Teacher.find(set_reservaton_list_params[:id])
@@ -50,7 +50,6 @@ class TeacherCalendarsController < ApplicationController
 
 
     def new
-      current_user = User.third
       @teacher = current_user.teacher
       if @teacher.nil?
         #   倒回註冊老師頁面
@@ -60,7 +59,6 @@ class TeacherCalendarsController < ApplicationController
     end
 
     def create
-      current_user = User.third
       start_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:start].in_time_zone, 'after')
       end_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:end].in_time_zone, 'before')
       @return_insert_sections = AvailableSection.check_section_insertalbe_and_bluk_insert(start_time, end_time, current_user.teacher.id)
@@ -73,7 +71,7 @@ class TeacherCalendarsController < ApplicationController
     end
 
     def teacher_available_section
-      @available_section = AvailableSection.teacher_available_section(params[:teacher_calendar_id])
+      @event_result = AvailableSection.teacher_available_section(params[:teacher_calendar_id],current_user.id)
     end
 
     def booked_section

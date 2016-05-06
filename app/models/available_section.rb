@@ -99,12 +99,69 @@ class AvailableSection < ActiveRecord::Base
     reservation_list
   end
 
-  def self.teacher_available_section(teacher_id)
-    AvailableSection.where('teacher_id = ? and end >= ? and start <= ?',
-                           teacher_id,
-                           Time.now.in_time_zone.at_beginning_of_day,
-                           14.days.from_now.in_time_zone.at_end_of_day)
+  # def self.teacher_available_section(teacher_id)
+  #   AvailableSection.where('teacher_id = ? and end >= ? and start <= ?',
+  #                          teacher_id,
+  #                          Time.now.in_time_zone.at_beginning_of_day,
+  #                          14.days.from_now.in_time_zone.at_end_of_day)
+  # end
+  def self.teacher_available_section(teacher_id, user_id)
+    # 設定只能預約三小時後的課程
+    start_time = AvailableSection.time_shif_to_half_an_hour(Time.current + 3.hours)
+    event_reuslt = []
+    availableSection=AvailableSection.where('teacher_id = ? and (end >= ? and start <= ?)',
+                                            teacher_id,
+                                            start_time,
+                                            14.days.from_now.in_time_zone.at_end_of_day)
+    appointment = Appointment.where('teacher_id = ? and (end >= ? and start <= ?)',
+                                    teacher_id,
+                                    start_time,
+                                    14.days.from_now.in_time_zone.at_end_of_day).order('start')
+    # 先寫出不能的預約的時段
+    appointment.each do |appointment|
+      event_reuslt << {:id => 'unavailable_for_booking',
+                       :start => appointment.start.in_time_zone,
+                       :end => appointment.end.in_time_zone,
+                       :user_id => appointment.user_id,
+                       :backgroundColor => 'gray'}
+    end
+
+    availableSection.each do |availableSection|
+      event_end_time = availableSection.end
+      if availableSection.start >= start_time
+        event_start_time = availableSection.start
+      else
+        event_start_time = start_time
+      end
+      (0..appointment.count-1).each do |n|
+        if appointment[n].start.in_time_zone >= event_start_time.in_time_zone and appointment[n].end.in_time_zone <= availableSection.end.in_time_zone
+          if event_start_time.in_time_zone ==  appointment[n].start.in_time_zone
+          #   開始時間相等 do nothing and reset event_start_time
+            event_start_time = appointment[n].end
+          elsif event_start_time.in_time_zone < appointment[n].start.in_time_zone
+            event_reuslt << {:id => 'available_for_booking',
+                             :start => event_start_time.in_time_zone,
+                             :end => appointment[n].start.in_time_zone,
+                             :backgroundColor => 'blue'}
+            event_start_time = appointment[n].end
+          end
+        else
+          # event_reuslt << {:id => 'available_for_booking',
+          #                  :start => event_start_time.in_time_zone,
+          #                  :end => appointment[n].end.in_time_zone,
+          #                  :backgroundColor => 'blue'}
+        end
+      end
+      if event_start_time != event_end_time
+        event_reuslt << {:id => 'available_for_booking',
+                         :start => event_start_time,
+                         :end => event_end_time,
+                         :backgroundColor => 'blue'}
+      end
+    end
+    event_reuslt
   end
+
 
   def self.recent_14_days(teacher_id)
     available_section = AvailableSection.where('teacher_id = ? and end >= ? and start <= ?',

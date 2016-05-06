@@ -25,15 +25,20 @@ UserAvailableSection.delete_all
                             :introduction => 'FakerLorem',
                             :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ')
 
-@avaiablesection=AvailableSection.create(:start => Time.current.at_beginning_of_day,
-                                         :end => Time.current.at_beginning_of_day + 6.hours,
+@avaiablesection=AvailableSection.create(:start => Time.current.at_beginning_of_day + 1.days,
+                                         :end => Time.current.at_beginning_of_day+ 1.days + 6.hours,
                                          :teacher => @teacher1)
-@avaiablesection=AvailableSection.create(:start => Time.current.at_beginning_of_day + 7.hours,
-                                         :end => Time.current.at_beginning_of_day + 15.hours,
+@avaiablesection=AvailableSection.create(:start => Time.current.at_beginning_of_day+ 1.days + 7.hours,
+                                         :end => Time.current.at_beginning_of_day+ 1.days + 15.hours,
                                          :teacher => @teacher1)
 Appointment.create(:teacher => @teacher1,
                    :user => @student2,
                    :section => 2,
-                   :start => Time.current.at_beginning_of_day + 4.hours + 30*60,
-                   :end => Time.current.at_beginning_of_day  + 5.hours + 30*60 )
+                   :start => Time.current.at_beginning_of_day + 1.days + 4.hours + 30*60,
+                   :end => Time.current.at_beginning_of_day + 1.days  + 5.hours + 30*60 )
+Appointment.create(:teacher => @teacher1,
+                   :user => @student2,
+                   :section => 2,
+                   :start => Time.current.at_beginning_of_day + 1.days + 1.hours + 30*60,
+                   :end => Time.current.at_beginning_of_day + 1.days  + 2.hours + 30*60 )
 UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_section => 20)

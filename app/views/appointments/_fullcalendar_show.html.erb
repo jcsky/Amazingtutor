@@ -1,0 +1,40 @@
+
+  $('#calendar').fullCalendar({
+    theme: true,
+    //24小時制 大寫H
+    timeFormat: 'H:mm',
+    allDaySlot: false,
+    defaultDate: '<%=Time.current.strftime("%Y-%m-%d")%>',
+    defaultView: 'agendaWeek',
+    ignoreTimezone: false,
+    droppable: true,
+    drop: function( date, jsEvent, ui, resourceId ) {
+      if (!confirm("Are you sure to booking on "+date.format()+"?")){
+
+      $('#calendar').fullCalendar( 'removeEvents' , $(this).data().event.id  );
+      }else{
+      $(this).remove();
+      }
+
+    },
+    eventLimit: true, // allow "more" link when too many events
+    eventSources: [
+      {
+        //teacher events source
+        url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
+        rendering: 'background',
+      },
+      {
+        url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/booked_section.json', // use the `url` property
+        backgroundColor: 'gray',
+      }
+    ],
+    event:[
+      {
+       id: 'availableForbooking',
+       start: '2016-05-07T10:00:00',
+       end: '2016-05-07T16:00:00',
+       rendering: 'background'
+      },
+    ]
+  });

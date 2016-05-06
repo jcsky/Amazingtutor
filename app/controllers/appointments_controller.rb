@@ -1,7 +1,8 @@
 class AppointmentsController < ApplicationController
-
+  before_action :authenticate_user! , :only[:create]
   #user預約時 appointment 要包含teacher_id 和 user_id
   before_action :set_appointment_params, :only => [:create]
+  before_action :set_appointment_new_params, :only => [:new]
 
   def index
     @appointments=Appointment.find_by_user_id(User.first)
@@ -20,9 +21,13 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def new
+    @teacher = Teacher.find_by_id(set_appointment_new_params[:teacher_id])
+    @user_available_sections = current_user.user_available_sections.find_by_teacher_id(set_appointment_new_params[:teacher_id])
+  end
+
   def create
     appointment = Appointment.new(set_appointment_params)
-    current_user = User.first
     appointment.user = current_user
     appointment.section = (appointment.end.in_time_zone - appointment.start.in_time_zone) / 30.minute
     # appointment.student_id = 1
@@ -58,6 +63,9 @@ class AppointmentsController < ApplicationController
 
   private
   def set_appointment_params
-    params.require(:appointment).permit(:teacher_id, :book_section)
+    params.permit(:teacher_id, :start , :end)
+  end
+  def set_appointment_new_params
+    params.permit(:teacher_id)
   end
 end
