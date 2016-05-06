@@ -20,7 +20,7 @@
       timeFormat: 'H:mm',
       //移除allDay的欄位
       allDaySlot: false,
-      defaultDate: '<%=Time.now.strftime("%Y-%m-%d")%>',
+      defaultDate: '<%=Time.current.strftime("%Y-%m-%d")%>',
       defaultView: 'agendaWeek',
       selectable: true,
       selectHelper: true,
@@ -57,21 +57,12 @@
         $('#calendar').fullCalendar('unselect');
       },
 
-//      editable: true,
       eventLimit: true, // allow "more" link when too many events
-//      events: 'http://localhost:3000/teacher_calendar/teacher_available_section.json'
       eventSources: [
         {
-          //teacher events source
           url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
-          backgroundColor: 'blue',
-          rendering: 'background',
-        },
-        {
-          url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/booked_section.json', // use the `url` property
-          backgroundColor: 'red',
         }
-      ],
+      ]
     });
 
   });
