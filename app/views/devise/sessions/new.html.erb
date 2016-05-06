@@ -1,9 +1,9 @@
-<div class="log in">
+<div class="log inxx">
   <div class="container-fluid">
     <h3>Log In</h3>
     <hr>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
+  <%= devise_error_messages! %>
     <%= render "devise/shared/links" %>
     <div class="login_input">
       <%= f.email_field :email, autofocus: true , :class => "form-control",:placeholder=>"Email"%>

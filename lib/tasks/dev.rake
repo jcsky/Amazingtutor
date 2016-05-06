@@ -8,7 +8,7 @@ namespace :dev do
     1.times do
       @user = User.create
       @user.update(first_name: "LU", last_name: "Yi",
-                   email: "et3216@gmail.com", password: 12345678,admin: true ,authority: "teacher")
+                   email: "admin@gmail.com", password: 12345678,admin: true ,authority: "teacher")
     end
     30.times do
       @user = User.create
@@ -26,6 +26,14 @@ namespace :dev do
         @user.teacher.teacher_languageships.create(language_id: rand(1..10))
       end
     end
+    Teacher.first.update(youtube: "https://www.youtube.com/watch?v=jqjSsoKyWGo")
+    Teacher.limit(1).offset(2).first.update(youtube: "https://www.youtube.com/watch?v=ExCm_FYbu94")
+    Teacher.limit(1).offset(3).first.update(youtube: "https://www.youtube.com/watch?v=rMqSQvmmM4A")
+    Teacher.limit(1).offset(4).first.update(youtube: "https://www.youtube.com/watch?v=gkVpNq4-wqs")
+    Teacher.limit(1).offset(5).first.update(youtube: "https://www.youtube.com/watch?v=gSbOa1SJ0TQ")
+    Teacher.limit(1).offset(6).first.update(youtube: "https://www.youtube.com/watch?v=diVhgrqqFhc")
+    Teacher.limit(1).offset(7).first.update(youtube: "https://www.youtube.com/watch?v=YUR38UEgjPE")
+    Teacher.last.update(youtube: "https://www.youtube.com/watch?v=diVhgrqqFhc")
     Language.create(language: "English")
     Language.create(language: "Chinese")
     Language.create(language: "German")

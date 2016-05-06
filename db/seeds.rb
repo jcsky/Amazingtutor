@@ -5,11 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.delete_all
-Teacher.delete_all
-AvailableSection.delete_all
-Appointment.delete_all
-UserAvailableSection.delete_all
+# User.delete_all
+# Teacher.delete_all
+# AvailableSection.delete_all
+# Appointment.delete_all
+# UserAvailableSection.delete_all
 @student1 = User.create!(:email => Faker::Internet.email,
                          :password => 'qwer4321')
 @student2 = User.create!(:email => Faker::Internet.email,
@@ -42,5 +42,5 @@ Appointment.create(:teacher => @teacher1,
                    :start => Time.current.at_beginning_of_day + 1.days + 1.hours + 30*60,
                    :end => Time.current.at_beginning_of_day + 1.days  + 2.hours + 30*60 )
 UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_section => 20)
-                   :start => Time.now.at_beginning_of_day + 4.hours + 30*60,
-                   :end => Time.now.at_beginning_of_day  + 5.hours + 30*60 )
+                  #  :start => Time.now.at_beginning_of_day + 4.hours + 30*60,
+                  #  :end => Time.now.at_beginning_of_day  + 5.hours + 30*60 )

@@ -7,11 +7,11 @@
   margin: 13px 12px;
   background: transparent;
 }
-.in {
-  height: 472px;
+.inxx {
+  min-height: 472px;
 }
 .reset {
-  height: 242px;
+  min-height: 242px;
   .logup_input input {
     height: 50px;
     border-color: #FDAFB1;
@@ -25,7 +25,7 @@
   }
 }
 .up {
-  height: 519px;
+  min-height: 519px;
   .facegoogle a:nth-child(3) {
     position: absolute !important;
     height: 145px !important;
@@ -61,6 +61,16 @@
     text-decoration: none;
     color: #bbb;
   }
+}
+.login{
+  position: fixed;;
+  top: 20px;
+  left: 45%;
+  background: #fff;
+  border-radius: 5px;
+  width: 417px;
+  height: 400px;
+  z-index: 5000;
 }
 .log {
   position: relative;
