@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   post 'pay2go/return'
   post 'pay2go/notify'
 
+  post "/paypal/webhook" => "paypal#webhook"
+  post "/paypal/redirect" => "paypal#redirect" # for paypal return
+
   devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
 
   resources :users do
@@ -20,6 +23,7 @@ Rails.application.routes.draw do
     resources :orders do
       member do
         post :checkout_pay2go
+        post :checkout_paypal
       end
     end
     resources :available_section, controller: 'user_available_sections'

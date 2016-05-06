@@ -20,6 +20,7 @@
 
   <p>
     <%= link_to "Pay", checkout_pay2go_user_order_path(@order.user_id, @order, :payment_method => "Credit"), :class => "btn btn-primary btn-lg", :method => :post %>
+    <%= link_to "Paypal", checkout_paypal_user_order_path(@order.user_id, @order), :class => "btn btn-primary btn-lg", :method => :post %>
   </p>
 
 <% end %>
