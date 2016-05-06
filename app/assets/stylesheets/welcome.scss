@@ -53,13 +53,13 @@ h2 {
   margin-top: 15px;
   border-radius: 5px;
   overflow: hidden;
-  p,span{color: #000;}
-  a:hover{
-    color: #000;
+  p{color: #000;}
+  a{
+  color: #000;
   }
-  a:visited{
-    color: #000;
-  }
+  // span{
+  //   color: inherit;
+  // }
   embed,
   iframe,
   object {

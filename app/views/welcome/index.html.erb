@@ -63,7 +63,7 @@
           <i class="fa fa-comment-o"></i>
           <span>Speak
           </span>
-          <span>
+          <span class="moneyred">
             <% t.languages.each do |x| %>
             <%= x.language %>
             <% end %>
@@ -72,11 +72,11 @@
           <span>Rate
           </span>
           <span class="moneyred"><%= t.ten_fee/10 %>~<%= t.one_fee %>
-            TW/hour</span><br>
+          </span> <span>TW/hour</span><br>
           <i class="fa fa-rss"></i>
           <span>Trial
           </span>
-          <span>Yes</span>
+          <span class="moneyred">Yes</span>
         </div>
         <div class="col-xs-12 info-pro">
           <p><%= t.introduction %></p>
