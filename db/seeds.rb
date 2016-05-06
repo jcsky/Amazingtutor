@@ -15,15 +15,23 @@
 @student2 = User.create!(:email => Faker::Internet.email,
                          :password => 'qwer4321')
 @user1 = User.create!(:email => Faker::Internet.email,
-                         :password => 'qwer4321')
+                      :password => 'qwer4321')
 @user2 = User.create!(:email => Faker::Internet.email,
-                         :password => 'qwer4321')
+                      :password => 'qwer4321')
 @teacher1 = Teacher.create!(:user => @user1,
                             :introduction => 'FakerLorem',
-                            :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ')
+                            :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ',
+                            :trial_fee => 3,
+                            :one_fee => 5,
+                            :five_fee => 25,
+                            :ten_fee => 50)
 @teacher2 = Teacher.create!(:user => @user2,
                             :introduction => 'FakerLorem',
-                            :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ')
+                            :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ',
+                            :trial_fee => 3,
+                            :one_fee => 5,
+                            :five_fee => 25,
+                            :ten_fee => 50)
 
 @avaiablesection=AvailableSection.create(:start => Time.current.at_beginning_of_day + 1.days,
                                          :end => Time.current.at_beginning_of_day+ 1.days + 6.hours,
@@ -35,7 +43,7 @@ Appointment.create(:teacher => @teacher1,
                    :user => @student2,
                    :section => 2,
                    :start => Time.current.at_beginning_of_day + 1.days + 4.hours + 30*60,
-                   :end => Time.current.at_beginning_of_day + 1.days  + 5.hours + 30*60 )
+                   :end => Time.current.at_beginning_of_day + 1.days + 5.hours + 30*60)
 Appointment.create(:teacher => @teacher1,
                    :user => @student2,
                    :section => 2,

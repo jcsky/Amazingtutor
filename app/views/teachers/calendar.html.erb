@@ -3,8 +3,67 @@
     <div class="col-md-1 sidebar">
       <%= render "sidebar" %>
     </div>
-    <div class="col-md-8">
-      
+    <div class="col-md-8" id='calendar'>
+      <%= csrf_meta_tag %>
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+
+// page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+      theme: true,
+      //24小時制 大寫H
+      timeFormat: 'H:mm',
+      //移除allDay的欄位
+      allDaySlot: false,
+      defaultDate: '<%=Time.current.strftime("%Y-%m-%d")%>',
+      defaultView: 'agendaWeek',
+      selectable: true,
+      selectHelper: true,
+      select: function (start, end) {
+        var c = confirm("是否設定可預約時段？")
+        var eventData;
+        if (c) {
+//        做一個ajax
+          $.ajax({
+            url: '<%= teacher_calendars_url %>.json',
+            data: {start: start.format(), end: end.format()},
+            beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+            type: "POST",
+            dataType: 'text',
+            success: function (msg) {
+//              console.log(msg);
+//              var events = JSON.parse(msg);
+//                eventData = {
+//                  start: events.start,
+//                  end: events.end,
+//                  backgroundColor: 'blue',
+//                  rendering: 'background',
+//                };
+//                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+              $('#calendar').fullCalendar( 'refetchEvents' )
+            },
+
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.status);
+              alert(thrownError);
+            }
+          });
+        }
+        $('#calendar').fullCalendar('unselect');
+      },
+
+      eventLimit: true, // allow "more" link when too many events
+      eventSources: [
+        {
+          url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
+        }
+      ]
+    });
+
+  });
+</script>

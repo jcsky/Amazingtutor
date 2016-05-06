@@ -10,8 +10,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
-      resource.time_zone = cookies['browser.timezone']
-      resource.save!
+      if resource.id.nil?
+      else
+        resource.time_zone = cookies['browser.timezone']
+        resource.save!
+      end
     end
   end
 
