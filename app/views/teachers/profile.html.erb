@@ -190,15 +190,15 @@
       </div>
 
 
-      <% @teacher.evaluations.each do |e|%>
+      <% @evaluations.each do |e|%>
 
         <div class="rating-content col-xs-12">
           <div class="col-xs-1">
-            <%= image_tag(e.user.image) %>
+            <%= image_tag(User.find(e.evaluatable_id).image) %>
           </div>
           <div class="col-xs-10 col-xs-push-1">
-            <span><%= e.user.first_name %></span>
-            <span><%= e.user.last_name %></span><br>
+            <span><%= User.find_by_id(e.evaluatable_id).first_name %></span>
+            <span><%= User.find_by_id(e.evaluatable_id).last_name %></span><br>
 
               <div id="rateYo-<%= e.id %>"></div>
             --
@@ -219,7 +219,7 @@
 <script type="text/javascript" charset="utf-8">
 
 $(function () {
-  <% @teacher.evaluations.each do |e| %>
+  <% @evaluations.each do |e| %>
     $("#rateYo-<%= e.id %>").rateYo({
       starWidth: "20px",
       numStars: 5,

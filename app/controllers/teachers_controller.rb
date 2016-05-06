@@ -26,8 +26,11 @@ class TeachersController < ApplicationController
 
   def profile
     @user = current_user
-    @teacher = Teacher.find(params[:id])
+
     redirect_to root_path if @teacher.check != "checked"
+
+    @evaluations = Evaluation.all.where(evaluatable_type: "User", evaluated_id: @teacher)
+
   end
 
   def price
