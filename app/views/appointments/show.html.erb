@@ -22,7 +22,7 @@
                 <%= @appointment.evaluations.where(evaluatable_type: "User").first.comment %>
                 </div>
               <% elsif @appointment.user == current_user %>
-                <div id="rateYo"></div><span id="content"></span>
+                <div id="rateYo" class="rate"></div><span id="content"></span>
                 <div class="evaluation-comment">
                   <h5>Comments</h5>
                   <hr>

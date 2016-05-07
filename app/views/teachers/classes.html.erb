@@ -37,7 +37,15 @@
             </div>
             <div class="clearfix gotocalss">
               <div class="conatiner-fluid">
-              <button>GO TO CLASS</button>
+                <div class="hangout_button">
+                    <g:hangout render="createhangout"
+                     invites="[{ id : 'blue76817@gmail.com', invite_type : 'EMAIL' },
+                               { id : 'jetking1021@gmail.com', invite_type : 'EMAIL' },
+                               { id : 'xusicong0331@gmail.com', invite_type : 'EMAIL' },
+                               { id : 'plok74122@gmail.com', invite_type : 'EMAIL' },
+                               ]">
+                    </g:hangout>
+                  </div>
               </div>
             </div>
           </div>
@@ -127,6 +135,7 @@ What did you like about your teacher, and what could your teacher improve?"></te
   </div>
 </div>
 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
 $(document).ready(function () {
   <% @teacher.appointments.each do |a|%>
