@@ -91,11 +91,13 @@
                 <div class="clearfix ratingnow">
                   <div class="conatiner-fluid">
                     <% if a.evaluations.where(evaluatable_type: "User").blank? %>
-                      <form action="http://localhost:3000/appointments/<%= a.id %>">
+                      <form action="<%= appointment_path(a.id) %>">
                         <button type="submit" >Rating Now</button>
                       </form>
                     <% else %>
-                       <button id="rating-<%= a.id %>">Rated</button>
+                    <div class="rated">
+                      <button id="rating-<%= a.id %>">Rated</button>
+                    </div>
                 <% end %>
                   </div>
                 </div>
