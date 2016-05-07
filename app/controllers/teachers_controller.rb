@@ -26,7 +26,7 @@ class TeachersController < ApplicationController
 
   def profile
     @user = current_user
-
+    @user_available_sections = current_user.user_available_sections.find_by_teacher_id(@teacher.id)
     redirect_to root_path if @teacher.check != "checked"
 
     @evaluations = Evaluation.all.where(evaluatable_type: "User", evaluated_id: @teacher)

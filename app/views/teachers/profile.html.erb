@@ -127,12 +127,21 @@
            <% end %>
           </div>
         </div>
-
-        <div class="col-xs-12 text-center">
-          <h6>Sarah usually responds
-            <b>within 12 hours.</b>
-          </h6>
+        <div class="col-xs-12 private-head">
+          <h5>booking</h5>
+          <p>Draggable Class(drop to calendar to book)</p>
+          <div id='external-events'>
+            <h4>Draggable Class(drop to calendar to book)</h4>
+            <% if @user_available_sections.trailed %>
+                <div class='fc-event trailed'>trailed class</div>
+                <% @user_available_sections.available_section -= 1 %>
+            <% end %>
+            <% (1..(@user_available_sections.available_section/2)).each do |i| %>
+                <div class='fc-event nomal'>nomal class <%= i %></div>
+            <% end %>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -141,8 +150,8 @@
       <div class="schedule-head col-xs-12">
         <h5>Schedule</h5>
       </div>
-      <div class="schedule-plan col-xs-12">
-        <%= image_tag("booking.png") %>
+      <div id='calendar' class="schedule-plan col-xs-12">
+        <%= csrf_meta_tag %>
       </div>
     </div>
   </div>
@@ -228,6 +237,100 @@ $(function () {
       rating: <%= e.rating %>
     });
   <% end %>
-});
 
+  $('#external-events .trailed').each(function () {
+
+    // store data so the calendar knows to render an event upon drop
+    $(this).data('event', {
+      id: 'trailed',
+      title: $.trim($(this).text()), // use the element's text as the event title
+      constraint: 'available_for_booking',
+      duration: '00:30',
+      stick: true // maintain when user navigates (see docs on the renderEvent method),
+    });
+
+    // make the event draggable using jQuery UI
+    $(this).draggable({
+      zIndex: 999,
+      revert: true,      // will cause the event to go back to its
+      revertDuration: 0  //  original position after the drag
+    });
+  });
+  i = 1;
+  $('#external-events .nomal').each(function () {
+
+    // store data so the calendar knows to render an event upon drop
+    $(this).data('event', {
+      id: 'nomal' + i,
+      title: $.trim($(this).text()), // use the element's text as the event title
+      constraint: 'available_for_booking',
+      duration: '01:00',
+      stick: true // maintain when user navigates (see docs on the renderEvent method),
+    });
+
+    // make the event draggable using jQuery UI
+    $(this).draggable({
+      zIndex: 999,
+      revert: true,      // will cause the event to go back to its
+      revertDuration: 0  //  original position after the drag
+    });
+    i++;
+  });
+  $('#calendar').fullCalendar({
+    theme: true,
+    //24小時制 大寫H
+    timeFormat: 'H:mm',
+    allDaySlot: false,
+    defaultDate: '<%=Time.now.strftime("%Y-%m-%d")%>',
+    defaultView: 'agendaWeek',
+    ignoreTimezone: false,
+    droppable: true,
+    drop: function (date, jsEvent, ui, resourceId) {
+      s = $('#calendar').fullCalendar('clientEvents', $(this).data().event.id)[0];
+      console.log($('#calendar').fullCalendar('clientEvents', $(this).data().event.id));
+      if (!confirm("Are you sure to booking on " + s.start.format("YYYY-MM-DD HH:mm:ss") + '~' + s.end.format("YYYY-MM-DD HH:mm:ss") + "?")) {
+        $('#calendar').fullCalendar('removeEvents', $(this).data().event.id);
+      } else {
+        $.ajax({
+          url: '<%= appointments_url %>',
+          data: {start: s.start.format("YYYY-MM-DD HH:mm:ss"), end: s.end.format("YYYY-MM-DD HH:mm:ss"), teacher_id: <%= @teacher.id %>},
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+          },
+          type: "POST",
+          dataType: 'text',
+          success: function (msg) {
+//              console.log(msg);
+//              var events = JSON.parse(msg);
+//                eventData = {
+//                  start: events.start,
+//                  end: events.end,
+//                  backgroundColor: 'blue',
+//                  rendering: 'background',
+//                };
+//                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+            $('#calendar').fullCalendar('refetchEvents')
+          },
+
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+          }
+        });
+        $('#calendar').fullCalendar('refetchEvents');
+        $('#calendar').fullCalendar('removeEvents', $(this).data().event.id);
+        $(this).remove();
+      }
+    },
+    eventLimit: true, // allow "more" link when too many events
+    eventSources: [
+      {
+        //teacher events source
+        url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
+        rendering: 'background',
+      }
+    ]
+  });
+
+});
 </script>
