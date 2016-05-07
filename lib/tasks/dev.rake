@@ -5,6 +5,20 @@ namespace :dev do
     AvailableSection.delete_all
     Appointment.delete_all
     UserAvailableSection.delete_all
+    Evaluation.delete_all
+
+
+    @user_a = User.create!(first_name: "Wood", last_name: "River",
+                          email: "a@gmail.com", password: 12345678, authority: "teacher")
+    @teacher_a = Teacher.create!(user: @user_a, one_fee: 100, five_fee: 500, ten_fee: 900)
+
+    @user_b = User.create!(first_name: "RooD", last_name: "Omma",
+                          email: "b@gmail.com", password: 12345678)
+
+    @appointment_1 = Appointment.create!(user_id: @user_b.id, teacher_id: @teacher_a.id)
+    @appointment_2 = Appointment.create!(user_id: @user_b.id, teacher_id: @teacher_a.id)
+
+
     1.times do
       @user = User.create
       @user.update(first_name: "LU", last_name: "Yi",

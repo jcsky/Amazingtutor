@@ -1,6 +1,7 @@
 class AppointmentsController < ApplicationController
 
   before_action :authenticate_user! , :only=> [:create]
+
   #user預約時 appointment 要包含teacher_id 和 user_id
   before_action :set_appointment_params, :only => [:create]
   before_action :user_authority, :only => [:show]

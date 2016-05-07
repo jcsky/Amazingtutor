@@ -112,6 +112,15 @@
     outline: none;
   }
 }
+.rated{
+  button{
+    border: 1px solid #ffccff;
+  }
+  button:hover {
+    background-color: #ffccff;
+    color: #fff;
+  }
+}
 .scheduled {
   .col-sm-5,
   .col-sm-7 {

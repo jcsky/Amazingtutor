@@ -78,11 +78,13 @@
             <div class="clearfix ratingnow">
               <div class="conatiner-fluid">
                 <% if a.evaluations.where(evaluatable_type: "Teacher").blank? %>
-                  <form action="http://localhost:3000/appointments/<%= a.id %>">
+                  <form action="<%= appointment_path(a.id) %>">
                    <button type="submit" >Rating Now</button>
                   </form>
                 <% else %>
+                <div class="rated">
                  <button id="rating-<%= a.id %>">Rated</button>
+                </div>
                 <% end %>
               </div>
             </div>
@@ -109,7 +111,9 @@
       <div class="evaluation-comment">
         <h5>Comments</h5>
         <hr>
-        <%= a.evaluations.where(evaluatable_type: "Teacher").first.try(:comment) %>
+        <div class="user-comment">
+          <%= a.evaluations.where(evaluatable_type: "Teacher").first.try(:comment) %>
+        </div>
         <textarea id="comment"></textarea>
         <!-- <textarea class="" placeholder="You can ENTER your comment here!!
 What did you like about your teacher, and what could your teacher improve?"></textarea> -->
