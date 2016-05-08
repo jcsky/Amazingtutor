@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
 
-  before_action :authenticate_user! , :only=> [:create]
+  before_action :authenticate_user!, :only => [:create]
 
   #user預約時 appointment 要包含teacher_id 和 user_id
   before_action :set_appointment_params, :only => [:create]
@@ -35,6 +35,12 @@ class AppointmentsController < ApplicationController
   def new
     @teacher = Teacher.find_by_id(set_appointment_new_params[:teacher_id])
     @user_available_sections = current_user.user_available_sections.find_by_teacher_id(set_appointment_new_params[:teacher_id])
+    if @teacher.nil?
+      flash[:alert]='this id is a wrong teacher_id'
+      redirect_to teachers_path
+
+    end
+
   end
 
   def create
@@ -63,7 +69,7 @@ class AppointmentsController < ApplicationController
         appointment.save
         # 扣掉預約後的堂數
         UserAvailableSection.update_credit(credit, appointment.section, 'less')
-        if calc_section ==1
+        if calc_section == 1
           credit.trailed = false
           credit.save!
         end
@@ -75,8 +81,9 @@ class AppointmentsController < ApplicationController
   private
 
   def set_appointment_params
-    params.permit(:teacher_id, :start , :end)
+    params.permit(:teacher_id, :start, :end)
   end
+
   def set_appointment_new_params
     params.permit(:teacher_id)
   end

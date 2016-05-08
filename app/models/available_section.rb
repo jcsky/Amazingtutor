@@ -113,17 +113,32 @@ class AvailableSection < ActiveRecord::Base
                                             teacher_id,
                                             start_time,
                                             14.days.from_now.in_time_zone.at_end_of_day)
-    appointment = Appointment.where('teacher_id = ? and (end >= ? and start <= ?)',
+    appointment = Appointment.includes(:teacher).where('teacher_id = ? and (end >= ? and start <= ?)',
                                     teacher_id,
                                     start_time,
                                     14.days.from_now.in_time_zone.at_end_of_day).order('start')
+    teacher_name = appointment.first.teacher.user.username
     # 先寫出不能的預約的時段
     appointment.each do |appointment|
-      event_reuslt << {:id => 'unavailable_for_booking',
-                       :start => appointment.start.in_time_zone,
-                       :end => appointment.end.in_time_zone,
-                       :user_id => appointment.user_id,
-                       :backgroundColor => 'gray'}
+      # user 自己個課程
+      if appointment.user_id == user_id
+        event_reuslt << {:id => 'unavailable_for_booking',
+                         :title => teacher_name,
+                         :start => appointment.start.in_time_zone,
+                         :end => appointment.end.in_time_zone,
+                         :user_id => appointment.user_id,
+                         :borderColor => 'red',
+                         :color => 'pink',
+                         :textColor => 'block',
+                         :backgroundColor => 'gray'}
+      else
+        event_reuslt << {:id => 'unavailable_for_booking',
+                         :start => appointment.start.in_time_zone,
+                         :end => appointment.end.in_time_zone,
+                         :user_id => appointment.user_id,
+                         :backgroundColor => 'gray'}
+      end
+
     end
 
     availableSection.each do |availableSection|
@@ -135,8 +150,8 @@ class AvailableSection < ActiveRecord::Base
       end
       (0..appointment.count-1).each do |n|
         if appointment[n].start.in_time_zone >= event_start_time.in_time_zone and appointment[n].end.in_time_zone <= availableSection.end.in_time_zone
-          if event_start_time.in_time_zone ==  appointment[n].start.in_time_zone
-          #   開始時間相等 do nothing and reset event_start_time
+          if event_start_time.in_time_zone == appointment[n].start.in_time_zone
+            #   開始時間相等 do nothing and reset event_start_time
             event_start_time = appointment[n].end
           elsif event_start_time.in_time_zone < appointment[n].start.in_time_zone
             event_reuslt << {:id => 'available_for_booking',
