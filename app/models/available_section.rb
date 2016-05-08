@@ -49,17 +49,20 @@ class AvailableSection < ActiveRecord::Base
   def self.check_section_insertalbe_and_bluk_insert(start_time, end_time, teacher_id)
     end_time = end_time.in_time_zone
     start_time = start_time.in_time_zone
-    check_exist = AvailableSection.where("((start >= ? and start <= ?) OR (end >= ? and end <= ?)) AND teacher_id = ?", start_time, end_time, start_time, end_time, teacher_id)
-    check_exist.each do |avaiable|
-      if avaiable.start.in_time_zone < start_time.in_time_zone
-        start_time = avaiable.start.in_time_zone
+    check_exist = AvailableSection.where("(start <= ? and end >= ?) AND teacher_id = ?", start_time, end_time, teacher_id)
+    if check_exist.count == 0
+      check_exist = AvailableSection.where("((start >= ? and start <= ?) OR (end >= ? and end <= ?)) AND teacher_id = ?", start_time, end_time, start_time, end_time, teacher_id)
+      check_exist.each do |avaiable|
+        if avaiable.start.in_time_zone < start_time.in_time_zone
+          start_time = avaiable.start.in_time_zone
+        end
+        if avaiable.end.in_time_zone > end_time.in_time_zone
+          end_time = avaiable.end.in_time_zone
+        end
       end
-      if avaiable.end.in_time_zone > end_time.in_time_zone
-        end_time = avaiable.end.in_time_zone
-      end
+      check_exist.delete_all
+      AvailableSection.create(:start => start_time, :end => end_time, :teacher_id => teacher_id)
     end
-    check_exist.delete_all
-    AvailableSection.create(:start => start_time, :end => end_time, :teacher_id => teacher_id)
   end
 
   def self.time_shif_when_database_exist(check_time, teacher_id, action)
@@ -114,9 +117,9 @@ class AvailableSection < ActiveRecord::Base
                                             start_time,
                                             14.days.from_now.in_time_zone.at_end_of_day)
     appointment = Appointment.includes(:teacher).where('teacher_id = ? and (end >= ? and start <= ?)',
-                                    teacher_id,
-                                    start_time,
-                                    14.days.from_now.in_time_zone.at_end_of_day).order('start')
+                                                       teacher_id,
+                                                       start_time,
+                                                       14.days.from_now.in_time_zone.at_end_of_day).order('start')
     teacher_name = appointment.first.teacher.user.username
     # 先寫出不能的預約的時段
     appointment.each do |appointment|
