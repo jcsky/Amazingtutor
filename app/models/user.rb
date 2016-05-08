@@ -30,10 +30,10 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    if first_name && last_name
-    a = first_name+" "+last_name
-    else
+    if first_name.blank? && last_name.blank?
       email.split('@').first
+    else
+        first_name+" "+last_name
     end
   end
 

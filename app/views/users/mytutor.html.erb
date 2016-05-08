@@ -72,3 +72,19 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    $(".selectpicker").selectpicker({});
+    $('#pop-booking').hide();
+    $('#pop-black').hide();
+    $('#booknow').click(function (e) {
+      $('#pop-black').fadeIn(1);
+      $('#pop-booking').fadeIn(300);
+    });
+    $('#pop-black').click(function (e) {
+      $('#pop-booking').fadeOut(1);
+      $('#pop-black').fadeOut(1);
+    });
+    });
+</script>

@@ -10,7 +10,8 @@ namespace :dev do
 
     @user_a = User.create!(first_name: "Wood", last_name: "River",
                           email: "a@gmail.com", password: 12345678, authority: "teacher")
-    @teacher_a = Teacher.create!(user: @user_a, one_fee: 100, five_fee: 500, ten_fee: 900, check: "checked")
+    @teacher_a = Teacher.create!(user: @user_a, one_fee: 100, five_fee: 500, ten_fee: 900, check: "checked",
+                         introduction: Faker::Lorem.paragraph(8))
 
     @user_b = User.create!(first_name: "RooD", last_name: "Omma",
                           email: "b@gmail.com", password: 12345678)

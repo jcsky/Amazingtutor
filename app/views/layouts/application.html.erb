@@ -7,47 +7,17 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
-
       $(document).ready(function () {
-        $('#pop-booking').hide();
-        $('#pop-black').hide();
-        $('#booknow').click(function (e) {
-          $('#pop-black').fadeIn(1);
-          $('#pop-booking').fadeIn(300);
-        });
-        $('#pop-black').click(function (e) {
-          $('#pop-booking').fadeOut(1);
-          $('#pop-black').fadeOut(1);
-        });
-        $("#user_birthday_1i").selectpicker({width: '33%'});
-        $("#user_birthday_2i").selectpicker({width: '33%'});
-        $("#user_birthday_3i").selectpicker({width: '33%'});
-        $(".selectpicker").selectpicker({});
-        $("#priceslide").slider();
-        $(".language-select").select2({placeholder: "Select a language"});
         $('#login-white').hide();
         $('#login-black').hide();
         // $('#login').click(function (e) {
         //   $('#login-black').fadeIn(1);
         //   $('#login-white').fadeIn(300);
         // });
-        $('#login-black').click(function (e) {
-          $('#login-white').fadeOut(1);
-          $('#login-black').fadeOut(1);
-        });
-
-        $("#js-example-basic-single").select2();
-        $("#index_languages").select2().on("change", function(e) {
-          var lan_id = $("#index_languages").val();
-          // if (lan_id != "") {
-          //   $.ajax({
-          //     type: 'get',
-          //     url: "/welcome",
-          //     data: {
-          //     lan_id: lan_id
-          //     }
-          // };
-        });
+        // $('#login-black').click(function (e) {
+        //   $('#login-white').fadeOut(1);
+        //   $('#login-black').fadeOut(1);
+        // });
       });
     </script>
   </head>
@@ -91,7 +61,7 @@
                 <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.get_teacher.id)%></li>
                 <% end %>
                 <li>
-                  <a href="#"><%= link_to('Log Out', destroy_user_session_path, :method => :delete)%></a>
+                <%= link_to('Log Out', destroy_user_session_path, :method => :delete)%>
                 </li>
               </ul>
             </li>

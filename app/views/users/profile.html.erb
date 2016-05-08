@@ -9,7 +9,11 @@
         <div class="scheduled-content-head">
           <h4>Edit Profile</h4>
         </div>
-
+        <div class="facegoogle">
+          <h5 class="moneyred"><%= notice %></h5>
+          <%= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
+          <%= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
+        </div>
         <div class="form-group">
           <%= form_for @user do |f| %>
 
@@ -53,20 +57,19 @@
             <%= f.label :time_zone, "TimeZone" %>
             <%= f.time_zone_select(:time_zone ,ActiveSupport::TimeZone.us_zones,{}, {:class => "form-control"} )%>
           </div>
-
         </div>
-
-        <div class="facegoogle">
-          <%= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
-          <%= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
-        </div>
-          <h2><%= notice %></h2>
       </div>
       <div class="editprofile-save">
-        <%= f.submit 'SAVE', :class => "" %>
+        <%= f.submit 'SAVE' %>
       </div>
       <% end %>
       <!--for lululala edit view-->
     </div>
   </div>
 </div>
+
+<script>
+$("#user_birthday_1i").selectpicker({width: '33%'});
+$("#user_birthday_2i").selectpicker({width: '33%'});
+$("#user_birthday_3i").selectpicker({width: '33%'});
+</script>
