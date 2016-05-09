@@ -6,7 +6,7 @@ namespace :dev do
     Appointment.delete_all
     UserAvailableSection.delete_all
     Evaluation.delete_all
-
+    Language.delete_all
 
     @user_a = User.create!(first_name: "Wood", last_name: "River",
                           email: "a@gmail.com", password: 12345678, authority: "teacher")

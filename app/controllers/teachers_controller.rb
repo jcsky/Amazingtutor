@@ -15,6 +15,7 @@ class TeachersController < ApplicationController
 
   def introduce
     @teacher.teacher_languageships.new if @teacher.teacher_languageships.empty?
+     render layout: 'welcome' 
   end
 
   def calendar
@@ -26,11 +27,10 @@ class TeachersController < ApplicationController
 
   def profile
     @user = current_user
-
     redirect_to root_path if @teacher.check != "checked"
-
     @evaluations = Evaluation.all.where(evaluatable_type: "User", evaluated_id: @teacher)
-
+    @teacher = Teacher.find_by_id(params[:id])
+    @user_available_sections = current_user.user_available_sections.find_by_teacher_id(params[:id])
   end
 
   def price

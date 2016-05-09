@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     @teacher =Teacher.all
+     render layout: 'welcome' 
   end
 
   def apply_teacher

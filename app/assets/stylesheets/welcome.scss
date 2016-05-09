@@ -10,9 +10,11 @@
   font-size: 12px;
   margin: 0 10px;
 }
-.jumbotron-modify p,
-h2 {
-  color: #fff;
+.jumbotron-modify {
+  h2,
+  p {
+    color: #fff;
+  }
 }
 .search {
   padding: 15px 0;
@@ -37,8 +39,8 @@ h2 {
   height: 6px;
 }
 .info {
-  &:hover{
-      transform: scale(1.01);
+  &:hover {
+    transform: scale(1.01);
   }
   display: inline-block;
   vertical-align: middle;
@@ -53,9 +55,11 @@ h2 {
   margin-top: 15px;
   border-radius: 5px;
   overflow: hidden;
-  p{color: #000;}
-  a{
-  color: #000;
+  p {
+    color: #000;
+  }
+  a {
+    color: #000;
   }
   // span{
   //   color: inherit;
@@ -159,9 +163,10 @@ h2 {
       height: 206px;
     }
   }
-  .jumbotron-fix{
+  .jumbotron-fix {
     margin: 0 5%;
-    p,h2 {
+    h2,
+    p {
       text-align: center;
     }
   }
@@ -170,9 +175,9 @@ h2 {
   .info-pro {
     display: block;
     font-size: 12px;
-    p{
-    margin-right: 15px;
-  }
+    p {
+      margin-right: 15px;
+    }
   }
   .info {
     height: 220px;
@@ -182,14 +187,16 @@ h2 {
       -webkit-border-bottom-left-radius: 5px;
       -moz-border-bottom-left-radius: 5px;
       border-bottom-left-radius: 5px;
-        width: 320px;
-        height: 220px;
+      width: 320px;
+      height: 220px;
     }
   }
-  .flexmodify ,.info-tag,.info-pro{
-    margin: 10px 0px 0px 23px;
+  .flexmodify,
+  .info-pro,
+  .info-tag {
+    margin: 10px 0 0 23px;
   }
-  .info-pro{
+  .info-pro {
     margin-top: 3px;
   }
 }

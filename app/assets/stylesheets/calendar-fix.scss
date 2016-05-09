@@ -1,0 +1,92 @@
+.calendar-content {
+  margin-top: 20px;
+  padding: 0 15px;
+  background-color: #fff;
+  border-radius: 5px;
+  height: 1180px;
+  margin-bottom: 15px;
+  padding: 0 ;
+}
+.fc-state-default{
+  background-image:none;
+  background-color:#fff;
+  box-shadow:none;
+  border:none;
+  &:focus{
+    outline: none;
+  }
+}
+.fc-center{
+  h2{
+    font-size: 20px;
+    color: #787C83;
+    font-weight: lighter;
+    margin-top: 5px;
+  }
+}
+.calendar-drag{
+  h4{
+    font-size: 14px;
+  }
+}
+.calendar-drag-content{
+  height: 85px;
+  overflow: hidden;
+  .fc-event{
+    background-color: #FC6063;
+    text-transform:capitalize;
+    border:none;
+    height: 30px;
+    width: 47%;
+    font-size: 13px;
+    line-height: 2.3;
+    display: inline-block;
+    float: left;
+    margin:10px 0px;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: lighter;
+    padding: -2px;
+  }
+}
+.calendar-content-other{
+  margin-top: 15px;
+  // padding: 0 15px;
+  background-color: #fff;
+  border-radius: 5px;
+  height: 1210px;
+  // margin-bottom: 15px;
+  padding: 5px 15px 15px 15px ;
+}
+.calendar-teacher{
+  text-align: left;
+  h5{margin-bottom: -10px;}
+}
+#external-events{
+  .fc-event:nth-child(2){
+    margin-right: 15px;
+  }
+}
+@media (max-width: $screen-xs-min) {
+  .calendar-drag-content{
+    height: 90px;
+    overflow: hidden;
+  }
+}
+@media (max-width: $screen-md-min) {
+  .calendar-content {
+    height: 1195px;
+    padding: 0 ;
+    margin: 15px 0px 15px 0px;
+    .public-head{
+      margin: -10px 0px 15px 0px;
+    }
+  }
+}
+@media (min-width: $screen-md-min){
+  .calendar-content {
+    .public-head{
+      margin:-15px 0 0 0;
+    }
+  }
+}

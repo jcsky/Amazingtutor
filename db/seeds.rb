@@ -10,6 +10,14 @@
 # AvailableSection.delete_all
 # Appointment.delete_all
 # UserAvailableSection.delete_all
+User.delete_all
+Teacher.delete_all
+AvailableSection.delete_all
+Appointment.delete_all
+UserAvailableSection.delete_all
+Evaluation.delete_all
+Language.delete_all
+
 @student1 = User.create!(:email => Faker::Internet.email,
                          :password => 'qwer4321')
 @student2 = User.create!(:email => Faker::Internet.email,
@@ -19,14 +27,14 @@
 @user2 = User.create!(:email => Faker::Internet.email,
                       :password => 'qwer4321')
 @teacher1 = Teacher.create!(:user => @user1,
-                            :introduction => 'FakerLorem',
+                            :introduction => Faker::Lorem.paragraph(8),
                             :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ',
                             :trial_fee => 3,
                             :one_fee => 5,
                             :five_fee => 25,
                             :ten_fee => 50)
 @teacher2 = Teacher.create!(:user => @user2,
-                            :introduction => 'FakerLorem',
+                            :introduction => Faker::Lorem.paragraph(8),
                             :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ',
                             :trial_fee => 3,
                             :one_fee => 5,
@@ -52,13 +60,6 @@ Appointment.create(:teacher => @teacher1,
 UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_section => 20)
                   #  :start => Time.now.at_beginning_of_day + 4.hours + 30*60,
                   #  :end => Time.now.at_beginning_of_day  + 5.hours + 30*60 )
-                  User.delete_all
-                  Teacher.delete_all
-                  AvailableSection.delete_all
-                  Appointment.delete_all
-                  UserAvailableSection.delete_all
-                  Evaluation.delete_all
-
 
                   @user_a = User.create!(first_name: "Wood", last_name: "River",
                                         email: "a@gmail.com", password: 12345678, authority: "teacher")
@@ -110,4 +111,4 @@ UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_se
                   Language.create(language: "Italian")
                   Language.create(language: "Korean")
                   Language.create(language: "Ukrainian")
-                  Language.create(language: "French")                  
+                  Language.create(language: "French")
