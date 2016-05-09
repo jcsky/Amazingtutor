@@ -3,7 +3,6 @@
   padding: 0 15px;
   background-color: #fff;
   border-radius: 5px;
-  height: 1180px;
   margin-bottom: 15px;
   padding: 0 ;
 }
@@ -53,7 +52,7 @@
   margin-top: 15px;
   background-color: #fff;
   border-radius: 5px;
-  height: 1210px;
+  // height: 1210px;
   padding: 5px 15px 15px 15px ;
 }
 .calendar-teacher{
@@ -73,8 +72,8 @@
 }
 @media (max-width: $screen-md-min) {
   .calendar-content {
-    height: 1195px;
     padding: 0 ;
+    padding-bottom: 15px;
     margin: 15px 0px 15px 0px;
     .public-head{
       margin: -10px 0px 15px 0px;
@@ -90,6 +89,7 @@
 }
 @media (min-width: $screen-md-min){
   .calendar-content {
+    padding-bottom: 15px;
     .public-head{
       margin:-15px 0 0 0;
     }

@@ -114,9 +114,13 @@
       },
       theme: false,
       dragScroll: false,
-      contentHeight: 1100,
+      contentHeight: 'auto',
       eventColor: '#FC6063',
       //24小時制 大寫H
+
+      minTime: '07:00:00',
+      maxTime: '24:00:00',
+      timeFormat: 'H:mm',
       allDaySlot: false,
       defaultDate: '<%=Time.now.strftime("%Y-%m-%d")%>',
       defaultView: 'agendaWeek',
@@ -161,7 +165,6 @@
         {
           //teacher events source
           url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
-          rendering: 'background'
         }
       ]
     });

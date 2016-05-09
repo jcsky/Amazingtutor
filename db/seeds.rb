@@ -5,11 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
 # User.delete_all
 # Teacher.delete_all
 # AvailableSection.delete_all
 # Appointment.delete_all
 # UserAvailableSection.delete_all
+
 User.delete_all
 Teacher.delete_all
 AvailableSection.delete_all
@@ -17,6 +19,7 @@ Appointment.delete_all
 UserAvailableSection.delete_all
 Evaluation.delete_all
 Language.delete_all
+
 
 @student1 = User.create!(:email => Faker::Internet.email,
                          :password => 'qwer4321')
