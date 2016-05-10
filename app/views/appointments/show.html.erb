@@ -2,26 +2,23 @@
       <div id="evaluation-white" class="evaluation-white">
         <div class="evaluation col-xs-12">
           <div class="evaluation-button clearfix">
-            <%= link_to "Back" ,classes_user_path ,:class=>"pull-left"%>
-           <!--  <button class="pull-right" id ="eval-send">Send</button>
-          </div> -->
-          <div class="evaluation-block col-xs-10 col-xs-push-1">
-            <div class="evaluation-me text-center">
-              <%= image_tag(@user.image) %>
-              <h4>Abner Chao</h4>
-              <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
-            </div>
 
             <% if current_user == @appointment.user %>
-
+              <%= link_to "Back", classes_user_path ,:class=>"pull-left"%>
+              <div class="evaluation-block col-xs-10 col-xs-push-1">
+                <div class="evaluation-me text-center">
+                  <%= image_tag(@user.image) %>
+                  <h4>Abner Chao</h4>
+                  <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
+                </div>
               <% if evaluatable_type_is_user(@appointment) %>
                 <div id="rateYo"></div><span id="content"></span>
                 <div class="evaluation-comment">
                   <h5>Comments</h5>
                   <hr>
-                <%= @appointment.evaluations.where(evaluatable_type: "User").first.comment %>
+                  <%= @appointment.evaluations.where(evaluatable_type: "User").first.comment %>
                 </div>
-              <% elsif @appointment.user == current_user %>
+              <% elsif %>
                 <div id="rateYo" class="rate"></div><span id="content"></span>
                 <div class="evaluation-comment">
                   <h5>Comments</h5>
@@ -29,13 +26,20 @@
                 <textarea type="text" id="comment" value="<%= @evaluationsArray.first.try(:comment) %>" placeholder="You can ENTER your comment here!!"></textarea>
                 </div>
                 <div class="ratingnow">
-                  <button class="button pull-right" id ="eval-send">Create</button>
+                  <button class="button pull-right appointment-create" id ="eval-send">Create</button>
                 </div>
               <% end %>
 
           <% end %>
 
           <% if current_user == @appointment.teacher.user %>
+            <%= link_to "Back", classes_teacher_path(current_user.teacher.id) ,:class=>"pull-left"%>
+              <div class="evaluation-block col-xs-10 col-xs-push-1">
+                <div class="evaluation-me text-center">
+                  <%= image_tag(current_user.image) %>
+                  <h4>Abner Chao</h4>
+                  <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
+                </div>
             <div class="evaluation-comment">
               <h5>Comments</h5>
               <hr>
@@ -45,13 +49,11 @@
 
               <textarea type="text" id="commentTa" value="<%= @commentTa %>" placeholder="You can ENTER your comment here!!"></textarea>
               <div class="ratingnow">
-               <button class="buttonTa pull-right" >Create</button>
+               <button class="buttonTa pull-right appointment-create" >Create</button>
               </div>
             <% end %>
             </div>
           <% end %>
-
-
         </div>
       </div>
     </div>
