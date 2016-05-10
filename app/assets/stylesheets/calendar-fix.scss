@@ -41,7 +41,7 @@
     line-height: 2.3;
     display: inline-block;
     float: left;
-    margin:10px 0px;
+    margin:10px 4px;
     text-align: center;
     border-radius: 5px;
     font-weight: lighter;
@@ -59,10 +59,18 @@
   text-align: left;
   h5{margin-bottom: -10px;}
 }
-#external-events{
-  .fc-event:nth-child(2){
-    margin-right: 15px;
-  }
+.fc-time-grid-event{
+      margin-left: -1px !important;
+      border: 0;
+      border-right: 0;
+      opacity: 0.8;
+      .fc-time{
+        white-space: normal;
+      }
+}
+.fc-time-grid .fc-event{
+  background-color: #FC6063 !important;
+  border-radius:  0;
 }
 @media (max-width: $screen-xs-min) {
   .calendar-drag-content{

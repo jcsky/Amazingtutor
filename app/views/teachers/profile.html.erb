@@ -153,7 +153,7 @@
 
             <% (1..(@user_available_sections.available_section/2)).each do |i| %>
             <div class='fc-event nomal'>Normal Class
-              <%= i %></div>
+            </div>
             <% end %>
           </div>
 
@@ -263,8 +263,18 @@
 
       // make the event draggable using jQuery UI
       $(this).draggable({
-        zIndex: 999, revert: true, // will cause the event to go back to its
-        revertDuration: 0 //  original position after the drag
+        zIndex: 9990, revert: true, // will cause the event to go back to its
+        revertDuration: 0, //  original position after the drag
+        helper: 'clone',
+        revert: 'invalid',
+        appendTo: 'body',
+        cursor: "pointer",
+        start: function (event, ui) {
+          $(this).hide();
+        },
+        stop: function (event, ui) {
+          $(this).show();
+        }
       });
     });
     i = 1;
@@ -282,7 +292,19 @@
       // make the event draggable using jQuery UI
       $(this).draggable({
         zIndex: 1000, revert: true, // will cause the event to go back to its
-        revertDuration: 0 //  original position after the drag
+        revertDuration: 0, //  original position after the drag
+        helper: 'clone',
+        revert: 'invalid',
+        appendTo: 'body',
+        cursor: "pointer",
+        start: function (event, ui) {
+            // $(this\\:clone).attr("fc-event");
+          $(this).hide();
+        },
+        stop: function (event, ui) {
+          $(this).show();
+        }
+
       });
       i++;
     });
@@ -305,7 +327,7 @@
       theme: false,
       dragScroll: false,
       contentHeight: 'auto',
-      eventColor: '#FC6063',
+      eventColor: '#C73C3C',
       //lulu setting 24小時制 大寫H timeFormat: 'H:mm',
       allDaySlot: false,
       defaultDate: '<%=Time.now.strftime("%Y-%m-%d")%>',

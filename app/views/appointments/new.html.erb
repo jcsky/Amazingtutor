@@ -40,7 +40,7 @@
             <% end %>
             <% (1..(@user_available_sections.available_section/2)).each do |i| %>
             <div class='fc-event nomal'>nomal class
-              <%= i %></div>
+            </div>
             <% end %>
           </div>
         </div>
@@ -75,7 +75,17 @@
       // make the event draggable using jQuery UI
       $(this).draggable({
         zIndex: 999, revert: true, // will cause the event to go back to its
-        revertDuration: 0 //  original position after the drag
+        revertDuration: 0, //  original position after the drag
+        helper: 'clone',
+        revert: 'invalid',
+        appendTo: 'body',
+        cursor: "pointer",
+        start: function (event, ui) {
+          $(this).hide();
+        },
+        stop: function (event, ui) {
+          $(this).show();
+        }
       });
     });
     i = 1;
@@ -93,7 +103,17 @@
       // make the event draggable using jQuery UI
       $(this).draggable({
         zIndex: 999, revert: true, // will cause the event to go back to its
-        revertDuration: 0 //  original position after the drag
+        revertDuration: 0, //  original position after the drag
+        helper: 'clone',
+        revert: 'invalid',
+        appendTo: 'body',
+        cursor: "pointer",
+        start: function (event, ui) {
+          $(this).hide();
+        },
+        stop: function (event, ui) {
+          $(this).show();
+        }
       });
       i++;
     });
@@ -110,14 +130,12 @@
       },
       axisFormat: 'H:mmA',
       dragOpacity: {
-        agenda: .5
+        agenda: .7
       },
       theme: false,
       dragScroll: false,
       contentHeight: 'auto',
-      eventColor: '#FC6063',
       //24小時制 大寫H
-
       minTime: '07:00:00',
       maxTime: '24:00:00',
       timeFormat: 'H:mm',
@@ -165,6 +183,7 @@
         {
           //teacher events source
           url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
+
         }
       ]
     });
