@@ -96,8 +96,8 @@ $("#index_languages").select2().on("change", function(e) {
   if (lan_id != "") {
     console.log(lan_id);
     $.ajax({
-      type: 'post',
-      url: "/welcome",
+      type: 'get',
+      url: "/",
       data: {
       lan_id: lan_id
       }
