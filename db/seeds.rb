@@ -86,6 +86,19 @@ UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_se
                     @user = User.create
                     @user.update(first_name: "LU", last_name: "Yi",
                                  email: "admin@gmail.com", password: 12345678,admin: true ,authority: "teacher")
+                    @teacher_1 = Teacher.create(user: @user, one_fee: 100, five_fee: 500, ten_fee: 900, check: "checked",
+                                                introduction: Faker::Lorem.paragraph(8),
+                                                avg_rating: rand(3..5))
+
+                    @newAppointment_1 = Appointment.create(teacher_id: @teacher_1.id, user_id: @user.id)
+
+                    @user_b.evaluations.create(rating: rand(4..5), comment: Faker::Lorem.sentence(3),
+                                                          evaluated_id: @teacher_1.id, appointment_id: @newAppointment_1.id)
+                    @user_b.evaluations.create(rating: rand(3..5), comment: Faker::Lorem.sentence(3),
+                                                          evaluated_id: @teacher_1.id, appointment_id: @newAppointment_1.id)
+                    @user_b.evaluations.create(rating: rand(4..5), comment: Faker::Lorem.sentence(3),
+                                                          evaluated_id: @teacher_1.id, appointment_id: @newAppointment_1.id)
+
                   end
                   30.times do
                     @user = User.create
@@ -133,5 +146,3 @@ UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_se
                   Language.create(language: "French")
 
                   puts("done!")
-
-
