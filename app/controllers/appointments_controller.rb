@@ -1,46 +1,43 @@
 class AppointmentsController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
 
-  before_action :authenticate_user!, :only => [:create]
-
-  #user預約時 appointment 要包含teacher_id 和 user_id
-  before_action :set_appointment_params, :only => [:create]
-  before_action :user_authority, :only => [:show]
-  before_action :set_appointment_new_params, :only => [:new]
-
+  # user預約時 appointment 要包含teacher_id 和 user_id
+  before_action :set_appointment_params, only: [:create]
+  before_action :user_authority, only: [:show]
+  before_action :set_appointment_new_params, only: [:new]
 
   def index
-    @appointments=Appointment.find_by_user_id(User.first)
+    @appointments = Appointment.find_by_user_id(User.first)
   end
 
   def show
     @appointment = Appointment.find(params[:id])
-    @user= current_user
+    @user = current_user
 
-    @evaluationsArray = Evaluation.where(evaluatable_type: "User",
+    @evaluationsArray = Evaluation.where(evaluatable_type: 'User',
                                          evaluatable_id: current_user, appointment_id: @appointment)
 
-    if @evaluationsArray.blank?
-      @raty = 0
-    else
-      @raty = @evaluationsArray.first.rating
-    end
+    @raty = if @evaluationsArray.blank?
+              0
+            else
+              @evaluationsArray.first.rating
+            end
 
-    @evaluationsArrayTa = Evaluation.where(evaluatable_type: "Teacher",
+    @evaluationsArrayTa = Evaluation.where(evaluatable_type: 'Teacher',
                                            evaluatable_id: current_user.teacher, appointment_id: @appointment)
 
     @commentTa = @evaluationsArrayTa.first.try(:comment)
-
   end
 
   def new
     @teacher = Teacher.find_by_id(set_appointment_new_params[:teacher_id])
-    @user_available_sections = current_user.user_available_sections.find_by_teacher_id(set_appointment_new_params[:teacher_id])
     if @teacher.nil?
-      flash[:alert]='this id is a wrong teacher_id'
+      flash[:alert] = 'this id is a wrong teacher_id'
       redirect_to teachers_path
-
     end
-
+    unless current_user.nil?
+      @user_available_sections = current_user.user_available_sections.find_by_teacher_id(set_appointment_new_params[:teacher_id])
+    end
   end
 
   def create
@@ -60,7 +57,7 @@ class AppointmentsController < ApplicationController
       # 減掉user_avaiable_section的數值
       credit = UserAvailableSection.lock.query_credit(appointment.teacher_id, current_user)
       calc_section = (appointment.end.in_time_zone - appointment.start.in_time_zone) / 30.minute
-      if avaiable_section_check and !appointment_check and credit[:available_section] >= calc_section.to_i
+      if avaiable_section_check && !appointment_check && credit[:available_section] >= calc_section.to_i
         # 設定預約課程
         # Appointment.create_appointment(appointment.start,
         #                                appointment.end,
@@ -90,9 +87,8 @@ class AppointmentsController < ApplicationController
 
   def user_authority
     @appointment = Appointment.find(params[:id])
-    if current_user == nil || (@appointment.user.id != @appointment.user_id && @appointment.teacher.id != @appointment.teacher_id)
+    if current_user.nil? || (@appointment.user.id != @appointment.user_id && @appointment.teacher.id != @appointment.teacher_id)
       redirect_to root_path
     end
   end
-
 end
