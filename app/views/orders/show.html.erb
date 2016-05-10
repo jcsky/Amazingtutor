@@ -1,26 +1,175 @@
-<h1>Order Checkout</h1>
-<table class="table">
-  <tr>
-    <td>
-      <% if @order.user %>
-        User ID: <%= @order.user_id %>
-      <% end %>
-    </td>
-    <td>Teacher_ID:  <%= @order.teacher_id %></td>
-    <td>User E-mail: <%= @order.user.email %></td>
-    <td>Amount $ <%= @order.amount %></td>
-    <td>Session $ <%= @order.session %></td>
-  </tr>
-</table>
 
-<% if @order.paid %>
-  <p>Paid</p>
-<% else %>
-  <p>Please Pay before booking </p>
 
-  <p>
-    <%= link_to "Pay", checkout_pay2go_user_order_path(@order.user_id, @order, :payment_method => "Credit"), :class => "btn btn-primary btn-lg", :method => :post %>
-    <%= link_to "Paypal", checkout_paypal_user_order_path(@order.user_id, @order), :class => "btn btn-primary btn-lg", :method => :post %>
-  </p>
+<div class="col-md-7 profile-body-padding">
+  <div class="profile-container">
+    <div class="profile-info col-xs-12">
+      <div class="row">
+        <div class="profile-image col-sm-5 col-md-12">
+          <iframe src="<%= @order.teacher.youtube_website %>?playlist=&version=3&controls=0&fs=0&rel=0&showinfo=0&iv_load_policy=3&theme=light" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="col-xs-12 col-sm-7 col-md-12">
+          <div class="col-xs-12 clearfix flexmodify">
+            <div class="info-mypic col-xs-3 pull-left">
+              <%= image_tag("oval155.png") %>
+            </div>
+            <div class="info-eval col-xs-7">
+              <p><%= User.find(@order.teacher.user_id).first_name %>
+                <%= User.find(@order.teacher.user_id).last_name %></p>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-o"></i>
+              <i class="fa fa-star-o"></i>
+              <span>(132)</span>
+            </div>
+            <div class=" col-xs-2 info-flag">
+              <%= image_tag("flag.png") %>
+            </div>
+          </div>
+          <div class="col-xs-12 clearfix info-tag">
+            <i class="fa fa-comment-o"></i>
+            <span>Speak
+            </span>
+            <span>
+              <% @order.teacher.languages.each do |x| %>
+              <%= x.language %>
+              <% end %></span><br>
+            <i class="fa fa-usd"></i>
+            <span>Rate
+            </span>
+            <span class="moneyred"><%= @order.teacher.ten_fee/10 %>~<%= @order.teacher.one_fee %>TW/hour</span><br>
+            <i class="fa fa-rss"></i>
+            <span>Trial
+            </span>
+            <span>Yes</span>
+          </div>
+          <div class="col-xs-12 info-pro">
+            <p><%= @order.teacher.introduction %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%= form_for @order, url: user_orders_path(current_user, @order) do |f| %>
+<div class="profile-fix">
+  <div class=" profile-container">
+    <div class="private col-xs-12">
 
-<% end %>
+      <div class="col-xs-12 private-head">
+        <h5>Private sesions</h5>
+        <p>whith Sarah</p>
+      </div>
+
+      <div class="col-xs-12 private-money">
+        <div class="col-xs-6">
+          <div class="payment-radio">
+            <input type="radio" id="radio-1-4" name="radio-1-set" class="regular-radio" checked/>
+            <label for="radio-1-4"></label>
+          </div>
+          <h6>&nbsp;&nbsp;Trial session</h6>
+        </div>
+        <div class="col-xs-6 text-right">
+          <h5 class="moneyred">200 TWD</h5>
+          <p>30 mins</p>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 private-money">
+        <div class="col-xs-6">
+          <div class="payment-radio">
+            <input type="radio" id="radio-1-1" name="radio-1-set" class="regular-radio" checked/>
+            <label for="radio-1-1"></label>
+          </div>
+          <h6>&nbsp;&nbsp;1 session</h6>
+        </div>
+        <div class="col-xs-6 text-right">
+          <h5 class="moneyred">400 TWD</h5>
+          <p>per hour</p>
+        </div>
+      </div>
+
+      <div class="col-xs-12 private-money ">
+        <div class="col-xs-6">
+          <div class="payment-radio">
+            <input type="radio" id="radio-1-2" name="radio-1-set" class="regular-radio"/>
+            <label for="radio-1-2"></label>
+          </div>
+          <h6>&nbsp;&nbsp;5 session</h6>
+        </div>
+        <div class="col-xs-6 text-right ">
+          <h5 class="moneyred">1900 TWD</h5>
+          <p>per hour</p>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 private-money">
+        <div class="col-xs-6 ">
+          <div class="payment-radio">
+            <input type="radio" id="radio-1-3" name="radio-1-set" class="regular-radio"/>
+            <label for="radio-1-3"></label>
+          </div>
+          <h6>&nbsp;&nbsp;10 session</h6>
+        </div>
+        <div class="col-xs-6 text-right">
+          <h5 class="moneyred">3500 TWD</h5>
+          <p>per hour</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <% f.label :teacher_id, "Teacher_ID: " %>
+        <%= f.hidden_field :teacher_id, :class => "form-control" %>
+      </div>
+
+        <div class="form-group">
+          <%= f.label :amount, "amount: "%>
+          <%= f.text_field :amount, :id => "amount", :class => "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <% f.label :session, "session: "%>
+          <%= f.hidden_field :session, :id => "session", :class => "form-control" %>
+        </div>
+
+       <div class="form-group">
+         <% f.label :email %>
+         <%= f.hidden_field :email,value: User.find(params[:user_id]).email, :class => "form-control" %>
+       </div>
+
+       <% if @order.paid %>
+         <p>Paid</p>
+       <% else %>
+         <h3>Please Pay before booking </h3>
+
+         <p>
+           <%= link_to "Pay2go", checkout_pay2go_user_order_path(@order.user_id, @order, :payment_method => "Credit"), :class => "btn btn-primary btn-lg", :method => :post %>
+         </P>
+         <p>
+           <%= link_to "Paypal", checkout_paypal_user_order_path(@order.user_id, @order), :class => "btn btn-primary btn-lg", :method => :post %>
+         </p>
+
+       <% end %>
+     <% end %>
+
+</div>
+</div>
+</div>
+
+
+<script>
+  $("#amount").val(400);
+  $("#radio-1-4").click(function(){
+    $("#amount").val(200);
+  });
+  $("#radio-1-3").click(function(){
+    $("#amount").val(3500);
+  });
+  $("#radio-1-2").click(function(){
+    $("#amount").val(1900);
+  });
+  $("#radio-1-1").click(function(){
+    $("#amount").val(400);
+  });
+
+</script>

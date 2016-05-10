@@ -209,7 +209,7 @@
   }
 }
 .profile-container {
-  a {
+  a,input[type='submit'] {
     width: 100%;
     background-color: #FC6063;
     color: #fff;
