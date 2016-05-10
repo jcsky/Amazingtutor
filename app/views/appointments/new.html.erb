@@ -1,24 +1,63 @@
-<br/>
-<%= @teacher.try(:youtube) %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 text-center sidebar-fixed">
+      <%= render "users/sidebar"%>
+      <div class="private col-xs-12 calendar-drag">
+        <div class="col-xs-12 private-head">
+          <h5>Teacher infomation</h5>
+        </div>
+        <div class="col-xs-12 calendar-teacher">
+          <h4><% @user = User.find_by_id(@teacher.user_id) %>
+          <%= @user.first_name %><%= @user.last_name %></h4>
+          <div class="clearfix info-tag">
+            <i class="fa fa-comment-o"></i>
+            <span>Speak
+            </span>
+            <span class="moneyred">
+              <% @teacher.languages.each do |x| %>
+              <%= x.language %>
+              <% end %>
+            </span><br>
+            <i class="fa fa-usd"></i>
+            <span>Rate
+            </span>
+            <span class="moneyred"><%= @teacher.ten_fee/10 %>~<%= @teacher.one_fee %>
+            TW/hour</span><br>
+            <h5>5 UnScheduled</h5>
+          </div>
+        </div>
+      </div>
+      <div class="private col-xs-12 calendar-drag">
+        <div class="col-xs-12 private-head">
+          <h5>Sesions Bookings</h5>
+        </div>
+        <div class="col-xs-12 calendar-drag-content">
+          <div id='external-events'>
+            <h4>Draggable Class(drop to calendar to book)</h4>
+            <% if @user_available_sections.trailed %>
+            <div class='fc-event trailed'>trailed class</div>
+            <% @user_available_sections.available_section -= 1 %>
+            <% end %>
+            <% (1..(@user_available_sections.available_section/2)).each do |i| %>
+            <div class='fc-event nomal'>nomal class
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<br/>
-<%= @teacher.user.email %>
-<br/>
-----------------
-<div id='wrap'>
-  <div id='external-events'>
-    <h4>Draggable Class(drop to calendar to book)</h4>
-    <% if @user_available_sections.trailed %>
-        <div class='fc-event trailed'>trailed class</div>
-        <% @user_available_sections.available_section -= 1 %>
-    <% end %>
-    <% (1..(@user_available_sections.available_section/2)).each do |i| %>
-        <div class='fc-event nomal'>nomal class <%= i %></div>
-    <% end %>
+    <div class="col-md-7">
+      <div class="calendar-content-other">
+        <div class="public-head">
+          <h4>授課日曆</h4>
+        </div>
+        <div id="calendar"></div>
+      </div>
+    </div>
   </div>
-  <div id='calendar' style="width:70%"></div>
 </div>
-<%= csrf_meta_tag %>
+
 <script>
   $(document).ready(function () {
 
@@ -35,9 +74,18 @@
 
       // make the event draggable using jQuery UI
       $(this).draggable({
-        zIndex: 999,
-        revert: true,      // will cause the event to go back to its
-        revertDuration: 0  //  original position after the drag
+        zIndex: 999, revert: true, // will cause the event to go back to its
+        revertDuration: 0, //  original position after the drag
+        helper: 'clone',
+        revert: 'invalid',
+        appendTo: 'body',
+        cursor: "pointer",
+        start: function (event, ui) {
+          $(this).hide();
+        },
+        stop: function (event, ui) {
+          $(this).show();
+        }
       });
     });
     i = 1;
@@ -54,15 +102,42 @@
 
       // make the event draggable using jQuery UI
       $(this).draggable({
-        zIndex: 999,
-        revert: true,      // will cause the event to go back to its
-        revertDuration: 0  //  original position after the drag
+        zIndex: 999, revert: true, // will cause the event to go back to its
+        revertDuration: 0, //  original position after the drag
+        helper: 'clone',
+        revert: 'invalid',
+        appendTo: 'body',
+        cursor: "pointer",
+        start: function (event, ui) {
+          $(this).hide();
+        },
+        stop: function (event, ui) {
+          $(this).show();
+        }
       });
       i++;
     });
     $('#calendar').fullCalendar({
-      theme: true,
+      buttonIcons: false,
+      buttonText: {
+        prev: '<  Prev',
+        next: 'Next  >'
+      },
+      header: {
+        left: 'prev',
+        center: 'title',
+        right: 'next'
+      },
+      axisFormat: 'H:mmA',
+      dragOpacity: {
+        agenda: .7
+      },
+      theme: false,
+      dragScroll: false,
+      contentHeight: 'auto',
       //24小時制 大寫H
+      minTime: '07:00:00',
+      maxTime: '24:00:00',
       timeFormat: 'H:mm',
       allDaySlot: false,
       defaultDate: '<%=Time.now.strftime("%Y-%m-%d")%>',
@@ -77,22 +152,19 @@
         } else {
           $.ajax({
             url: '<%= appointments_url %>',
-            data: {start: s.start.format("YYYY-MM-DD HH:mm:ss"), end: s.end.format("YYYY-MM-DD HH:mm:ss"), teacher_id: <%= @teacher.id %>},
+            data: {
+              start: s.start.format("YYYY-MM-DD HH:mm:ss"),
+              end: s.end.format("YYYY-MM-DD HH:mm:ss"),
+              teacher_id: <%= @teacher.id %>
+            },
             beforeSend: function (xhr) {
               xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
             },
             type: "POST",
             dataType: 'text',
             success: function (msg) {
-//              console.log(msg);
-//              var events = JSON.parse(msg);
-//                eventData = {
-//                  start: events.start,
-//                  end: events.end,
-//                  backgroundColor: 'blue',
-//                  rendering: 'background',
-//                };
-//                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+              //              console.log(msg);              var events = JSON.parse(msg);                eventData = {                  start: events.start,                  end: events.end,                  backgroundColor: 'blue',                  rendering:
+              // 'background',                };                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
               $('#calendar').fullCalendar('refetchEvents')
             },
 
@@ -111,63 +183,10 @@
         {
           //teacher events source
           url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
-          rendering: 'background',
+
         }
       ]
     });
 
   });
 </script>
-<style>
-
-
-  #wrap {
-    width: 1100px;
-    margin: 0 auto;
-  }
-
-  #external-events {
-    float: left;
-    width: 30%;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    background: #eee;
-    text-align: left;
-  }
-
-  #external-events h4 {
-    font-size: 16px;
-    margin-top: 0;
-    padding-top: 1em;
-  }
-
-  #external-events .fc-event {
-    margin: 10px 0;
-    cursor: pointer;
-  }
-
-  #external-events .trailed {
-    color: red;
-  }
-
-  #external-events .nomal {
-    color: green;
-  }
-
-  #external-events p {
-    margin: 1.5em 0;
-    font-size: 11px;
-    color: #666;
-  }
-
-  #external-events p input {
-    margin: 0;
-    vertical-align: middle;
-  }
-
-  #calendar {
-    float: right;
-    width: 900px;
-  }
-
-</style>

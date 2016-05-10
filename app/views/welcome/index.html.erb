@@ -87,93 +87,23 @@
 </div>
 <% end %>
 <% end %>
-<div class="container">
-  <div class="info" style="border-radius: 5px; overflow: hidden;">
-    <div class="row">
-      <div class="info-image col-sm-5">
-        <iframe src="https://www.youtube.com/embed/ock9apsCpb0?playlist=&version=3&controls=0&fs=0&rel=0&showinfo=0&iv_load_policy=3&theme=light" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="col-xs-12 col-sm-7">
-        <div class="col-xs-12 clearfix flexmodify">
-          <div class="info-mypic col-xs-3 pull-left">
-            <%= image_tag("oval155.png") %>
-          </div>
-          <div class="info-eval col-xs-7">
-            <p>Abner Chao</p>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-            <i class="fa fa-star-o"></i>
-            <span>(132)</span>
-          </div>
-          <div class=" col-xs-2 info-flag">
-            <%= image_tag("flag.png") %>
-          </div>
-        </div>
-        <div class="col-xs-12 clearfix info-tag">
-          <i class="fa fa-comment-o"></i>
-          <span>Speak
-          </span>
-          <span>Chinese,English</span><br>
-          <i class="fa fa-usd"></i>
-          <span>Rate
-          </span>
-          <span class="moneyred">400-650TW/hour</span><br>
-          <i class="fa fa-rss"></i>
-          <span>Trial
-          </span>
-          <span>Yes</span>
-        </div>
-        <div class="col-xs-12 info-pro">
-          <p>Hi! My name is Sarah, and I've been teaching English as a second language for the past 10 years. I completed my university studies in Sociology and Spanish,</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="info" style="border-radius: 5px; overflow: hidden;">
-    <div class="row">
-      <div class="info-image col-sm-5">
-        <iframe src="https://www.youtube.com/embed/xIl2W7HQTMs?playlist=&version=3&controls=0&fs=0&rel=0&showinfo=0&iv_load_policy=3&theme=light" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="col-xs-12 col-sm-7">
-        <div class="col-xs-12 clearfix flexmodify">
-          <div class="info-mypic col-xs-3 pull-left">
-            <%= image_tag("oval155.png") %>
-          </div>
-          <div class="info-eval col-xs-7">
-            <p>Abner Chao</p>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-            <i class="fa fa-star-o"></i>
-            <span>(132)</span>
-          </div>
-          <div class=" col-xs-2 info-flag">
-            <%= image_tag("flag.png") %>
-          </div>
-        </div>
-        <div class="col-xs-12 clearfix info-tag">
-          <i class="fa fa-comment-o"></i>
-          <span>Speak
-          </span>
-          <span>Chinese,English</span><br>
-          <i class="fa fa-usd"></i>
-          <span>Rate
-          </span>
-          <span class="moneyred">400-650TW/hour</span><br>
-          <i class="fa fa-rss"></i>
-          <span>Trial
-          </span>
-          <span>Yes</span>
-        </div>
-        <div class="col-xs-12 info-pro">
-          <p>Hi! My name is Sarah, and I've been teaching English as a second language for the past 10 years. I completed my university studies in Sociology and Spanish,</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+<script>
+  $(document).ready(function () {
+$("#js-example-basic-single").select2();
+$("#index_languages").select2().on("change", function(e) {
+  var lan_id = $("#index_languages").val();
+  if (lan_id != "") {
+    console.log(lan_id);
+    $.ajax({
+      type: 'post',
+      url: "/welcome",
+      data: {
+      lan_id: lan_id
+      }
+  });
+}
+});
+  $("#priceslide").slider();
+  });
+</script>

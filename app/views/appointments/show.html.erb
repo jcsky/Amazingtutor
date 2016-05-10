@@ -22,13 +22,15 @@
                 <%= @appointment.evaluations.where(evaluatable_type: "User").first.comment %>
                 </div>
               <% elsif @appointment.user == current_user %>
-                <div id="rateYo"></div><span id="content"></span>
+                <div id="rateYo" class="rate"></div><span id="content"></span>
                 <div class="evaluation-comment">
                   <h5>Comments</h5>
                   <hr>
-                <input type="text" id="comment" value="<%= @evaluationsArray.first.try(:comment) %>">
+                <textarea type="text" id="comment" value="<%= @evaluationsArray.first.try(:comment) %>" placeholder="You can ENTER your comment here!!"></textarea>
                 </div>
-                <button class="button pull-right" id ="eval-send">Create</button>
+                <div class="ratingnow">
+                  <button class="button pull-right" id ="eval-send">Create</button>
+                </div>
               <% end %>
 
           <% end %>
@@ -41,8 +43,10 @@
               <%= @appointment.evaluations.where(evaluatable_type: "Teacher").first.comment %>
               <% elsif @appointment.teacher == current_user.teacher %>
 
-              <input type="text" id="commentTa" value="<%= @commentTa %>">
-              <button class="buttonTa" >Create</button>
+              <textarea type="text" id="commentTa" value="<%= @commentTa %>" placeholder="You can ENTER your comment here!!"></textarea>
+              <div class="ratingnow">
+               <button class="buttonTa pull-right" >Create</button>
+              </div>
             <% end %>
             </div>
           <% end %>
@@ -59,7 +63,7 @@
 
 $(function () {
   $("#rateYo").rateYo({
-    starWidth: "40px",
+    starWidth: "50px",
     numStars: 5,
     fullStar: true,
     rating: <%= @raty %>
@@ -84,7 +88,7 @@ $(function () {
         comment: comment
       },
       success: function(){
-        window.location.assign("http://localhost:3000/");
+        window.location.assign("<%= classes_user_path((@appointment.user_id)) %>");
       },
       error: function() {
         alert("failed");
@@ -105,7 +109,7 @@ $(function () {
         commentTa: commentTa
       },
       success: function(){
-        window.location.assign("http://localhost:3000/");
+        window.location.assign("<%= classes_teacher_path(@appointment.teacher_id) %>");
       },
       error: function() {
         alert("failed");

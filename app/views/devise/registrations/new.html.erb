@@ -10,14 +10,17 @@
       <% end -%>
       <% end -%>
     </div>
-
+    <p class="or">or</p>
+    <p><%= devise_error_messages! %></p>
     <div class="logup_input">
       <%= f.email_field :email, autofocus: true , :class => "form-control" ,:placeholder=>"Email"%>
       <%= f.password_field :password, autocomplete: "off" , :class => "form-control" ,:placeholder=>"PassWord"%>
       <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control" ,:placeholder=>"PassWord Confirm"%>
     </div>
-      <%= link_to(t("I already have an account"), new_session_path(:user),:class=>"account")%>
-      <em><% devise_error_messages! %></em>
+    <div class="account">
+      <%= link_to(t("I already have an account"), new_session_path(:user))%>
+    </div>
+
   </div>
   <div class="actions">
     <%= f.submit "Sign up" , :class => "form-control"%>

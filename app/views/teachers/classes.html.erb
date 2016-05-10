@@ -37,7 +37,15 @@
             </div>
             <div class="clearfix gotocalss">
               <div class="conatiner-fluid">
-              <button>GO TO CLASS</button>
+                <div class="hangout_button">
+                    <g:hangout render="createhangout"
+                     invites="[{ id : 'blue76817@gmail.com', invite_type : 'EMAIL' },
+                               { id : 'jetking1021@gmail.com', invite_type : 'EMAIL' },
+                               { id : 'xusicong0331@gmail.com', invite_type : 'EMAIL' },
+                               { id : 'plok74122@gmail.com', invite_type : 'EMAIL' },
+                               ]">
+                    </g:hangout>
+                  </div>
               </div>
             </div>
           </div>
@@ -78,11 +86,13 @@
             <div class="clearfix ratingnow">
               <div class="conatiner-fluid">
                 <% if a.evaluations.where(evaluatable_type: "Teacher").blank? %>
-                  <form action="http://localhost:3000/appointments/<%= a.id %>">
+                  <form action="<%= appointment_path(a.id) %>">
                    <button type="submit" >Rating Now</button>
                   </form>
                 <% else %>
+                <div class="rated">
                  <button id="rating-<%= a.id %>">Rated</button>
+                </div>
                 <% end %>
               </div>
             </div>
@@ -109,7 +119,9 @@
       <div class="evaluation-comment">
         <h5>Comments</h5>
         <hr>
-        <%= a.evaluations.where(evaluatable_type: "Teacher").first.try(:comment) %>
+        <div class="user-comment">
+          <%= a.evaluations.where(evaluatable_type: "Teacher").first.try(:comment) %>
+        </div>
         <textarea id="comment"></textarea>
         <!-- <textarea class="" placeholder="You can ENTER your comment here!!
 What did you like about your teacher, and what could your teacher improve?"></textarea> -->
@@ -123,6 +135,7 @@ What did you like about your teacher, and what could your teacher improve?"></te
   </div>
 </div>
 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
 $(document).ready(function () {
   <% @teacher.appointments.each do |a|%>

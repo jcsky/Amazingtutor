@@ -7,44 +7,40 @@
   margin: 13px 12px;
   background: transparent;
 }
-.in {
-  height: 472px;
-}
 .reset {
-  height: 242px;
   .logup_input input {
     height: 50px;
     border-color: #FDAFB1;
   }
   .goto {
-    position: absolute;
-    top: 147px;
-    left: 15px;
-    color: #bbb;
+    a {
+      color: #bbb;
+      text-decoration: none;
+    }
+    margin: 10px auto;
+  }
+}
+.alert {float: left;}
+.forgot-newcount {
+  a {
+    color: #BEBEBE;
     text-decoration: none;
+    margin-bottom: 10px;
+    &:nth-child(2) {
+      float: right;
+    }
   }
 }
 .up {
-  height: 519px;
   .facegoogle a:nth-child(3) {
     position: absolute !important;
     height: 145px !important;
   }
   .logup_input {
     input {
-      position: absolute;
       border-color: #FDAFB1;
       height: 50px;
-      width: 93%;
-    }
-    input:nth-child(1) {
-      top: 258px;
-    }
-    input:nth-child(2) {
-      top: 313px;
-    }
-    input:nth-child(3) {
-      top: 368px;
+      width: 100%;
     }
     em {
       font-size: 12px;
@@ -55,23 +51,30 @@
     }
   }
   .account {
-    position: absolute;
-    left: 130px;
-    top: 214px;
-    text-decoration: none;
-    color: #bbb;
+    margin-bottom: 5px;
+    a,
+    span {
+      text-decoration: none;
+      color: #bbb;
+    }
   }
 }
-.log {
-  position: relative;
+.login {
+  position: fixed;
   top: 20px;
-  margin: auto;
+  left: 45%;
   background: #fff;
   border-radius: 5px;
   width: 417px;
-  hr {
-    margin-bottom: 10px;
-  }
+  height: 400px;
+  z-index: 5000;
+}
+.log {
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 5px;
+  width: 417px;
+  height: 100%;
   h3 {
     line-height: 0.9;
     font-weight: lighter;
@@ -79,13 +82,11 @@
     padding-top: 10px;
   }
   p {
-    position: absolute;
     top: 214px;
     font-size: 19px;
     left: 48%;
   }
   input[type=submit] {
-    position: absolute;
     bottom: 0;
     background-color: #FC6063;
     border-top-left-radius: 0;
@@ -98,26 +99,35 @@
     font-weight: lighter;
   }
   input[type=email] {
-    top: 257px;
+    margin: auto;
   }
   input[type=password] {
-    bottom: 108px;
+    margin: 5px auto;
   }
   .login_input input {
-    position: absolute;
     border-color: #FDAFB1;
     height: 50px;
-    width: 93%;
+    width: 100%;
+  }
+  .field label {
+    font-weight: lighter;
+    margin-left: 5px;
   }
   .forgot,
   .newcount {
-    position: absolute;
-    bottom: 75px;
     color: #bbb;
     text-decoration: none;
   }
-  .newcount {
-    right: 15px;
+  .newcount {}
+  .or {
+    margin: 20px auto;
+    text-align: center;
+  }
+  #error_explanation {
+    h2 {
+      display: none;
+      margin: 0;
+    }
   }
   .facegoogle {
     text-align: center;
@@ -131,18 +141,17 @@
       height: 50px;
       color: #fff;
       border-radius: 4px;
-      position: absolute;
       text-decoration: none;
     }
     a:nth-child(1) {
       background-color: #4E92DF;
-      top: 87px;
+      margin-top: 5px;
     }
     a:nth-child(2) {
       background-color: #DD6575;
-      top: 145px;
+      margin: 5px 0;
     }
-    .h2{
+    .h2 {
       font-weight: 16px;
       color: #DD6575;
     }
@@ -161,7 +170,7 @@ input:-webkit-autofill {
       width: 280px;
     }
     input[type=email] {
-    margin-left: -2px;
+      margin-left: -2px;
     }
     input[type=password] {
       margin-left: -2px;
