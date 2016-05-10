@@ -84,7 +84,7 @@
       eventLimit: true, // allow "more" link when too many events
       eventSources: [
         {
-          url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
+          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id)%>', 
         }
       ]
 
