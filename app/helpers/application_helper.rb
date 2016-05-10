@@ -7,7 +7,7 @@ module ApplicationHelper
           TimeStamp: payment.created_at.to_i,
           Version: "1.2",
           LangType: "en",
-          MerchantOrderNo: "#{payment.id}ACA#{Rails.env.upcase[0]}",
+          MerchantOrderNo: "#{payment.id}AT#{Rails.env.upcase[0]}",
           Amt: payment.order.amount,
           ItemDesc: "Order #{payment.order.id}",
           ReturnURL: "http://localhost:3000/pay2go/return",
