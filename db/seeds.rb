@@ -67,14 +67,20 @@ UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_se
                   @user_a = User.create!(first_name: "Wood", last_name: "River",
                                         email: "a@gmail.com", password: 12345678, authority: "teacher")
                   @teacher_a = Teacher.create!(user: @user_a, one_fee: 100, five_fee: 500, ten_fee: 900, check: "checked",
-                                       introduction: Faker::Lorem.paragraph(8))
+                                              introduction: Faker::Lorem.paragraph(8),youtube: 'https://www.youtube.com/watch?v=xWsfailxV3U',
+                                              avg_rating: rand(3..5))
 
                   @user_b = User.create!(first_name: "RooD", last_name: "Omma",
                                         email: "b@gmail.com", password: 12345678)
 
                   @appointment_1 = Appointment.create!(user_id: @user_b.id, teacher_id: @teacher_a.id)
                   @appointment_2 = Appointment.create!(user_id: @user_b.id, teacher_id: @teacher_a.id)
+                  @appointment_3 = Appointment.create!(user_id: @user_b.id, teacher_id: @teacher_a.id)
 
+                  @user_b.evaluations.create(rating: rand(4..5), comment: Faker::Lorem.sentence(3),
+                                             evaluated_id: @teacher_a.id, appointment_id: @appointment_2.id)
+                  @user_b.evaluations.create(rating: rand(4..5), comment: Faker::Lorem.sentence(4),
+                                             evaluated_id: @teacher_a.id, appointment_id: @appointment_3.id)
 
                   1.times do
                     @user = User.create
@@ -90,9 +96,19 @@ UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_se
                     @user = User.create
                     @user.update(first_name: Faker::Name.name.split(' ').first, last_name: Faker::Name.name.split(' ').last,
                                  email: Faker::Internet.email, password: 12345678,authority: "teacher")
-                    @user.create_teacher(introduction: Faker::Lorem.paragraph(8), youtube: 'https://www.youtube.com/watch?v=xWsfailxV3U',
+                    @newTeacher = @user.create_teacher(introduction: Faker::Lorem.paragraph(8), youtube: 'https://www.youtube.com/watch?v=xWsfailxV3U',
                                               trial_fee: rand(10..30) * 10, one_fee: rand(10..30) * 20, five_fee: rand(10..30) * 50,
                                               ten_fee: rand(10..30) * 100 ,check: "checked" , avg_rating: rand(3..5))
+
+                    @newAppointment = Appointment.create(teacher_id: @newTeacher.id, user_id: @user.id)
+
+                    @user_b.evaluations.create(rating: rand(4..5), comment: Faker::Lorem.sentence(3),
+                                             evaluated_id: @newTeacher.id, appointment_id: @newAppointment.id)
+                    @user_b.evaluations.create(rating: rand(3..5), comment: Faker::Lorem.sentence(3),
+                                             evaluated_id: @newTeacher.id, appointment_id: @newAppointment.id)
+                    @user_b.evaluations.create(rating: rand(4..5), comment: Faker::Lorem.sentence(3),
+                                             evaluated_id: @newTeacher.id, appointment_id: @newAppointment.id)
+
                     rand(1..3).times do
                       @user.teacher.teacher_languageships.create(language_id: rand(1..10))
                     end
@@ -115,3 +131,7 @@ UserAvailableSection.create(:teacher => @teacher1,:user=>@student1,:available_se
                   Language.create(language: "Korean")
                   Language.create(language: "Ukrainian")
                   Language.create(language: "French")
+
+                  puts("done!")
+
+
