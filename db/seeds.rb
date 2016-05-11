@@ -19,9 +19,18 @@ Appointment.delete_all
 UserAvailableSection.delete_all
 Evaluation.delete_all
 Language.delete_all
+Language.create(language: "English")
+Language.create(language: "Chinese")
+Language.create(language: "German")
+Language.create(language: "Japan")
+Language.create(language: "Indian")
+Language.create(language: "Vietnamese")
+Language.create(language: "Italian")
+Language.create(language: "Korean")
+Language.create(language: "Ukrainian")
+Language.create(language: "French")
 
-
-@student1 = User.create!(:first_name => "Sot1", :last_name => "SSSSert1",
+@student1 = User.create!(:first_name => "Lu", :last_name => "Yi",
                          :email => 'student1@gmail.com',
                          :password => 'qwer4321')
 @student2 = User.create!(first_name: "Sot2", last_name: "SSSSert",
@@ -39,11 +48,13 @@ Language.delete_all
                             :introduction => Faker::Lorem.paragraph(8),
                             :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ',
                             :trial_fee => 3,
-                            :one_fee => 5,
-                            :five_fee => 25,
-                            :ten_fee => 50,
+                            :one_fee => 500,
+                            :five_fee => 2500,
+                            :ten_fee => 4800,
                             :check => 'checked',
                             :avg_rating => 5)
+                            @user1.teacher.teacher_languageships.create(language_id: Language.first.id)
+                          @user1.teacher.teacher_languageships.create(language_id: Language.second.id)
 @teacher2 = Teacher.create!(:user => @user2,
                             :introduction => Faker::Lorem.paragraph(8),
                             :youtube => 'https://www.youtube.com/embed/FuedTgMzSJQ',
@@ -51,7 +62,8 @@ Language.delete_all
                             :one_fee => 5,
                             :five_fee => 25,
                             :ten_fee => 50)
-
+                          @user1.teacher.teacher_languageships.create(language_id: Language.first.id)
+                          @user1.teacher.teacher_languageships.create(language_id: Language.last.id)
 @avaiablesection=AvailableSection.create(:start => Time.current.at_beginning_of_day + 1.days,
                                          :end => Time.current.at_beginning_of_day+ 1.days + 6.hours,
                                          :teacher => @teacher1)
@@ -106,6 +118,7 @@ end
   @user.update(first_name: Faker::Name.name.split(' ').first, last_name: Faker::Name.name.split(' ').last,
                email: Faker::Internet.email, password: 12345678)
 end
+
 8.times do
   @user = User.create
   @user.update(first_name: Faker::Name.name.split(' ').first, last_name: Faker::Name.name.split(' ').last,
@@ -124,29 +137,17 @@ end
                              evaluated_id: @newTeacher.id, appointment_id: @newAppointment.id)
 
   rand(1..3).times do
-    @user.teacher.teacher_languageships.create(language_id: rand(1..10))
+    @user.teacher.teacher_languageships.create(language_id: Language.all.sample.id)
   end
 end
-Teacher.first.update(youtube: "https://www.youtube.com/watch?v=jqjSsoKyWGo")
-Teacher.limit(1).offset(2).first.update(youtube: "https://www.youtube.com/watch?v=ExCm_FYbu94")
+Teacher.first.update(youtube: "https://www.youtube.com/watch?v=ExCm_FYbu94")
+Teacher.limit(1).offset(2).first.update(youtube: "https://www.youtube.com/watch?v=jqjSsoKyWGo")
 Teacher.limit(1).offset(3).first.update(youtube: "https://www.youtube.com/watch?v=rMqSQvmmM4A")
 Teacher.limit(1).offset(4).first.update(youtube: "https://www.youtube.com/watch?v=gkVpNq4-wqs")
 Teacher.limit(1).offset(5).first.update(youtube: "https://www.youtube.com/watch?v=gSbOa1SJ0TQ")
 Teacher.limit(1).offset(6).first.update(youtube: "https://www.youtube.com/watch?v=diVhgrqqFhc")
 Teacher.limit(1).offset(7).first.update(youtube: "https://www.youtube.com/watch?v=YUR38UEgjPE")
 Teacher.last.update(youtube: "https://www.youtube.com/watch?v=diVhgrqqFhc")
-Language.create(language: "English")
-Language.create(language: "Chinese")
-Language.create(language: "German")
-Language.create(language: "Japan")
-Language.create(language: "Indian")
-Language.create(language: "Vietnamese")
-Language.create(language: "Italian")
-Language.create(language: "Korean")
-Language.create(language: "Ukrainian")
-Language.create(language: "French")
+
 
 puts("done!")
-
-
-

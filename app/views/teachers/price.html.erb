@@ -10,10 +10,11 @@
           <h4>價格</h4>
         </div>
         <h5>試上課程</h5>
+        <div class="alert alert-success" role="alert">
+          <%= flash[:alert]  %>
+        </div>
         <div class="input-group clearfix">
-          <div class="alert">
-            <span><%= flash[:alert]  %></span>
-          </div>
+
           <%= f.label :trial_fee, "體驗課" %>
           <%= f.text_field :trial_fee, :placeholder=>"NT$000", :class => "form-control" %>
         </div>
@@ -46,7 +47,7 @@
         </div>
       </div>
       <div class="public-save">
-          <%= f.submit 'SAVE', :class => "btn" %>
+        <%= f.submit 'SAVE', :class => "btn" %>
       </div>
       <% end %>
     </div>

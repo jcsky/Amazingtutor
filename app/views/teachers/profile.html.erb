@@ -7,10 +7,10 @@
         </div>
         <div class="col-xs-12 col-sm-7 col-md-12">
           <div class="col-xs-12 clearfix flexmodify">
-            <div class="info-mypic col-xs-3 pull-left">
+            <div class="info-mypic col-xs-3 pull-left col-md-2">
               <%= image_tag("oval155.png") %>
             </div>
-            <div class="info-eval col-xs-7">
+            <div class="info-eval col-xs-7 col-md-7">
               <p><%= User.find(@teacher.user_id).first_name %>
                 <%= User.find(@teacher.user_id).last_name %></p>
               <i class="fa fa-star"></i>
@@ -20,7 +20,7 @@
               <i class="fa fa-star-o"></i>
               <span>(132)</span>
             </div>
-            <div class=" col-xs-2 info-flag">
+            <div class=" col-xs-2 info-flag col-md-1 col-md-push-1">
               <%= image_tag("flag.png") %>
             </div>
           </div>
@@ -372,7 +372,7 @@
       eventSources: [
         {
           //teacher events source
-          url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
+          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id)%>',
           rendering: 'background'
         }
       ]

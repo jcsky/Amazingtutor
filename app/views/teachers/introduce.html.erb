@@ -9,10 +9,11 @@
         <div class="public-head">
           <h4>基本資料</h4>
         </div>
+        <div class="alert alert-success">
+          <%= flash[:alert]  %>
+        </div>
         <div class="input-group clearfix language-select-fix">
-          <div class="alert">
-            <span><%= flash[:alert]  %></span>
-          </div>
+
           <label for="#your-input" class="pull-left ">第二外語</label>
           <%= f.collection_select(:language_ids, Language.all, :id, :language,{}, {:multiple => true, :class => "form-control",:id=>"language-select",:style=>"width:80%;" }) %>
         </div>

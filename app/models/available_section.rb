@@ -131,7 +131,7 @@ class AvailableSection < ActiveRecord::Base
                          :end => appointment.end.in_time_zone,
                          :user_id => appointment.user_id,
                          :borderColor => 'red',
-                         :color => 'pink',
+                         :color => '#ff0000',
                          :textColor => 'block',
                          :backgroundColor => 'gray'}
       else
@@ -139,7 +139,7 @@ class AvailableSection < ActiveRecord::Base
                          :start => appointment.start.in_time_zone,
                          :end => appointment.end.in_time_zone,
                          :user_id => appointment.user_id,
-                         :backgroundColor => 'gray'}
+                         :backgroundColor => 'white'}
       end
 
     end
@@ -160,7 +160,7 @@ class AvailableSection < ActiveRecord::Base
             event_reuslt << {:id => 'available_for_booking',
                              :start => event_start_time.in_time_zone,
                              :end => appointment[n].start.in_time_zone,
-                             :backgroundColor => 'blue'}
+                             :backgroundColor => '#FF5F5F'}
             event_start_time = appointment[n].end
           end
         else
@@ -174,7 +174,7 @@ class AvailableSection < ActiveRecord::Base
         event_reuslt << {:id => 'available_for_booking',
                          :start => event_start_time,
                          :end => event_end_time,
-                         :backgroundColor => 'blue'}
+                         :backgroundColor => '#FF5F5F'}
       end
     end
     event_reuslt

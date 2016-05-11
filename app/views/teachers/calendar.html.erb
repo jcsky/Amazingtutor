@@ -39,14 +39,15 @@
       theme: false,
       dragScroll: false,
       contentHeight: 'auto',
-      eventColor: '#FC6063',
+      eventColor: '##FF5F5F',
       //lulu setting
 
       //24小時制 大寫H timeFormat: 'h:mm', 移除allDay的欄位
       allDaySlot: false,
       defaultDate: '<%=Time.current.strftime("%Y-%m-%d")%>',
       defaultView: 'agendaWeek',
-      eventBorderColor: '#f00',
+      eventBorderColor: '#FF5F5F',
+      backgroundColor: '#FF5F5F',
       dragScroll: false,
       selectable: true,
       selectHelper: true,
@@ -84,7 +85,7 @@
       eventLimit: true, // allow "more" link when too many events
       eventSources: [
         {
-          url: 'http://localhost:3000/teacher_calendars/<%= @teacher.id %>/teacher_available_section.json', // use the `url` property
+          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id)%>', 
         }
       ]
 
