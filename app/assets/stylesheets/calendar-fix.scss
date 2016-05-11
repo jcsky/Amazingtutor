@@ -4,106 +4,101 @@
   background-color: #fff;
   border-radius: 5px;
   margin-bottom: 15px;
-  padding: 0 ;
+  padding: 0;
 }
-.fc-state-default{
-  background-image:none;
-  background-color:#fff;
-  box-shadow:none;
-  border:none;
-  &:focus{
+.fc-state-default {
+  background-image: none;
+  background-color: #fff;
+  box-shadow: none;
+  border: none;
+  &:focus {
     outline: none;
   }
 }
-.fc-center{
-  h2{
+.fc-center {
+  h2 {
     font-size: 20px;
     color: #787C83;
     font-weight: lighter;
     margin-top: 5px;
   }
 }
-.calendar-drag{
-  h4{
+.calendar-drag {
+  h4 {
     font-size: 14px;
   }
 }
-.calendar-drag-content{
+.calendar-drag-content {
   height: 85px;
   overflow: hidden;
-  .fc-event{
+  .fc-event {
     background-color: #FC6063;
-    text-transform:capitalize;
-    border:none;
+    text-transform: capitalize;
+    border: none;
     height: 30px;
     width: 47%;
     font-size: 13px;
     line-height: 2.3;
     display: inline-block;
     float: left;
-    margin:10px 4px;
+    margin: 10px 4px;
     text-align: center;
     border-radius: 5px;
     font-weight: lighter;
     padding: -2px;
   }
 }
-.calendar-content-other{
+.calendar-content-other {
   margin-top: 15px;
   background-color: #fff;
   border-radius: 5px;
-  // height: 1210px;
-  padding: 5px 15px 15px 15px ;
+  padding: 5px 15px 15px;
 }
-.calendar-teacher{
+.calendar-teacher {
   text-align: left;
-  h5{margin-bottom: -10px;}
+  h5 {
+    margin-bottom: -10px;
+  }
 }
-.fc-time-grid-event{
-      margin-left: -1px !important;
-      border: 0;
-      border-right: 0;
-      opacity: 0.8;
-      .fc-time{
-        white-space: normal;
-      }
+.fc-time-grid-event {
+  margin-left: -1px !important;
+  border: 0;
+  border-right: 0;
+  opacity: 0.8;
+  .fc-time {
+    white-space: normal;
+  }
 }
-.fc-time-grid .fc-event{
-  background-color: #FC6063 !important;
-  border-radius:  0;
-}
-.fc-bgevent-container .fc-bgevent{
-  opacity: 0.5;
-  background-color: #FF5F5F !important;
+.fc-bgevent-container .fc-bgevent {
+  opacity: 0.6;
 }
 @media (max-width: $screen-xs-min) {
-  .calendar-drag-content{
+  .calendar-drag-content {
     height: 90px;
     overflow: hidden;
   }
 }
 @media (max-width: $screen-md-min) {
   .calendar-content {
-    padding: 0 ;
-    padding-bottom: 15px;
-    margin: 15px 0px 15px 0px;
-    .public-head{
-      margin: -10px 0px 15px 0px;
+    padding: 0 0 15px;
+    margin: 15px 0;
+    .public-head {
+      margin: -10px 0 15px;
     }
   }
-  .calendar-content-other{
+  .calendar-content-other {
     margin-top: 610px;
-    .public-head{
+    .public-head {
       margin-top: 0;
       margin-top: -15px;
     }
   }
 }
-@media (min-width: $screen-md-min){
+@media (min-width: $screen-md-min) {
   .calendar-content {
     padding-bottom: 15px;
-    .public-head{
-      margin:-15px 0 0 0;
+    .public-head {
+      margin: -15px 0 0;
     }
   }
 }
