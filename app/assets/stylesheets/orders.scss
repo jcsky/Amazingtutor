@@ -1,3 +1,59 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.private {
+  .pay2goimg {
+    height: 50px;
+    border: 0.5px solid #d8d8d8;
+    background-color: #f8f8f8;
+    &:hover {
+      background-color: #f8f8f8;
+    }
+  }
+  .paypalimg {
+    height: 50px;
+    border: 0.5px solid #d8d8d8;
+    background-color: #f8f8f8;
+    &:hover {
+      background-color: #f8f8f8;
+    }
+  }
+}
+.amount-show {
+  height: 50px;
+  background-color: #FC6063;
+  font-size: 17px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-bottom: -10px;
+  label {
+    font-weight: lighter;
+    color: #fff;
+    margin-bottom: -25px;
+    float: left;
+  }
+  span {
+    color: #fff;
+    float: right;
+  }
+}
+.pay-order {
+  border: 0;
+}
+.pay-order-cotent {
+  label {
+    font-weight: lighter;
+  }
+}
+.payment-button {
+  height: 100%;
+  h5 {
+    font-weight: lighter;
+  }
+}
+.deletewhite {
+  background-color: transparent;
+}

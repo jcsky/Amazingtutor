@@ -47,7 +47,7 @@
 }
 .regular-radio + label {
   -webkit-appearance: none;
-  border: 2px solid #9B9B9B;
+  border: 0.5px solid #FC6063;
   padding: 8px;
   border-radius: 50px;
   display: inline-block;
@@ -59,7 +59,7 @@
   height: 20px;
   border-radius: 50%;
   position: absolute;
-  background: #5DA80A;
+  background: #FC6063;
   text-shadow: 0;
   top: -2px;
   left: -2px;
@@ -68,7 +68,7 @@
 .regular-radio:checked + label {
   background-color: #e9ecee;
   color: #99a1a7;
-  border: 2px solid #9B9B9B;
+  border: 0.5px solid #9B9B9B;
 }
 .payment-info {
   // padding: 0;
@@ -116,6 +116,10 @@
     margin-left: 20px;
   }
 }
+.pay2goImg{
+  margin-top: 0px;
+}
+
 @media (max-width: $screen-sm-min) {}
 @media (min-width: $screen-sm-min)and (max-width: $screen-md-min) {}
 @media (min-width: $screen-md-min) {
