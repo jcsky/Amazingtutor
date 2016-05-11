@@ -72,6 +72,10 @@
   background-color: #FC6063 !important;
   border-radius:  0;
 }
+.fc-bgevent-container .fc-bgevent{
+  opacity: 0.5;
+  background-color: #FF5F5F !important;
+}
 @media (max-width: $screen-xs-min) {
   .calendar-drag-content{
     height: 90px;

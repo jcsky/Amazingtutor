@@ -9,11 +9,13 @@
         <div class="scheduled-content-head">
           <h4>Edit Profile</h4>
         </div>
+              <span><%= flash[:success]  %></span>
         <div class="facegoogle">
-          <h5 class="moneyred"><%= notice %></h5>
+          <h5 class="moneyred"></h5>
           <%= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
           <%= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
         </div>
+
         <div class="form-group">
           <%= form_for @user do |f| %>
 
@@ -25,7 +27,7 @@
           <%= image_tag(@user.image.url(:medium)) %>
 
           <div class="input-group clearfix">
-            <%= f.label :username, "UserName" %>
+            <%= f.label :username, "User Name" %>
             <%= f.text_field :username, :class => "form-control" %>
           </div>
           <div class="input-group clearfix ">

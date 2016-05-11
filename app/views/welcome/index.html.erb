@@ -40,11 +40,11 @@
       </div>
       <div class="col-xs-12 col-sm-7">
         <div class="col-xs-12 clearfix flexmodify">
-          <div class="info-mypic col-xs-3 pull-left">
-            <%= image_tag("oval155.png") %>
+          <div class="info-mypic col-md-2 pull-left col-xs-3">
+            <%=   image_tag(User.find(t.user_id).image.url(:medium)) %>
           </div>
           <%= link_to profile_teacher_path(t)  do %>
-          <div class="info-eval col-xs-7">
+          <div class="info-eval col-md-7 col-xs-7">
             <p><%= User.find(t.user_id).first_name %>
               <%= User.find(t.user_id).last_name %></p>
             <i class="fa fa-star" aria-hidden="true"></i>
@@ -54,7 +54,7 @@
             <i class="fa fa-star-o"></i>
             <span>(132)</span>
           </div>
-          <div class=" col-xs-2 info-flag">
+          <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
             <%= image_tag("flag.png") %>
           </div>
         </div>
@@ -75,7 +75,7 @@
           <i class="fa fa-rss"></i>
           <span>Trial
           </span>
-          <span class="moneyred">Yes</span>
+          <span>Yes</span>
         </div>
         <div class="col-xs-12 info-pro">
           <p><%= t.introduction %></p>
@@ -87,7 +87,6 @@
 </div>
 <% end %>
 <% end %>
-
 <script>
   $(document).ready(function () {
 $("#js-example-basic-single").select2();

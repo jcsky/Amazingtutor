@@ -4,7 +4,6 @@ class UsersController < ApplicationController
 
   def classes
     @appointments = @user.appointments
-
   end
   def remark
   end
@@ -16,15 +15,15 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user.update(user_params)
     if params[:_remove_image] =="1"
       @user.image = nil
     end
-    @user.update(user_params)
     if @user.save
       flash[:success] = "編輯成功"
-      redirect_to "back"
+    render 'profile'
     else
-      render 'edit'
+      render 'profile'
     end
   end
 
