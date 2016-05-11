@@ -72,6 +72,9 @@
 .fc-bgevent-container .fc-bgevent {
   opacity: 0.6;
 }
+.fc-unthemed .fc-today {
+	background: rgba(187, 187, 187,0.15);
+}
 @media (max-width: $screen-xs-min) {
   .calendar-drag-content {
     height: 90px;
