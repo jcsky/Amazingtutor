@@ -120,7 +120,7 @@ class AvailableSection < ActiveRecord::Base
                                                        teacher_id,
                                                        start_time,
                                                        14.days.from_now.in_time_zone.at_end_of_day).order('start')
-    # teacher_name = appointment.first.teacher.user.username
+    teacher_name = appointment.first.teacher.user.username
     # 先寫出不能的預約的時段
     appointment.each do |appointment|
       # user 自己個課程

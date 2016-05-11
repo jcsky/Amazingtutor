@@ -62,7 +62,7 @@ Language.create(language: "French")
                             :one_fee => 5,
                             :five_fee => 25,
                             :ten_fee => 50)
-                            @user1.teacher.teacher_languageships.create(language_id: Language.first.id)
+                          @user1.teacher.teacher_languageships.create(language_id: Language.first.id)
                           @user1.teacher.teacher_languageships.create(language_id: Language.last.id)
 @avaiablesection=AvailableSection.create(:start => Time.current.at_beginning_of_day + 1.days,
                                          :end => Time.current.at_beginning_of_day+ 1.days + 6.hours,
