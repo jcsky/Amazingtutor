@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :evaluations, :as => :evaluatable
   has_many :user_available_sections
 
-  has_attached_file :image, styles: { medium: '100x100>', thumb: '50x50>' }, default_url: 'user_default.png'
+  has_attached_file :image, styles: { medium: '100x100>', thumb: '50x50>' }, default_url: 'logo.png'
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   before_create :generate_authentication_token
 

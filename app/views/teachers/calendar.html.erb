@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-1 sidebar">
+    <div class="col-md-4 teacher-sidebar-fix">
       <%= render "sidebar" %>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 teacher-rightbar-fix">
       <div class="row calendar-content">
         <div class="public-head">
           <h4>授課日曆</h4>
@@ -85,7 +85,7 @@
       eventLimit: true, // allow "more" link when too many events
       eventSources: [
         {
-          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id)%>', 
+          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id)%>',
         }
       ]
 

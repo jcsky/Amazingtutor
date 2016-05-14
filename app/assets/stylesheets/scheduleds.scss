@@ -181,12 +181,21 @@
     background: #FC6063;
     font-weight: 100;
     position: absolute;
-    right: 49px;
+    right: 30px;
     bottom: 25px;
     border-radius: 5px;
   }
 }
-
+.tutor-info {
+  height: 155px;
+}
+.scheduled-content{
+  img[alt="Logo"]{
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+  }
+}
 @media (max-width: $screen-xs-min) {
   .scheduled-text {
     h1 {
@@ -286,11 +295,18 @@
 }
 @media (min-width: $screen-md-min) {
   .scheduled-white {
-    img {
+      overflow: hidden;
       width: 202px;
-      height: 137px;
       border-bottom-left-radius:5px;
-    }
+      border-top-left-radius:5px;
+      // position: relative;
+    img {
+      position: relative;
+      left: -50%;
+      width: auto;
+      height: 137px;
+      background-position: center center;
+        }
   }
   .scheduled-text {
     h1 {
@@ -302,7 +318,7 @@
     .scheduled-dark {
       border-top-right-radius: 0;
       border-bottom-left-radius: 5px;
-      width: 202px !important;
+      width: 202px;
     }
   }
   .scheduled-changepassword-fix {
@@ -325,10 +341,7 @@
       }
     }
   }
-  .tutor-info {
-    width: 455px;
-    height: 155px;
-  }
+
   .gotocalss,
   .ratingnow {
     button {
