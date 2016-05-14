@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
      render layout: 'welcome'
     #  if params[:lan_id]
     #   v = params[:lan_id]
-    #   @ = Teacher.language
+    #   @ = Teacher.all.language
     #  end
   end
 

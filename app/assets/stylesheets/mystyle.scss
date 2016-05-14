@@ -39,7 +39,6 @@ body {
 }
 .brand-center {
   position: absolute;
-  left: 10%;
 }
 // 價格錢的顏色
 .moneyred {
@@ -95,9 +94,6 @@ body {
   .container {
     width: 700px;
   }
-  .brand-center {
-    left: 80px;
-  }
 }
 @media (min-width: $screen-md-min) {
   .info-container {
@@ -109,8 +105,5 @@ body {
   }
   .container {
     width: 830px;
-  }
-  .brand-center {
-    left: 9%;
   }
 }

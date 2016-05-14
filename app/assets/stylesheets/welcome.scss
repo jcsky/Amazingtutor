@@ -8,7 +8,7 @@
 }
 .jumbotron-modify p {
   font-size: 12px;
-  margin: 0 10px;
+  margin: 0;
 }
 .jumbotron-modify {
   h2,
@@ -19,6 +19,9 @@
 .search {
   padding: 15px 0;
   background-color: #fff;
+  .container{
+    padding: 0;
+  }
   p {
     margin: 5px;
     color: #898989;
