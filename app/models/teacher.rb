@@ -34,14 +34,14 @@ class Teacher < ActiveRecord::Base
     end
   end
 
-  def hangouts_url
-    if self.hangouts_url.blank?
+  # def hangouts_url
+  #   if self.hangouts_url.blank?
 
-      charset = (0...4).map { ('a'..'z').to_a[ rand(26)] }.join
-      url =  "https://talkgadget.google.com/hangouts/_/i"+charset+"m5jzffaheagjkaa5wzj7y2?hl=zh-TW"
-      self.hangouts_url = url
-    end
-  end
+  #     charset = (0...4).map { ('a'..'z').to_a[ rand(26)] }.join
+  #     url =  "https://talkgadget.google.com/hangouts/_/i"+charset+"m5jzffaheagjkaa5wzj7y2?hl=zh-TW"
+  #     self.hangouts_url = url
+  #   end
+  # end
 
 
 
