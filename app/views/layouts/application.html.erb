@@ -42,7 +42,10 @@
         <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" >
           <ul class="nav navbar-nav navbar-right">
             <li>
-            <%= link_to("Apply to Teach", apply_teacher_path(:user))%>
+            <%= link_to("Scholarship", scholarship_path)%>
+            </li>
+            <li>
+            <%= link_to("Apply to Teach", apply_teacher_path)%>
             </li>
             <li>
               <%#= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>

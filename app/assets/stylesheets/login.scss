@@ -1,3 +1,9 @@
+#error_explanation {
+  h2 {
+    display: none;
+    margin: 0;
+  }
+}
 .loginbutton {
   margin-top: 13px;
   color: #fff;
@@ -20,7 +26,9 @@
     margin: 10px auto;
   }
 }
-.alert {float: left;}
+.alert {
+  float: left;
+}
 .forgot-newcount {
   a {
     color: #BEBEBE;
@@ -122,12 +130,6 @@
   .or {
     margin: 20px auto;
     text-align: center;
-  }
-  #error_explanation {
-    h2 {
-      display: none;
-      margin: 0;
-    }
   }
   .facegoogle {
     text-align: center;

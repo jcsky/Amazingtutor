@@ -9,13 +9,10 @@ Rails.application.routes.draw do
   post 'pay2go/return'
   post 'pay2go/notify'
 
-
   post "/paypal/webhook" => "paypal#webhook"
   post "/paypal/redirect" => "paypal#redirect" # for paypal return
 
-
   devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks',registrations: 'users/registrations'}
-
 
   resources :users do
     member do
@@ -62,7 +59,7 @@ Rails.application.routes.draw do
     get 'teacher_available_section' => 'teacher_calendars#teacher_available_section'
     get 'booked_section' => 'teacher_calendars#booked_section'
   end
-
+  get  'scholarship'=> "welcome#scholarship"
   get  'apply_teacher'=> "welcome#apply_teacher"
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

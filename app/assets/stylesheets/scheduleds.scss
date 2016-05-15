@@ -196,6 +196,14 @@
     border-radius: 50%;
   }
 }
+.remark{
+  .info-mypic img{
+    margin-left: 10px;
+  }
+  .info-tag{
+    margin-left: 0;
+  }
+}
 @media (max-width: $screen-xs-min) {
   .scheduled-text {
     h1 {
@@ -218,8 +226,9 @@
   }
 }
 @media (max-width: $screen-sm-min) {
-  .editprofile-save input {
-    width: 100%;
+  .editprofile-save{
+    input,button{
+    width: 100%;}
   }
   .gotoclass,
   .ratingnow {
@@ -292,7 +301,16 @@
       }
     }
   }
+  .remark{
+    .info-mypic img{
+      margin-left: -10px;
+    }
+    .info-pro-fix{
+      margin-top: 10px;
+    }
+  }
 }
+
 @media (min-width: $screen-md-min) {
   .scheduled-white {
       overflow: hidden;
@@ -323,7 +341,7 @@
   }
   .scheduled-changepassword-fix {
     .input-group .form-control {
-      width: 370px !important;
+      width: 440px ;
       margin-left: -5px;
     }
   }
@@ -337,7 +355,7 @@
     .input-group {
       padding-right: 30px;
       .form-control{
-        width: 320px;
+        width: 357px;
       }
     }
   }
