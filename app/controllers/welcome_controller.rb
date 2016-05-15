@@ -13,4 +13,7 @@ class WelcomeController < ApplicationController
 
   def sorting
   end
+
+  def scholarship
+  end
 end

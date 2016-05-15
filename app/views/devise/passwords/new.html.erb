@@ -10,11 +10,14 @@
     </div>
     <div class="goto">
       <%= link_to(t("I already have an account"), new_session_path(:user))%>
+      <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+        <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+      <% end -%>
     </div>
   </div>
 
   <div class="actions">
-    <%= f.submit "Reset Password" , :class => "form-control"%>
+    <%= f.submit "Send Reset Password Instructions" , :class => "form-control"%>
   </div>
   <% end %>
 </div>

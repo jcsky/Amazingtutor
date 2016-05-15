@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:email, :password, :password_confirmation, :nick)
     end
-        end
+    devise_parameter_sanitizer.for(:account_update) { |u|
+      u.permit(:password, :password_confirmation, :current_password)
+    }
+  end
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
