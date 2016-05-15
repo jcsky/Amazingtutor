@@ -54,16 +54,16 @@
             <%= f.label :time_zone, "TimeZone" %>
             <%= f.time_zone_select(:time_zone ,ActiveSupport::TimeZone.us_zones,{}, {:class => "form-control"} )%>
           </div>
-          <div class="facegoogle">
-            <%= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
-            <%= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
-          </div>
         </div>
       </div>
       <div class="editprofile-save">
         <%= f.submit 'SAVE' %>
       </div>
       <% end %>
+      <div class="facegoogle">
+        <%#= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
+        <%#= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
+      </div>
       <!--for lululala edit view-->
     </div>
   </div>

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :remarks
   has_many :orders
   has_many :appointments
-  has_many :evaluations, :as => :evaluatable
+  has_many :evaluations, as: :evaluatable
   has_many :user_available_sections
 
   has_attached_file :image, styles: { medium: '100x100>', thumb: '50x50>' }, default_url: 'logo.png'
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
     if first_name.blank? && last_name.blank?
       email.split('@').first
     else
-        first_name+" "+last_name
+      first_name + ' ' + last_name
     end
   end
 
@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   serialize :fb_raw_data
   serialize :google_raw_data
 
-  def self.from_facebook_omniauth(auth,browser_time_zone)
+  def self.from_facebook_omniauth(auth, browser_time_zone)
     # Case 1: Find existing user by facebook uid
     user = User.find_by_fb_uid(auth.uid)
     if user
@@ -93,9 +93,7 @@ class User < ActiveRecord::Base
     end
   end
 
-
-
-  def self.from_google_omniauth(auth,browser_time_zone)
+  def self.from_google_omniauth(auth, browser_time_zone)
     # 可用參數
     # auth.uid
     # auth.credentialscredentials.token
