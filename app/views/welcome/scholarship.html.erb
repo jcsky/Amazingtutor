@@ -1,0 +1,43 @@
+<div class="scholarship-head">
+  <div class="scholarship-head-content">
+    <p>Receive USD 3</p>
+    <p>for every friend you refer!</p>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row scholarship-button">
+    <div class="col-md-4 col-md-offset-2 col-xs-12 col-sm-5 col-sm-offset-1">
+      <%= button_tag do %>
+      <i class="fa fa-envelope-o" aria-hidden="true"></i>Invite from Gmail Contacts
+      <% end %>
+    </div>
+    <div class="col-md-4 col-xs-12 col-sm-5 scholarship-button-fix">
+      <%= button_tag do %>
+      <i class="fa fa-facebook" aria-hidden="true"></i>Invite from Facebook
+      <% end %>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-md-8 col-md-push-2">
+      <div class="scholarship-text">
+        <div class="row">
+          <p class="moneyred">Your Invite Link</p>
+        </div>
+        <div class="row">
+          <div class="col-md-8 col-md-push-2 col-xs-10 col-xs-push-1">
+            <div class="input-group">
+              <input type="text" class="form-control">
+              <span class="input-group-btn">
+                <%= button_tag "COPY",class:"btn btn-default form-control"  %>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <p>每當有朋友使用您的邀請序號註冊，他們即可獲得USD 3的首次折扣。</p>
+          <p>一旦他們完成首次上課，您將在下次使用 AmazingTutor 時自動獲得一次USD 3上課折抵優惠 (最高可享XXX)。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
