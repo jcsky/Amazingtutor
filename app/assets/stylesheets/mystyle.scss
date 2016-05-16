@@ -97,6 +97,9 @@ body {
     width: 100%;
     max-width: 400px;
   }
+  .jumbotron .container{
+      max-width: 400px;
+  }
 }
 @media (min-width: $screen-sm-min)and (max-width: $screen-md-min) {
   .container {
