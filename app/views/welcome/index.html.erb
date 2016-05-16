@@ -1,8 +1,8 @@
 <div class="jumbotron jumbotron-modify">
   <div class="container">
-      <h2>Find a Chinese Tutor</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid saepe in sequi voluptatum ducimus id, error ex, esse nisi ipsam mollitia quisquam atque repudiandae dolorum. Aspernatur quod ducimus dicta laborum explicabo totam inventore neque
-        doloremque, reprehenderit temporibus excepturi facere. Error unde voluptates cum reiciendis labore, dolorem, modi vero sed impedit.</p>
+    <h2>Find a Chinese Tutor</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid saepe in sequi voluptatum ducimus id, error ex, esse nisi ipsam mollitia quisquam atque repudiandae dolorum. Aspernatur quod ducimus dicta laborum explicabo totam inventore neque
+      doloremque, reprehenderit temporibus excepturi facere. Error unde voluptates cum reiciendis labore, dolorem, modi vero sed impedit.</p>
   </div>
 </div>
 
@@ -18,9 +18,16 @@
             <span class="caret dropdown-language-span"></span>
           </button>
           <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
+            <% if params[:week] %>
+            <li><%= link_to "All", root_path(:week=>params[:week] ) %></li>
+            <% Language.all.each do |l| %>
+            <li><%= link_to l.language, root_path( :language_id => l.id,:week=>params[:week]  ) %></li>
+            <% end %>
+          <% else %>
             <li><%= link_to "All", root_path %></li>
             <% Language.all.each do |l| %>
-            <li><%= link_to l.language, root_path( :language_id => l.id ) %></li>
+            <li><%= link_to l.language, root_path( :language_id => l.id  ) %></li>
+            <% end %>
             <% end %>
           </ul>
         </div>
@@ -33,6 +40,17 @@
             <span class="caret dropdown-language-span"></span>
           </button>
           <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
+            <% if params[:language_id ]  %>
+            <li><%= link_to "All", root_path(:language_id=> params[:language_id]) %></li>
+            <li><%= link_to "Monday", root_path( :week=> 1 ,:language_id=> params[:language_id]) %></li>
+            <li><%= link_to "Tuesday", root_path( :week=>2 ,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Wednesday", root_path( :week=> 3,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Thursday", root_path( :week=> 4,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Friday", root_path( :week=> 5,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Saturday", root_path( :week=> 6,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Sunday", root_path( :week=> 7,:language_id=> params[:language_id] ) %></li>
+          <% else %>
+            <li><%= link_to "All", root_path  %></li>
             <li><%= link_to "Monday", root_path( :week=> 1 ) %></li>
             <li><%= link_to "Tuesday", root_path( :week=>2  ) %></li>
             <li><%= link_to "Wednesday", root_path( :week=> 3 ) %></li>
@@ -40,6 +58,7 @@
             <li><%= link_to "Friday", root_path( :week=> 5 ) %></li>
             <li><%= link_to "Saturday", root_path( :week=> 6 ) %></li>
             <li><%= link_to "Sunday", root_path( :week=> 7 ) %></li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -115,16 +134,13 @@
     $('#priceslide').slider().on('slideStop', function (ev) {
       var price = $('#priceslide').data('slider').getValue();
       console.log(price);
-      $.ajax({
-        type: 'POST',
-        url: "/appointments/" + appointment_id + "/evaluations",
-        data: {
-          type: 0,
-          rating: rating,
-          comment: comment
-        }
-      });
-
+      // $.ajax({
+      //   type: 'GET',
+      //   url: "/getprice",
+      //   data: {
+      //   price: price
+      //   }
+      // });
 
     });
   });
