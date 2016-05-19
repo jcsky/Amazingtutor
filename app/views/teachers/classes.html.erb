@@ -39,7 +39,7 @@
             <div class="clearfix gotocalss">
               <div class="conatiner-fluid">
               <% if Time.now >= a.start-10.minutes &&  Time.now < a.end %>
-                <form action="<%= @teacher.hangouts_url %>" target="_blank">
+                <form action="<%= a.appointment_url %>" target="_blank">
                   <button type="submit">GO TO CLASS</button>
                 </form>
               <% elsif Time.now > a.end %>

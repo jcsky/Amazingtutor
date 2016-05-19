@@ -5,6 +5,7 @@
     </div>
 
     <div class="col-md-7">
+    <% @user.appointments.each do |a|%>
       <div class="scheduled col-xs-12">
         <div class="col-sm-5 scheduled-image img-responsive center-block">
           <div class="scheduled-dark"></div>
@@ -39,24 +40,24 @@
             <div class="clearfix gotocalss">
               <div class="conatiner-fluid">
                 <div class="hangout_button">
-                  <g:hangout
-                    render="createhangout"
-                    invites="[{ id : 'blue76817@gmail.com', invite_type : 'EMAIL' },
-                             { id : 'jetking1021@gmail.com', invite_type : 'EMAIL' },
-                             { id : 'xusicong0331@gmail.com', invite_type : 'EMAIL' },
-                             { id : 'plok74122@gmail.com', invite_type : 'EMAIL' },
-                             ]"></g:hangout>
+                <% if Time.now >= a.start-10.minutes &&  Time.now < a.end %>
+                  <form action="<%= a.appointment_url %>" target="_blank">
+                    <button type="submit">GO TO CLASS</button>
+                  </form>
+                <% elsif Time.now > a.end %>
+                  <button type="submit">Class close</button>
+                <% elsif %>
+                  <button type="submit">Please wait</button>
+                <% end %>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
-    <div class="col-md-7">
       <% @user.appointments.each do |a|%>
-
       <div class="scheduled col-xs-12">
         <div class="col-sm-5 scheduled-image img-responsive center-block">
           <div class="scheduled-dark"></div>
