@@ -59,6 +59,8 @@ Rails.application.routes.draw do
     get 'teacher_available_section' => 'teacher_calendars#teacher_available_section'
     get 'booked_section' => 'teacher_calendars#booked_section'
   end
+
+  # get  'getprice'=> 'welcome#getprice'
   get  'scholarship'=> "welcome#scholarship"
   get  'apply_teacher'=> "welcome#apply_teacher"
   root 'welcome#index'

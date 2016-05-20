@@ -35,7 +35,13 @@
             <i class="fa fa-usd"></i>
             <span>Rate
             </span>
-            <span class="moneyred"><%= @teacher.ten_fee/10 %>~<%= @teacher.one_fee %>TW/hour</span><br>
+            <span class="moneyred">
+              <% if @teacher.ten_fee/10 < @teacher.one_fee %>
+              <%= @teacher.ten_fee/10 %>~<%= @teacher.one_fee %>
+              <% else %>
+              <%= @teacher.one_fee %>~<%= @teacher.ten_fee/10 %>
+              <% end %>
+              TW/hour</span><br>
             <i class="fa fa-rss"></i>
             <span>Trial
             </span>
