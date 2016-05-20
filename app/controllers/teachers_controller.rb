@@ -2,6 +2,7 @@ class TeachersController < ApplicationController
   before_action :teacher_authority, except: [:profile, :index]
   before_action :get_teacher, except: :profile
   before_action :find_teacher, only: [:classes, :profile]
+  before_action :get_hangouts_url
 
   # 只有user裡面的author得值要等於teacher才可以進來 但大家都有第一次可能進來沒有teacher
   # 所以全部要before_action先建好teacher 如果已經有了就用已經有的
@@ -49,6 +50,9 @@ class TeachersController < ApplicationController
   def youtube
   end
 
+  def hangouts_url
+  end
+
   def update
     if params[:teacher][:youtube]
       if params[:teacher][:youtube].include?('https://www.youtube.com/watch')
@@ -70,6 +74,7 @@ class TeachersController < ApplicationController
         flash[:alert] = 'Save fail'
       end
     end
+
   end
 
   private
@@ -84,6 +89,17 @@ class TeachersController < ApplicationController
                else
                  current_user.create_teacher
                end
+  end
+
+  def get_hangouts_url
+    if @teacher.hangouts_url.blank?
+      charset = ""
+      url = ""
+      charset = (0...9).map { ('a'..'z').to_a[ rand(26)] }.join
+      url =  "https://talkgadget.google.com/hangouts/_/n"+charset+"aelp4l25okzw3tw4e?hl=en-US"
+      @teacher.hangouts_url = url
+      @teacher.save
+    end
   end
 
   def teacher_authority

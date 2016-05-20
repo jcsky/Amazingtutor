@@ -1,17 +1,17 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
-
   # user預約時 appointment 要包含teacher_id 和 user_id
   before_action :set_appointment_params, only: [:create]
   before_action :user_authority, only: [:show]
   before_action :set_appointment_new_params, only: [:new]
+  before_action :find_appointment, only: [:show]
 
   def index
     @appointments = Appointment.find_by_user_id(User.first)
   end
 
   def show
-    @appointment = Appointment.find(params[:id])
+
     @user = current_user
 
     @evaluationsArray = Evaluation.where(evaluatable_type: 'User',
@@ -27,6 +27,15 @@ class AppointmentsController < ApplicationController
                                            evaluatable_id: current_user.teacher, appointment_id: @appointment)
 
     @commentTa = @evaluationsArrayTa.first.try(:comment)
+
+    if @appointment.appointment_url.blank?
+      charset = ""
+      url = ""
+      charset = (0...9).map { ('a'..'z').to_a[ rand(26)] }.join
+      url =  "https://talkgadget.google.com/hangouts/_/n"+charset+"aelp4l25okzw3tw4e?hl=en-US"
+      @appointment.appointment_url = url
+      @appointment.save
+    end
   end
 
   def new
@@ -38,6 +47,7 @@ class AppointmentsController < ApplicationController
     unless current_user.nil?
       @user_available_sections = current_user.user_available_sections.find_by_teacher_id(set_appointment_new_params[:teacher_id])
     end
+
   end
 
   def create
@@ -72,10 +82,15 @@ class AppointmentsController < ApplicationController
         end
       end
     end
+
     redirect_to appointments_path
   end
 
   private
+
+  def find_appointment
+    @appointment = Appointment.find(params[:id])
+  end
 
   def set_appointment_params
     params.permit(:teacher_id, :start, :end)
@@ -91,4 +106,5 @@ class AppointmentsController < ApplicationController
       redirect_to root_path
     end
   end
+
 end
