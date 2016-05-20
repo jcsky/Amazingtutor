@@ -76,14 +76,12 @@
 <script>
   $(document).ready(function () {
     $("#js-example-basic-single").select2();
-    $('#priceslide').slider().on('slideStop', function (ev) {
+    $('#priceslide').slider({value: [10,1000]}).on('slideStop', function (ev) {
       var price = $('#priceslide').data('slider').getValue();
       console.log(price);
       $.ajax({
         url: "/",
-        // cache: false,
         contentType: false,
-        // processData: false,
         type: 'GET',
         data: {
           price: price
@@ -92,7 +90,6 @@
         //   alert(data);
         // }
       });
-
     });
   });
 </script>
