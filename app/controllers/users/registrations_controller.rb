@@ -16,6 +16,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         resource.save!
       end
     end
+    if params[:scholarship]
+      adasd
+    end
   end
 
   # GET /resource/edit
