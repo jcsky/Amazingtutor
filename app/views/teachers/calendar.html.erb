@@ -3,7 +3,7 @@
     <div class="col-md-4 teacher-sidebar-fix">
       <%= render "sidebar" %>
     </div>
-    <div class="col-md-8 teacher-rightbar-fix">
+    <div class="col-md-8 col-md-push-4">
       <div class="row calendar-content">
         <div class="public-head">
           <h4>授課日曆</h4>
@@ -17,7 +17,6 @@
 
 <script>
   $(document).ready(function () {
-
     // page is now ready, initialize the calendar...
 
     $('#calendar').fullCalendar({
@@ -39,7 +38,7 @@
       theme: false,
       dragScroll: false,
       contentHeight: 'auto',
-      eventColor: '##FF5F5F',
+      eventColor: '#FF5F5F',
       //lulu setting
 
       //24小時制 大寫H timeFormat: 'h:mm', 移除allDay的欄位

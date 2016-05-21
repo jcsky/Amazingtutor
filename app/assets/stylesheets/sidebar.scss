@@ -26,6 +26,9 @@
     padding-left: 35px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    a{
+      cursor: default;
+    }
   }
   .sidebar-bottom {
     border-bottom-left-radius: 5px;
@@ -86,10 +89,5 @@
   .teacher-sidebar-fix {
     position: fixed;
     width: 250px;
-  }
-  .teacher-rightbar-fix {
-    position: absolute;
-    width: 560px;
-    left: 440px;
   }
 }

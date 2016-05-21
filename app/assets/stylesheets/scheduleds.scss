@@ -64,11 +64,13 @@
     h6 {
       color: #fff;
       line-height: 2;
+      margin: 0 5px;
+      display: inline;
     }
   }
 }
 .gotocalss {
-  button {
+  button[name="gotoclass"] {
     border: 1px solid #7EB0EA;
     border-radius: 23px;
     width: 175px;
@@ -82,16 +84,16 @@
     left: 50%;
     // margin: 10px auto;
   }
-  button:hover {
+  button[name="gotoclass"]:hover {
     background-color: #7EB0EA;
     color: #fff;
   }
-  button:focus{
+  button[name="gotoclass"]:focus{
     outline: none;
   }
 }
 .ratingnow {
-  button {
+  button[name="rating"] {
     border: 1px solid #FF6969;
     border-radius: 23px;
     width: 175px;
@@ -104,11 +106,11 @@
     font-size: 15px;
     font-weight: lighter;
   }
-  button:hover {
+  button[name="rating"]:hover {
     background-color: #FF6969;
     color: #fff;
   }
-  button:focus{
+  button[name="rating"]:focus{
     outline: none;
   }
 }
