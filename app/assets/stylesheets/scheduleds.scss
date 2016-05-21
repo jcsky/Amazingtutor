@@ -213,9 +213,9 @@
   }
   .filebutton{
     position: absolute;
-    left: 50%;
+    width: 100%;
     opacity: 0;
-    transform: translateX(-50%);
+  left: 0;
     display: inline;
     cursor: pointer;
   }
