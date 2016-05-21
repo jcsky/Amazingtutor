@@ -195,8 +195,32 @@
     width: 100px;
     height: auto;
     border-radius: 50%;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
   }
 }
+.filebuttondiv{
+  text-align: center;
+  position: relative;
+  margin-top: 10px;
+  i,span{
+    color: #FF5F5F;
+    font-weight: lighter;
+  }
+  i{
+    margin-right: 10px;
+  }
+  .filebutton{
+    position: absolute;
+    left: 50%;
+    opacity: 0;
+    transform: translateX(-50%);
+    display: inline;
+    cursor: pointer;
+  }
+}
+
 .remark{
   .info-mypic img{
     margin-left: 10px;

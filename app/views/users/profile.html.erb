@@ -9,17 +9,18 @@
         <div class="scheduled-content-head">
           <h4>Edit Profile</h4>
         </div>
-              <span><%= flash[:success]  %></span>
+        <span><%= flash[:success]  %></span>
 
         <div class="form-group">
           <%= form_for @user do |f| %>
-
-          <%= f.file_field :image %>
+          <%= image_tag(@user.image.url(:medium)) %>
+          <div class="filebuttondiv">
+             <i class="fa fa-pencil" aria-hidden="true"></i><span>Edit Profile Photo</span>
+          <%= f.file_field :image ,class:"filebutton" %>
+          </div>
           <% if @user.image.exists? %>
           <%= check_box_tag "_remove_image", "1" %>Remove image
           <% end %>
-
-          <%= image_tag(@user.image.url(:medium)) %>
 
           <div class="input-group clearfix">
             <%= f.label :username, "User Name" %>
@@ -70,7 +71,7 @@
 </div>
 
 <script>
-$("#user_birthday_1i").selectpicker({width: '33%'});
-$("#user_birthday_2i").selectpicker({width: '33%'});
-$("#user_birthday_3i").selectpicker({width: '33%'});
+  $("#user_birthday_1i").selectpicker({width: '33%'});
+  $("#user_birthday_2i").selectpicker({width: '33%'});
+  $("#user_birthday_3i").selectpicker({width: '33%'});
 </script>
