@@ -26,7 +26,7 @@
         <div class="row">
           <div class="col-md-8 col-md-push-2 col-xs-10 col-xs-push-1">
             <div class="input-group">
-              <input id="copy" type="text" class="form-control" placeholder="Sign up to get the scholarship password!" value="http://localhost:3000/users/sign_up?scholarship=<%= @encrypted_data if current_user %>">
+              <input id="copy" type="text" class="form-control" placeholder="Sign up to get the scholarship password!" value="<%= "http://localhost:3000/users/sign_up?scholarship="+@encrypted_data if current_user %>">
               <span class="input-group-btn">
               <button id="btn" class="btn-default form-control btnxx" data-clipboard-target="#copy">COPY</button>
               </span>
