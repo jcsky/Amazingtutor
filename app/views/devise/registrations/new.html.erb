@@ -10,7 +10,13 @@
       <% end -%>
     </div>
     <p class="or">or</p>
-    <p><%= devise_error_messages! %></p>
+    <% if flash[:alert] %>
+    <ul>
+      <% flash[:alert].each do |x| %>
+      <li class="alerts"><%= x %></li>
+      <% end %>
+    </ul>
+    <% end %>
     <div class="logup_input">
       <%= f.email_field :email, autofocus: true , :class => "form-control" ,:placeholder=>"Email"%>
       <%= f.password_field :password, autocomplete: "off" , :class => "form-control" ,:placeholder=>"PassWord"%>
