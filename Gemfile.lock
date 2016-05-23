@@ -68,6 +68,7 @@ GEM
       capistrano-bundler (~> 1.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
+    clipboard-rails (1.5.10)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
@@ -354,6 +355,7 @@ DEPENDENCIES
   byebug
   capistrano-passenger
   capistrano-rails
+  clipboard-rails (~> 1.5, >= 1.5.10)
   coffee-rails (~> 4.1.0)
   country_select
   devise

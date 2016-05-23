@@ -6,3 +6,4 @@
 //= require select2-full
 //= require bootstrap-select.min
 //= require rateyo.min
+//= require clipboard.min

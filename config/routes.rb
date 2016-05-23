@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post "/paypal/webhook" => "paypal#webhook"
   post "/paypal/redirect" => "paypal#redirect" # for paypal return
 
-  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks',registrations: 'users/registrations'}
+  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks',registrations: 'users/registrations',sessions: 'users/sessions'}
 
   resources :users do
     member do

@@ -1,18 +1,18 @@
 class WelcomeController < ApplicationController
   def index
-      # @teacher = Teacher.all
-      # render layout: 'welcome'
-  if params[:language_id] && params[:week].blank?
-      cookies[:lan]= params[:language_id]
-      cookies[:week]= nil
+    # @teacher = Teacher.all
+    # render layout: 'welcome'
+    if params[:language_id] && params[:week].blank?
+      cookies[:lan] = params[:language_id]
+      cookies[:week] = nil
       find_language_teacher
     elsif params[:week] && params[:language_id].blank?
-      cookies[:lan]= nil
-      cookies[:week]= params[:week]
+      cookies[:lan] = nil
+      cookies[:week] = params[:week]
       find_week_teacher
     elsif params[:week] && params[:language_id]
-      cookies[:lan]= params[:language_id]
-      cookies[:week]= params[:week]
+      cookies[:lan] = params[:language_id]
+      cookies[:week] = params[:week]
       find_language_teacher
       @teachera = @teachers
       find_week_teacher
@@ -45,17 +45,21 @@ class WelcomeController < ApplicationController
       respond_to do |format|
         format.js { render 'teacher' }
       end
-    elsif  params[:week].blank? && params[:language_id].blank?
-      cookies[:lan]= nil
-      cookies[:week]= nil
+    elsif params[:week].blank? && params[:language_id].blank?
+      cookies[:lan] = nil
+      cookies[:week] = nil
       @teachers = Teacher.all
-    end
+      end
   end
 
   def apply_teacher
   end
 
   def scholarship
+    key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
+    crypt = ActiveSupport::MessageEncryptor.new(key)
+    @encrypted_data = crypt.encrypt_and_sign(current_user.email) if current_user
+    # decrypted_data = crypt.decrypt_and_verify(encrypted_data)
   end
 
   private

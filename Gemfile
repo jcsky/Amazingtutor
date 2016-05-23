@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'faker'
 #devise
 # gem 'bootstrap-datepicker-rails'
+gem 'clipboard-rails', '~> 1.5', '>= 1.5.10'
 gem 'devise'
 # omniauth
 gem 'omniauth-facebook'
