@@ -12,20 +12,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    # if cookies[:scholarship].present? || params[:scholarship]
-    # key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
-    # crypt = ActiveSupport::MessageEncryptor.new(key)
-    # @decrypted_data = crypt.decrypt_and_verify(cookies[:scholarship])
-    # rasie
-    # end
-    #
-    # super do |resource|
-    #   if resource.id.present?
-    #     resource.time_zone = cookies['browser.timezone']
-    #     resource.save!
-    #   end
-    # end
-
      build_resource(sign_up_params)
      resource.save
      yield resource if block_given?
@@ -54,7 +40,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
          key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
          crypt = ActiveSupport::MessageEncryptor.new(key)
          @decrypted_data = crypt.decrypt_and_verify(cookies[:scholarship])
-         raise
+         @old_member = User.where(email: @decrypted_data ).first
+         Scholarship.create(new_user_id: resource.id, user_id:@old_member.id )
        end
      end
   end
