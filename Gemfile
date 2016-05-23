@@ -5,7 +5,7 @@ gem 'country_select'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
-gem 'mysql2'
+#gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -24,6 +24,12 @@ gem 'sinatra'
 gem 'omniauth-google-oauth2'
 # http連線
 gem 'rest-client'
+
+#deploy
+gem 'capistrano-rails', :group => :development
+gem 'capistrano-passenger', :group => :development
+
+gem "mysql2",  '~> 0.3.18', :group => :production
 
 # 做假資料的套件
 gem 'faker'
