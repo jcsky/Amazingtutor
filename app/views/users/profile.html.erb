@@ -7,6 +7,16 @@
     <div class="col-md-7 col-xs-12">
       <div class="scheduled-content scheduled-editprofile-fix">
         <div class="scheduled-content-head">
+          <h4>Facebook Google connect</h4>
+        </div>
+      <div class="facegoogle">
+        <%= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
+        <%= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
+      </div>
+    </div>
+
+      <div class="scheduled-content scheduled-editprofile-fix">
+        <div class="scheduled-content-head">
           <h4>Edit Profile</h4>
         </div>
         <span><%= flash[:success]  %></span>
@@ -57,16 +67,13 @@
             <%= f.label :time_zone, "TimeZone" %>
             <%= f.time_zone_select(:time_zone ,ActiveSupport::TimeZone.us_zones,{}, {:class => "form-control"} )%>
           </div>
-          <div class="facegoogle">
-            <%= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
-            <%= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
-          </div>
         </div>
       </div>
       <div class="editprofile-save">
         <%= f.submit 'SAVE' %>
       </div>
       <% end %>
+
       <!--for lululala edit view-->
     </div>
   </div>
