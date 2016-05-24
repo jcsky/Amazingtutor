@@ -13,7 +13,7 @@
 
         <div class="form-group">
           <%= form_for @user do |f| %>
-          <%= image_tag(@user.image.url(:medium)) %>
+          <%= user_headimage(@user) %>
           <div class="filebuttondiv">
             <i class="fa fa-pencil" aria-hidden="true"></i>
             <span>Edit Profile Photo</span>

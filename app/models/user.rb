@@ -72,6 +72,7 @@ class User < ActiveRecord::Base
     user.password = Devise.friendly_token[0, 20]
     user.fb_raw_data = auth
     user.time_zone = browser_time_zone
+    user.fb_pic = auth.info.image
     user.save!
     user
   end
@@ -121,6 +122,7 @@ class User < ActiveRecord::Base
     end
 
     # Case 3: Create new password
+
     user = User.new
     user.google_uid = auth.uid
     user.google_token = auth.credentials.token
@@ -129,8 +131,10 @@ class User < ActiveRecord::Base
     user.google_raw_data = auth
     user.locale = auth.extra.raw_info.locale
     user.time_zone = browser_time_zone
+    user.google_pic = auth.info.image
     user.save!
     user
+
   end
 
   def connect_to_google_omniauth(auth)
