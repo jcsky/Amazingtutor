@@ -23,7 +23,7 @@
         <h5>正式上課</h5>
         <div class="input-group clearfix">
           <%= f.label :one_fee, "單堂課" %>
-          <%= f.text_field :one_fee, :placeholder=>"NT$000", :class => "form-control" %>
+          <%= f.text_field :one_fee, :placeholder=>"NT$000", :class => "form-control",id:"one_fee" %>
           <%#= f.label :one_fee %>
           <%#= f.text_field :one_fee ,{class:"form-control", placeholder:"NT$000", "aria-describedby":basic-addon1}%>
         </div>
@@ -31,14 +31,15 @@
         <div class="input-group clearfix">
 
           <%= f.label :five_fee, "五堂課" %>
-          <%= f.text_field :five_fee, :placeholder=>"NT$000",:class => "form-control" %>
+          <%= f.text_field :five_fee, :placeholder=>"NT$000",:class => "form-control",id:"five_fee" %>
         </div>
 
         <div class="input-group clearfix">
 
           <%= f.label :ten_fee, "十堂課" %>
-          <%= f.text_field :ten_fee, :placeholder=>"NT$000", :class => "form-control" %>
+          <%= f.text_field :ten_fee, :placeholder=>"NT$000", :class => "form-control" ,id:"ten_fee"%>
         </div>
+          <h6> 小提醒：五堂課和十堂課的平均價格需低於或等於一堂課 (一堂課價 >= 五堂課平均價 >= 十堂課平均價)</h6>
         <hr>
         <div class="public-note">
           <h5>小提醒：</h5>
@@ -47,9 +48,47 @@
         </div>
       </div>
       <div class="public-save">
-        <%= f.submit 'SAVE', :class => "btn" %>
+        <%= f.submit 'SAVE', {:class => "btn" ,:id=>"pricesubbmit"} %>
       </div>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  $(function () {
+    var onefee = $('#one_fee').val();
+    var fivefee = $('#five_fee').val() / 5;
+    var tenfee = $('#ten_fee').val() / 10;
+    $('#one_fee').focusout(function () {
+      onefee = $(this).val();
+      if (onefee < fivefee) {
+        onefee = fivefee
+        $('#one_fee').val(onefee);
+      } else if (onefee < tenfee) {
+        onefee = tenfee
+        $('#one_fee').val(onefee);
+      }
+    });
+    $('#five_fee').focusout(function () {
+      fivefee = $(this).val() / 5;
+      if (fivefee > onefee) {
+        fivefee = onefee
+        $('#five_fee').val(fivefee*5);
+      } else if (fivefee < tenfee) {
+        fivefee = tenfee
+        $('#five_fee').val(fivefee*5);
+      }
+    });
+    $('#ten_fee').focusout(function () {
+      tenfee = $(this).val() / 10;
+      if (tenfee > onefee) {
+        tenfee = onefee 
+        $('#ten_fee').val(tenfee*10);
+      } else if (tenfee > fivefee) {
+        tenfee = fivefee
+        $('#ten_fee').val(tenfee*10);
+      }
+    });
+  });
+</script>
