@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522152240) do
+ActiveRecord::Schema.define(version: 20160524041416) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -206,6 +206,8 @@ ActiveRecord::Schema.define(version: 20160522152240) do
     t.datetime "image_updated_at"
     t.string   "authentication_token"
     t.boolean  "admin"
+    t.string   "fb_pic"
+    t.string   "google_pic"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
