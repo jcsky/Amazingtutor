@@ -23,7 +23,7 @@
 
         <div class="form-group">
           <%= form_for @user do |f| %>
-          <%= user_headimage(@user) %>
+          <%= current_user.headimage %>
           <div class="filebuttondiv">
             <i class="fa fa-pencil" aria-hidden="true"></i>
             <span>Edit Profile Photo</span>

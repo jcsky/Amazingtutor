@@ -19,7 +19,7 @@
 .search {
   padding: 15px 0;
   background-color: #fff;
-  .container{
+  .container {
     padding: 0;
   }
   p {
@@ -149,12 +149,61 @@
   font-size: 12px;
 }
 .slider-track {
-    background-image: linear-gradient(to bottom, rgba(#bbbbbb, 0.93),rgba(#bbbbbb, 0.93)) !important;
+  background-image: linear-gradient(to bottom, rgba(#bbbbbb, 0.93),rgba(#bbbbbb, 0.93)) !important;
 }
-.navbar-default .navbar-toggle .icon-bar{
+.navbar-default .navbar-toggle .icon-bar {
   background-color: #fff;
 }
-
+.youtube-container {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  height: 206px;
+}
+.youtube-player {
+  display: block;
+  width: 100%; /* assuming that the video has a 16:9 ratio */
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: hand;
+  cursor: pointer;
+  display: block;
+}
+img.youtube-thumb {
+  bottom: 0;
+  display: block;
+  left: 0;
+  margin: auto;
+  max-width: 100%;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: auto;
+}
+div.play-button {
+  height: 72px;
+  width: 72px;
+  left: 50%;
+  top: 50%;
+  margin-left: -36px;
+  margin-top: -36px;
+  position: absolute;
+  background: url("http://i.imgur.com/TxzC70f.png") no-repeat;
+}
+.youtube-container-profile {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  height: 274px;
+  iframe {
+    height: 274px;
+  }
+}
+/*#youtube-iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }*/
 // Small devices (tablets, 768px and up)
 @media (max-width: $screen-sm-min) {
   .info {
@@ -201,6 +250,10 @@
   .info-pro {
     margin-top: 3px;
   }
+  .youtube-container {
+    width: 318px;
+    height: 220px;
+  }
 }
 @media (min-width: $screen-md-min) {
   .info-pro {
@@ -228,10 +281,13 @@
     border-bottom-left-radius: 5px;
     border-top-right-radius: 0;
   }
-  .info-flag-class-fix{
+  .info-flag-class-fix {
     margin-left: 15px;
   }
   .info-tag {
     margin-left: 10px;
+  }
+  .youtube-container {
+    width: 366px;
   }
 }
