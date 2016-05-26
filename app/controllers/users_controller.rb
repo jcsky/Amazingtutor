@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @user.image = nil
     end
     if @user.save
-      flash[:success] = "編輯成功"
+      flash[:success] = "Edit successfully"
     render 'profile'
     else
       render 'profile'

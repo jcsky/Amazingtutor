@@ -1,46 +1,133 @@
-.main-head{
+.main-head {
   background: image-url("index_background.png");
-  height: 640px;
+  height: 585px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  .main-head-content{
-
+  position: relative;
+  .main_head_content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
   }
-  h1,h4{
+  .main_head_link {
+    background-color: rgba(0,0,0,0.75);
+    border-radius: 5px;
+  }
+  h1 {
     color: #fff;
     vertical-align: middle;
+    margin: 40px auto;
+  }
+  h3 {
+    color: #fff;
+    vertical-align: middle;
+    font-weight: lighter;
+  }
+  a {
+    text-decoration: none;
+    background-color: #FF5F5F;
+    width: 226px;
+    height: 57px;
+    color: #fff;
+    display: block;
+    border-radius: 5px;
+    line-height: 57px;
+    font-size: 24px;
+    margin: 30px auto;
+    font-weight: lighter;
   }
 }
-.teacherwall{
-
+.teacherwall {
+  h3 {
+    margin-bottom: 30px;
+  }
 }
-.teacherpic{
-  img{
-  width: 100%;
+.teacherpic {
+  img {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto 30px;
+    max-width: 450px;
+    border-radius: 5px;
+  }
 }
-}
-.golesson{
+.golesson {
+  text-align: center;
   background-color: #FF5F5F;
-  height: 520px;
-  h1,h4{
+  .container-fluid{
+    margin: 0 70px;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    max-width: 150px;
+  }
+  h4,
+  h3,h1 {
     color: #fff;
   }
+  h1 {
+    margin-top: 50px;
+  }
+  h3 {
+    margin: 20px;
+    font-weight: lighter;
+  }
+  h4{font-weight: lighter;}
+  .lesson_pic{
+    margin: 80px 0;
+  }
 }
-.whyme{
+.whyme {
   background-color: #4A4A4A;
-  height: 735px;
-  h1,h4{
-    color: #fff;
+  h4{
+    font-weight: lighter;
+  }
+  h1,h3  {
+    margin-top: 50px;
+  }
+  h3 {
+    margin: 20px;
+    font-weight: lighter;
+  }
+  img{
+    width: 100%;
+  }
+  .container-fluid{
+    margin: 0 100px;
+  }
+  .whyme_content{
+    background-color: #fff;
+    padding: 0 30px;
+
+    h3,h4 {
+      color: #4A4A4A;
+    }
+  }
+  .col-md-12{
+    h1,h3{
+      color: #fff;
+    }
   }
 }
-.main-footer{
-  background: image-url("footerbg03.png");
+.main-footer {
+  background: image-url("footerbg.png");
   height: 650px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  h1,h4{
-    color: #fff;
+
+}
+.teacherwall {
+  margin-bottom: 40px;
+  h1 {
+    margin-top: 50px;
+  }
+  h3 {
+    margin: 20px;
+    font-weight: lighter;
   }
 }

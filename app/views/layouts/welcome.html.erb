@@ -68,6 +68,7 @@
     </nav>
     <div class="nav-top"></div>
     <!-- Google Tag Manager -->
+
     <noscript>
       <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PK4JJZ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
@@ -85,6 +86,7 @@
         f.parentNode.insertBefore(j, f);
       })(window, document, 'script', 'dataLayer', 'GTM-PK4JJZ');
     </script>
+
     <!-- End Google Tag Manager -->
     <%= yield %>
     <%#= render :partial=>"welcome/login" %>
@@ -105,7 +107,8 @@
             <div class="container-fluid">
               <div class="row message_input">
                 <div class="col-xs-3"><%= f.label :problem, "Problem" %></div>
-                <div class="col-xs-9">  <%= select(:message,:problem,options_for_select([["BUG", "BUG"],["Suggestion", "Suggestion"], ["Question", "Question"]],"BUG"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-width" =>"100%"} )%></div>
+                <div class="col-xs-9">
+                  <%= select(:message,:problem,options_for_select([["BUG", "BUG"],["Suggestion", "Suggestion"], ["Question", "Question"]],"BUG"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-width" =>"100%"} )%></div>
               </div>
               <div class="row message_input">
                 <div class="col-xs-3"><%= f.label :email, "Email" %></div>

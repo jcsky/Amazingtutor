@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :friends, through: :messages
 
-  has_attached_file :image, styles: { medium: '100x100>', thumb: '50x50>' }, default_url: 'logo.png'
+  has_attached_file :image, styles: { medium: '100x100#', thumb: '50x50#' }, default_url: 'logo.png'
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   before_create :generate_authentication_token
 

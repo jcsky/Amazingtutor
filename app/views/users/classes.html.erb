@@ -102,7 +102,7 @@ var i=0;
     <% @user.appointments.each do |a|%>
 
     i+=1;
-    console.log(i);
+
     $('#pop-black-<%= a.id %>').hide();
     $('#evaluation-white-<%= a.id %>').hide();
     $('#rating-<%= a.id %>').click(function (e) {
