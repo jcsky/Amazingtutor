@@ -34,6 +34,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     if resource.id.present?
       resource.time_zone = cookies['browser.timezone']
+      resource.alternate_email = resource.email
       resource.username = resource.email.split('@').first
       resource.save!
       if cookies[:scholarship]
