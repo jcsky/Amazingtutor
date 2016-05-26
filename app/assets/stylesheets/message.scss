@@ -47,6 +47,7 @@
     border: 1px solid #BEBEBE;
     background-color: #fff;
     color: #BEBEBE;
+    margin-right: 10px;
   }
 }
 .message_footer {
@@ -61,4 +62,7 @@
 }
 .message_input{
   padding: 10px 0;
+  label{
+    font-weight: lighter;
+  }
 }
