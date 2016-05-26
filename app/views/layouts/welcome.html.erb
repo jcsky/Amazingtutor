@@ -7,18 +7,8 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
-      // $(document).ready(function () {
-      //   $('#login-white').hide();
-      //   $('#login-black').hide();
-      //   $('#login').click(function (e) {
-      //     $('#login-black').fadeIn(1);
-      //     $('#login-white').fadeIn(300);
-      //   });
-      //   $('#login-black').click(function (e) {
-      //     $('#login-white').fadeOut(1);
-      //     $('#login-black').fadeOut(1);
-      //   });
-      // });
+      // $(document).ready(function () {   $('#login-white').hide();   $('#login-black').hide();   $('#login').click(function (e) {     $('#login-black').fadeIn(1);     $('#login-white').fadeIn(300);   });   $('#login-black').click(function (e) {
+      // $('#login-white').fadeOut(1);     $('#login-black').fadeOut(1);   }); });
     </script>
   </head>
   <body>
@@ -27,7 +17,8 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header brand-center">
           <%= link_to root_path , :class=>"navbar-brand" do%>
-          <span class="brand1">Amazing</span><span class="brand2">tutor</span>
+          <span class="brand1">Amazing</span>
+          <span class="brand2">tutor</span>
           <% end %>
         </div>
         <div class="navbar-header">
@@ -39,13 +30,13 @@
           </button>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1" >
+        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li>
-            <%= link_to("Scholarship", scholarship_path)%>
+              <%= link_to("Scholarship", scholarship_path)%>
             </li>
             <li>
-            <%= link_to("Apply to Teach", apply_teacher_path)%>
+              <%= link_to("Apply to Teach", apply_teacher_path)%>
             </li>
             <li>
               <%#= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>
@@ -64,7 +55,7 @@
                 <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.get_teacher.id)%></li>
                 <% end %>
                 <li>
-                <%= link_to('Log Out', destroy_user_session_path, :method => :delete)%>
+                  <%= link_to('Log Out', destroy_user_session_path, :method => :delete)%>
                 </li>
               </ul>
             </li>
@@ -77,15 +68,62 @@
     </nav>
     <div class="nav-top"></div>
     <!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PK4JJZ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PK4JJZ');</script>
-<!-- End Google Tag Manager -->
+    <noscript>
+      <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PK4JJZ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-PK4JJZ');
+    </script>
+    <!-- End Google Tag Manager -->
     <%= yield %>
     <%#= render :partial=>"welcome/login" %>
+    <button type="button" class="message_button" data-toggle="modal" data-target="#message">
+      <i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>
+    </button>
+    <div class="modal fade message_modal" id="message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content message_content">
+          <div class="modal-header message_header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="message_modal_title" id="myModalLabel">Feedback</h4>
+          </div>
+          <%= form_for Message.new do |f| %>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row message_input">
+                <div class="col-xs-3"><%= f.label :problem, "Problem" %></div>
+                <div class="col-xs-9">  <%= select(:message,:problem,options_for_select([["BUG", "BUG"],["Suggestion", "Suggestion"], ["Question", "Question"]],"BUG"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-width" =>"100%"} )%></div>
+              </div>
+              <div class="row message_input">
+                <div class="col-xs-3"><%= f.label :email, "Email" %></div>
+                <div class="col-xs-9"><%= f.text_field :email,value: current_user.try(:alternate_email),placeholder:"We will send messages back by this email. ", :class => "form-control" %></div>
+              </div>
+              <div class="row message_input">
+                <div class="col-xs-3"><%= f.label :message, "Explanation" %></div>
+                <div class="col-xs-9"><%= f.text_area :message,placeholder:"Message....", :class => "form-control" %></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer message_footer">
+            <button type="button" class="message_cancel" data-dismiss="modal">Close</button>
+            <%= f.submit 'SAVE' ,class:"message_save"%>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

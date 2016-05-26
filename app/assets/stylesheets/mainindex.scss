@@ -1,0 +1,46 @@
+.main-head{
+  background: image-url("index_background.png");
+  height: 640px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  .main-head-content{
+
+  }
+  h1,h4{
+    color: #fff;
+    vertical-align: middle;
+  }
+}
+.teacherwall{
+
+}
+.teacherpic{
+  img{
+  width: 100%;
+}
+}
+.golesson{
+  background-color: #FF5F5F;
+  height: 520px;
+  h1,h4{
+    color: #fff;
+  }
+}
+.whyme{
+  background-color: #4A4A4A;
+  height: 735px;
+  h1,h4{
+    color: #fff;
+  }
+}
+.main-footer{
+  background: image-url("footerbg03.png");
+  height: 650px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  h1,h4{
+    color: #fff;
+  }
+}

@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   post "/paypal/redirect" => "paypal#redirect" # for paypal return
 
   devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks',registrations: 'users/registrations'}
-
+  resources :messages
+  
   resources :users do
     member do
       get :classes
