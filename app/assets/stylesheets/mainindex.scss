@@ -56,7 +56,7 @@
 .golesson {
   text-align: center;
   background-color: #FF5F5F;
-  .container-fluid{
+  .container-fluid {
     margin: 0 70px;
   }
   img {
@@ -65,8 +65,9 @@
     max-height: 150px;
     max-width: 150px;
   }
-  h4,
-  h3,h1 {
+  h1,
+  h3,
+  h4 {
     color: #fff;
   }
   h1 {
@@ -76,50 +77,85 @@
     margin: 20px;
     font-weight: lighter;
   }
-  h4{font-weight: lighter;}
-  .lesson_pic{
+  h4 {
+    font-weight: lighter;
+  }
+  .lesson_pic {
     margin: 80px 0;
   }
 }
 .whyme {
   background-color: #4A4A4A;
-  h4{
+  h4 {
     font-weight: lighter;
   }
-  h1,h3  {
+  h1,
+  h3 {
     margin-top: 50px;
   }
   h3 {
     margin: 20px;
     font-weight: lighter;
   }
-  img{
+  img {
     width: 100%;
   }
-  .container-fluid{
+  .container-fluid {
     margin: 0 100px;
   }
-  .whyme_content{
+  .whyme_content {
     background-color: #fff;
-    padding: 0 30px;
-
-    h3,h4 {
+    margin: 50px auto 80px auto;
+    height: 600px;
+    text-align: center;
+    h3,
+    h4 {
       color: #4A4A4A;
     }
+    h4{
+      padding: 0 15px 15px 15px;
+      line-height: 1.5;
+    }
   }
-  .col-md-12{
-    h1,h3{
+  .col-md-12 {
+    h1,
+    h3 {
       color: #fff;
     }
   }
 }
-.main-footer {
+.main_footer {
   background: image-url("footerbg.png");
-  height: 650px;
+  height: 685px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
+  position: relative;
+  h3{
+    font-weight: lighter;
+  }
+  h1,h3{
+    color: #fff;
+  }
+  a {
+    text-decoration: none;
+    background-color: #FF5F5F;
+    width: 226px;
+    height: 57px;
+    color: #fff;
+    display: block;
+    border-radius: 5px;
+    line-height: 57px;
+    font-size: 24px;
+    margin: 30px auto;
+    font-weight: lighter;
+  }
+  .main_head_content{
+    position: relative;
+    top: 200px;
+    // transform: translateY(-50%);
+    text-align: center;
+  }
 }
 .teacherwall {
   margin-bottom: 40px;
