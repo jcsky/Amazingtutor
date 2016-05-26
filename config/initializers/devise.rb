@@ -263,7 +263,9 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   fb_config = Rails.application.config_for(:facebook)
-  config.omniauth :facebook, fb_config["app_id"], fb_config["secret"], :scope => 'public_profile,email', :info_fields => 'email,name'
+  config.omniauth :facebook, fb_config["app_id"], fb_config["secret"],
+  :scope => 'public_profile, email', :info_fields => 'email, gender, name', :image_size => 'large'
+
   google_config = Rails.application.config_for(:google)
   config.omniauth :google_oauth2, google_config["app_id"], google_config["secret"],  skip_jwt: true
 end

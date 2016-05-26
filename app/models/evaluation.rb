@@ -1,4 +1,6 @@
 class Evaluation < ActiveRecord::Base
+
+  validates_numericality_of :rating, :greater_than => 0
   belongs_to :appointment
   belongs_to :evaluatable, :polymorphic => true
 

@@ -11,9 +11,9 @@ class User < ActiveRecord::Base
   has_many :evaluations, as: :evaluatable
   has_many :user_available_sections
   has_many :scholarships
-  has_many :new_user, :through => :scholarships
+  has_many :new_user, through: :scholarships
 
-  has_attached_file :image, styles: { medium: '100x100>', thumb: '50x50>' }, default_url: 'logo.png'
+  has_attached_file :image, styles: { medium: '100x100#', thumb: '50x50#' }, default_url: 'logo.png'
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   before_create :generate_authentication_token
 
@@ -32,10 +32,10 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    if first_name.blank? && last_name.blank?
+    if username.blank?
       email.split('@').first
     else
-      first_name + ' ' + last_name
+      username
     end
   end
 
@@ -72,6 +72,7 @@ class User < ActiveRecord::Base
     user.password = Devise.friendly_token[0, 20]
     user.fb_raw_data = auth
     user.time_zone = browser_time_zone
+    user.fb_pic = auth.info.image
     user.save!
     user
   end
@@ -121,6 +122,7 @@ class User < ActiveRecord::Base
     end
 
     # Case 3: Create new password
+
     user = User.new
     user.google_uid = auth.uid
     user.google_token = auth.credentials.token
@@ -129,6 +131,7 @@ class User < ActiveRecord::Base
     user.google_raw_data = auth
     user.locale = auth.extra.raw_info.locale
     user.time_zone = browser_time_zone
+    user.google_pic = auth.info.image
     user.save!
     user
   end

@@ -10,22 +10,24 @@
   border-radius: 5px;
   z-index: 3000;
 }
+.bookteacherbtn{
+  color: #fff;
+  background: #FC6063;
+  font-weight: lighter;
+  &:hover{
+    color: #fff;
+  }
+}
+.closebtn{
+  background: #fff;
+  font-weight: lighter;
+  border: 1px solid #e5e5e5;
+}
 .calender-booking {
   margin: 27px auto auto;
   // background-color: #00f3f3;
   height: 707px;
   width: 481px;
-  button {
-    border: none;
-    width: 128px;
-    height: 41px;
-    color: #fff;
-    background: #FC6063;
-    font-weight: 100;
-    position: absolute;
-    right: 49px;
-    bottom: 25px;
-  }
   h6 {
     text-align: center;
     color: #A6A9AE;
@@ -34,7 +36,7 @@
   }
 }
 .select-list {
-  margin-top: 15px;
+  margin: 15px 0;
   span {
     color: #A6A9AE;
     font-size: 14px;

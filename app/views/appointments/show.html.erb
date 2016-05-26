@@ -90,10 +90,10 @@ $(function () {
         comment: comment
       },
       success: function(){
-        window.location.assign("<%= classes_user_path((@appointment.user_id)) %>");
+        window.location.assign("<%= classes_user_path(@appointment.user_id) %>");
       },
       error: function() {
-        alert("failed");
+        alert("Please give teacher rating: 1~5");
       }
     });
   });
@@ -114,7 +114,7 @@ $(function () {
         window.location.assign("<%= classes_teacher_path(@appointment.teacher_id) %>");
       },
       error: function() {
-        alert("failed");
+        alert("Please give teacher rating: 1~5");
       }
     });
   });
