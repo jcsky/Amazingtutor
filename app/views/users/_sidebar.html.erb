@@ -16,13 +16,13 @@
   <div>
     <%= link_to "Class",classes_user_path(current_user) %>
   </div>
-  <div><%= link_to "ChangePassword",edit_user_registration_path %>
+  <div><%= link_to "My Tutor",mytutor_user_path(current_user) %>
   </div>
   <div><%= link_to "FeedBack",remark_user_path(current_user) %>
   </div>
-  <div><%= link_to "My Tutor",mytutor_user_path(current_user) %>
-  </div>
   <div>
     <%= link_to "EditProfile",profile_user_path(current_user) %>
+  </div>
+  <div><%= link_to "ChangePassword",edit_user_registration_path %>
   </div>
 </div>

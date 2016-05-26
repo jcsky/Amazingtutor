@@ -4,6 +4,24 @@
       <%= render "sidebar"%>
     </div>
     <div class="col-md-7">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="mytutor-sort">
+            <div class="dropdown dropdown-language selsct_scheduled">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Choose class status....
+                <span class="caret dropdown-language-span"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
+                <li><%= link_to "ALL", classes_user_path( :classes=> 1 ) %></li>
+                <li><%= link_to "Scheduled", classes_user_path( :classes=> 2 ) %></li>
+                <li><%= link_to "UnScheduled", classes_user_path( :classes=> 3 ) %></li>
+                <li><%= link_to "Past", classes_user_path( :classes=> 4 ) %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
       <% i=0 %>
       <% @user.appointments.each do |a|%>
       <% i+=1 %>
@@ -60,6 +78,8 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
       <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
       <div id="evaluation-white-<%= a.id %>" class="evaluation-white">

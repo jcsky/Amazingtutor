@@ -159,20 +159,25 @@
 }
 .mytutor-sort {
   margin-top: 15px;
-  z-index: -1;
 }
 .tutor-info {
+  padding-top: 1px;
   margin-top: 15px;
   border-radius: 5px;
   background-color: #fff;
   h5 {
     font-weight: lighter;
+    margin-top: 5px;
   }
   span {
     line-height: 2;
   }
   .tutor-top {
     margin: 8px 0;
+    .info-tag{
+      margin-bottom: 15px;
+      margin-left: 20px;
+    }
   }
   button {
     border: none;
@@ -186,9 +191,6 @@
     bottom: 25px;
     border-radius: 5px;
   }
-}
-.tutor-info {
-  height: 155px;
 }
 .scheduled-content{
   img{
@@ -231,6 +233,10 @@
   .info-tag{
     margin-left: 0;
   }
+}
+.mytutor-sort .selsct_scheduled{
+  button{
+  height: 40px;}
 }
 @media (max-width: $screen-xs-min) {
   .scheduled-text {
@@ -387,11 +393,15 @@
       }
     }
   }
-
   .gotocalss,
   .ratingnow {
     button {
       margin-left: -50px;
+    }
+  }
+  .tutor-info{
+    .info-tag{
+      margin-left: 20px;
     }
   }
 }
