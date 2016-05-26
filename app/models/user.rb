@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :evaluations, as: :evaluatable
   has_many :user_available_sections
   has_many :scholarships
-  has_many :new_user, :through => :scholarships
+  has_many :new_user, through: :scholarships
 
   has_attached_file :image, styles: { medium: '100x100#', thumb: '50x50#' }, default_url: 'logo.png'
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
@@ -32,10 +32,10 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    if first_name.blank? && last_name.blank?
+    if username.blank?
       email.split('@').first
     else
-      first_name + ' ' + last_name
+      username
     end
   end
 
@@ -134,7 +134,6 @@ class User < ActiveRecord::Base
     user.google_pic = auth.info.image
     user.save!
     user
-
   end
 
   def connect_to_google_omniauth(auth)

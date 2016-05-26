@@ -66,8 +66,9 @@ class WelcomeController < ApplicationController
 
   def find_price_teacher
     @pricefir = params[:price].first.to_i
-    @pricesec = params[:price].last.to_i * 10
-    @teachers = Teacher.where('one_fee >= ? AND ten_fee <= ?', @pricefir, @pricesec)
+    @pricesec = params[:price].last.to_i
+    @teachers = Teacher.where('ten_fee/10 >= ? AND one_fee <= ?', @pricefir, @pricesec)
+    # @teachers = Teacher.where('(ten_fee/10 between ? and ?) AND (one_fee between ? and ?)', @pricefir, @pricesec)
   end
 
   def find_language_teacher
@@ -86,9 +87,9 @@ class WelcomeController < ApplicationController
       @thedaytime +=  7.day
       @thedaytimeend = @thedaytime + 60 * 60 * 24 - 1
     end
-    @asfront = AvailableSection.where('start > ? AND start < ?', @thedaytime, @thedaytimeend)
-    @asmid = AvailableSection.where('start < ? AND end > ?', @thedaytime, @thedaytimeend)
-    @asend = AvailableSection.where('end > ? AND end < ?', @thedaytime, @thedaytimeend)
+    @asfront = AvailableSection.select(:start,:start).where('start > ? AND start < ?', @thedaytime, @thedaytimeend)
+    @asmid = AvailableSection.select(:start,:end).where('start < ? AND end > ?', @thedaytime, @thedaytimeend)
+    @asend = AvailableSection.select(:end,:end).where('end > ? AND end < ?', @thedaytime, @thedaytimeend)
     @as = @asfront.ids + @asmid.ids + @asend.ids
     @as.uniq
     @teacher_id = AvailableSection.where(id: @as).pluck(:teacher_id).uniq

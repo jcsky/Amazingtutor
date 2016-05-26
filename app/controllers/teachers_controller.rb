@@ -62,7 +62,7 @@ class TeachersController < ApplicationController
         flash[:alert] = 'Save success'
         redirect_to :back
       else
-        flash[:alert] = 'Save fail'
+        flash[:alert] = 'Save fail because video not from Youtube'
         redirect_to :back
       end
     else
