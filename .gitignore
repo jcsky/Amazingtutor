@@ -25,3 +25,5 @@
 .byebug_history
 /config/secrets.yml
 /config/email.yml
+/db/seeds.rb
+/db/seeds.sample.rb
