@@ -39,6 +39,9 @@ gem 'populator'
 # 多國語系
 gem 'rails-i18n'
 
+# mailer
+gem 'sidekiq'
+
 #paperclip
 gem "paperclip"
 gem 'rails_admin'
