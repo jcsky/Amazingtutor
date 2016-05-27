@@ -26,4 +26,5 @@
 /config/secrets.yml
 /config/email.yml
 /db/seeds.rb
-/db/seeds.sample.rb
+/config/secrets.yml.example
+
