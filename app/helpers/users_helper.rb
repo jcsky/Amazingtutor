@@ -7,7 +7,7 @@ module UsersHelper
       image_url = user.fb_pic
     elsif user.google_pic?
       image_url = user.google_pic
-    elsif
+    else
       image_url = "logo.jpg"
     end
     image_tag image_url
