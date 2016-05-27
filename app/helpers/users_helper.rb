@@ -8,7 +8,7 @@ module UsersHelper
     elsif user.google_pic?
       image_url = user.google_pic
     elsif
-      image_url = "logo.png"
+      image_url = "logo.jpg"
     end
     image_tag image_url
   end

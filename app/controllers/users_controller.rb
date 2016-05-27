@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def classes
     @appointments = @user.appointments
+    @teacher = Teacher.where(:id => Teacher.all.first).first
   end
   def remark
   end

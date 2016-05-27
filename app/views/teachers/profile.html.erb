@@ -4,9 +4,9 @@
       <div class="row">
         <div class="profile-image col-sm-5 col-md-12">
 
-      <div class="youtube-container-profile">
-        <div class="youtube-player youtube-player-profile" data-id="<%= @teacher.youtube_website %>"></div>
-      </div>
+          <div class="youtube-container-profile">
+            <div class="youtube-player youtube-player-profile" data-id="<%= @teacher.youtube_website %>"></div>
+          </div>
         </div>
         <div class="col-xs-12 col-sm-7 col-md-12">
           <div class="col-xs-12 clearfix flexmodify">
@@ -41,7 +41,7 @@
             <span class="moneyred">
               <% if @teacher.ten_fee/10 < @teacher.one_fee %>
               <%= @teacher.ten_fee/10 %>~<%= @teacher.one_fee %>
-              <% else %>
+            <% else %>
               <%= @teacher.one_fee %>~<%= @teacher.ten_fee/10 %>
               <% end %>
               TW/hour</span><br>
@@ -307,7 +307,7 @@
         appendTo: 'body',
         cursor: "pointer",
         start: function (event, ui) {
-            // $(this\\:clone).attr("fc-event");
+          // $(this\\:clone).attr("fc-event");
           $(this).hide();
         },
         stop: function (event, ui) {
@@ -389,26 +389,25 @@
 
   });
 
-(function() {
+  (function () {
     var v = document.getElementsByClassName("youtube-player");
     for (var n = 0; n < v.length; n++) {
-        var p = document.createElement("div");
-        p.innerHTML = labnolThumb(v[n].dataset.id);
-        p.onclick = labnolIframe;
-        v[n].appendChild(p);
+      var p = document.createElement("div");
+      p.innerHTML = labnolThumb(v[n].dataset.id);
+      p.onclick = labnolIframe;
+      v[n].appendChild(p);
     }
-})();
+  })();
 
-function labnolThumb(id) {
+  function labnolThumb(id) {
     return '<img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div>';
-}
+  }
 
-function labnolIframe() {
+  function labnolIframe() {
     var iframe = document.createElement("iframe");
     iframe.setAttribute("src", "//www.youtube.com/embed/" + this.parentNode.dataset.id + "?autoplay=1&autohide=2&border=0&wmode=opaque&enablejsapi=1&controls=0&showinfo=0");
     iframe.setAttribute("frameborder", "0");
     iframe.setAttribute("id", "youtube-iframe");
     this.parentNode.replaceChild(iframe, this);
-}
-
+  }
 </script>

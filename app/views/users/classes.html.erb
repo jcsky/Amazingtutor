@@ -4,6 +4,7 @@
       <%= render "sidebar"%>
     </div>
     <div class="col-md-7">
+      <% if @user.appointments.present? %>
       <div class="row">
         <div class="col-xs-12">
           <div class="mytutor-sort">
@@ -22,46 +23,49 @@
           </div>
         </div>
         <div class="col-xs-12">
-      <% i=0 %>
-      <% @user.appointments.each do |a|%>
-      <% i+=1 %>
-      <div class="scheduled col-xs-12">
-        <div class="col-sm-5 scheduled-image img-responsive center-block">
-          <div class="scheduled-dark"></div>
-          <div class="scheduled-white">
-            <%= image_tag("scheduled.png") %>
-          </div>
-          <div class="scheduled-text">
-            <h5>SCHEDULED</h5>
-            <h1><%= a.start.in_time_zone.strftime('%H:%M, %p') %></h1>
-            <p><%= a.start.in_time_zone.strftime('%a') %>, </p>
-            <h6><%= a.start.in_time_zone.strftime('%B%d, %Y') %></h6>
-          </div>
-        </div>
-        <div class="col-sm-7">
-          <div class="col-xs-12">
-            <div class="clearfix flexmodify">
-              <div class="info-mypic col-xs-3 pull-left">
-                <%= image_tag(a.teacher.user.image) %>
+
+          <% i=0 %>
+          <% @user.appointments.each do |a|%>
+          <% i+=1 %>
+          <div class="scheduled col-xs-12">
+            <div class="col-sm-5 scheduled-image img-responsive center-block">
+              <div class="scheduled-dark"></div>
+              <div class="scheduled-white">
+                <%= image_tag("scheduled.png") %>
               </div>
-              <div class="info-eval col-xs-7">
-                <p><%= a.teacher.user.first_name %>
-                   <%= a.teacher.user.last_name %></p>
-                  <div id="rateYo-<%= i %>"></div><span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
-              </div>
-              <div class=" col-xs-2 info-flag">
-                <%= image_tag("flag.png") %>
+              <div class="scheduled-text">
+                <h5>SCHEDULED</h5>
+                <h1><%= a.start.in_time_zone.strftime('%H:%M, %p') %></h1>
+                <p><%= a.start.in_time_zone.strftime('%a') %>,
+                </p>
+                <h6><%= a.start.in_time_zone.strftime('%B%d, %Y') %></h6>
               </div>
             </div>
-            <div class="clearfix ratingnow gotocalss">
-              <div class="conatiner-fluid">
-                <% if Time.current.in_time_zone >= a.start.in_time_zone-10.minutes &&
+            <div class="col-sm-7">
+              <div class="col-xs-12">
+                <div class="clearfix flexmodify">
+                  <div class="info-mypic col-xs-3 pull-left">
+                    <%= image_tag(a.teacher.user.image) %>
+                  </div>
+                  <div class="info-eval col-xs-7">
+                    <p><%= a.teacher.user.first_name %>
+                      <%= a.teacher.user.last_name %></p>
+                    <div id="rateYo-<%= i %>"></div>
+                    <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
+                  </div>
+                  <div class=" col-xs-2 info-flag">
+                    <%= image_tag("flag.png") %>
+                  </div>
+                </div>
+                <div class="clearfix ratingnow gotocalss">
+                  <div class="conatiner-fluid">
+                    <% if Time.current.in_time_zone >= a.start.in_time_zone-10.minutes &&
                   Time.current.in_time_zone < a.end.in_time_zone %>
-                  <form action="<%= a.appointment_url %>" target="_blank">
-                    <button type="submit" name="gotoclass">GO TO CLASS</button>
-                  </form>
-                <% elsif Time.current.in_time_zone > a.end.in_time_zone %>
-                  <% if a.evaluations.where(evaluatable_type: "User").blank? %>
+                    <form action="<%= a.appointment_url %>" target="_blank">
+                      <button type="submit" name="gotoclass">GO TO CLASS</button>
+                    </form>
+                    <% elsif Time.current.in_time_zone > a.end.in_time_zone %>
+                    <% if a.evaluations.where(evaluatable_type: "User").blank? %>
                     <form action="<%= appointment_path(a.id) %>">
                       <button type="submit" name="rating">Rating Now</button>
                     </form>
@@ -69,17 +73,17 @@
                     <div class="rated">
                       <button id="rating-<%= a.id %>" name="rating">Rated</button>
                     </div>
-                  <% end %>
-                <% elsif Time.current.in_time_zone <= a.start.in_time_zone-10.minutes %>
-                  <button type="submit" name="gotoclass">Please wait</button>
-                <% end %>
+                    <% end %>
+                    <% elsif Time.current.in_time_zone <= a.start.in_time_zone-10.minutes %>
+                    <button type="submit" name="gotoclass">Please wait</button>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
       <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
       <div id="evaluation-white-<%= a.id %>" class="evaluation-white">
@@ -102,12 +106,81 @@
                   <%= a.evaluations.where(evaluatable_type: "User").first.try(:comment) %>
                 </div>
                 <textarea id="comment"></textarea>
-                <!-- <textarea id="comment" placeholder="You can ENTER your comment here!!
-      What did you like about your teacher, and what could your teacher improve?"></textarea> -->
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <% end %>
+    <% else %>
+      <div class="scheduled-content scheduled-editprofile-fix">
+        <div class="scheduled-content-head">
+          <h4>Find a Tutor</h4>
+        </div>
+        <div class="text-center findtutor">
+          <h3>Hello
+            <%= current_user.display_name %></h3>
+          <h5>You haven’t booked your lesson yet. Come and find your tutor!</h5>
+          <p><%= link_to "Find a Tutor",teacherwall_path %></p>
+        </div>
+      </div>
+      <div class="scheduled-content scheduled-editprofile-fix suggestion">
+        <div class="scheduled-content-head">
+          <h4>Recommend Tutor</h4>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+
+          <%= link_to profile_teacher_path(@teacher)  do %>
+        <div class="col-xs-12 clearfix flexmodify">
+
+          <div class="info-mypic col-md-2 col-xs-3">
+            <%= image_tag(User.find(@teacher.user_id).image.url(:medium)) %>
+          </div>
+          <div class="info-eval col-md-7 col-xs-7">
+            <p><%= User.find(@teacher.user_id).first_name %>
+              <%= User.find(@teacher.user_id).last_name %></p>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star-half-o"></i>
+            <i class="fa fa-star-o"></i>
+            <span>(132)</span>
+          </div>
+          <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
+            <%= image_tag("flag.png") %>
+          </div>
+        </div>
+        <div class="col-xs-12 clearfix info-tag">
+          <i class="fa fa-comment-o"></i>
+          <span>Speak
+          </span>
+          <span>
+            <% @teacher.languages.each do |x| %>
+            <%= x.language %>
+            <% end %>
+          </span><br>
+          <i class="fa fa-usd"></i>
+          <span>Rate
+          </span>
+          <span class="moneyred">
+            <% if @teacher.ten_fee/10 < @teacher.one_fee %>
+            <%= @teacher.ten_fee/10 %>~<%= @teacher.one_fee %>
+            <% else %>
+            <%= @teacher.one_fee %>~<%= @teacher.ten_fee/10 %>
+            <% end %>
+            TW/hour</span><br>
+          <i class="fa fa-rss"></i>
+          <span>Trial
+          </span>
+          <span>Yes</span>
+        </div>
+        <div class="col-xs-12 info-pro">
+          <p><%= @teacher.introduction %></p>
+        </div>
+          <% end %>
+        </div>
+      </div>
       </div>
       <% end %>
     </div>
@@ -116,12 +189,12 @@
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
-var i=0;
+  var i = 0;
   $(document).ready(function () {
 
     <% @user.appointments.each do |a|%>
 
-    i+=1;
+    i += 1;
 
     $('#pop-black-<%= a.id %>').hide();
     $('#evaluation-white-<%= a.id %>').hide();
@@ -142,10 +215,9 @@ var i=0;
 
     $("#rateYo-<%= a.id %>").rateYo({starWidth: "40px", numStars: 5, fullStar: true, readOnly: true, rating: <%= @raty %>});
 
-    $("#rateYo-"+i).rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %> });
+    $("#rateYo-" + i).rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
 
     <% end %>
 
   });
-
 </script>

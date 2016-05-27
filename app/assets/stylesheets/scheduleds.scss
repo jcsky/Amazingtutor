@@ -194,12 +194,17 @@
 }
 .scheduled-content{
   img{
-    width: 100px;
+    width: 50px;
     height: auto;
     border-radius: 50%;
     left: 50%;
     position: relative;
     transform: translateX(-50%);
+  }
+  img[alt="Flag"]{
+    border-radius: 0;
+    height: 20px;
+    width: 30px;
   }
 }
 .filebuttondiv{
@@ -237,6 +242,41 @@
 .mytutor-sort .selsct_scheduled{
   button{
   height: 40px;}
+}
+.findtutor{
+  padding: 0 30px;
+
+  h3,h5,p{
+    font-weight: lighter;
+      line-height: 1.5;
+  }
+  p{
+    font-size: 16px;
+  }
+  a{
+    text-decoration: none;
+    background-color: #FF5F5F;
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    display: inline-block;
+    border-radius: 5px;
+    line-height: 40px;
+  }
+h5{
+  margin:  20px 0;
+}
+}
+.userimage{
+  img{
+    height: 100px;
+    width: 100px;
+  }
+}
+.suggestion{
+  a{
+    color: inherit;
+  }
 }
 @media (max-width: $screen-xs-min) {
   .scheduled-text {
