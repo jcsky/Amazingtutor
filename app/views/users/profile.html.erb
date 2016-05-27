@@ -7,21 +7,37 @@
     <div class="col-md-7 col-xs-12">
       <div class="scheduled-content scheduled-editprofile-fix">
         <div class="scheduled-content-head">
+          <h4>Facebook Google connect</h4>
+        </div>
+      <div class="facegoogle">
+        <%= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
+        <%= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
+      </div>
+    </div>
+
+      <div class="scheduled-content scheduled-editprofile-fix">
+        <div class="scheduled-content-head">
           <h4>Edit Profile</h4>
         </div>
         <span><%= flash[:success]  %></span>
 
-        <div class="form-group">
+        <div class="form-group userimage">
           <%= form_for @user do |f| %>
-          <%= image_tag(@user.image.url(:medium)) %>
+          <%= user_headimage(current_user) %>
           <div class="filebuttondiv">
-             <i class="fa fa-pencil" aria-hidden="true"></i><span>Edit Profile Photo</span>
-          <%= f.file_field :image ,class:"filebutton" %>
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <span>Edit Profile Photo</span>
+            <%= f.file_field :image ,class:"filebutton" %>
           </div>
           <% if @user.image.exists? %>
           <%= check_box_tag "_remove_image", "1" %>Remove image
           <% end %>
 
+          <div class="input-group clearfix">
+            <%= f.label :alternate_email, "Email" %>
+            <%= f.email_field :alternate_email, :class => "form-control" %>
+          </div>
+          <p class="text-center moneyred">Note : This email will receive system email</p>
           <div class="input-group clearfix">
             <%= f.label :username, "User Name" %>
             <%= f.text_field :username, :class => "form-control" %>
@@ -34,13 +50,9 @@
             <%= f.label :last_name, "Last Name" %>
             <%= f.text_field :last_name, :class => "form-control" %>
           </div>
-          <div class="input-group clearfix">
-            <%= f.label :email, "Email" %>
-            <%= f.email_field :email, :class => "form-control" %>
-          </div>
           <div class="input-group clearfix birthday-fix">
             <%= f.label :birthday, "Birthday" %>
-            <%= f.date_select :birthday, :class => 'datepicker' %>
+            <%= f.date_select :birthday,start_year: 1950, :class => 'datepicker' %>
           </div>
 
           <div class="input-group clearfix">
@@ -51,6 +63,7 @@
             <%= f.label :currency, "Currency" %>
             <%= f.select(:currency ,options_for_select([["紙錢", 3],["美金", 1]],"3"),{}, {:class => "form-control"} )%>
           </div>
+
           <div class="input-group clearfix">
             <%= f.label :time_zone, "TimeZone" %>
             <%= f.time_zone_select(:time_zone ,ActiveSupport::TimeZone.us_zones,{}, {:class => "form-control"} )%>
@@ -61,10 +74,7 @@
         <%= f.submit 'SAVE' %>
       </div>
       <% end %>
-      <div class="facegoogle">
-        <%#= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
-        <%#= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
-      </div>
+
       <!--for lululala edit view-->
     </div>
   </div>

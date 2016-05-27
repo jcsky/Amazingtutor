@@ -4,40 +4,56 @@
       <%= render "sidebar"%>
     </div>
 
-    <div class="col-md-7  col-xs-12">
-      <div class="mytutor-sort">
-        <%= select({},{},options_for_select([["ALL", 3],["Scheduled", 1], ["UnScheduled", 2],["以此類推", 4]],"3"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-width" =>"100%"} )%>
-      </div>
-      <div class="tutor-info">
+    <div class="col-md-7">
+      <div class="row">
         <div class="col-xs-12">
-          <div class="clearfix tutor-top">
-            <div class="info-mypic col-xs-3 pull-left col-sm-2">
-              <%= image_tag("oval155.png") %>
-            </div>
-            <div class="info-eval col-xs-7 col-sm-7">
-              <p>Abner Chao</p>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-half-o"></i>
-              <i class="fa fa-star-o"></i>
-              <span>(132)</span>
-            </div>
-            <div class=" col-xs-2 info-flag col-sm-1 col-sm-push-1 info-flag-class-fix">
-              <%= image_tag("flag.png") %>
+          <div class="mytutor-sort">
+            <div class="dropdown dropdown-language selsct_scheduled">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Choose class status....
+                <span class="caret dropdown-language-span"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
+                <li><%= link_to "ALL", mytutor_user_path( :mytutor=> 1 ) %></li>
+                <li><%= link_to "Scheduled", mytutor_user_path( :mytutor=> 2 ) %></li>
+                <li><%= link_to "UnScheduled", mytutor_user_path( :mytutor=> 3 ) %></li>
+                <li><%= link_to "Past", mytutor_user_path( :mytutor=> 4 ) %></li>
+              </ul>
             </div>
           </div>
-          <div class="clearfix info-tag">
-            <i class="fa fa-comment-o"></i>
-            <span>Speak
-            </span>
-            <span>Chinese,English</span><br>
-            <i class="fa fa-usd"></i>
-            <span>Rate
-            </span>
-            <span class="moneyred">400-650 TW/hour</span><br>
-            <h5>5 UnScheduled</h5>
-            <%= button_tag "Book Now", {:class => "", :id=>"booknow" }%>
+        </div>
+        <div class="col-xs-12">
+          <div class="tutor-info">
+            <div class="clearfix tutor-top">
+              <div class="info-mypic col-xs-3 pull-left col-sm-2">
+                <%= image_tag("oval155.png") %>
+              </div>
+              <div class="info-eval col-xs-7 col-sm-7">
+                <p>Abner Chao</p>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+                <span>(132)</span>
+              </div>
+              <div class=" col-xs-2 info-flag col-sm-1 col-sm-push-1 info-flag-class-fix">
+                <%= image_tag("flag.png") %>
+              </div>
+            </div>
+            <div class="clearfix info-tag">
+              <i class="fa fa-comment-o"></i>
+              <span>Speak
+              </span>
+              <span>Chinese,English</span><br>
+              <i class="fa fa-usd"></i>
+              <span>Rate
+              </span>
+              <span class="moneyred">400-650 TW/hour</span><br>
+              <h5>5 UnScheduled</h5>
+              <%#= button_tag "Book Now", { :id=>"booknow" ,data:{toggle:"modal",target:"#booknow" }}%>
+              <button type="button" data-toggle="modal" data-target="#booknow">Book Now</button>
+            </div>
           </div>
         </div>
       </div>
@@ -45,46 +61,47 @@
   </div>
 </div>
 
-<div id="pop-black" class="pop-bg"></div>
-<div id="pop-booking" class="booking">
-  <div class="container-fluid">
-    <div class="calender-booking">
-      <h6>All time listed are in your local timezone</h6>
-      <div class="insert-calender"></div>
-
-      <button class="btn btn-default">Quick Book</button>
-    </div>
-    <div class="select-list">
-      <div class="row">
-        <div class="col-xs-5">
-          <div class="day">
-            <span>Day</span>
-            <%= select_day(0,{},:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"137px") %>
+<div class="modal fade" id="booknow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="container-fluid">
+        <div class="calender-booking">
+          <h6>All time listed are in your local timezone</h6>
+          <div class="insert-calender"></div>
+        </div>
+        <div class="select-list">
+          <div class="row">
+            <div class="col-xs-5">
+              <div class="day">
+                <span>Day</span>
+                <%= select_day(0,{},:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"137px") %>
+              </div>
+            </div>
+            <div class="col-xs-7">
+              <div class="time">
+                <span>Time</span>
+                <%= select({},{},options_for_select([["0000~0100", 3],["0030~0130", 1], ["0100~0200", 2],["0130~0230", 4],["以此類推", 4]],"3"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"215px"} )%>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-xs-7">
-          <div class="time">
-            <span>Time</span>
-            <%= select({},{},options_for_select([["0000~0100", 3],["0030~0130", 1], ["0100~0200", 2],["0130~0230", 4],["以此類推", 4]],"3"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"215px"} )%>
-          </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn closebtn" data-dismiss="modal">Close</button>
+        <button class="btn bookteacherbtn">Quick Book</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  $(document).ready(function () {
-    $(".selectpicker").selectpicker({});
-    $('#pop-booking').hide();
-    $('#pop-black').hide();
-    $('#booknow').click(function (e) {
-      $('#pop-black').fadeIn(1);
-      $('#pop-booking').fadeIn(300);
-    });
-    $('#pop-black').click(function (e) {
-      $('#pop-booking').fadeOut(1);
-      $('#pop-black').fadeOut(1);
-    });
-    });
+  $('#booknow').on('shown.bs.modal', function () {
+    $('#booknow').focus()
+  })
 </script>

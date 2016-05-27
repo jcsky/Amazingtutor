@@ -1,19 +1,51 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-# before_action :configure_sign_up_params, only: [:create]
-# before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+    if params[:scholarship]
+      cookies[:scholarship] = params[:scholarship]
+    end
+  end
 
   # POST /resource
   def create
-    super do |resource|
-      if resource.id.nil?
+    build_resource(sign_up_params)
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
       else
-        resource.time_zone = cookies['browser.timezone']
-        resource.save!
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      #  respond_with resource
+      flash[:alert] = resource.errors.full_messages.each { |x| flash[x] = x }
+      redirect_to :back
+    end
+    if resource.id.present?
+      resource.time_zone = cookies['browser.timezone']
+      resource.alternate_email = resource.email
+      resource.username = resource.email.split('@').first
+      resource.save!
+      if cookies[:scholarship]
+        begin
+          key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
+          crypt = ActiveSupport::MessageEncryptor.new(key)
+          @decrypted_data = crypt.decrypt_and_verify(cookies[:scholarship])
+          @old_user = User.where(email: @decrypted_data).first
+          Scholarship.create(new_user_id: resource.id, user_id: @old_user.id, bonus: "90")
+        rescue
+        end
       end
     end
   end
@@ -45,14 +77,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:time_zone])
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update)
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)

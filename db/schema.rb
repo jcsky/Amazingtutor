@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519080814) do
+ActiveRecord::Schema.define(version: 20160526054951) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 20160519080814) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.text     "message"
+    t.string   "problem"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "teacher_id"
@@ -123,6 +133,14 @@ ActiveRecord::Schema.define(version: 20160519080814) do
     t.text     "desciption"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "scholarships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "new_user_id"
+    t.string   "bonus"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "second_tongues", force: :cascade do |t|
@@ -203,6 +221,9 @@ ActiveRecord::Schema.define(version: 20160519080814) do
     t.datetime "image_updated_at"
     t.string   "authentication_token"
     t.boolean  "admin"
+    t.string   "fb_pic"
+    t.string   "google_pic"
+
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,5 +1,6 @@
 module ApplicationHelper
 
+
   def generate_pay2go_params(payment)
         pay2go_params = {
           MerchantID: Pay2go.merchant_id,
@@ -26,21 +27,41 @@ module ApplicationHelper
         pay2go_params
     end
 
-    def generate_paypal_params(payment)
-      {
-          business: Rails.application.secrets.paypal_account,
-          cmd: "_xclick",
-          upload: 1,
-          return: "#{Rails.application.secrets.app_host}/paypal/redirect",
-          invoice: payment.id,
-          amount: payment.order.amount,
-          currency_code: "TWD",
-          item_name: "Chinese Tutor Class",
-          item_number: payment.id,
-          quantity: "1",
-          notify_url: "#{Rails.application.secrets.app_host}/paypal/webhook"
-      }
-    end
+  def scholarship_test
+      key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
+      crypt = ActiveSupport::MessageEncryptor.new(key)
+      begin
+        @decrypted_data = crypt.decrypt_and_verify(params[:scholarship])
+      rescue
+         "error"
+      end
+  end
+
+  def scholarship_name
+      key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
+      crypt = ActiveSupport::MessageEncryptor.new(key)
+      begin
+      @decrypted_data = crypt.decrypt_and_verify(params[:scholarship])
+      @old_user_name = User.where(email: @decrypted_data).first.email.split('@').first
+      rescue
+      end
+  end
 
 
+
+  def generate_paypal_params(payment)
+    {
+      business: Rails.application.secrets.paypal_account,
+      cmd: '_xclick',
+      upload: 1,
+      return: "#{Rails.application.secrets.app_host}/paypal/redirect",
+      invoice: payment.id,
+      amount: payment.order.amount,
+      currency_code: 'TWD',
+      item_name: 'Chinese Tutor Class',
+      item_number: payment.id,
+      quantity: '1',
+      notify_url: "#{Rails.application.secrets.app_host}/paypal/webhook"
+    }
+  end
 end

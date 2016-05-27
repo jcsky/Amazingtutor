@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def classes
     @appointments = @user.appointments
+    @teacher = Teacher.where(:id => Teacher.all.first).first
   end
   def remark
   end
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
       @user.image = nil
     end
     if @user.save
-      flash[:success] = "編輯成功"
+      flash[:success] = "Edit successfully"
     render 'profile'
     else
       render 'profile'
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:image, :email,:username,:first_name,:last_name,:birthday,
+    params.require(:user).permit(:image, :alternate_email,:username,:first_name,:last_name,:birthday,
                                  :time_zone,:tongue,:location,:currency,:born_form,:live_in,:gender)
   end
 end

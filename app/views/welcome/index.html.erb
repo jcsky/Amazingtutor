@@ -18,9 +18,9 @@
           </button>
           <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
             <% if params[:week] %>
-            <li><%= link_to "All", root_path(:week=>params[:week] ) %></li>
+            <li><%= link_to "All", teacherwall_path(:week=>params[:week] ) %></li>
             <% Language.all.each do |l| %>
-            <li><%= link_to l.language, root_path( :language_id => l.id,:week=>params[:week]  ) %></li>
+            <li><%= link_to l.language, teacherwall_path( :language_id => l.id,:week=>params[:week]  ) %></li>
             <% end %>
           <% else %>
             <li><%= link_to "All", root_path %></li>
@@ -40,23 +40,23 @@
           </button>
           <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
             <% if params[:language_id ]  %>
-            <li><%= link_to "All", root_path(:language_id=> params[:language_id]) %></li>
-            <li><%= link_to "Monday", root_path( :week=> 1 ,:language_id=> params[:language_id]) %></li>
-            <li><%= link_to "Tuesday", root_path( :week=>2 ,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Wednesday", root_path( :week=> 3,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Thursday", root_path( :week=> 4,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Friday", root_path( :week=> 5,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Saturday", root_path( :week=> 6,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Sunday", root_path( :week=> 7,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "All", teacherwall_path(:language_id=> params[:language_id]) %></li>
+            <li><%= link_to "Monday", teacherwall_path( :week=> 1 ,:language_id=> params[:language_id]) %></li>
+            <li><%= link_to "Tuesday", teacherwall_path( :week=>2 ,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Wednesday", teacherwall_path( :week=> 3,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Thursday", teacherwall_path( :week=> 4,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Friday", teacherwall_path( :week=> 5,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Saturday", teacherwall_path( :week=> 6,:language_id=> params[:language_id] ) %></li>
+            <li><%= link_to "Sunday", teacherwall_path( :week=> 7,:language_id=> params[:language_id] ) %></li>
           <% else %>
-            <li><%= link_to "All", root_path  %></li>
-            <li><%= link_to "Monday", root_path( :week=> 1 ) %></li>
-            <li><%= link_to "Tuesday", root_path( :week=>2  ) %></li>
-            <li><%= link_to "Wednesday", root_path( :week=> 3 ) %></li>
-            <li><%= link_to "Thursday", root_path( :week=> 4 ) %></li>
-            <li><%= link_to "Friday", root_path( :week=> 5 ) %></li>
-            <li><%= link_to "Saturday", root_path( :week=> 6 ) %></li>
-            <li><%= link_to "Sunday", root_path( :week=> 7 ) %></li>
+            <li><%= link_to "All", teacherwall_path  %></li>
+            <li><%= link_to "Monday", teacherwall_path( :week=> 1 ) %></li>
+            <li><%= link_to "Tuesday", teacherwall_path( :week=>2  ) %></li>
+            <li><%= link_to "Wednesday", teacherwall_path( :week=> 3 ) %></li>
+            <li><%= link_to "Thursday", teacherwall_path( :week=> 4 ) %></li>
+            <li><%= link_to "Friday", teacherwall_path( :week=> 5 ) %></li>
+            <li><%= link_to "Saturday", teacherwall_path( :week=> 6 ) %></li>
+            <li><%= link_to "Sunday", teacherwall_path( :week=> 7 ) %></li>
             <% end %>
           </ul>
         </div>
@@ -69,7 +69,6 @@
   </div>
 </div>
 
-
 <ul id="teachers-list">
 
   <%= render :partial => "teacher", :locals => { :teacher => @teachers } %>
@@ -77,7 +76,7 @@
 </ul>
 
 <% if @next_page %>
-  <%= link_to "Load More", teacher_path(@teachers, :page => @next_page ), :remote => true, :class => "btn btn-primary", :id => "load-more" %>
+  <% link_to "Load More", teacher_path(@teachers, :page => @next_page ), :remote => true, :class => "btn btn-primary", :id => "load-more" %>
 <% end %>
 
 
@@ -104,7 +103,7 @@
       var price = $('#priceslide').data('slider').getValue();
       console.log(price);
       $.ajax({
-        url: "/",
+        url: "/teacherwall",
         contentType: false,
         type: 'GET',
         data: {

@@ -162,6 +162,17 @@
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
+.scholarshipnotice{
+  text-align: center;
+  h4{
+    font-weight: lighter;
+    color: #FF5F5F;
+  }
+  p{
+    font-size: 14px;
+    margin-top: 10px;
+  }
+}
 @media (max-width: $login-fix) {
   .log {
     width: 310px;
