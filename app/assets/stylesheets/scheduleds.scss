@@ -159,20 +159,25 @@
 }
 .mytutor-sort {
   margin-top: 15px;
-  z-index: -1;
 }
 .tutor-info {
+  padding-top: 1px;
   margin-top: 15px;
   border-radius: 5px;
   background-color: #fff;
   h5 {
     font-weight: lighter;
+    margin-top: 5px;
   }
   span {
     line-height: 2;
   }
   .tutor-top {
     margin: 8px 0;
+    .info-tag{
+      margin-bottom: 15px;
+      margin-left: 20px;
+    }
   }
   button {
     border: none;
@@ -187,17 +192,19 @@
     border-radius: 5px;
   }
 }
-.tutor-info {
-  height: 155px;
-}
 .scheduled-content{
   img{
-    width: 100px;
+    width: 50px;
     height: auto;
     border-radius: 50%;
     left: 50%;
     position: relative;
     transform: translateX(-50%);
+  }
+  img[alt="Flag"]{
+    border-radius: 0;
+    height: 20px;
+    width: 30px;
   }
 }
 .filebuttondiv{
@@ -230,6 +237,45 @@
   }
   .info-tag{
     margin-left: 0;
+  }
+}
+.mytutor-sort .selsct_scheduled{
+  button{
+  height: 40px;}
+}
+.findtutor{
+  padding: 0 30px;
+
+  h3,h5,p{
+    font-weight: lighter;
+      line-height: 1.5;
+  }
+  p{
+    font-size: 16px;
+  }
+  a{
+    text-decoration: none;
+    background-color: #FF5F5F;
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    display: inline-block;
+    border-radius: 5px;
+    line-height: 40px;
+  }
+h5{
+  margin:  20px 0;
+}
+}
+.userimage{
+  img{
+    height: 100px;
+    width: 100px;
+  }
+}
+.suggestion{
+  a{
+    color: inherit;
   }
 }
 @media (max-width: $screen-xs-min) {
@@ -387,11 +433,15 @@
       }
     }
   }
-
   .gotocalss,
   .ratingnow {
     button {
       margin-left: -50px;
+    }
+  }
+  .tutor-info{
+    .info-tag{
+      margin-left: 20px;
     }
   }
 }

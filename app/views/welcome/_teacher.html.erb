@@ -5,13 +5,13 @@
     <div class="row">
       <div class="col-sm-5">
         <div class="youtube-container">
-   <div class="youtube-player-<%= t.id %> youtube-player" data-id="<%= t.youtube_website %>"></div>
-</div>
+          <div class="youtube-player-<%= t.id %> youtube-player" data-id="<%= t.youtube_website %>"></div>
+        </div>
       </div>
       <div class="col-xs-12 col-sm-7">
         <div class="col-xs-12 clearfix flexmodify">
           <div class="info-mypic col-md-2 col-xs-3">
-            <%=   image_tag(User.find(t.user_id).image.url(:medium)) %>
+            <%=   image_tag(t.user.image.url(:medium)) %>
           </div>
           <%= link_to profile_teacher_path(t)  do %>
           <div class="info-eval col-md-7 col-xs-7">
@@ -43,7 +43,7 @@
           <span class="moneyred">
             <% if t.ten_fee/10 < t.one_fee %>
             <%= t.ten_fee/10 %>~<%= t.one_fee %>
-            <% else %>
+          <% else %>
             <%= t.one_fee %>~<%= t.ten_fee/10 %>
             <% end %>
             TW/hour</span><br>
@@ -64,26 +64,26 @@
 <% end %>
 <script>
   $(document).ready(function () {
-(function() {
-<% @teachers.each do |t| %>
-    var v = document.getElementsByClassName("youtube-player-<%= t.id %>");
-    for (var n = 0; n < v.length; n++) {
+    (function () {
+      <% @teachers.each do |t| %>
+      var v = document.getElementsByClassName("youtube-player-<%= t.id %>");
+      for (var n = 0; n < v.length; n++) {
         var p = document.createElement("div");
         p.innerHTML = labnolThumb(v[n].dataset.id);
         p.onclick = labnolIframe;
         v[n].appendChild(p);
+      }
+      <% end %>
+    })();
+    function labnolThumb(id) {
+      return '<img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div>';
     }
-<% end %>
-})();
-function labnolThumb(id) {
-    return '<img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div>';
-}
-function labnolIframe() {
-    var iframe = document.createElement("iframe");
-    iframe.setAttribute("src", "//www.youtube.com/embed/" + this.parentNode.dataset.id + "?autoplay=1&autohide=2&border=0&wmode=opaque&enablejsapi=1&controls=0&showinfo=0");
-    iframe.setAttribute("frameborder", "0");
-    iframe.setAttribute("id", "youtube-iframe");
-    this.parentNode.replaceChild(iframe, this);
-}
-});
+    function labnolIframe() {
+      var iframe = document.createElement("iframe");
+      iframe.setAttribute("src", "//www.youtube.com/embed/" + this.parentNode.dataset.id + "?autoplay=1&autohide=2&border=0&wmode=opaque&enablejsapi=1&controls=0&showinfo=0");
+      iframe.setAttribute("frameborder", "0");
+      iframe.setAttribute("id", "youtube-iframe");
+      this.parentNode.replaceChild(iframe, this);
+    }
+  });
 </script>
