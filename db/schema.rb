@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160526054951) do
   end
 
   create_table "languages", force: :cascade do |t|
+    t.integer  "teacher_id"
     t.string   "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -201,6 +202,7 @@ ActiveRecord::Schema.define(version: 20160526054951) do
     t.datetime "birthday"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "authority"
     t.string   "fb_uid"
     t.string   "fb_token"
     t.text     "fb_raw_data"
@@ -208,7 +210,6 @@ ActiveRecord::Schema.define(version: 20160526054951) do
     t.string   "google_token"
     t.text     "google_raw_data"
     t.string   "locale"
-    t.string   "authority"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"

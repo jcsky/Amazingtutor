@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def mytutor
   end
   def profile
+    UserMailer.delay_until(6.seconds.from_now).notify_comment(current_user)
   end
 
   def update
