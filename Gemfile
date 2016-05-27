@@ -42,6 +42,9 @@ gem 'rails-i18n'
 # mailer
 gem 'sidekiq'
 
+# 佈署 Sidekiq
+gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+
 #paperclip
 gem "paperclip"
 gem 'rails_admin'
