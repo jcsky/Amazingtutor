@@ -1,0 +1,9 @@
+var html = "<%= j( render :partial => "list" ) %>";
+
+$("#teachers-list").append(html);
+
+<% if @next_page %>
+  $("#load-more").attr("href", "<%= teacher_path(@teacher, :page => @next_page) %>")
+<% else %>
+  $("#load-more").remove();
+<% end %>

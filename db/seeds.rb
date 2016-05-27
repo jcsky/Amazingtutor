@@ -113,13 +113,13 @@ UserAvailableSection.create(:teacher => @teacher1, :user => @student1, :availabl
   @user.update(first_name: "LU", last_name: "Yi",
                email: "admin@gmail.com", password: 12345678, admin: true, authority: "teacher")
 end
-30.times do
+100.times do
   @user = User.create
   @user.update(first_name: Faker::Name.name.split(' ').first, last_name: Faker::Name.name.split(' ').last,
                email: Faker::Internet.email, password: 12345678)
 end
 
-8.times do
+80.times do
   @user = User.create
   @user.update(first_name: Faker::Name.name.split(' ').first, last_name: Faker::Name.name.split(' ').last,
                email: Faker::Internet.email, password: 12345678, authority: "teacher")

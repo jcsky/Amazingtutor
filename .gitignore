@@ -24,3 +24,4 @@
 /config/google.yml
 .byebug_history
 /config/secrets.yml
+/config/pay2go.yml

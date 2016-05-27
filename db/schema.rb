@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160519080814) do
   end
 
   create_table "languages", force: :cascade do |t|
+    t.integer  "teacher_id"
     t.string   "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -97,6 +98,11 @@ ActiveRecord::Schema.define(version: 20160519080814) do
     t.string   "paypal_status"
     t.string   "paypal_transaction_id"
     t.text     "paypal_params"
+  end
+
+  create_table "payapl_payments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "payments", force: :cascade do |t|
@@ -195,8 +201,8 @@ ActiveRecord::Schema.define(version: 20160519080814) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.boolean  "admin"
     t.string   "authentication_token"
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

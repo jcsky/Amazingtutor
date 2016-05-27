@@ -32,6 +32,9 @@ gem 'populator'
 # 多國語系
 gem 'rails-i18n'
 
+# 分頁
+gem 'kaminari'
+
 #paperclip
 gem "paperclip"
 gem 'rails_admin'
