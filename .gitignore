@@ -28,5 +28,5 @@
 /db/seeds.rb
 /db/seeds.rb.example
 /config/secrets.yml.example
-/lib/tasks/dev.rake
+/lib/tasks/dev.rake.example
 
