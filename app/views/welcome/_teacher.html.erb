@@ -11,18 +11,14 @@
       <div class="col-xs-12 col-sm-7">
         <div class="col-xs-12 clearfix flexmodify">
           <div class="info-mypic col-md-2 col-xs-3">
-            <%=   image_tag(t.user.image.url(:medium)) %>
+            <%= image_tag(t.user.image.url(:medium)) %>
           </div>
           <%= link_to profile_teacher_path(t)  do %>
           <div class="info-eval col-md-7 col-xs-7">
             <p><%= User.find(t.user_id).first_name %>
               <%= User.find(t.user_id).last_name %></p>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star-half-o"></i>
-            <i class="fa fa-star-o"></i>
-            <span>(132)</span>
+            <div id="rateYo-<%= t.id %>" ></div>
+            <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: t.id ).count %>)
           </div>
           <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
             <%= image_tag("flag.png") %>
@@ -30,7 +26,7 @@
         </div>
         <div class="col-xs-12 clearfix info-tag">
           <i class="fa fa-comment-o"></i>
-          <span>Speak
+          <span>Speak:
           </span>
           <span>
             <% t.languages.each do |x| %>
@@ -85,5 +81,10 @@
       iframe.setAttribute("id", "youtube-iframe");
       this.parentNode.replaceChild(iframe, this);
     }
+
+    <% @teachers.each do |t|%>
+    $("#rateYo-<%= t.id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= t.avg_rating %>});
+
+    <% end %>
   });
 </script>
