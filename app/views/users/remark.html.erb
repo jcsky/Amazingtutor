@@ -6,19 +6,21 @@
     </div>
 
     <div class="col-md-7 ">
+    <% i=0 %>
+    <% @evaluations.each do |e| %>
+    <% i+=1 %>
       <div class="scheduled-content col-xs-12 remark">
         <div class="clearfix flexmodify">
           <div class="info-mypic col-xs-3  col-sm-2">
-            <%= image_tag("oval155.png") %>
+            <%= user_headimage(User.find(e.appointment.teacher.user)) %>
           </div>
           <div class="info-eval col-xs-7 col-sm-7">
-            <p>Abner Chao</p>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star-half-o"></i>
-            <i class="fa fa-star-o"></i>
-            <span>(132)</span>
+            <p><%= User.find(e.appointment.teacher.user).first_name %>
+               <%= User.find(e.appointment.teacher.user).last_name %></p>
+            <div id="rateYo-<%= i %>" ></div>
+            <span>(<%= Evaluation.where(evaluatable_type: "User",
+                  evaluated_id: Teacher.find(e.appointment.teacher) ).count %>)
+            </span>
           </div>
           <div class=" col-xs-2 info-flag col-sm-1 col-sm-push-1">
             <%= image_tag("flag.png") %>
@@ -28,7 +30,11 @@
           <i class="fa fa-comment-o"></i>
           <span>Speak
           </span>
-          <span>Chinese,English</span><br>
+          <span>
+            <% Teacher.find(e.appointment.teacher).languages.each do |language| %>
+              <%= language.language %>
+            <% end %>
+          </span><br>
           <i class="fa fa-usd"></i>
           <span>Rate
           </span>
@@ -39,10 +45,32 @@
           <span>Yes</span>
         </div>
         <div class="col-xs-12 info-pro-fix">
-          <p>Hi! My name is Sarah, and I've been teaching English as a second language for the past 10 en teaching English as a second language for th en teaching English as a second language for th years. I completed my university studies in Sociology and
-            Spanish,</p>
+          <p><%= e.comment %></p>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  var i = 0;
+  $(document).ready(function () {
+
+    <% @evaluations.each do |e|%>
+    i += 1;
+    $("#rateYo-" + i).rateYo({starWidth: "18px", numStars: 5, fullStar: true,
+      readOnly: true, rating: <%= Teacher.find(e.appointment.teacher).avg_rating %>});
+
+    <% end %>
+
+  });
+</script>
+
+
+
+
+
+
+
+
