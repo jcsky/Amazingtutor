@@ -75,6 +75,13 @@ class AppointmentsController < ApplicationController
     redirect_to appointments_path
   end
 
+  def destroy
+    ActiveRecord::Base.transaction do
+      appointment = current_user.appointments.find_by_id(destroy_appointment_params[:id])
+      appointment.check_and_destroy!
+    end
+  end
+
   private
 
   def set_appointment_params
@@ -83,6 +90,10 @@ class AppointmentsController < ApplicationController
 
   def set_appointment_new_params
     params.permit(:teacher_id)
+  end
+
+  def destroy_appointment_params
+    params.permit(:id)
   end
 
   def user_authority

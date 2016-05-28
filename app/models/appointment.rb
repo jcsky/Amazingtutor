@@ -2,8 +2,8 @@ class Appointment < ActiveRecord::Base
   belongs_to :user
   belongs_to :teacher
   has_many :evaluations
-  has_many :available_section
-
+  has_one :available_section
+  has_one :user_available_section
   def book_section
     [:start, :end].join('~')
   end
@@ -39,11 +39,23 @@ class Appointment < ActiveRecord::Base
                         :user => student,
                         :section => (end_time - start_time) / 30.minute)
   end
-
   def self.booked_section(teacher_id)
     where('teacher_id=? and end > ? and start < ?',
           teacher_id,
           Time.now.in_time_zone.at_beginning_of_day,
           14.days.from_now.in_time_zone.at_end_of_day)
+  end
+
+  def check_and_destroy!
+    if self.start >= 6.hours.ago
+    #   in six hours   donothing
+      puts 'can not delete'
+    elsif self.start < 6.hours.ago
+    #   delete it and resume 2 point to user_available_sections
+    #   self.destroy
+      puts 'delete'
+    else
+    #   do nothing
+    end
   end
 end
