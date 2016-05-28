@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   def changepassword
   end
   def mytutor
-    UserMailer.delay_until(2.seconds.from_now).notify_comment(current_user)
   end
   def profile
   end
