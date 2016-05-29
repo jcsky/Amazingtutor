@@ -96,7 +96,8 @@
             <div class="col-xs-3">
               <div class="day">
                 <span>Day</span>
-                <%= select({},{},t.find_available_days,{}, {id:"day_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+
+                <%= select({},{},t.find_available_days(),{}, {id:"day_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow day" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
                 <%#= collection_select(:language_ids, Language.all, :id, :language,{}, { :class => "form-control",:id=>"language-select",:style=>"width:100%;" }) %>
               </div>
 
@@ -104,7 +105,10 @@
             <div class="col-xs-5">
               <div class="time">
                 <span>Time</span>
-                <%= select({},{},t.find_available_times("Thu, 3 Jun 2016"),{}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+
+                <% if @times %>
+                <%= select({},{},@times,{}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                <% end %>
                 <%#= select({},{},t.find_available_times("Sun, 3 Jun 2016",2).map{|x| x[0].strftime('%R')+" - "+x[1].strftime('%R') },{}, {:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
               </div>
             </div>
@@ -125,6 +129,7 @@
 $(document).ready(function () {
 
   <% @teachers.each do |t|%>
+
   $('#booknow-<%= t.id %>').on('shown.bs.modal', function () {
     $('#calendar-<%= t.id %>').fullCalendar({
       //lulu setting
@@ -164,7 +169,39 @@ $(document).ready(function () {
 });
 // $('.selectpicker').selectpicker('val', 'Mustard's);
 
-
 <% end %>
+
+  $(function() {
+
+    <% @teachers.each do |t|%>
+
+  $('.day').on('change', function(){
+    var selected = $(this).find("option:selected").val();
+    var tid = <%= t.id %>;
+    var userid = <%= current_user.id %>;
+    $.ajax({
+      type: 'POST',
+      url: "/users/" + userid + "/mytutor",
+      data: {
+        tid: tid,
+        selected: selected
+      },
+      success: function(){
+
+      },
+      error: function() {
+        alert("Please give teacher rating: 1~5");
+      }
+    });
+
+
+  });
+  <% end %>
+
+});
+
+
+
+
 });
 </script>
