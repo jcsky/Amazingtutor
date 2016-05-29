@@ -1,18 +1,28 @@
 class UsersController < ApplicationController
   before_action :find_user
   before_action :user_authority
+  before_action :set_appointment_new_params, only: [:new]
 
   def classes
     @appointments = @user.appointments
     @teacher = Teacher.where(:id => Teacher.all.first).first
   end
+
   def remark
   end
+
   def changepassword
   end
+
   def mytutor
+    @teachers = Teacher.where(id: current_user.user_available_sections.pluck(:teacher_id).uniq)
   end
+
   def profile
+  end
+
+  def create
+    
   end
 
   def update
@@ -40,5 +50,9 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:image, :alternate_email,:username,:first_name,:last_name,:birthday,
                                  :time_zone,:tongue,:location,:currency,:born_form,:live_in,:gender)
+  end
+
+  def set_appointment_new_params
+    params.permit(:teacher_id)
   end
 end

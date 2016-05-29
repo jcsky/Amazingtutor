@@ -256,6 +256,10 @@ div.play-button {
   }
 }
 @media (min-width: $screen-md-min) {
+  .teacherwallpa{
+    height: 66px;
+    overflow: hidden;
+  }
   .info-pro {
     display: block;
     font-size: 12px;
