@@ -34,19 +34,23 @@
             <% end %>
           </span><br>
           <i class="fa fa-usd"></i>
-          <span>Rate
+          <span>Rate:
           </span>
           <span class="moneyred">
-            <% if t.ten_fee/10 < t.one_fee %>
             <%= t.ten_fee/10 %>~<%= t.one_fee %>
-          <% else %>
-            <%= t.one_fee %>~<%= t.ten_fee/10 %>
-            <% end %>
             TW/hour</span><br>
           <i class="fa fa-rss"></i>
-          <span>Trial
+          <span>Trial:
           </span>
-          <span>Yes</span>
+          <span>
+            <% if t.trial_fee == 0 %>
+              <%= "free" %>
+            <% elsif t.trial_fee == nil %>
+              <%= "no" %>
+            <% else %>
+              <%= "yes" %>
+            <% end %>
+          </span>
         </div>
         <div class="col-xs-12 info-pro">
           <p><%= t.introduction %></p>

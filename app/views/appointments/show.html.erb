@@ -24,8 +24,8 @@
                 </div>
               <% elsif %>
                 <div id="ratebox">
-                  <div id="ratebox1">
-                  <div id="rateYo" class="rate"></div>
+                  <div id="ratebox_con">
+                  <div id="rateYo"></div>
                   </div>
                 </div>
                 <span id="content"></span>
@@ -76,7 +76,7 @@ $(document).ready(function () {
 
   $(function () {
     $("#rateYo").rateYo({
-      starWidth: "50px",
+      starWidth: "40px",
       numStars: 5,
       fullStar: true,
       rating: <%= @raty %>
