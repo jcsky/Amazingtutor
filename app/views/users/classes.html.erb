@@ -50,10 +50,8 @@
                   <div class="info-eval col-xs-7">
                     <p><%= a.teacher.user.first_name %>
                       <%= a.teacher.user.last_name %></p>
-                    <div>
                       <div id="rateYo-<%= i %>"></div>
                       <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
-                    </div>
                   </div>
                   <div class=" col-xs-2 info-flag">
                     <%= image_tag("flag.png") %>
@@ -217,7 +215,7 @@
 
     $("#rateYo-<%= a.id %>").rateYo({starWidth: "40px", numStars: 5, fullStar: true, readOnly: true, rating: <%= @raty %>});
 
-    $("#rateYo-" + i).rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
+    $("#rateYo-" + i).rateYo({starWidth: "15px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
 
     <% end %>
 

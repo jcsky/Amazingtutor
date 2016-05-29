@@ -2,7 +2,7 @@
     position: relative;
     padding: 0 5px;
     line-height: 0;
-    display: block;
+    display: inline-block;
     cursor: pointer;
 }
 .jq-ry-container[readonly=readonly] {
@@ -32,3 +32,17 @@
     left: 0;
     overflow: hidden;
 }
+#ratebox{
+    width: 360px;
+    margin: auto;
+}
+#ratebox1{
+    width: 260px;
+    margin: auto;
+}
+
+
+
+
+
+
