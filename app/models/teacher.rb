@@ -45,8 +45,7 @@ class Teacher < ActiveRecord::Base
         @days << @start + i.days
       end
     end
-    @days.select{|x| x if x>= Time.current.in_time_zone+12.hours }.map{|x|x.to_date}.uniq.sort
-
+    @days.select{|x| x if x>= Time.current.in_time_zone + 12.hours }.map{|x|x.to_date}.uniq.sort
   # @available_section_times.uniq.sort.select{|x| [x[0],x[1]] if x[0]>= Time.current.in_time_zone+12.hours }
   end
 
@@ -106,6 +105,7 @@ class Teacher < ActiveRecord::Base
       # byebug
     end
     @available_section_times.uniq.sort.select{|x| [x[0],x[1]] if x[0]>= Time.current.in_time_zone+12.hours }.map{|x| x[0].strftime('%r')+" - "+x[1].strftime('%r') }
+    raise
   end
 end
 # find_available_times   有bug 每天的開頭那個物件找不到時間 還有如果選正常課的 最後只剩半小時不能選
