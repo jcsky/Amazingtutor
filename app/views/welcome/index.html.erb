@@ -23,9 +23,9 @@
             <li><%= link_to l.language, teacherwall_path( :language_id => l.id,:week=>params[:week]  ) %></li>
             <% end %>
           <% else %>
-            <li><%= link_to "All", root_path %></li>
+            <li><%= link_to "All", teacherwall_path %></li>
             <% Language.all.each do |l| %>
-            <li><%= link_to l.language, root_path( :language_id => l.id  ) %></li>
+            <li><%= link_to l.language, teacherwall_path( :language_id => l.id  ) %></li>
             <% end %>
             <% end %>
           </ul>

@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 20160526054951) do
     t.boolean  "admin"
     t.string   "fb_pic"
     t.string   "google_pic"
-
+    t.string   "alternate_email"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

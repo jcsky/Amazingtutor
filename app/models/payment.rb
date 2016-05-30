@@ -15,7 +15,7 @@ class Payment < ActiveRecord::Base
   end
 
   def external_id
-    "#{self.id}ATA#{Rails.env.upcase[0]}"
+    "#{self.id}ATC#{Rails.env.upcase[0]}"
   end
 
   def email

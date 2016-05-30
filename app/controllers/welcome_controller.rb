@@ -63,7 +63,6 @@ class WelcomeController < ApplicationController
        @next_page = @teachers.next_page
     end
 
-      end
 
   end
 
