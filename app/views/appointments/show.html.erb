@@ -1,4 +1,4 @@
-<div id="pop-black" class="pop-bg"></div>
+
       <div id="evaluation-white" class="evaluation-white">
         <div class="evaluation col-xs-12">
           <div class="evaluation-button clearfix">
@@ -13,14 +13,22 @@
                   <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
                 </div>
               <% if evaluatable_type_is_user(@appointment) %>
-                <div id="rateYo"></div><span id="content"></span>
+                <div id="ratebox">
+                  <div id="rateYo"></div>
+                </div>
+                <span id="content"></span>
                 <div class="evaluation-comment">
                   <h5>Comments</h5>
                   <hr>
                   <%= @appointment.evaluations.where(evaluatable_type: "User").first.comment %>
                 </div>
               <% elsif %>
-                <div id="rateYo" class="rate"></div><span id="content"></span>
+                <div id="ratebox">
+                  <div id="ratebox_con">
+                  <div id="rateYo"></div>
+                  </div>
+                </div>
+                <span id="content"></span>
                 <div class="evaluation-comment">
                   <h5>Comments</h5>
                   <hr>
@@ -66,14 +74,9 @@
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function () {
 
-  $('#pop-black').show();
-
-
-
-
   $(function () {
     $("#rateYo").rateYo({
-      starWidth: "50px",
+      starWidth: "40px",
       numStars: 5,
       fullStar: true,
       rating: <%= @raty %>

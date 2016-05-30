@@ -39,11 +39,16 @@ gem 'populator'
 # 多國語系
 gem 'rails-i18n'
 
+
+# 分頁
+gem 'kaminari'
+
 # mailer
 gem 'sidekiq'
 
 # 佈署 Sidekiq
 gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+
 
 #paperclip
 gem "paperclip"
