@@ -40,7 +40,7 @@
           </span>
           <span class="moneyred">
             <% if t.ten_fee/10 < t.one_fee %>
-            <%= t.one_fee_exchange_to(current_user.currency) %>~<%= t.ten_fee_exchange_to(current_user.currency) %>
+            <%= number_to_currency(t.one_fee_exchange_to(current_user.currency), precision: 0) %>~<%= t.ten_fee_exchange_to(current_user.currency) %>
           <% else %>
             <%= t.one_fee %>~<%= t.ten_fee/10 %>
             <% end %>
