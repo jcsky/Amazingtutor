@@ -1,6 +1,8 @@
+<tr class="teacher">
+
 <% @teachers.each do |t| %>
 <% if t.check == "checked" %>
-<div class="container">
+<div class="container scroll">
   <div class="info">
     <div class="row">
       <div class="col-sm-5">
@@ -62,6 +64,9 @@
 </div>
 <% end %>
 <% end %>
+
+</tr>
+
 <script>
   $(document).ready(function () {
     (function () {

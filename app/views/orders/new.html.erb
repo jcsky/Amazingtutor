@@ -69,7 +69,7 @@
             <h6>&nbsp;&nbsp;Trial session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred">200 TWD</h5>
+            <h5 class="moneyred"><%= @order.teacher.trial_fee %> TWD</h5>
             <p>30 mins</p>
           </div>
         </div>
@@ -83,7 +83,7 @@
             <h6>&nbsp;&nbsp;1 session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred">400 TWD</h5>
+            <h5 class="moneyred"><%= @order.teacher.one_fee %> TWD</h5>
             <p>per hour</p>
           </div>
         </div>
@@ -97,7 +97,7 @@
             <h6>&nbsp;&nbsp;5 session</h6>
           </div>
           <div class="col-xs-6 text-right ">
-            <h5 class="moneyred">1900 TWD</h5>
+            <h5 class="moneyred"> <%= @order.teacher.five_fee/5 %> TWD</h5>
             <p>per hour</p>
           </div>
         </div>
@@ -111,7 +111,7 @@
             <h6>&nbsp;&nbsp;10 session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred">3500 TWD</h5>
+            <h5 class="moneyred"> <%= @order.teacher.ten_fee/10 %> TWD</h5>
             <p>per hour</p>
           </div>
         </div>
@@ -145,18 +145,18 @@
   </div>
 
   <script>
-    $("#amount").val(400);
+    $("#amount").val(<%= @order.teacher.one_fee %>);
     $("#radio-1-4").click(function () {
-      $("#amount").val(200);
+      $("#amount").val(<%= @order.teacher.trial_fee %>);
     });
     $("#radio-1-3").click(function () {
-      $("#amount").val(3500);
+      $("#amount").val(<%= @order.teacher.ten_fee %>);
     });
     $("#radio-1-2").click(function () {
-      $("#amount").val(1900);
+      $("#amount").val(<%= @order.teacher.five_fee %>);
     });
     $("#radio-1-1").click(function () {
-      $("#amount").val(400);
+      $("#amount").val(<%= @order.teacher.one_fee %>);
     });
 
     $("#session").val("1");

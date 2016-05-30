@@ -24,10 +24,10 @@
 /config/google.yml
 .byebug_history
 /config/secrets.yml
+/config/pay2go.yml
 /config/email.yml
 /config/pay2go.yml
 /db/seeds.rb
 /db/seeds.rb.example
 /config/secrets.yml.example
 /lib/tasks/dev.rake.example
-

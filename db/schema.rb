@@ -110,6 +110,11 @@ ActiveRecord::Schema.define(version: 20160526054951) do
     t.text     "paypal_params"
   end
 
+  create_table "payapl_payments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "payments", force: :cascade do |t|
     t.integer  "order_id"
     t.string   "payment_method"
