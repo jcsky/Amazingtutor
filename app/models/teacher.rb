@@ -49,13 +49,14 @@ class Teacher < ActiveRecord::Base
   # @available_section_times.uniq.sort.select{|x| [x[0],x[1]] if x[0]>= Time.current.in_time_zone+12.hours }
   end
 
-  def find_available_times(pickedday= Time.current.in_time_zone+1.day,section=2)
+  def find_available_times(pickedday= Time.current.in_time_zone,section=2)
     @available_section_times = []
     @pickedday = pickedday.to_date.in_time_zone
     @pickedday_start = @pickedday.beginning_of_day
     @pickedday_end = @pickedday.end_of_day
     # type 要輸入1 or 2 試上 或正式課
-    self.available_sections.each do |available_section|
+    # byebug
+    available_sections.each do |available_section|
       for i in 0..((available_section.end - available_section.start) / 24.hours).to_i+1
         @forday = available_section.start.to_date + i.days
 
@@ -102,10 +103,9 @@ class Teacher < ActiveRecord::Base
           end
         end
       end
-      # byebug
     end
     @available_section_times.uniq.sort.select{|x| [x[0],x[1]] if x[0]>= Time.current.in_time_zone+12.hours }.map{|x| x[0].strftime('%r')+" - "+x[1].strftime('%r') }
-    raise
   end
 end
 # find_available_times   有bug 每天的開頭那個物件找不到時間 還有如果選正常課的 最後只剩半小時不能選
+# 方法裡面在call 方法？    有必要用到module???

@@ -18,10 +18,12 @@ class UsersController < ApplicationController
 
     @teachers = Teacher.where(id: current_user.user_available_sections.pluck(:teacher_id).uniq)
     if params[:selected]
-      # @teacher = Teacher.find(params[:tid].to_i)
-      @selected = params[:selected].to_date
-      @times = Teacher.find(348).find_available_times(@selected)
+      @teacher = Teacher.find(params[:tid].to_i)
 
+      @selected = params[:selected].to_date
+
+      @times = @teacher.find_available_times(@selected,)
+  # byebug
     end
 
   end

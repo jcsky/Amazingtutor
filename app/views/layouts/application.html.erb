@@ -92,6 +92,7 @@
             </button>
             <h4 class="message_modal_title" id="myModalLabel">Feedback</h4>
           </div>
+
           <%= form_for Message.new do |f| %>
           <div class="modal-body">
             <div class="container-fluid">
@@ -101,7 +102,7 @@
               </div>
               <div class="row message_input">
                 <div class="col-xs-3"><%= f.label :email, "Email" %></div>
-                <div class="col-xs-9"><%= f.email_field :email,value: current_user.try(:alternate_email),placeholder:"We will send messages back by this email. ", :class => "form-control" %></div>
+                <div class="col-xs-9"><%= f.email_field :email,value: current_user.try(:email),placeholder:"We will send messages back by this email. ", :class => "form-control" %></div>
               </div>
               <div class="row message_input">
                 <div class="col-xs-3"><%= f.label :message, "Explanation" %></div>
