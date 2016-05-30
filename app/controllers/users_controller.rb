@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def mytutor
-
+    @appointment = Appointment.new
     @teachers = Teacher.where(id: current_user.user_available_sections.pluck(:teacher_id).uniq)
     if params[:selected]
       @teacher = Teacher.find(params[:tid].to_i)
@@ -30,7 +30,6 @@ class UsersController < ApplicationController
       format.html
       format.js
     end
-
   end
 
   def profile

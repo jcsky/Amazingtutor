@@ -46,22 +46,18 @@
               <i class="fa fa-comment-o"></i>
               <span>Speak
               </span>
-              <span>
-                <% t.languages.each do |x| %>
-                <%= x.language %>
-                <% end %></span><br>
+              <span>    <% t.languages.each do |x| %>
+                  <%= x.language %>
+                  <% end %></span><br>
               <i class="fa fa-usd"></i>
               <span>Rate
               </span>
-              <span class="moneyred">
-                <% if t.ten_fee/10 < t.one_fee %>
+              <span class="moneyred">  <% if t.ten_fee/10 < t.one_fee %>
                 <%= t.ten_fee/10 %>~<%= t.one_fee %>
               <% else %>
                 <%= t.one_fee %>~<%= t.ten_fee/10 %>
-                <% end %>
-                TW/hour</span><br>
-              <h5><%= current_user.user_available_sections.first.available_section/2 %>
-                UnScheduled</h5>
+                <% end %> TW/hour</span><br>
+              <h5><%= current_user.user_available_sections.first.available_section/2 %> UnScheduled</h5>
               <button type="button" data-toggle="modal" data-target="#booknow-<%= t.id %>">Book Now</button>
             </div>
           </div>
@@ -84,50 +80,48 @@
       <div class="container-fluid">
         <div class="calender-booking">
           <h6>All time listed are in your local timezone</h6>
-          <h6>Only can pick classes after 12 hours from now</h6>
           <div class="insert-calender">
             <div id="calendar-<%= t.id %>"></div>
           </div>
         </div>
         <div class="select-list">
-
+            <h6>Only can pick classes after 12 hours from now</h6>
           <div class="row">
+             <%#= form_for @appointment, :url => url_for(:controller => 'appointments', :action => 'create') do |x|%>
             <div class="col-xs-4">
               <div class="time">
                 <span>Type</span>
-                <%#=  ,{disabled:trail_check(current_user,t) }%>
-                <%= select({},{},options_for_select([["Normal 1hour", "2"],["Trail 30mins", "1"]] ,{}),{}, {id:"type_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow type-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                <%= select({},{},options_for_select([["Normal 1hour", "2"],["Trail 30mins", "1"]],{disabled:trail_check(current_user,t) }),{}, {id:"type_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow type-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
               </div>
             </div>
             <div class="col-xs-3">
               <div class="day">
                 <span>Day</span>
 
-                <%= select({},{},t.find_available_days(),{}, {id:"day_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow day-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                <%= select({},{},t.find_available_days(), {:include_blank => "Select a day"}, {id:"day_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow day-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
                 <%#= collection_select(:language_ids, Language.all, :id, :language,{}, { :class => "form-control",:id=>"language-select",:style=>"width:100%;" }) %>
               </div>
-
             </div>
             <div class="col-xs-5">
               <div class="time">
                 <span>Time</span>
-                <%#= @type %>
-                <%#= select({},{},t.find_available_times("Thu, 3 Jun 2016",2),{}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
 
                 <div id="times-select-<%= t.id %>">
-                  <%= select({},{},@times,{}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                  <%= select({},{},@times,{:include_blank => "Select day first"}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow time-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
                 </div>
 
                 <%#= select({},{},t.find_available_times("Sun, 3 Jun 2016",2).map{|x| x[0].strftime('%R')+" - "+x[1].strftime('%R') },{}, {:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
               </div>
             </div>
+
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn closebtn" data-dismiss="modal">Close</button>
-        <button class="btn bookteacherbtn">Quick Book</button>
+          <%#= x.submit 'Quick Book',:class=>"btn bookteacherbtn" %>
+          <button type="button" class="btn bookteacherbtn" data-dismiss="modal" id="book_pass_params">Quick Book</button>
       </div>
     </div>
   </div>
@@ -135,16 +129,6 @@
 <% end %>
 
 <script>
-  $(document).ready(function () {
-    //
-    // <% @teachers.each do |t|%>
-    //
-    // $('#times_select_<%= t.id %>').selectpicker({size: 4});
-    //
-    // $('#type_select_<%= t.id %>').on('change', function () {
-    //   var type = $(this).val();
-    //
-    //   console.log(type)
 
   $('.teacher-modal').on('shown.bs.modal', function () {
     var teacher_modal = $(this).closest(".teacher-modal")
@@ -188,7 +172,6 @@
       });
     });
 
-
   function update_times_select() {
     var teacher_modal = $(this).closest(".teacher-modal");
 
@@ -210,6 +193,7 @@
       }
     });
   }
+
   $('.type-select').on('change', function(){
     update_times_select.bind(this)();
   });
@@ -217,5 +201,26 @@
   $('.day-select').on('change', function(){
     update_times_select.bind(this)();
   });
- });
+
+  $('#book_pass_params').click(function(){
+    var teacher_modal = $(this).closest(".teacher-modal");
+
+    var selected = teacher_modal.find(".day-select").find("option:selected").val();
+    //var type_selected = teacher_modal.find(".type-select").find("option:selected").val();
+    var type = teacher_modal.find(".type-select").find("option:selected").val();
+
+    var tid = teacher_modal.data("teacher-id");
+    var time = teacher_modal.find("#times_select_"+tid).find("option:selected").val();
+console.log(time, selected, type, tid);
+    $.ajax({
+      type: 'POST',
+      dataType: 'script',
+      url: "/appointments",
+      data: {
+        tid: tid,
+        selected: selected,
+        time: time
+      }
+    });
+  });
 </script>

@@ -93,7 +93,14 @@ class AppointmentsController < ApplicationController
   end
 
   def set_appointment_params
-    params.permit(:teacher_id, :start, :end)
+    # {"tid"=>"353", "selected"=>"2016-06-02", "time"=>"07:30:00 PM - 08:30:00 PM", "controller"=>"appointments", "action"=>"create"}
+    start_time, end_time = params[:time].split('-')
+
+    appointment_params = {}
+    appointment_params[:teacher_id] = params[:tid].to_i
+    appointment_params[:start]      = (params[:selected] + ' ' + start_time).to_datetime.in_time_zone
+    appointment_params[:end]        = (params[:selected] + ' ' + end_time).to_datetime.in_time_zone
+    appointment_params
   end
 
   def set_appointment_new_params
