@@ -22,6 +22,10 @@ class UsersController < ApplicationController
       @selected = params[:selected].to_date
       @times = Teacher.find(348).find_available_times(@selected)
 
+      respond_to do |format|
+      format.js
+    end
+
     end
 
   end
