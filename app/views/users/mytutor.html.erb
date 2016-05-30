@@ -72,7 +72,7 @@
   </div>
 </div>
 <% @teachers.each do |t|%>
-<div class="modal fade" id="booknow-<%= t.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade teacher-modal" data-calendar-url="<%= teacher_calendar_teacher_available_section_url(t.id)%>" data-teacher-id="<%= t.id %>" id="booknow-<%= t.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -96,14 +96,14 @@
               <div class="time">
                 <span>Type</span>
                 <%#=  ,{disabled:trail_check(current_user,t) }%>
-                <%= select({},{},options_for_select([["Normal 1hour", "2"],["Trail 30mins", "1"]]),{}, {id:"type_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                <%= select({},{},options_for_select([["Normal 1hour", "2"],["Trail 30mins", "1"]] ,{}),{}, {id:"type_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow type-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
               </div>
             </div>
             <div class="col-xs-3">
               <div class="day">
                 <span>Day</span>
 
-                <%= select({},{},t.find_available_days(),{}, {id:"day_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow day" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                <%= select({},{},t.find_available_days(),{}, {id:"day_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow day-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
                 <%#= collection_select(:language_ids, Language.all, :id, :language,{}, { :class => "form-control",:id=>"language-select",:style=>"width:100%;" }) %>
               </div>
 
@@ -113,9 +113,10 @@
                 <span>Time</span>
                 <%#= @type %>
                 <%#= select({},{},t.find_available_times("Thu, 3 Jun 2016",2),{}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
-                <% if @times %>
-                <%= select({},{},@times,{}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
-                <% end %>
+
+                <div id="times-select-<%= t.id %>">
+                  <%= select({},{},@times,{}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                </div>
 
                 <%#= select({},{},t.find_available_times("Sun, 3 Jun 2016",2).map{|x| x[0].strftime('%R')+" - "+x[1].strftime('%R') },{}, {:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
               </div>
@@ -135,86 +136,86 @@
 
 <script>
   $(document).ready(function () {
+    //
+    // <% @teachers.each do |t|%>
+    //
+    // $('#times_select_<%= t.id %>').selectpicker({size: 4});
+    //
+    // $('#type_select_<%= t.id %>').on('change', function () {
+    //   var type = $(this).val();
+    //
+    //   console.log(type)
 
-    <% @teachers.each do |t|%>
+  $('.teacher-modal').on('shown.bs.modal', function () {
+    var teacher_modal = $(this).closest(".teacher-modal")
+    var tid = teacher_modal.data("teacher-id");
+    var calendar_url = teacher_modal.data("calendar-url");
 
-    $('#times_select_<%= t.id %>').selectpicker({size: 4});
-
-    $('#type_select_<%= t.id %>').on('change', function () {
-      var type = $(this).val();
-
-      console.log(type)
-    });
-
-    $('#day_select_<%= t.id %>').on('change', function () {
-      var day = $(this).val();
-      console.log(day)
-    });
-
-    $('#booknow-<%= t.id %>').on('shown.bs.modal', function () {
-      $('#calendar-<%= t.id %>').fullCalendar({
-        //lulu setting
-        buttonIcons: false,
-        buttonText: {
-          prev: '<  Prev',
-          next: 'Next  >'
-        },
-        header: {
-          left: 'prev',
-          center: 'title',
-          right: 'next'
-        },
-        axisFormat: 'H:mmA',
-        dragOpacity: {
-          agenda: .5
-        },
-        theme: false,
-        dragScroll: false,
-        contentHeight: 'auto',
-        eventColor: '#C73C3C',
-        //lulu setting 24小時制 大寫H timeFormat: 'H:mm',
-        allDaySlot: false,
-        defaultDate: '<%=Time.now.strftime("%Y-%m-%d")%>',
-        defaultView: 'agendaWeek',
-        ignoreTimezone: false,
-        droppable: true,
-        eventLimit: true, // allow "more" link when too many events
-        eventSources: [
-          {
-            //teacher events source
-            url: '<%= teacher_calendar_teacher_available_section_url(t.id)%>',
-            rendering: 'background'
-          }
-        ]
+    $('#calendar-' + tid ).fullCalendar({
+      //lulu setting
+      buttonIcons: false,
+      buttonText: {
+        prev: '<  Prev',
+        next: 'Next  >'
+      },
+      header: {
+        left: 'prev',
+        center: 'title',
+        right: 'next'
+      },
+      axisFormat: 'H:mmA',
+      dragOpacity: {
+        agenda: .5
+      },
+      theme: false,
+      dragScroll: false,
+      contentHeight: 'auto',
+      eventColor: '#C73C3C',
+      //lulu setting 24小時制 大寫H timeFormat: 'H:mm',
+      allDaySlot: false,
+      defaultDate: '<%=Time.now.strftime("%Y-%m-%d")%>',
+      defaultView: 'agendaWeek',
+      ignoreTimezone: false,
+      droppable: true,
+      eventLimit: true, // allow "more" link when too many events
+      eventSources: [
+        {
+          //teacher events source
+          url: calendar_url,
+          rendering: 'background'
+        }
+      ]
       });
     });
-    // $('.selectpicker').selectpicker('val', 'Mustard's);
 
-    <% end %>
 
-    $(function () {
+  function update_times_select() {
+    var teacher_modal = $(this).closest(".teacher-modal");
 
-      <% @teachers.each do |t|%>
+    var selected = teacher_modal.find(".day-select").find("option:selected").val();
+    //var type_selected = teacher_modal.find(".type-select").find("option:selected").val();
+    var type = teacher_modal.find(".type-select").find("option:selected").val();
 
-      $('.day').on('change', function () {
-        var selected = $(this).find("option:selected").val();
-        var tid = <%= t.id %>;
-        var userid = <%= current_user.id %>;
-        $.ajax({
-          type: 'post',
-          url: "/users/" + userid + "/mytutor",
-          data: {
-            tid: tid,
-            selected: selected
-          },
-          success: function () {},
-          error: function () {
-            alert("Please give teacher rating: 1~5");
-          }
-        });
+    var tid = teacher_modal.data("teacher-id");
 
-      });
-      <% end %>
+    var userid = <%= current_user.id %>;
+    $.ajax({
+      type: 'GET',
+      dataType: 'script',
+      url: "/users/" + userid + "/mytutor",
+      data: {
+        tid: tid,
+        selected: selected,
+        type: type
+      }
     });
+  }
+  $('.type-select').on('change', function(){
+    update_times_select.bind(this)();
   });
+
+  $('.day-select').on('change', function(){
+    update_times_select.bind(this)();
+  });
+ });
 </script>

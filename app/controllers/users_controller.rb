@@ -19,11 +19,16 @@ class UsersController < ApplicationController
     @teachers = Teacher.where(id: current_user.user_available_sections.pluck(:teacher_id).uniq)
     if params[:selected]
       @teacher = Teacher.find(params[:tid].to_i)
-
       @selected = params[:selected].to_date
+      @type = params[:type].to_i
+      @times = @teacher.find_available_times(@selected,@type)
+    else
+      @times = []
+    end
 
-      @times = @teacher.find_available_times(@selected,)
-  # byebug
+    respond_to do |format|
+      format.html
+      format.js
     end
 
   end
@@ -49,6 +54,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_authority
     redirect_to root_path if current_user==nil
   end
