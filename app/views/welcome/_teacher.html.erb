@@ -39,13 +39,13 @@
           <span>Rate:
           </span>
           <span class="moneyred">
-            <% if t.ten_fee/10 < t.one_fee %>
-            <%= number_to_currency(t.one_fee_exchange_to(current_user.currency), precision: 2) %>~<%= number_to_currency(t.ten_fee_exchange_to(current_user.currency),precision: 2 ) %>
-          <% else %>
-            <%= t.one_fee %>~<%= t.ten_fee/10 %>
+            <% unless current_user %>
+              <%= number_to_currency(t.one_fee, precision: 2) %>~<%= number_to_currency(t.ten_fee,precision: 2 ) %>
+              USD/hour</span><br>
+            <% else %>
+              <%= number_to_currency(t.one_fee_exchange_to(current_user.currency), precision: 2) %>~<%= number_to_currency(t.ten_fee_exchange_to(current_user.currency),precision: 2 ) %>
+              <%= current_user.currency %>/hour</span><br>
             <% end %>
-          <%= current_user.currency %>/hour</span><br>
-            <p><%= @money %></p>
 
           <i class="fa fa-rss"></i>
           <span>Trial:
