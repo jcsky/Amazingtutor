@@ -22,20 +22,17 @@
             </div>
           </div>
         </div>
+        <% @appointments.select(:teacher_id).uniq.each do |a|%>
         <div class="col-xs-12">
           <div class="tutor-info">
             <div class="clearfix tutor-top">
               <div class="info-mypic col-xs-3 pull-left col-sm-2">
-                <%= image_tag("oval155.png") %>
+                <%= user_headimage(a.teacher.user) %>
               </div>
               <div class="info-eval col-xs-7 col-sm-7">
-                <p>Abner Chao</p>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                <i class="fa fa-star-o"></i>
-                <span>(132)</span>
+                <p><%= a.teacher.user.last_name %> <%= a.teacher.user.first_name %></p>
+                <div id="rateYo-<%= a.teacher_id %>" ></div>
+                <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
               </div>
               <div class=" col-xs-2 info-flag col-sm-1 col-sm-push-1 info-flag-class-fix">
                 <%= image_tag("flag.png") %>
@@ -43,9 +40,12 @@
             </div>
             <div class="clearfix info-tag">
               <i class="fa fa-comment-o"></i>
-              <span>Speak
-              </span>
-              <span>Chinese,English</span><br>
+              <span>Speak:</span>
+              <span>
+                <% a.teacher.languages.each do |language| %>
+                <%= language.language %>
+                <% end %>
+              </span><br>
               <i class="fa fa-usd"></i>
               <span>Rate
               </span>
@@ -56,10 +56,12 @@
             </div>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="modal fade" id="booknow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -104,4 +106,13 @@
   $('#booknow').on('shown.bs.modal', function () {
     $('#booknow').focus()
   })
+
+  $(document).ready(function () {
+
+    <% @appointments.select(:teacher_id).uniq.each do |a|%>
+    $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
+
+    <% end %>
+
+  });
 </script>

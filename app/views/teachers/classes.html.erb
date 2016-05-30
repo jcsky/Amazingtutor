@@ -45,6 +45,7 @@
                 <div class="info-eval col-xs-7">
                   <p><%= a.user.first_name %>
                   <%= a.user.last_name %></p>
+                  Time Zone: <%= a.user.time_zone %>
                 </div>
                 <div class=" col-xs-2 info-flag">
                   <%= image_tag("flag.png") %>
@@ -75,7 +76,6 @@
             </div>
           </div>
         </div>
-        </div>
 
           <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
           <div id="evaluation-white-<%= a.id %>" class="evaluation-white">
@@ -83,7 +83,7 @@
               <div class="evaluation-button clearfix">
                 <%= link_to "Back" ,classes_teacher_path ,:class=>"pull-left"%>
                 <%#= link_to "Send" ,root_path ,:class=>"pull-right",:id =>"eval-send"%>
-              </div>
+
               <div class="evaluation-block col-xs-10 col-xs-push-1">
                 <div class="evaluation-me text-center">
                   <%= image_tag("ool.png") %>
@@ -100,6 +100,7 @@
                   <textarea id="comment"></textarea>
                   <!-- <textarea class="" placeholder="You can ENTER your comment here!!
                     What did you like about your teacher, and what could your teacher improve?"></textarea> -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -108,6 +109,7 @@
       <% end %>
     </div>
   </div>
+</div>
 </div>
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>

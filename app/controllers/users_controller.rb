@@ -7,10 +7,12 @@ class UsersController < ApplicationController
     @teacher = Teacher.where(:id => Teacher.all.first).first
   end
   def remark
+    @evaluations = Evaluation.where(evaluatable_type: "Teacher", evaluated_id: @user)
   end
   def changepassword
   end
   def mytutor
+    @appointments = @user.appointments
   end
   def profile
   end
@@ -34,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def user_params

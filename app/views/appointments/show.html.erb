@@ -1,25 +1,34 @@
-<div id="pop-black" class="pop-bg"></div>
+
       <div id="evaluation-white" class="evaluation-white">
         <div class="evaluation col-xs-12">
           <div class="evaluation-button clearfix">
 
             <% if current_user == @appointment.user %>
-              <%= link_to "Back", classes_user_path ,:class=>"pull-left"%>
+              <%= link_to "Back", classes_user_path(@user) ,:class=>"pull-left"%>
               <div class="evaluation-block col-xs-10 col-xs-push-1">
                 <div class="evaluation-me text-center">
-                  <%= image_tag(@user.image) %>
-                  <h4>Abner Chao</h4>
+                  <%= user_headimage(@appointment.teacher.user) %>
+                  <h4><%= @appointment.teacher.user.first_name %>
+                      <%= @appointment.teacher.user.last_name %></h4>
                   <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
                 </div>
               <% if evaluatable_type_is_user(@appointment) %>
-                <div id="rateYo"></div><span id="content"></span>
+                <div id="ratebox">
+                  <div id="rateYo"></div>
+                </div>
+                <span id="content"></span>
                 <div class="evaluation-comment">
                   <h5>Comments</h5>
                   <hr>
                   <%= @appointment.evaluations.where(evaluatable_type: "User").first.comment %>
                 </div>
               <% elsif %>
-                <div id="rateYo" class="rate"></div><span id="content"></span>
+                <div id="ratebox">
+                  <div id="ratebox_con">
+                  <div id="rateYo"></div>
+                  </div>
+                </div>
+                <span id="content"></span>
                 <div class="evaluation-comment">
                   <h5>Comments</h5>
                   <hr>
@@ -36,8 +45,9 @@
             <%= link_to "Back", classes_teacher_path(current_user.teacher.id) ,:class=>"pull-left"%>
               <div class="evaluation-block col-xs-10 col-xs-push-1">
                 <div class="evaluation-me text-center">
-                  <%= image_tag(current_user.image) %>
-                  <h4>Abner Chao</h4>
+                  <%= user_headimage(@appointment.user) %>
+                  <h4><%= @appointment.user.first_name %>
+                      <%= @appointment.user.last_name %></h4>
                   <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
                 </div>
             <div class="evaluation-comment">
@@ -62,60 +72,63 @@
 
 
 <script type="text/javascript" charset="utf-8">
+$(document).ready(function () {
 
-$(function () {
-  $("#rateYo").rateYo({
-    starWidth: "50px",
-    numStars: 5,
-    fullStar: true,
-    rating: <%= @raty %>
-  });
-});
-
-$(function () {
-
-  var $rateYo = $("#rateYo").rateYo();
-
-  $(".button").click(function () {
-    var rating = $rateYo.rateYo("rating");
-    var comment = document.getElementById("comment").value;
-
-    var appointment_id =  <%= @appointment.id %>;
-    $.ajax({
-      type: 'POST',
-      url: "/appointments/" + appointment_id + "/evaluations",
-      data: {
-        type: 0,
-        rating: rating,
-        comment: comment
-      },
-      success: function(){
-        window.location.assign("<%= classes_user_path(@appointment.user_id) %>");
-      },
-      error: function() {
-        alert("Please give teacher rating: 1~5");
-      }
+  $(function () {
+    $("#rateYo").rateYo({
+      starWidth: "40px",
+      numStars: 5,
+      fullStar: true,
+      rating: <%= @raty %>
     });
   });
 
 
-  $(".buttonTa").click(function () {
-    var commentTa = document.getElementById("commentTa").value;
+  $(function () {
 
-     var appointment_id =  <%= @appointment.id %>;
-    $.ajax({
-      type: 'POST',
-      url: "/appointments/" + appointment_id + "/evaluations",
-      data: {
-        type: 1,
-        commentTa: commentTa
-      },
-      success: function(){
-        window.location.assign("<%= classes_teacher_path(@appointment.teacher_id) %>");
-      },
-      error: function() {
-        alert("Please give teacher rating: 1~5");
-      }
+    var $rateYo = $("#rateYo").rateYo();
+
+    $(".button").click(function () {
+      var rating = $rateYo.rateYo("rating");
+      var comment = document.getElementById("comment").value;
+
+      var appointment_id =  <%= @appointment.id %>;
+      $.ajax({
+        type: 'POST',
+        url: "/appointments/" + appointment_id + "/evaluations",
+        data: {
+          type: 0,
+          rating: rating,
+          comment: comment
+        },
+        success: function(){
+          window.location.assign("<%= classes_user_path(@appointment.user_id) %>");
+        },
+        error: function() {
+          alert("Please give teacher rating: 1~5");
+        }
+      });
+    });
+
+
+    $(".buttonTa").click(function () {
+      var commentTa = document.getElementById("commentTa").value;
+
+       var appointment_id =  <%= @appointment.id %>;
+      $.ajax({
+        type: 'POST',
+        url: "/appointments/" + appointment_id + "/evaluations",
+        data: {
+          type: 1,
+          commentTa: commentTa
+        },
+        success: function(){
+          window.location.assign("<%= classes_teacher_path(@appointment.teacher_id) %>");
+        },
+        error: function() {
+          alert("Please give teacher rating: 1~5");
+        }
+      });
     });
   });
 
