@@ -78,7 +78,10 @@ gem 'bootstrap-sass' ,' ~>3.3.6'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-
+# 貨幣顯示轉換
+gem 'money'
+gem 'json'
+gem 'google_currency'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
