@@ -25,6 +25,7 @@
 .byebug_history
 /config/secrets.yml
 /config/pay2go.yml
+/config/pay2go.yml.example
 /config/email.yml
 /config/pay2go.yml
 /db/seeds.rb
