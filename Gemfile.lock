@@ -389,11 +389,8 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
-<<<<<<< HEAD
   json
-=======
   kaminari
->>>>>>> 672ff52fd9e754c84862d3df58cdfa303dc80155
   momentjs-rails (>= 2.9.0)
   money
   mysql2 (~> 0.3.18)
