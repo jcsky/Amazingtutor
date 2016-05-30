@@ -1,1 +1,5 @@
-$("#abc").empty().append("123")
+$("#times-select-<%= @teacher.id %>").html("<%=j render :partial=>"times_select", :locals => { :t => @teacher } %>");
+
+
+$('#times-select-<%= @teacher.id %> .selectpicker').selectpicker();
+

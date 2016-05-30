@@ -56,7 +56,7 @@ class Teacher < ActiveRecord::Base
     @pickedday_start = @pickedday.beginning_of_day
     @pickedday_end = @pickedday.end_of_day
     # type 要輸入1 or 2 試上 或正式課
-    self.available_sections.each do |available_section|
+    available_sections.each do |available_section|
       for i in 0..((available_section.end - available_section.start) / 24.hours).to_i+1
         @forday = available_section.start.to_date + i.days
 
