@@ -99,7 +99,9 @@ class AppointmentsController < ApplicationController
     appointment_params = {}
     appointment_params[:teacher_id] = params[:tid].to_i
     appointment_params[:start]      = (params[:selected] + ' ' + start_time).to_datetime.in_time_zone
+    appointment_params[:start] += -appointment_params[:start].utc_offset
     appointment_params[:end]        = (params[:selected] + ' ' + end_time).to_datetime.in_time_zone
+    appointment_params[:end] += -appointment_params[:end].utc_offset
     appointment_params
   end
 
