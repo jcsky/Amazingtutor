@@ -215,31 +215,33 @@
   </div>
 
   <div class="profile-container">
-    <div class="rating  col-xs-12">
-      <div class="rating-head col-xs-12">
-        <h5>Rating</h5>
+    <% if teacher_evaluations(@teacher) %>
+      <div class="rating  col-xs-12">
+        <div class="rating-head col-xs-12">
+          <h5>Rating</h5>
+        </div>
+
+        <% @evaluations.each do |e|%>
+
+        <div class="rating-content col-xs-12">
+          <div class="col-xs-1">
+            <%= image_tag(User.find(e.evaluatable_id).image) %>
+          </div>
+          <div class="col-xs-10 col-xs-push-1">
+            <span><%= User.find_by_id(e.evaluatable_id).first_name %></span>
+            <span><%= User.find_by_id(e.evaluatable_id).last_name %></span><br>
+
+            <div id="rateYo-<%= e.id %>"></div>
+            --
+            <span>Decemeber 9,2016</span>
+          </div>
+          <div class="col-xs-12 rating-comment">
+            <p><%= e.comment %></p>
+          </div>
+        </div>
+        <% end %>
       </div>
-
-      <% @evaluations.each do |e|%>
-
-      <div class="rating-content col-xs-12">
-        <div class="col-xs-1">
-          <%= image_tag(User.find(e.evaluatable_id).image) %>
-        </div>
-        <div class="col-xs-10 col-xs-push-1">
-          <span><%= User.find_by_id(e.evaluatable_id).first_name %></span>
-          <span><%= User.find_by_id(e.evaluatable_id).last_name %></span><br>
-
-          <div id="rateYo-<%= e.id %>"></div>
-          --
-          <span>Decemeber 9,2016</span>
-        </div>
-        <div class="col-xs-12 rating-comment">
-          <p><%= e.comment %></p>
-        </div>
-      </div>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
 

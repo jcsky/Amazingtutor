@@ -6,4 +6,10 @@ module TeacherProfilesHelper
       current_user.teacher.youtube.gsub('watch?v=', 'embed/')
     end
   end
+
+
+  def teacher_evaluations(teacher)
+    Evaluation.where(evaluated_id: teacher.id, evaluatable_type: "User").exists?
+  end
+
 end
