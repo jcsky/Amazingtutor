@@ -32,3 +32,4 @@
 /db/seeds.rb.example
 /config/secrets.yml.example
 /lib/tasks/dev.rake.example
+.byebug_history
