@@ -27,7 +27,6 @@
           <% @user.appointments.each do |a|%>
           <% i+=1 %>
           <div class="scheduled col-xs-12">
-            <div class="row">
             <div class="col-sm-5 scheduled-image img-responsive center-block">
               <div class="scheduled-dark"></div>
               <div class="scheduled-white">
@@ -35,7 +34,7 @@
               </div>
               <div class="scheduled-text">
                 <h5>SCHEDULED</h5>
-                <h1><%= a.start.in_time_zone.strftime('%H:%M, %p') %></h1>
+                <h4><%= a.start.in_time_zone.strftime('%H:%M, %p') %></h4>
                 <p><%= a.start.in_time_zone.strftime('%a') %>,
                 </p>
                 <h6><%= a.start.in_time_zone.strftime('%B%d, %Y') %></h6>
@@ -50,17 +49,23 @@
                   <div class="info-eval col-xs-7">
                     <p><%= a.teacher.user.first_name %>
                       <%= a.teacher.user.last_name %></p>
-                    <div id="rateYo-<%= i %>"></div>
-                    <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
+                      <div id="rateYo-<%= i %>"></div>
+                      <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
                   </div>
-                  <div class=" col-xs-2 info-flag">
-                    <%= image_tag("flag.png") %>
+                  <div class=" col-xs-2 ">
+                    <div class="dropdown ">
+                      <button class=" dropdown-toggle classes_dropdown" type="button" data-toggle="dropdown">
+                      <i class="fa fa-angle-down" aria-hidden="true"></i></span></button>
+                      <ul class="dropdown-menu classes_meun">
+                        <li><%= button_to('Cancel',appointment_path(:id=>a.id),method: "delete", data: { confirm: 'Are you sure ? Only can cancel classe after 12 hours from now', disable_with: 'loading...' }) %></li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <div class="clearfix ratingnow gotocalss">
                   <div class="conatiner-fluid">
                     <% if Time.current.in_time_zone >= a.start.in_time_zone-10.minutes &&
-                  Time.current.in_time_zone < a.end.in_time_zone %>
+                          Time.current.in_time_zone < a.end.in_time_zone %>
                     <form action="<%= a.appointment_url %>" target="_blank">
                       <button type="submit" name="gotoclass">GO TO CLASS</button>
                     </form>
@@ -81,38 +86,42 @@
                 </div>
               </div>
             </div>
-            </div>
           </div>
-        </div>
-      </div>
+            <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
+            <div id="evaluation-white-<%= a.id %>" class="evaluation-white">
+              <div class="evaluation col-xs-12">
+                <div class="evaluation-button clearfix">
+                  <%= link_to "Back" ,classes_user_path ,:class=>"pull-left"%>
+                  <!--  <button class="pull-right" id ="eval-send">Send</button>
+                </div> -->
+                  <div class="evaluation-block col-xs-10 col-xs-push-1">
+                    <div class="evaluation-me text-center">
+                      <%= user_headimage(a.teacher.user) %>
+                      <h4><%= a.teacher.user.first_name %>
+                          <%= a.teacher.user.last_name %></h4>
+                      <p>Wehope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
+                    </div>
+                    <div id="ratebox">
+                      <div id="ratebox_con">
+                        <div id="rateYo-<%= a.id %>" class="star-rating"></div>
+                      </div>
+                    </div>
 
-      <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
-      <div id="evaluation-white-<%= a.id %>" class="evaluation-white">
-        <div class="evaluation col-xs-12">
-          <div class="evaluation-button clearfix">
-            <%= link_to "Back" ,classes_user_path ,:class=>"pull-left"%>
-            <!--  <button class="pull-right" id ="eval-send">Send</button>
-          </div> -->
-            <div class="evaluation-block col-xs-10 col-xs-push-1">
-              <div class="evaluation-me text-center">
-                <%= image_tag(@user.image) %>
-                <h4>Abner Chao</h4>
-                <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
-              </div>
-              <div id="rateYo-<%= a.id %>" class="star-rating"></div>
-              <div class="evaluation-comment">
-                <h5>Comments</h5>
-                <hr>
-                <div class="user-comment">
-                  <%= a.evaluations.where(evaluatable_type: "User").first.try(:comment) %>
+                    <div class="evaluation-comment">
+                      <h5>Comments</h5>
+                      <hr>
+                      <div class="user-comment">
+                        <%= a.evaluations.where(evaluatable_type: "User").first.try(:comment) %>
+                      </div>
+                      <textarea id="comment"></textarea>
+                    </div>
+                  </div>
                 </div>
-                <textarea id="comment"></textarea>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
-      <% end %>
     <% else %>
       <div class="scheduled-content scheduled-editprofile-fix">
         <div class="scheduled-content-head">
@@ -188,7 +197,7 @@
   </div>
 </div>
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <script>
   var i = 0;
   $(document).ready(function () {
@@ -216,7 +225,7 @@
 
     $("#rateYo-<%= a.id %>").rateYo({starWidth: "40px", numStars: 5, fullStar: true, readOnly: true, rating: <%= @raty %>});
 
-    $("#rateYo-" + i).rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
+    $("#rateYo-" + i).rateYo({starWidth: "15px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
 
     <% end %>
 

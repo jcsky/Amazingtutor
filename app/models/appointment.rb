@@ -47,12 +47,12 @@ class Appointment < ActiveRecord::Base
   end
 
   def check_and_destroy!
-    if self.start >= 6.hours.ago
+    if self.start-12.hours< Time.now.in_time_zone
     #   in six hours   donothing
       puts 'can not delete'
-    elsif self.start < 6.hours.ago
+    elsif self.start-12.hours > Time.now.in_time_zone
     #   delete it and resume 2 point to user_available_sections
-    #   self.destroy
+      self.destroy
       puts 'delete'
     else
     #   do nothing

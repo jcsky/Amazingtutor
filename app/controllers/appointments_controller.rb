@@ -86,11 +86,12 @@ class AppointmentsController < ApplicationController
   end
 
   def destroy
+
     ActiveRecord::Base.transaction do
       appointment = current_user.appointments.find_by_id(destroy_appointment_params[:id])
       appointment.check_and_destroy!
-      
     end
+    redirect_to :back
   end
 
   private

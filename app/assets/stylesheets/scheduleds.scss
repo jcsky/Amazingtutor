@@ -278,6 +278,28 @@ h5{
     color: inherit;
   }
 }
+.classes_dropdown{
+  border-radius: 50%;
+  height: 20px;
+  width: auto;
+  background-color: transparent;
+  color: #bbb;
+  border:none;
+  margin-top: -5px;
+  i{
+    font-size: 18px;
+  }
+}
+.classes_meun{
+  left: -40px ;
+  min-width:inherit;
+  input{
+    background-color: transparent;
+    color: #bbb;
+    border: none;
+    outline: 0;
+  }
+}
 @media (max-width: $screen-xs-min) {
   .scheduled-text {
     h1 {
