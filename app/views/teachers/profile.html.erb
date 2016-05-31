@@ -259,64 +259,6 @@
 <script>
   $(document).ready(function () {
 
-    $('#external-events .trailed').each(function () {
-
-      // store data so the calendar knows to render an event upon drop
-      $(this).data('event', {
-        id: 'trailed',
-        title: $.trim($(this).text()), // use the element's text as the event title
-        constraint: 'available_for_booking',
-        duration: '00:30',
-        stick: true // maintain when user navigates (see docs on the renderEvent method),
-      });
-
-      // make the event draggable using jQuery UI
-      $(this).draggable({
-        zIndex: 9990, revert: true, // will cause the event to go back to its
-        revertDuration: 0, //  original position after the drag
-        helper: 'clone',
-        revert: 'invalid',
-        appendTo: 'body',
-        cursor: "pointer",
-        start: function (event, ui) {
-          $(this).hide();
-        },
-        stop: function (event, ui) {
-          $(this).show();
-        }
-      });
-    });
-    i = 1;
-    $('#external-events .nomal').each(function () {
-
-      // store data so the calendar knows to render an event upon drop
-      $(this).data('event', {
-        id: 'nomal' + i,
-        title: $.trim($(this).text()), // use the element's text as the event title
-        constraint: 'available_for_booking',
-        duration: '01:00',
-        stick: true // maintain when user navigates (see docs on the renderEvent method),
-      });
-
-      // make the event draggable using jQuery UI
-      $(this).draggable({
-        zIndex: 1000, revert: true, // will cause the event to go back to its
-        revertDuration: 0, //  original position after the drag
-        helper: 'clone',
-        revert: 'invalid',
-        appendTo: 'body',
-        cursor: "pointer",
-        start: function (event, ui) {
-          // $(this\\:clone).attr("fc-event");
-          $(this).hide();
-        },
-        stop: function (event, ui) {
-          $(this).show();
-        }
-
-      });
-      i++;
-    });
     $('#calendar').fullCalendar({
       //lulu setting
       buttonIcons: false,
@@ -405,7 +347,7 @@
 
   function labnolIframe() {
     var iframe = document.createElement("iframe");
-    iframe.setAttribute("src", "//www.youtube.com/embed/" + this.parentNode.dataset.id + "?autoplay=1&autohide=2&border=0&wmode=opaque&enablejsapi=1&controls=0&showinfo=0");
+    iframe.setAttribute("src", "//www.youtube.com/embed/" + this.parentNode.dataset.id + "?autoplay=1&autohide=2&border=0&wmode=opaque&enablejsapi=1&showinfo=0");
     iframe.setAttribute("frameborder", "0");
     iframe.setAttribute("id", "youtube-iframe");
     this.parentNode.replaceChild(iframe, this);

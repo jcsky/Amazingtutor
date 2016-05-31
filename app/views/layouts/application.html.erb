@@ -19,8 +19,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header brand-center">
           <%= link_to root_path , :class=>"navbar-brand" do%>
-          <span class="brand1">Amazing</span>
-          <span class="brand2">tutor</span>
+          <span class="brand1">Amazing</span><span class="brand2">tutor</span>
           <% end %>
         </div>
         <div class="navbar-header">
@@ -35,7 +34,10 @@
         <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <%= link_to("Scholarship", scholarship_path)%>
+              <%= link_to("Find a tutor", teacherwall_path)%>
+            </li>
+            <li>
+              <%= link_to("Scholarship", scholarship_path) unless current_user.nil?%>
             </li>
             <li>
               <%= link_to("Apply to Teach", apply_teacher_path)%>

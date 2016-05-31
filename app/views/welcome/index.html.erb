@@ -25,12 +25,13 @@
           <% else %>
             <li><%= link_to "All", root_path %></li>
             <% Language.all.each do |l| %>
-            <li><%= link_to l.language, root_path( :language_id => l.id  ) %></li>
+            <li><%= link_to l.language, teacherwall_path( :language_id => l.id  ) %></li>
             <% end %>
             <% end %>
           </ul>
         </div>
       </div>
+    
       <div class="col-sm-4 col-md-4">
         <p>Availability</p>
         <div class="dropdown dropdown-language">
@@ -62,7 +63,7 @@
         </div>
       </div>
       <div class="col-sm-4 col-md-4">
-        <p>Price</p>
+        <p>Price US dollars</p>
         <input id="priceslide" type="text" class="priceslide" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]" style="width:100% !important"/>
       </div>
     </div>
