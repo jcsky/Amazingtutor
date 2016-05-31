@@ -36,12 +36,17 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    if username.blank?
-      email.split('@').first
-    else
+    if username?
       username
+    elsif first_name?
+      first_name
+    elsif last_name?
+      first_name
+    else
+      email.split('@').first
     end
   end
+
 
   accepts_nested_attributes_for :teacher
 
@@ -77,6 +82,7 @@ class User < ActiveRecord::Base
     user.fb_raw_data = auth
     user.time_zone = browser_time_zone
     user.fb_pic = auth.info.image
+    user.username = auth.info.name
     user.save!
     user
   end
@@ -136,6 +142,7 @@ class User < ActiveRecord::Base
     user.locale = auth.extra.raw_info.locale
     user.time_zone = browser_time_zone
     user.google_pic = auth.info.image
+    user.username = auth.info.name
     user.save!
     user
   end

@@ -10,6 +10,6 @@ module UsersHelper
     else
       image_url = "logo.jpg"
     end
-    image_tag image_url
+      image_tag image_url
   end
 end
