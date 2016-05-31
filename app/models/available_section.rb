@@ -139,7 +139,7 @@ class AvailableSection < ActiveRecord::Base
                          :start => appointment.start.in_time_zone,
                          :end => appointment.end.in_time_zone,
                          :user_id => appointment.user_id,
-                         :backgroundColor => 'white'}
+                         :backgroundColor => '#ff0000'}
       end
 
     end

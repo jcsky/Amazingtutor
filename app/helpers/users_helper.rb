@@ -12,4 +12,8 @@ module UsersHelper
     end
       image_tag image_url
   end
+
+  def trail_check(user,teacher)
+    "1" if user.user_available_sections.where(:teacher_id=> teacher.id).first.trailed == false     
+  end
 end

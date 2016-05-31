@@ -31,6 +31,7 @@
           </ul>
         </div>
       </div>
+      
       <div class="col-sm-4 col-md-4">
         <p>Availability</p>
         <div class="dropdown dropdown-language">
@@ -62,41 +63,16 @@
         </div>
       </div>
       <div class="col-sm-4 col-md-4">
-        <p>Price</p>
+        <p>Price US dollars</p>
         <input id="priceslide" type="text" class="priceslide" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]" style="width:100% !important"/>
       </div>
     </div>
   </div>
 </div>
-
-<ul id="teachers-list">
-
-  <%= render :partial => "teacher", :locals => { :teacher => @teachers } %>
-
-</ul>
-
-<% if @next_page %>
-  <% link_to "Load More", teacher_path(@teachers, :page => @next_page ), :remote => true, :class => "btn btn-primary", :id => "load-more" %>
-<% end %>
-
-
+<div id="teachers">
+  <%= render "teacher", :locals => {:teachers => @teachers} %>
+</div>
 <script>
-
-  $(window).scroll(function(){
-    if ( $(window).scrollTop() > $(document).height() - $(window).height() - 50 ) {
-      var url = $("#load-more").attr("href");
-      if (url) {
-        $.ajax({
-          type: "GET",
-          url: url,
-          dataType: "script"
-        })
-      } else {
-        console.log("data ended")
-      }
-    }
-  })
-
   $(document).ready(function () {
     $("#js-example-basic-single").select2();
     $('#priceslide').slider({value: [10,1000]}).on('slideStop', function (ev) {
@@ -113,5 +89,3 @@
     });
   });
 </script>
-
-<%= paginate @teachers %>

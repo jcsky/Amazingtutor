@@ -52,9 +52,7 @@ class WelcomeController < ApplicationController
       cookies[:lan] = nil
       cookies[:week] = nil
       @teachers = Teacher.all
-
     end
-
     @teachers = @teachers.page(params[:page]).per(10)
 
     if @teachers.last_page?
@@ -62,8 +60,6 @@ class WelcomeController < ApplicationController
     else
        @next_page = @teachers.next_page
     end
-
-
   end
 
   def apply_teacher
@@ -92,19 +88,31 @@ class WelcomeController < ApplicationController
 
   def find_week_teacher
     @week = cookies[:week].to_i - 1
-    @thedaytime = Time.now.utc.at_beginning_of_week + @week.day
-    @thedaytimeend = @thedaytime + 60 * 60 * 24 - 1
-    if @thedaytime == Time.now.utc.beginning_of_day
-      @thedaytime = Time.now.utc
-      @thedaytimeend = Time.now.utc.end_of_day
-    elsif @thedaytime < Time.now.utc
+    @thedaytime = Time.current.utc.at_beginning_of_week + @week.day
+    @thedaytimeend = @thedaytime.end_of_day
+    if @thedaytime == Time.current.utc.beginning_of_day
+      @thedaytime = Time.current.utc+12.hours
+      @thedaytimeend = Time.current.utc.end_of_day
+      if @thedaytime >= @thedaytimeend
+        @thedaytime = @thedaytimeend
+      end
+    elsif @thedaytime < Time.current.utc
       @thedaytime +=  7.day
-      @thedaytimeend = @thedaytime + 60 * 60 * 24 - 1
+      @thedaytimeend = @thedaytime.end_of_day
     end
-    @asfront = AvailableSection.select(:start,:start).where('start > ? AND start < ?', @thedaytime, @thedaytimeend)
+    @asfront = AvailableSection.select(:start,:end).where('start > ? AND start < ? AND end > ?', @thedaytime, @thedaytimeend,@thedaytimeend)
     @asmid = AvailableSection.select(:start,:end).where('start < ? AND end > ?', @thedaytime, @thedaytimeend)
-    @asend = AvailableSection.select(:end,:end).where('end > ? AND end < ?', @thedaytime, @thedaytimeend)
-    @as = @asfront.ids + @asmid.ids + @asend.ids
+    @asend = AvailableSection.select(:start,:end).where('end > ? AND end < ? AND start < ?', @thedaytime, @thedaytimeend, @thedaytime)
+    @asout = AvailableSection.select(:start,:end).where('start > ? AND end < ?', @thedaytime, @thedaytimeend)
+    # 兩個end 和兩個start的需要再做判斷  end的要補 start start要補end
+    @as = @asfront.ids + @asmid.ids + @asend.ids + @asout.ids
+    # s > oneday.beggin  and e < oneday.end
+    # s > oneday.beggin  and s < oneday.end
+    # e > oneday.beggin  and e < oneday.end
+    # s < oneday.beggin  and e > oneday.end
+    # @asbefore = AvailableSection.select(:start,:end).where.not('end < ?', @thedaytime)
+    # @asafter = AvailableSection.select(:start,:end).where.not('start > ?', @thedaytimeend)
+    # @as = @asbefore + @asafter
     @as.uniq
     @teacher_id = AvailableSection.where(id: @as).pluck(:teacher_id).uniq
     @teachers = Teacher.where(id: @teacher_id).uniq

@@ -7,12 +7,6 @@
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'ATlogo.ico' %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript">
-      $(document).ready(function () {
-        //   $('#login-white').hide();   $('#login-black').hide();   $('#login').click(function (e) {     $('#login-black').fadeIn(1);     $('#login-white').fadeIn(300);   });   $('#login-black').click(function (e) {     $('#login-white').fadeOut(1);
-        // $('#login-black').fadeOut(1);   });
-      });
-    </script>
     <script>
         var cb = function() {
         var l = document.createElement('link'); l.rel = 'stylesheet';
@@ -32,7 +26,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header brand-center">
           <%= link_to root_path , :class=>"navbar-brand" do%>
-          <span class="brand1">Amazing</span><span class="brand2">Tutor</span>
+          <span class="brand1">Amazing</span><span class="brand2">tutor</span>
           <% end %>
         </div>
         <div class="navbar-header">
@@ -47,7 +41,10 @@
         <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <%= link_to("Scholarship", scholarship_path)%>
+              <%= link_to("Find a tutor", teacherwall_path)%>
+            </li>
+            <li>
+              <%= link_to("Scholarship", scholarship_path) unless current_user.nil?%>
             </li>
             <li>
               <%= link_to("Apply to Teach", apply_teacher_path)%>
@@ -105,6 +102,7 @@
             </button>
             <h4 class="message_modal_title" id="myModalLabel">Feedback</h4>
           </div>
+
           <%= form_for Message.new do |f| %>
           <div class="modal-body">
             <div class="container-fluid">
@@ -114,7 +112,7 @@
               </div>
               <div class="row message_input">
                 <div class="col-xs-3"><%= f.label :email, "Email" %></div>
-                <div class="col-xs-9"><%= f.email_field :email,value: current_user.try(:alternate_email),placeholder:"We will send messages back by this email. ", :class => "form-control" %></div>
+                <div class="col-xs-9"><%= f.email_field :email,value: current_user.try(:email),placeholder:"We will send messages back by this email. ", :class => "form-control" %></div>
               </div>
               <div class="row message_input">
                 <div class="col-xs-3"><%= f.label :message, "Explanation" %></div>
