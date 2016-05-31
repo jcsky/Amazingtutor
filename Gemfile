@@ -39,6 +39,17 @@ gem 'populator'
 # 多國語系
 gem 'rails-i18n'
 
+
+# 分頁
+gem 'kaminari'
+
+# mailer
+gem 'sidekiq'
+
+# 佈署 Sidekiq
+gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+
+
 #paperclip
 gem "paperclip"
 gem 'rails_admin'
@@ -72,7 +83,10 @@ gem 'bootstrap-sass' ,' ~>3.3.6'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-
+# 貨幣顯示轉換
+gem 'money'
+gem 'json'
+gem 'google_currency'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

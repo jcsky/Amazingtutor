@@ -93,7 +93,7 @@
   }
 }
 .ratingnow {
-  button[name="rating"] {
+  button[name="rating"],#eval-send {
     border: 1px solid #FF6969;
     border-radius: 23px;
     width: 175px;
@@ -105,13 +105,13 @@
     margin-top: 15px;
     font-size: 15px;
     font-weight: lighter;
-  }
-  button[name="rating"]:hover {
-    background-color: #FF6969;
-    color: #fff;
-  }
-  button[name="rating"]:focus{
-    outline: none;
+    &:hover {
+      background-color: #FF6969;
+      color: #fff;
+    }
+    &:focus{
+      outline: none;
+    }
   }
 }
 .rated{
