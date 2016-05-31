@@ -24,7 +24,6 @@ class Teacher < ActiveRecord::Base
   end
 
   def youtube_website
-<<<<<<< HEAD
     youtube.split("=").last
   end
 
@@ -38,9 +37,6 @@ class Teacher < ActiveRecord::Base
 
   def ten_fee_exchange_to(iso_to)
     Money.new(ten_fee, "USD").exchange_to(iso_to)
-=======
-    youtube.split('=').last
->>>>>>> calendar
   end
 
   # def hangouts_url
