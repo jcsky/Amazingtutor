@@ -117,7 +117,6 @@
           </div>
         </div>
       </div>
-
       <div class="modal-footer">
         <button type="button" class="btn closebtn" data-dismiss="modal">Close</button>
           <%#= x.submit 'Quick Book',:class=>"btn bookteacherbtn" %>
@@ -211,7 +210,6 @@
 
     var tid = teacher_modal.data("teacher-id");
     var time = teacher_modal.find("#times_select_"+tid).find("option:selected").val();
-console.log(time, selected, type, tid);
     $.ajax({
       type: 'POST',
       dataType: 'script',
