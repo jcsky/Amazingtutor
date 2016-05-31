@@ -154,17 +154,15 @@
 <% end %>
 
 <script>
-//   $('#booknow').on('shown.bs.modal', function () {
-//     $('#booknow').focus()
-//   })
-//
-//   $(document).ready(function () {
-//
-//     <% @appointments.select(:teacher_id).uniq.each do |a|%>
-//     $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
-//
-//     <% end %>
-// )}:
+
+
+  $(document).ready(function () {
+
+    <% @appointments.select(:teacher_id).uniq.each do |a|%>
+    $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
+
+    <% end %>
+
 
   $('.teacher-modal').on('shown.bs.modal', function () {
     var teacher_modal = $(this).closest(".teacher-modal")
@@ -258,4 +256,5 @@
       }
     });
   });
+  )}:
 </script>
