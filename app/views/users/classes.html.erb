@@ -27,7 +27,6 @@
           <% @user.appointments.each do |a|%>
           <% i+=1 %>
           <div class="scheduled col-xs-12">
-            <div class="row">
             <div class="col-sm-5 scheduled-image img-responsive center-block">
               <div class="scheduled-dark"></div>
               <div class="scheduled-white">
@@ -53,8 +52,14 @@
                       <div id="rateYo-<%= i %>"></div>
                       <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
                   </div>
-                  <div class=" col-xs-2 info-flag">
-                    <%= image_tag("flag.png") %>
+                  <div class=" col-xs-2 ">
+                    <div class="dropdown ">
+                      <button class=" dropdown-toggle classes_dropdown" type="button" data-toggle="dropdown">
+                      <i class="fa fa-angle-down" aria-hidden="true"></i></span></button>
+                      <ul class="dropdown-menu classes_meun">
+                        <li><%= button_to('Cancel',appointment_path(:id=>a.id),method: "delete", data: { confirm: 'Are you sure ? Only can cancel classe after 12 hours from now', disable_with: 'loading...' }) %></li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <div class="clearfix ratingnow gotocalss">
@@ -80,7 +85,6 @@
                   </div>
                 </div>
               </div>
-            </div>
             </div>
           </div>
             <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
