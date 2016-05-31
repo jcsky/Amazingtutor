@@ -141,31 +141,6 @@
         </div>
       </div>
     </div>
-    <% unless @user_available_sections == nil  || current_user == nil || (@user_available_sections.trailed == false && @user_available_sections.available_section < 2 ) %>
-    <div class=" profile-container">
-      <div class="private col-xs-12 calendar-drag">
-        <div class="col-xs-12 private-head">
-          <h5>Sesions Bookings</h5>
-        </div>
-        <div class="col-xs-12 calendar-drag-content">
-          <div id='external-events'>
-            <h4>Draggable Class(drop to calendar to book)</h4>
-
-            <% if @user_available_sections.trailed %>
-            <div class='fc-event trailed'>Trailed Class</div>
-            <% @user_available_sections.available_section -= 1 %>
-            <% end %>
-
-            <% (1..(@user_available_sections.available_section/2)).each do |i| %>
-            <div class='fc-event nomal'>Normal Class
-            </div>
-            <% end %>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <% end %>
   </div>
   <div class="profile-container">
     <div class="schedule  col-xs-12">
@@ -258,7 +233,6 @@
 
 <script>
   $(document).ready(function () {
-
     $('#calendar').fullCalendar({
       //lulu setting
       buttonIcons: false,

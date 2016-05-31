@@ -3,7 +3,6 @@
     <div class="col-md-5 text-center  col-xs-12">
       <%= render "sidebar"%>
     </div>
-
     <div class="col-md-7">
       <div class="row">
         <div class="col-xs-12">
@@ -24,15 +23,30 @@
         </div>
         <% @appointments.select(:teacher_id).uniq.each do |a|%>
         <div class="col-xs-12">
+          <% @teachers.each do |t|%>
           <div class="tutor-info">
             <div class="clearfix tutor-top">
               <div class="info-mypic col-xs-3 pull-left col-sm-2">
+<<<<<<< HEAD
                 <%= user_headimage(a.teacher.user) %>
               </div>
               <div class="info-eval col-xs-7 col-sm-7">
                 <p><%= a.teacher.user.last_name %> <%= a.teacher.user.first_name %></p>
                 <div id="rateYo-<%= a.teacher_id %>" ></div>
                 <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
+=======
+                <%= image_tag(t.user.image.url(:medium)) %>
+              </div>
+              <div class="info-eval col-xs-7 col-sm-7">
+                <p><%= User.find(t.user_id).first_name %>
+                  <%= User.find(t.user_id).last_name %></p>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+                <span>(132)</span>
+>>>>>>> calendar
               </div>
               <div class=" col-xs-2 info-flag col-sm-1 col-sm-push-1 info-flag-class-fix">
                 <%= image_tag("flag.png") %>
@@ -40,79 +54,208 @@
             </div>
             <div class="clearfix info-tag">
               <i class="fa fa-comment-o"></i>
+<<<<<<< HEAD
               <span>Speak:</span>
               <span>
                 <% a.teacher.languages.each do |language| %>
                 <%= language.language %>
                 <% end %>
               </span><br>
+=======
+              <span>Speak
+              </span>
+              <span>    <% t.languages.each do |x| %>
+                  <%= x.language %>
+                  <% end %></span><br>
+>>>>>>> calendar
               <i class="fa fa-usd"></i>
               <span>Rate
               </span>
-              <span class="moneyred">400-650 TW/hour</span><br>
-              <h5>5 UnScheduled</h5>
-              <%#= button_tag "Book Now", { :id=>"booknow" ,data:{toggle:"modal",target:"#booknow" }}%>
-              <button type="button" data-toggle="modal" data-target="#booknow">Book Now</button>
+              <span class="moneyred">  <% if t.ten_fee/10 < t.one_fee %>
+                <%= t.ten_fee/10 %>~<%= t.one_fee %>
+              <% else %>
+                <%= t.one_fee %>~<%= t.ten_fee/10 %>
+                <% end %> TW/hour</span><br>
+              <h5><%= current_user.user_available_sections.first.available_section/2 %> UnScheduled</h5>
+              <button type="button" data-toggle="modal" data-target="#booknow-<%= t.id %>">Book Now</button>
             </div>
           </div>
+          <% end %>
         </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+<<<<<<< HEAD
 
 
 <div class="modal fade" id="booknow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+=======
+<% @teachers.each do |t|%>
+<div class="modal fade teacher-modal" data-calendar-url="<%= teacher_calendar_teacher_available_section_url(t.id)%>" data-teacher-id="<%= t.id %>" id="booknow-<%= t.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+>>>>>>> calendar
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Booking Teacher</h4>
       </div>
       <div class="container-fluid">
         <div class="calender-booking">
           <h6>All time listed are in your local timezone</h6>
-          <div class="insert-calender"></div>
+          <div class="insert-calender">
+            <div id="calendar-<%= t.id %>"></div>
+          </div>
         </div>
         <div class="select-list">
+            <h6>Only can pick classes after 12 hours from now</h6>
           <div class="row">
-            <div class="col-xs-5">
+             <%#= form_for @appointment, :url => url_for(:controller => 'appointments', :action => 'create') do |x|%>
+            <div class="col-xs-4">
+              <div class="time">
+                <span>Type</span>
+                <%= select({},{},options_for_select([["Normal 1hour", "2"],["Trail 30mins", "1"]],{disabled:trail_check(current_user,t) }),{}, {id:"type_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow type-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+              </div>
+            </div>
+            <div class="col-xs-3">
               <div class="day">
                 <span>Day</span>
-                <%= select_day(0,{},:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"137px") %>
+
+                <%= select({},{},t.find_available_days(), {:include_blank => "Select a day"}, {id:"day_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow day-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                <%#= collection_select(:language_ids, Language.all, :id, :language,{}, { :class => "form-control",:id=>"language-select",:style=>"width:100%;" }) %>
               </div>
             </div>
-            <div class="col-xs-7">
+            <div class="col-xs-5">
               <div class="time">
                 <span>Time</span>
-                <%= select({},{},options_for_select([["0000~0100", 3],["0030~0130", 1], ["0100~0200", 2],["0130~0230", 4],["以此類推", 4]],"3"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"215px"} )%>
+
+                <div id="times-select-<%= t.id %>">
+                  <%= select({},{},@times,{:include_blank => "Select day first"}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow time-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                </div>
+
+                <%#= select({},{},t.find_available_times("Sun, 3 Jun 2016",2).map{|x| x[0].strftime('%R')+" - "+x[1].strftime('%R') },{}, {:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
               </div>
             </div>
+
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn closebtn" data-dismiss="modal">Close</button>
-        <button class="btn bookteacherbtn">Quick Book</button>
+          <%#= x.submit 'Quick Book',:class=>"btn bookteacherbtn" %>
+          <button type="button" class="btn bookteacherbtn" data-dismiss="modal" id="book_pass_params">Quick Book</button>
       </div>
     </div>
   </div>
 </div>
+<% end %>
 
 <script>
-  $('#booknow').on('shown.bs.modal', function () {
-    $('#booknow').focus()
-  })
+//   $('#booknow').on('shown.bs.modal', function () {
+//     $('#booknow').focus()
+//   })
+//
+//   $(document).ready(function () {
+//
+//     <% @appointments.select(:teacher_id).uniq.each do |a|%>
+//     $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
+//
+//     <% end %>
+// )}:
 
-  $(document).ready(function () {
+  $('.teacher-modal').on('shown.bs.modal', function () {
+    var teacher_modal = $(this).closest(".teacher-modal")
+    var tid = teacher_modal.data("teacher-id");
+    var calendar_url = teacher_modal.data("calendar-url");
 
-    <% @appointments.select(:teacher_id).uniq.each do |a|%>
-    $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
+    $('#calendar-' + tid ).fullCalendar({
+      //lulu setting
+      buttonIcons: false,
+      buttonText: {
+        prev: '<  Prev',
+        next: 'Next  >'
+      },
+      header: {
+        left: 'prev',
+        center: 'title',
+        right: 'next'
+      },
+      axisFormat: 'H:mmA',
+      dragOpacity: {
+        agenda: .5
+      },
+      theme: false,
+      dragScroll: false,
+      contentHeight: 'auto',
+      eventColor: '#C73C3C',
+      //lulu setting 24小時制 大寫H timeFormat: 'H:mm',
+      allDaySlot: false,
+      defaultDate: '<%=Time.now.strftime("%Y-%m-%d")%>',
+      defaultView: 'agendaWeek',
+      ignoreTimezone: false,
+      droppable: true,
+      eventLimit: true, // allow "more" link when too many events
+      eventSources: [
+        {
+          //teacher events source
+          url: calendar_url,
+          rendering: 'background'
+        }
+      ]
+      });
+    });
 
-    <% end %>
+  function update_times_select() {
+    var teacher_modal = $(this).closest(".teacher-modal");
 
+    var selected = teacher_modal.find(".day-select").find("option:selected").val();
+    //var type_selected = teacher_modal.find(".type-select").find("option:selected").val();
+    var type = teacher_modal.find(".type-select").find("option:selected").val();
+
+    var tid = teacher_modal.data("teacher-id");
+
+    var userid = <%= current_user.id %>;
+    $.ajax({
+      type: 'GET',
+      dataType: 'script',
+      url: "/users/" + userid + "/mytutor",
+      data: {
+        tid: tid,
+        selected: selected,
+        type: type
+      }
+    });
+  }
+
+  $('.type-select').on('change', function(){
+    update_times_select.bind(this)();
+  });
+
+  $('.day-select').on('change', function(){
+    update_times_select.bind(this)();
+  });
+
+  $('#book_pass_params').click(function(){
+    var teacher_modal = $(this).closest(".teacher-modal");
+
+    var selected = teacher_modal.find(".day-select").find("option:selected").val();
+    //var type_selected = teacher_modal.find(".type-select").find("option:selected").val();
+    var type = teacher_modal.find(".type-select").find("option:selected").val();
+
+    var tid = teacher_modal.data("teacher-id");
+    var time = teacher_modal.find("#times_select_"+tid).find("option:selected").val();
+    $.ajax({
+      type: 'POST',
+      dataType: 'script',
+      url: "/appointments",
+      data: {
+        tid: tid,
+        selected: selected,
+        time: time
+      }
+    });
   });
 </script>

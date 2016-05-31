@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks',registrations: 'users/registrations'}
   resources :messages
-  
+
   resources :users do
     member do
       get :classes
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get :remark
       get :editprofile
       get :mytutor
+      post :mytutor
     end
     resources :orders do
       member do
