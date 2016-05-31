@@ -27,23 +27,13 @@
           <div class="tutor-info">
             <div class="clearfix tutor-top">
               <div class="info-mypic col-xs-3 pull-left col-sm-2">
+
                 <%= user_headimage(a.teacher.user) %>
               </div>
               <div class="info-eval col-xs-7 col-sm-7">
                 <p><%= a.teacher.user.last_name %> <%= a.teacher.user.first_name %></p>
                 <div id="rateYo-<%= a.teacher_id %>" ></div>
                 <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
-                <%= image_tag(t.user.image.url(:medium)) %>
-              </div>
-              <div class="info-eval col-xs-7 col-sm-7">
-                <p><%= User.find(t.user_id).first_name %>
-                  <%= User.find(t.user_id).last_name %></p>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                <i class="fa fa-star-o"></i>
-                <span>(132)</span>
 
               </div>
               <div class=" col-xs-2 info-flag col-sm-1 col-sm-push-1 info-flag-class-fix">
