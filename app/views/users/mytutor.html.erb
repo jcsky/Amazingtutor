@@ -27,26 +27,14 @@
           <div class="tutor-info">
             <div class="clearfix tutor-top">
               <div class="info-mypic col-xs-3 pull-left col-sm-2">
-<<<<<<< HEAD
+
                 <%= user_headimage(a.teacher.user) %>
               </div>
               <div class="info-eval col-xs-7 col-sm-7">
                 <p><%= a.teacher.user.last_name %> <%= a.teacher.user.first_name %></p>
                 <div id="rateYo-<%= a.teacher_id %>" ></div>
                 <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
-=======
-                <%= image_tag(t.user.image.url(:medium)) %>
-              </div>
-              <div class="info-eval col-xs-7 col-sm-7">
-                <p><%= User.find(t.user_id).first_name %>
-                  <%= User.find(t.user_id).last_name %></p>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                <i class="fa fa-star-o"></i>
-                <span>(132)</span>
->>>>>>> calendar
+
               </div>
               <div class=" col-xs-2 info-flag col-sm-1 col-sm-push-1 info-flag-class-fix">
                 <%= image_tag("flag.png") %>
@@ -54,20 +42,13 @@
             </div>
             <div class="clearfix info-tag">
               <i class="fa fa-comment-o"></i>
-<<<<<<< HEAD
               <span>Speak:</span>
               <span>
                 <% a.teacher.languages.each do |language| %>
                 <%= language.language %>
                 <% end %>
               </span><br>
-=======
-              <span>Speak
-              </span>
-              <span>    <% t.languages.each do |x| %>
-                  <%= x.language %>
-                  <% end %></span><br>
->>>>>>> calendar
+
               <i class="fa fa-usd"></i>
               <span>Rate
               </span>
@@ -87,14 +68,9 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
 
-
-<div class="modal fade" id="booknow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-=======
 <% @teachers.each do |t|%>
 <div class="modal fade teacher-modal" data-calendar-url="<%= teacher_calendar_teacher_available_section_url(t.id)%>" data-teacher-id="<%= t.id %>" id="booknow-<%= t.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
->>>>>>> calendar
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -154,15 +130,6 @@
 <% end %>
 
 <script>
-
-
-  $(document).ready(function () {
-
-    <% @appointments.select(:teacher_id).uniq.each do |a|%>
-    $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
-
-    <% end %>
-
 
   $('.teacher-modal').on('shown.bs.modal', function () {
     var teacher_modal = $(this).closest(".teacher-modal")
@@ -256,5 +223,10 @@
       }
     });
   });
-  )}:
+
+
+    <% @appointments.select(:teacher_id).uniq.each do |a|%>
+    $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
+    <% end %>
+
 </script>
