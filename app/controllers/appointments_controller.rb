@@ -82,8 +82,15 @@ class AppointmentsController < ApplicationController
         end
       end
     end
-
     redirect_to appointments_path
+  end
+
+  def destroy
+    ActiveRecord::Base.transaction do
+      appointment = current_user.appointments.find_by_id(destroy_appointment_params[:id])
+      appointment.check_and_destroy!
+      
+    end
   end
 
   private
@@ -95,7 +102,6 @@ class AppointmentsController < ApplicationController
   def set_appointment_params
     # {"tid"=>"353", "selected"=>"2016-06-02", "time"=>"07:30:00 PM - 08:30:00 PM", "controller"=>"appointments", "action"=>"create"}
     start_time, end_time = params[:time].split('-')
-
     appointment_params = {}
     appointment_params[:teacher_id] = params[:tid].to_i
     appointment_params[:start]      = (params[:selected] + ' ' + start_time).to_datetime.in_time_zone
@@ -107,6 +113,10 @@ class AppointmentsController < ApplicationController
 
   def set_appointment_new_params
     params.permit(:teacher_id)
+  end
+
+  def destroy_appointment_params
+    params.permit(:id)
   end
 
   def user_authority

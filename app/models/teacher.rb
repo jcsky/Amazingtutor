@@ -53,7 +53,7 @@ class Teacher < ActiveRecord::Base
         @days << @start + i.days
       end
     end
-    @days.uniq.sort.select{|x| x>= Time.current.in_time_zone + 12.hours }.map{|x|x.to_date}
+    @days.select{|x| x>= Time.current.in_time_zone + 12.hours }.map{|x|x.to_date}.uniq.sort
   # @available_section_times.uniq.sort.select{|x| [x[0],x[1]] if x[0]>= Time.current.in_time_zone+12.hours }
   end
 
@@ -74,7 +74,7 @@ class Teacher < ActiveRecord::Base
 
             for i in 0..block
               @available_section_times << [ x , x + (section* 30.minute)]
-              x += 30.minute
+               x += 30.minute
             end
             @available_section_times.pop if section == 2
 
