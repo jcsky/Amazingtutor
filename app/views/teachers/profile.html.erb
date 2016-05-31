@@ -35,12 +35,21 @@
             <span>Rate
             </span>
             <span class="moneyred">
-              <% if @teacher.ten_fee/10 < @teacher.one_fee %>
-              <%= @teacher.ten_fee/10 %>~<%= @teacher.one_fee %>
-            <% else %>
-              <%= @teacher.one_fee %>~<%= @teacher.ten_fee/10 %>
+              <% unless current_user %>
+                <% if @teacher.ten_fee/10 < @teacher.one_fee %>
+                  <%= number_to_currency(@teacher.ten_fee/10, precision: 2) %>~<%= number_to_currency(@teacher.one_fee,precision: 2) %>
+                <% else %>
+                  <%= number_to_currency(@teacher.one_fee,precision: 2) %>~<%= number_to_currency(@teacher.ten_fee/10,precision: 2) %>
+                <% end %>
+                USD/Hour</span><br>
+              <% else %>
+                <% if @teacher.ten_fee/10 < @teacher.one_fee %>
+                  <%= number_to_currency(@teacher.ten_fee_exchange_to(current_user.currency)/10, precision: 2) %>~<%= number_to_currency(@teacher.one_fee_exchange_to(current_user.currency), precision: 2) %>
+                <% else %>
+                  <%= number_to_currency(@teacher.one_fee_exchange_to(current_user.currency), precision: 2) %>~<%= number_to_currency(@teacher.ten_fee_exchange_to(current_user.currency)/10, precision: 2) %>
+                <% end %>
+                <%= current_user.currency %>/Hour</span><br>
               <% end %>
-              TW/hour</span><br>
             <i class="fa fa-rss"></i>
             <span>Trial
             </span>
