@@ -113,8 +113,8 @@ class TeachersController < ApplicationController
                                     :one_fee, :five_fee, :ten_fee, :gathering_way,
                                     language_ids: [],
                                     languages_attributes: [:language, :_destroy, :id],
-                                    experiences_attributes: [:company_name, :description, :_destroy, :id],
-                                    educations_attributes: [:school, :major, :_destroy, :id],
+                                    experiences_attributes: [:company_name, :description, :_destroy, :id,:start,:end],
+                                    educations_attributes: [:school, :major, :_destroy, :id,:start,:end],
                                     certificates_attributes: [:name, :score, :_destroy, :id])
   end
 end

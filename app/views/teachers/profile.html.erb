@@ -159,32 +159,20 @@
         <h5>Background</h5>
       </div>
       <div class="col-xs-12 background-content">
-        <h6 class="text-center">1994 - 2200</h6>
-        <h5>Eduation</h5>
-        <h6>Lorem ipsum dolor sit amet.</h6>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate distinctio eaque quis sed! Accusamus delectus explicabo labore magni minima possimus praesentium quae, qui quo quod reiciendis rem reprehenderit soluta suscipit veritatis, vitae
-          voluptatum. Cum deserunt distinctio dolore et facilis fugit, in incidunt iste laudantium nobis obcaecati quaerat, qui ratione, rem?</p>
+        <%= @teacher.experiences.each do |e| %>
+        <h6 class="text-center"><%= e.start %> - <%= e.end %></h6>
+        <h5>Experience</h5>
+        <h6><%= e.description %></h6>
+        <p><%= e.description %></p>
+        <% end %>
       </div>
       <div class="col-xs-12 background-content">
-        <h6 class="text-center">1994 - 2200</h6>
-        <h5>Eduation</h5>
-        <h6>Lorem ipsum dolor sit amet.</h6>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate distinctio eaque quis sed! Accusamus delectus explicabo labore magni minima possimus praesentium quae, qui quo quod reiciendis rem reprehenderit soluta suscipit veritatis, vitae
-          voluptatum. Cum deserunt distinctio dolore et facilis fugit, in incidunt iste laudantium nobis obcaecati quaerat, qui ratione, rem?</p>
-      </div>
-      <div class="col-xs-12 background-content">
-        <h6 class="text-center">1994 - 2200</h6>
-        <h5>Eduation</h5>
-        <h6>Lorem ipsum dolor sit amet.</h6>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate distinctio eaque quis sed! Accusamus delectus explicabo labore magni minima possimus praesentium quae, qui quo quod reiciendis rem reprehenderit soluta suscipit veritatis, vitae
-          voluptatum. Cum deserunt distinctio dolore et facilis fugit, in incidunt iste laudantium nobis obcaecati quaerat, qui ratione, rem?</p>
-      </div>
-      <div class="col-xs-12 background-content">
-        <h6 class="text-center">1994 - 2200</h6>
-        <h5>Eduation</h5>
-        <h6>Lorem ipsum dolor sit amet.</h6>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate distinctio eaque quis sed! Accusamus delectus explicabo labore magni minima possimus praesentium quae, qui quo quod reiciendis rem reprehenderit soluta suscipit veritatis, vitae
-          voluptatum. Cum deserunt distinctio dolore et facilis fugit, in incidunt iste laudantium nobis obcaecati quaerat, qui ratione, rem?</p>
+        <%= @teacher.educations.each do |e| %>
+        <h6 class="text-center"><%= e.start %> - <%= e.end %></h6>
+        <h5>Education</h5>
+        <h6><%= e.school %></h6>
+        <p><%= e.major %></p>
+        <% end %>
       </div>
     </div>
   </div>

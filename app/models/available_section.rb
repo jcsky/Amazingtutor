@@ -112,7 +112,7 @@ class AvailableSection < ActiveRecord::Base
                          :end => appointment.end.in_time_zone,
                          :user_id => appointment.user_id,
                          :borderColor => 'red',
-                         :color => '#ff0000',
+                         :color => '#C73C3C',
                          :textColor => 'block',
                          :backgroundColor => 'gray'}
       else
@@ -120,7 +120,8 @@ class AvailableSection < ActiveRecord::Base
                          :start => appointment.start.in_time_zone,
                          :end => appointment.end.in_time_zone,
                          :user_id => appointment.user_id,
-                         :backgroundColor => '#ff0000'}
+                         :backgroundColor => '#C73C3C',
+                       :backgroundImage => 'repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px'}
       end
 
     end
@@ -158,7 +159,10 @@ class AvailableSection < ActiveRecord::Base
                          :backgroundColor => '#FF5F5F'}
       end
     end
-    event_reuslt
+    # limit = Time.current.in_time_zone + 12.hours
+      # event_reuslt =  event_reuslt.map {|a|a if !(a[:start]< limit && a[:end]<limit) }.compact.each {|a|a[:start]= limit if !(a[:start]< limit && a[:end]>limit)}
+        # event_reuslt.map {|a|a. }
+        event_reuslt
   end
 
 
