@@ -28,15 +28,16 @@ class Teacher < ActiveRecord::Base
   end
 
   def one_fee_exchange_to(iso_to)
-    Money.new(one_fee, "USD").exchange_to(iso_to)
+
+    Money.new(one_fee*100, "USD").exchange_to(iso_to)
   end
 
   def five_fee_exchange_to(iso_to)
-    Money.new(five_fee, "USD").exchange_to(iso_to)
+    Money.new(five_fee*100, "USD").exchange_to(iso_to)
   end
 
   def ten_fee_exchange_to(iso_to)
-    Money.new(ten_fee, "USD").exchange_to(iso_to)
+    Money.new(ten_fee*100, "USD").exchange_to(iso_to)
   end
 
   # def hangouts_url
