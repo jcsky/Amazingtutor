@@ -23,7 +23,6 @@
         </div>
         <% @appointments.select(:teacher_id).uniq.each do |a|%>
         <div class="col-xs-12">
-          <% @teachers.each do |t|%>
           <div class="tutor-info">
             <div class="clearfix tutor-top">
               <div class="info-mypic col-xs-3 pull-left col-sm-2">
@@ -52,16 +51,15 @@
               <i class="fa fa-usd"></i>
               <span>Rate
               </span>
-              <span class="moneyred">  <% if t.ten_fee/10 < t.one_fee %>
-                <%= t.ten_fee/10 %>~<%= t.one_fee %>
+              <span class="moneyred">  <% if a.teacher.ten_fee/10 < a.teacher.one_fee %>
+                <%= a.teacher.ten_fee/10 %>~<%= a.teacher.one_fee %>
               <% else %>
-                <%= t.one_fee %>~<%= t.ten_fee/10 %>
+                <%= a.teacher.one_fee %>~<%= a.teacher.ten_fee/10 %>
                 <% end %> TW/hour</span><br>
               <h5><%= current_user.user_available_sections.first.available_section/2 %> UnScheduled</h5>
-              <button type="button" data-toggle="modal" data-target="#booknow-<%= t.id %>">Book Now</button>
+              <button type="button" data-toggle="modal" data-target="#booknow-<%= a.teacher.id %>">Book Now</button>
             </div>
           </div>
-          <% end %>
         </div>
         <% end %>
       </div>

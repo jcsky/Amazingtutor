@@ -174,12 +174,7 @@
           <span>Rate
           </span>
           <span class="moneyred">
-            <% if @teacher.ten_fee/10 < @teacher.one_fee %>
-            <%= @teacher.ten_fee/10 %>~<%= @teacher.one_fee %>
-            <% else %>
-            <%= @teacher.one_fee %>~<%= @teacher.ten_fee/10 %>
-            <% end %>
-            TW/hour</span><br>
+            <%= render partial: 'welcome/moneyred', locals: {t: @teacher} %>
           <i class="fa fa-rss"></i>
           <span>Trial
           </span>

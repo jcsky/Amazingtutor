@@ -56,16 +56,16 @@
 
           <div class="input-group clearfix">
             <%= f.label :location, "Location" %>
-            <%= f.country_select( "location", { priority_countries: ["GB", "FR"], selected: "GB" }, { class: 'form-control'}) %>
+            <%= f.select(:location, IsoCountryCodes.for_select, {}, class: 'form-control' ) %>
           </div>
           <div class="input-group clearfix">
             <%= f.label :currency, "Currency" %>
-            <%= f.select(:currency ,options_for_select([["美金", 1]],"1"),{}, {:class => "form-control"} )%>
+            <%= f.select(:currency ,options_for_select(["USD","JPY"]),{}, :class => "form-control" )%>
           </div>
 
           <div class="input-group clearfix">
             <%= f.label :time_zone, "TimeZone" %>
-            <%= f.time_zone_select(:time_zone ,ActiveSupport::TimeZone.us_zones,{}, {:class => "form-control"} )%>
+            <%= f.time_zone_select(:time_zone ,ActiveSupport::TimeZone.us_zones,{}, :class => "form-control" )%>
           </div>
         </div>
       </div>
