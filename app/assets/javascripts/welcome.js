@@ -16,5 +16,5 @@
       itemSelector: "#teachers tr.teacher"
     });
   });
-console.log("test");
+
 }).call(this);

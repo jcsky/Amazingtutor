@@ -31,7 +31,7 @@
           </ul>
         </div>
       </div>
-      
+
       <div class="col-sm-4 col-md-4">
         <p>Availability</p>
         <div class="dropdown dropdown-language">
@@ -77,7 +77,7 @@
     $("#js-example-basic-single").select2();
     $('#priceslide').slider({value: [10,1000]}).on('slideStop', function (ev) {
       var price = $('#priceslide').data('slider').getValue();
-      console.log(price);
+
       $.ajax({
         url: "/teacherwall",
         contentType: false,
