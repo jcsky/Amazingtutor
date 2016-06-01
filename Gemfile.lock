@@ -144,6 +144,7 @@ GEM
     hashie (3.4.3)
     i18n (0.7.0)
     i18n_data (0.7.0)
+    iso_country_codes (0.7.5)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -386,6 +387,7 @@ DEPENDENCIES
   google_currency
   growl
   guard-rspec
+  iso_country_codes
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
