@@ -146,7 +146,7 @@
       droppable: true,
       drop: function (date, jsEvent, ui, resourceId) {
         s = $('#calendar').fullCalendar('clientEvents', $(this).data().event.id)[0];
-        console.log($('#calendar').fullCalendar('clientEvents', $(this).data().event.id));
+        // console.log($('#calendar').fullCalendar('clientEvents', $(this).data().event.id));
         if (!confirm("Are you sure to booking on " + s.start.format("YYYY-MM-DD HH:mm:ss") + '~' + s.end.format("YYYY-MM-DD HH:mm:ss") + "?")) {
           $('#calendar').fullCalendar('removeEvents', $(this).data().event.id);
         } else {

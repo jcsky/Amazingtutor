@@ -78,6 +78,7 @@ class User < ActiveRecord::Base
     user.fb_uid = auth.uid
     user.fb_token = auth.credentials.token
     user.email = auth.info.email
+    user.alternate_email = auth.info.email
     user.password = Devise.friendly_token[0, 20]
     user.fb_raw_data = auth
     user.time_zone = browser_time_zone
@@ -137,6 +138,7 @@ class User < ActiveRecord::Base
     user.google_uid = auth.uid
     user.google_token = auth.credentials.token
     user.email = auth.extra.raw_info.email
+    user.alternate_email = auth.extra.raw_info.email
     user.password = Devise.friendly_token[0, 20]
     user.google_raw_data = auth
     user.locale = auth.extra.raw_info.locale

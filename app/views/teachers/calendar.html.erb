@@ -67,7 +67,7 @@
             type: "POST",
             dataType: 'text',
             success: function (msg) {
-              //              console.log(msg);              var events = JSON.parse(msg);                eventData = {                  start: events.start,                  end: events.end,                  backgroundColor: 'blue',                  rendering:
+              //                var events = JSON.parse(msg);                eventData = {                  start: events.start,                  end: events.end,                  backgroundColor: 'blue',                  rendering:
               // 'background',                };                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
               $('#calendar').fullCalendar('refetchEvents')
             },

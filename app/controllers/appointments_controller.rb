@@ -73,8 +73,18 @@ class AppointmentsController < ApplicationController
         #                                appointment.end,
         #                                appointment.teacher_id,
         #                                current_user)
+
+
         appointment.save
         # 扣掉預約後的堂數
+        if appointment.appointment_url.blank?
+          charset = ""
+          url = ""
+          charset = (0...9).map { ('a'..'z').to_a[ rand(26)] }.join
+          url =  "https://talkgadget.google.com/hangouts/_/n"+charset+"aelp4l25okzw3tw4e?hl=en-US"
+          appointment.appointment_url = url
+          appointment.save
+        end
         UserAvailableSection.update_credit(credit, appointment.section, 'less')
         if calc_section == 1
           credit.trailed = false
