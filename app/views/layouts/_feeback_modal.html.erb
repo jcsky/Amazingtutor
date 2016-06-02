@@ -1,0 +1,85 @@
+<button type="button" class="message_button" data-toggle="modal" data-target="#message">
+    <i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>
+</button>
+<div class="modal fade message_modal" id="message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content message_content">
+        <div class="modal-content thankYouFeeback">
+          <h3>Thank You!</h3>
+          <h4>We will contact you as soon as possible</h4>
+        </div>
+            <div class="modal-header message_header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="message_modal_title" id="myModalLabel">Feedback</h4>
+            </div>
+            <%= form_for Message.new, :html => { :id => 'feebackform' } do |f|  %>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row message_input">
+                        <div class="col-xs-3 problem"><%= f.label :problem, "Problem" %></div>
+                        <div class="col-xs-9">
+                            <%= select(:message,:problem,options_for_select([["BUG", "BUG"],["Suggestion", "Suggestion"], ["Question", "Question"]],"BUG"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-width" =>"100%"} )%></div>
+                    </div>
+                    <div class="row message_input">
+                        <div class="col-xs-3 email"><%= f.label :email, "Email" %></div>
+                        <div class="col-xs-9"><%= f.text_field :email,value: current_user.try(:alternate_email),placeholder:"We will send messages back by this email. ", :class => "form-control" %></div>
+                    </div>
+                    <div class="row message_input">
+                        <div class="col-xs-3 "><%= f.label :message, "Explanation" %></div>
+                        <div class="col-xs-9 "><%= f.text_area :message,placeholder:"Message....", :class => "form-control", :id => "message_text", :required =>true %></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer message_footer">
+                <button type="button" class="message_cancel" data-dismiss="modal">Close</button>
+                <%= f.submit 'SAVE' ,class:"message_save" %>
+            </div>
+
+            <% end %>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+  $('#feebackform').submit(function() {
+    var valuesToSubmit = $(this).serialize();
+    $.ajax({
+        type: "POST", url: $(this).attr('action'), //sumbits it to the given url of the form
+        data: valuesToSubmit,
+        dataType: "json", // you want a difference between normal and ajax-calls, and json is standard
+        success: function(e){
+          console.log(e.message);
+          $('.thankYouFeeback').css('display','inline');
+          $('.problem').css('opacity','0');
+          $('.email').css('opacity','0');
+          $('.message_input').css('opacity','0');
+          $('#message_text').val('');
+    }})
+    return false; // prevents normal behaviour
+  });
+</script>
+
+<script>
+  $('.message_button').on('click', function(){
+    $('.thankYouFeeback').css('display','none');
+    $('.problem').css('opacity','1');
+    $('.email').css('opacity','1');
+    $('.message_input').css('opacity','1');
+  })
+</script>
+
+<script>
+$("*").each(function (index) {
+    var event = $._data(this, "events");
+    if (event && "click" in event && event.click.length > 1) {
+        console.log("重複 binding 的 tag");
+        console.log(this);
+    }
+});
+</script>
