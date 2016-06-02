@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   private
 
   def user_authority
-    redirect_to root_path if current_user==nil
+    redirect_to root_path if current_user==nil || current_user.id != @user.id
   end
 
   def find_user
