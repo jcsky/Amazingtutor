@@ -24,43 +24,43 @@
             <i class="fa fa-star-o"></i>
             <span>(132)</span>
           </div>
-          <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
-            <%= image_tag("flag.png") %>
+              <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
+                <%= image_tag("flag.png") %>
+              </div>
+              </div>
+              <div class="col-xs-12 clearfix info-tag">
+                <i class="fa fa-comment-o"></i>
+                <span>Speak
+                </span>
+                <span>
+                  <% t.languages.each do |x| %>
+                      <%= x.language %>
+                  <% end %>
+                </span><br>
+                <i class="fa fa-usd"></i>
+                <span>Rate
+                </span>
+                <span class="moneyred">
+                  <% if t.ten_fee/10 < t.one_fee %>
+                      <%= t.ten_fee/10 %>~<%= t.one_fee %>
+                  <% else %>
+                      <%= t.one_fee %>~<%= t.ten_fee/10 %>
+                  <% end %>
+                  TW/hour</span><br>
+                <i class="fa fa-rss"></i>
+                <span>Trial
+                </span>
+                <span>Yes</span>
+              </div>
+              <div class="col-xs-12 info-pro">
+                <p class="teacherwallpa"><%= t.introduction %></p>
+              </div>
+          <% end %>
           </div>
-        </div>
-        <div class="col-xs-12 clearfix info-tag">
-          <i class="fa fa-comment-o"></i>
-          <span>Speak
-          </span>
-          <span>
-            <% t.languages.each do |x| %>
-            <%= x.language %>
-            <% end %>
-          </span><br>
-          <i class="fa fa-usd"></i>
-          <span>Rate
-          </span>
-          <span class="moneyred">
-            <% if t.ten_fee/10 < t.one_fee %>
-            <%= t.ten_fee/10 %>~<%= t.one_fee %>
-          <% else %>
-            <%= t.one_fee %>~<%= t.ten_fee/10 %>
-            <% end %>
-            TW/hour</span><br>
-          <i class="fa fa-rss"></i>
-          <span>Trial
-          </span>
-          <span>Yes</span>
-        </div>
-        <div class="col-xs-12 info-pro">
-          <p class="teacherwallpa"><%= t.introduction %></p>
-        </div>
-        <% end %>
-      </div>
     </div>
   </div>
 </div>
-<% end %>
+    <% end %>
 <% end %>
 <script>
   $(document).ready(function () {

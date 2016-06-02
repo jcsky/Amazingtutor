@@ -18,15 +18,15 @@
           </button>
           <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
             <% if params[:week] %>
-            <li><%= link_to "All", teacherwall_path(:week=>params[:week] ) %></li>
-            <% Language.all.each do |l| %>
-            <li><%= link_to l.language, teacherwall_path( :language_id => l.id,:week=>params[:week]  ) %></li>
-            <% end %>
-          <% else %>
-            <li><%= link_to "All", teacherwall_path %></li>
-            <% Language.all.each do |l| %>
-            <li><%= link_to l.language, teacherwall_path( :language_id => l.id  ) %></li>
-            <% end %>
+                <li><%= link_to "All", teacherwall_path(:week=>params[:week] ) %></li>
+                <% Language.all.each do |l| %>
+                    <li><%= link_to l.language, teacherwall_path( :language_id => l.id,:week=>params[:week]  ) %></li>
+                <% end %>
+            <% else %>
+                <li><%= link_to "All", teacherwall_path %></li>
+                <% Language.all.each do |l| %>
+                    <li><%= link_to l.language, teacherwall_path( :language_id => l.id  ) %></li>
+                <% end %>
             <% end %>
           </ul>
         </div>
@@ -40,23 +40,23 @@
           </button>
           <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
             <% if params[:language_id ]  %>
-            <li><%= link_to "All", teacherwall_path(:language_id=> params[:language_id]) %></li>
-            <li><%= link_to "Monday", teacherwall_path( :week=> 1 ,:language_id=> params[:language_id]) %></li>
-            <li><%= link_to "Tuesday", teacherwall_path( :week=>2 ,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Wednesday", teacherwall_path( :week=> 3,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Thursday", teacherwall_path( :week=> 4,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Friday", teacherwall_path( :week=> 5,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Saturday", teacherwall_path( :week=> 6,:language_id=> params[:language_id] ) %></li>
-            <li><%= link_to "Sunday", teacherwall_path( :week=> 7,:language_id=> params[:language_id] ) %></li>
-          <% else %>
-            <li><%= link_to "All", teacherwall_path  %></li>
-            <li><%= link_to "Monday", teacherwall_path( :week=> 1 ) %></li>
-            <li><%= link_to "Tuesday", teacherwall_path( :week=>2  ) %></li>
-            <li><%= link_to "Wednesday", teacherwall_path( :week=> 3 ) %></li>
-            <li><%= link_to "Thursday", teacherwall_path( :week=> 4 ) %></li>
-            <li><%= link_to "Friday", teacherwall_path( :week=> 5 ) %></li>
-            <li><%= link_to "Saturday", teacherwall_path( :week=> 6 ) %></li>
-            <li><%= link_to "Sunday", teacherwall_path( :week=> 7 ) %></li>
+                <li><%= link_to "All", teacherwall_path(:language_id=> params[:language_id]) %></li>
+                <li><%= link_to "Monday", teacherwall_path( :week=> 1 ,:language_id=> params[:language_id]) %></li>
+                <li><%= link_to "Tuesday", teacherwall_path( :week=>2 ,:language_id=> params[:language_id] ) %></li>
+                <li><%= link_to "Wednesday", teacherwall_path( :week=> 3,:language_id=> params[:language_id] ) %></li>
+                <li><%= link_to "Thursday", teacherwall_path( :week=> 4,:language_id=> params[:language_id] ) %></li>
+                <li><%= link_to "Friday", teacherwall_path( :week=> 5,:language_id=> params[:language_id] ) %></li>
+                <li><%= link_to "Saturday", teacherwall_path( :week=> 6,:language_id=> params[:language_id] ) %></li>
+                <li><%= link_to "Sunday", teacherwall_path( :week=> 7,:language_id=> params[:language_id] ) %></li>
+            <% else %>
+                <li><%= link_to "All", teacherwall_path  %></li>
+                <li><%= link_to "Monday", teacherwall_path( :week=> 1 ) %></li>
+                <li><%= link_to "Tuesday", teacherwall_path( :week=>2  ) %></li>
+                <li><%= link_to "Wednesday", teacherwall_path( :week=> 3 ) %></li>
+                <li><%= link_to "Thursday", teacherwall_path( :week=> 4 ) %></li>
+                <li><%= link_to "Friday", teacherwall_path( :week=> 5 ) %></li>
+                <li><%= link_to "Saturday", teacherwall_path( :week=> 6 ) %></li>
+                <li><%= link_to "Sunday", teacherwall_path( :week=> 7 ) %></li>
             <% end %>
           </ul>
         </div>
