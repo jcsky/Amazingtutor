@@ -1,5 +1,6 @@
 <div id='calendar' style="width:50% ; height:50%"></div>
 <%= csrf_meta_tag %>
+
 <script>
   $(document).ready(function () {
 
@@ -16,7 +17,7 @@
       selectable: true,
       selectHelper: true,
       select: function (start, end) {
-        var c = confirm("是否設定可預約時段？")
+        var c = confirm("是否設定可預約時段？<br>如果選擇原有課程的區域內則為刪除.")
         var eventData;
         if (c) {
 //        做一個ajax

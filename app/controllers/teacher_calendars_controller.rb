@@ -57,7 +57,7 @@ class TeacherCalendarsController < ApplicationController
   def create
     start_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:start].in_time_zone, 'after')
     end_time = AvailableSection.time_shif_to_half_an_hour(@availabele_section_params[:end].in_time_zone, 'before')
-    @return_insert_sections = AvailableSection.check_section_insertalbe_and_bluk_insert(start_time, end_time, current_user.teacher.id)
+    @return_insert_sections = AvailableSection.check_section_insertalbe_and_bluk_insert_and_destroy(start_time, end_time, current_user.teacher.id)
 
   end
 

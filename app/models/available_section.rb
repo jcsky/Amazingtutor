@@ -27,7 +27,7 @@ class AvailableSection < ActiveRecord::Base
     chosetime
   end
 
-  def self.check_section_insertalbe_and_bluk_insert(start_time, end_time, teacher_id)
+  def self.check_section_insertalbe_and_bluk_insert_and_destroy(start_time, end_time, teacher_id)
     end_time = end_time.in_time_zone
     start_time = start_time.in_time_zone
     check_exist = AvailableSection.where("(start <= ? and end >= ?) AND teacher_id = ?", start_time, end_time, teacher_id)
@@ -43,6 +43,16 @@ class AvailableSection < ActiveRecord::Base
       end
       check_exist.delete_all
       AvailableSection.create(:start => start_time, :end => end_time, :teacher_id => teacher_id)
+    elsif check_exist.count == 1
+      this_exist = check_exist.first
+      appointmented  = this_exist.teacher.appointments
+      if appointmented.where('start >= ? and end <= ?',start_time,end_time).count == 0
+        if this_exist.start != start_time && this_exist.end != end_time
+          AvailableSection.create(:start=> this_exist.start,:end=>start_time ,:teacher_id => teacher_id)
+          AvailableSection.create(:start=> end_time,:end=>this_exist.end ,:teacher_id => teacher_id)
+        end
+        this_exist.destroy
+      end
     end
   end
 
@@ -107,7 +117,7 @@ class AvailableSection < ActiveRecord::Base
       # user 自己個課程
       if appointment.user_id == user_id
         event_reuslt << {:id => 'unavailable_for_booking',
-                        #  :title => teacher_name,
+                         #  :title => teacher_name,
                          :start => appointment.start.in_time_zone,
                          :end => appointment.end.in_time_zone,
                          :user_id => appointment.user_id,
