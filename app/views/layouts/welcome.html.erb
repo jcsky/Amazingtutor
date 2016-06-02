@@ -1,135 +1,157 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>AmazingTutor</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'welcome', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-    <%= favicon_link_tag 'ATlogo.ico' %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript">
-      // $(document).ready(function () {   $('#login-white').hide();   $('#login-black').hide();   $('#login').click(function (e) {     $('#login-black').fadeIn(1);     $('#login-white').fadeIn(300);   });   $('#login-black').click(function (e) {
-      // $('#login-white').fadeOut(1);     $('#login-black').fadeOut(1);   }); });
-    </script>
-  </head>
-  <body>
-    <nav class="navbar navbar-default nav-modify navbar-fixed-top" id="nav">
-      <div class="container nav-relative">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header brand-center">
-          <%= link_to root_path , :class=>"navbar-brand" do%>
-          <span class="brand1">Amazing</span><span class="brand2">tutor</span>
-          <% end %>
-        </div>
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <%= link_to("Find a tutor", teacherwall_path)%>
-            </li>
-            <li>
-              <%= link_to("Scholarship", scholarship_path) unless current_user.nil?%>
-            </li>
-            <li>
-              <%= link_to("Apply to Teach", apply_teacher_path)%>
-            </li>
-            <li>
-              <%#= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>
-              <%= link_to(t("Log In"), new_session_path(:user))if !current_user%>
-            </li>
-            <% if current_user %>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user_headimage(current_user) %><%= current_user.display_name %>
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
+    <head>
+        <title>AmazingTutor</title>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'welcome', 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
+        <%= favicon_link_tag 'ATlogo.ico' %>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript">
+            // $(document).ready(function () {   $('#login-white').hide();   $('#login-black').hide();   $('#login').click(function (e) {     $('#login-black').fadeIn(1);     $('#login-white').fadeIn(300);   });   $('#login-black').click(function (e) {
+            // $('#login-white').fadeOut(1);     $('#login-black').fadeOut(1);   }); });
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default nav-modify navbar-fixed-top" id="nav">
+            <div class="container nav-relative">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header brand-center">
+                    <%= link_to root_path , :class=>"navbar-brand" do%>
+                    <span class="brand1">Amazing</span>
+                    <span class="brand2">tutor</span>
+                    <% end %>
+                </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <%= link_to("Find a tutor", teacherwall_path)%>
+                        </li>
+                        <li>
+                            <%= link_to("Scholarship", scholarship_path) unless current_user.nil?%>
+                        </li>
+                        <li>
+                            <%= link_to("Apply to Teach", apply_teacher_path)%>
+                        </li>
+                        <li>
+                            <%#= button_tag "Log In", {:class => "loginbutton", :id=>"login" } if !current_user%>
+                            <%= link_to(t("Log In"), new_session_path(:user))if !current_user%>
+                        </li>
+                        <% if current_user %>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user_headimage(current_user) %><%= current_user.display_name %>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
 
-                <li><%= link_to "Dashboard",classes_user_path(current_user) %></li>
-                <% if current_user.authority == "teacher" %>
-                <li><%= link_to "教師資訊" ,classes_teacher_path(current_user.get_teacher.id)%></li>
-                <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.get_teacher.id)%></li>
-                <% end %>
-                <li>
-                  <%= link_to('Log Out', destroy_user_session_path, :method => :delete)%>
-                </li>
-              </ul>
-            </li>
-            <% end %>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-    </nav>
-    <div class="nav-top"></div>
-    <!-- Google Tag Manager -->
-
-    <noscript>
-      <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PK4JJZ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer'
-            ? '&l=' + l
-            : '';
-        j.async = true;
-        j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-PK4JJZ');
-    </script>
-
-    <!-- End Google Tag Manager -->
-    <%= yield %>
-    <%#= render :partial=>"welcome/login" %>
-    <button type="button" class="message_button" data-toggle="modal" data-target="#message">
-      <i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>
-    </button>
-    <div class="modal fade message_modal" id="message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content message_content">
-          <div class="modal-header message_header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="message_modal_title" id="myModalLabel">Feedback</h4>
-          </div>
-          <%= form_for Message.new do |f| %>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row message_input">
-                <div class="col-xs-3"><%= f.label :problem, "Problem" %></div>
-                <div class="col-xs-9">
-                  <%= select(:message,:problem,options_for_select([["BUG", "BUG"],["Suggestion", "Suggestion"], ["Question", "Question"]],"BUG"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-width" =>"100%"} )%></div>
-              </div>
-              <div class="row message_input">
-                <div class="col-xs-3"><%= f.label :email, "Email" %></div>
-                <div class="col-xs-9"><%= f.text_field :email,value: current_user.try(:alternate_email),placeholder:"We will send messages back by this email. ", :class => "form-control" %></div>
-              </div>
-              <div class="row message_input">
-                <div class="col-xs-3"><%= f.label :message, "Explanation" %></div>
-                <div class="col-xs-9"><%= f.text_area :message,placeholder:"Message....", :class => "form-control" %></div>
-              </div>
+                                <li><%= link_to "Dashboard",classes_user_path(current_user) %></li>
+                                <% if current_user.authority == "teacher" %>
+                                <li><%= link_to "教師資訊" ,classes_teacher_path(current_user.get_teacher.id)%></li>
+                                <li><%= link_to "授課日曆" ,calendar_teacher_path(current_user.get_teacher.id)%></li>
+                                <% end %>
+                                <li>
+                                    <%= link_to('Log Out', destroy_user_session_path, :method => :delete)%>
+                                </li>
+                            </ul>
+                        </li>
+                        <% end %>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
-          </div>
-          <div class="modal-footer message_footer">
-            <button type="button" class="message_cancel" data-dismiss="modal">Close</button>
-            <%= f.submit 'SAVE' ,class:"message_save"%>
-          </div>
-          <% end %>
+            <!-- /.container-fluid -->
+        </nav>
+        <div class="nav-top"></div>
+        <!-- Google Tag Manager -->
+
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PK4JJZ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer'
+                        ? '&l=' + l
+                        : '';
+                j.async = true;
+                j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-PK4JJZ');
+        </script>
+
+        <!-- End Google Tag Manager -->
+        <%= yield %>
+        <%#= render :partial=>"welcome/login" %>
+        <button type="button" class="message_button" data-toggle="modal" data-target="#message">
+            <i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>
+        </button>
+        <div class="modal fade message_modal" id="message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content message_content">
+                    <div class="modal-header message_header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="message_modal_title" id="myModalLabel">Feedback</h4>
+                    </div>
+                    <%= form_for Message.new, :html => { :id => 'feebackform' } do |f|  %>
+                    <div class="modal-body">
+                        <div class="container-fluid" id="feeback_form">
+                            <div class="row message_input">
+                                <div class="col-xs-3"><%= f.label :problem, "Problem" %></div>
+                                <div class="col-xs-9">
+                                    <%= select(:message,:problem,options_for_select([["BUG", "BUG"],["Suggestion", "Suggestion"], ["Question", "Question"]],"BUG"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-width" =>"100%"} )%></div>
+                            </div>
+                            <div class="row message_input">
+                                <div class="col-xs-3"><%= f.label :email, "Email" %></div>
+                                <div class="col-xs-9"><%= f.text_field :email,value: current_user.try(:alternate_email),placeholder:"We will send messages back by this email. ", :class => "form-control" %></div>
+                            </div>
+                            <div class="row message_input">
+                                <div class="col-xs-3"><%= f.label :message, "Explanation" %></div>
+                                <div class="col-xs-9"><%= f.text_area :message,placeholder:"Message....", :class => "form-control", :required =>true %></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer message_footer">
+                        <button type="button" class="message_cancel" data-dismiss="modal">Close</button>
+                        <%= f.submit 'SAVE' ,class:"message_save" %>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </html>
+
+<script>
+  $('#feebackform').submit(function() {
+    alert('123')
+  });
+
+</script>
+
+<script>
+    function thankYouFeeback() {
+        var valuesToSubmit = $(this).serialize();
+        $.ajax({
+            type: "POST", url: $(this).attr('action'), //sumbits it to the given url of the form
+            data: valuesToSubmit,
+            dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+        }).success(function (json) {
+            console.log("success", json);
+        });
+        return false; // prevents normal behaviour
+    }
+</script>

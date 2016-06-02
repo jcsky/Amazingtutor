@@ -64,7 +64,7 @@
           <% elsif @teacher.trial_fee == nil %>
             <h5 class="moneyred"><%= "NOT TRIAL" %></h5>
           <% else %>
-            <h5 class="moneyred"><%= @teacher.trial_fee %>
+            <h5 class="moneyred"><%= number_to_currency(@teacher.trial_fee,precision: 2 ) %>
             USD</h5>
           <% end %>
           <p>30 min</p>

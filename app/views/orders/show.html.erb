@@ -37,7 +37,9 @@
             <i class="fa fa-usd"></i>
             <span>Rate
             </span>
-            <span class="moneyred"><%= @order.teacher.ten_fee/10 %>~<%= @order.teacher.one_fee %>TW/hour</span><br>
+            <span class="moneyred">
+              <%= render partial: 'welcome/moneyred', locals: {t: @order.teacher} %>
+            </span><br>
             <i class="fa fa-rss"></i>
             <span>Trial
             </span>
@@ -68,7 +70,7 @@
             <h6>&nbsp;&nbsp;Trial session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred"><%= @order.teacher.trial_fee %> TWD</h5>
+            <h5 class="moneyred"><%= number_to_currency(@order.teacher.trial_fee, precision: 2 ) %> USD</h5>
             <p>30 mins</p>
           </div>
         </div>
@@ -81,8 +83,8 @@
             <h6>&nbsp;&nbsp;1 session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred"><%= @order.teacher.one_fee %> TWD</h5>
-            <p>per hour</p>
+            <h5 class="moneyred"><%= number_to_currency(@order.teacher.one_fee, precision: 2 ) %> USD</h5>
+            <p>Per Hour</p>
           </div>
         </div>
 
@@ -94,8 +96,8 @@
             <h6>&nbsp;&nbsp;5 session</h6>
           </div>
           <div class="col-xs-6 text-right ">
-            <h5 class="moneyred"> <%= @order.teacher.five_fee/5 %> TWD</h5>
-            <p>per hour</p>
+            <h5 class="moneyred"> <%= number_to_currency(@order.teacher.five_fee/5, precision: 2 ) %> USD</h5>
+            <p>Per Hour</p>
           </div>
         </div>
 
@@ -107,8 +109,8 @@
             <h6>&nbsp;&nbsp;10 session</h6>
           </div>
           <div class="col-xs-6 text-right">
-            <h5 class="moneyred"> <%= @order.teacher.ten_fee/10 %> TWD</h5>
-            <p>per hour</p>
+            <h5 class="moneyred"> <%= number_to_currency(@order.teacher.ten_fee/10, precision: 2 ) %> USD</h5>
+            <p>Per Hour</p>
           </div>
 
           <div class="form-group">
@@ -135,7 +137,7 @@
         <div class="amount-show col-xs-12">
           <div class="container-fluid">
             <%= f.label :amount, "Total amount: "%>
-            <span>TWD <%= amount= @order.amount %>
+            <span>USD <%= number_to_currency(amount= @order.amount, precision: 2) %>
             </span>
           </div>
         </div>
