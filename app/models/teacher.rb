@@ -87,7 +87,7 @@ class Teacher < ActiveRecord::Base
 
             for i in 0..block
               @available_section_times << [ x , x + (section* 30.minute)]
-              x += 30.minute
+               x += 30.minute
             end
             @available_section_times.pop if section == 2
 

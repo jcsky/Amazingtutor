@@ -103,7 +103,8 @@ class TeachersController < ApplicationController
   end
 
   def teacher_authority
-    if current_user.nil? || current_user.authority != 'teacher'
+    @teacher = Teacher.find(params[:id])
+    if current_user.nil? || current_user.authority != 'teacher' || current_user.try(:teacher).id != @teacher.id
       redirect_to root_path
     end
   end
@@ -113,8 +114,8 @@ class TeachersController < ApplicationController
                                     :one_fee, :five_fee, :ten_fee, :gathering_way,
                                     language_ids: [],
                                     languages_attributes: [:language, :_destroy, :id],
-                                    experiences_attributes: [:company_name, :description, :_destroy, :id],
-                                    educations_attributes: [:school, :major, :_destroy, :id],
+                                    experiences_attributes: [:company_name, :description, :_destroy, :id,:start,:end],
+                                    educations_attributes: [:school, :major, :_destroy, :id,:start,:end],
                                     certificates_attributes: [:name, :score, :_destroy, :id])
   end
 end

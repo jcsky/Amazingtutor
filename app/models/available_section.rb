@@ -27,26 +27,7 @@ class AvailableSection < ActiveRecord::Base
     chosetime
   end
 
-  # def self.check_section_insertalbe_and_bluk_insert(start_time, end_time , teacher_id)
-  #   end_time = end_time.in_time_zone
-  #   start_time = start_time.in_time_zone
-  #   z = (end_time - start_time) / 30.minute
-  #   section_attr = Array.new
-  #   temp_time = start_time
-  #   (1..z).each do |n|
-  #     section_attr.push({:start => temp_time, :end => temp_time + 30.minute, :teacher_id => teacher_id})
-  #     temp_time += 30.minute
-  #   end
-  #   return_insert_sections = Array.new
-  #   section_attr.each do |attr|
-  #     if AvailableSection.where(attr).count==0
-  #       return_insert_sections << AvailableSection.create(attr)
-  #     end
-  #   end
-  #   return_insert_sections
-  # end
-
-  def self.check_section_insertalbe_and_bluk_insert(start_time, end_time, teacher_id)
+  def self.check_section_insertalbe_and_bluk_insert_and_destroy(start_time, end_time, teacher_id)
     end_time = end_time.in_time_zone
     start_time = start_time.in_time_zone
     check_exist = AvailableSection.where("(start <= ? and end >= ?) AND teacher_id = ?", start_time, end_time, teacher_id)
@@ -62,6 +43,16 @@ class AvailableSection < ActiveRecord::Base
       end
       check_exist.delete_all
       AvailableSection.create(:start => start_time, :end => end_time, :teacher_id => teacher_id)
+    elsif check_exist.count == 1
+      this_exist = check_exist.first
+      appointmented  = this_exist.teacher.appointments
+      if appointmented.where('start >= ? and end <= ?',start_time,end_time).count == 0
+        if this_exist.start != start_time && this_exist.end != end_time
+          AvailableSection.create(:start=> this_exist.start,:end=>start_time ,:teacher_id => teacher_id)
+          AvailableSection.create(:start=> end_time,:end=>this_exist.end ,:teacher_id => teacher_id)
+        end
+        this_exist.destroy
+      end
     end
   end
 
@@ -126,12 +117,12 @@ class AvailableSection < ActiveRecord::Base
       # user 自己個課程
       if appointment.user_id == user_id
         event_reuslt << {:id => 'unavailable_for_booking',
-                        #  :title => teacher_name,
+                         #  :title => teacher_name,
                          :start => appointment.start.in_time_zone,
                          :end => appointment.end.in_time_zone,
                          :user_id => appointment.user_id,
                          :borderColor => 'red',
-                         :color => '#ff0000',
+                         :color => '#C73C3C',
                          :textColor => 'block',
                          :backgroundColor => 'gray'}
       else
@@ -139,7 +130,8 @@ class AvailableSection < ActiveRecord::Base
                          :start => appointment.start.in_time_zone,
                          :end => appointment.end.in_time_zone,
                          :user_id => appointment.user_id,
-                         :backgroundColor => '#ff0000'}
+                         :backgroundColor => '#C73C3C',
+                       :backgroundImage => 'repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px'}
       end
 
     end
@@ -177,7 +169,10 @@ class AvailableSection < ActiveRecord::Base
                          :backgroundColor => '#FF5F5F'}
       end
     end
-    event_reuslt
+    # limit = Time.current.in_time_zone + 12.hours
+      # event_reuslt =  event_reuslt.map {|a|a if !(a[:start]< limit && a[:end]<limit) }.compact.each {|a|a[:start]= limit if !(a[:start]< limit && a[:end]>limit)}
+        # event_reuslt.map {|a|a. }
+        event_reuslt
   end
 
 
@@ -192,5 +187,49 @@ class AvailableSection < ActiveRecord::Base
       available_date << available.end.in_time_zone.to_date
     end
     available_date.uniq.map { |d| d.strftime("%Y-%m-%d") }
+  end
+
+  def self.teacher_available_section_by_date(teacher_id, date, section)
+    # 設定只能預約三小時後的課程
+    start_time = AvailableSection.time_shif_to_half_an_hour(Time.current + 3.hours)
+    event_reuslt = []
+    section = 2
+    available_sections=AvailableSection.where('teacher_id = ? and (end >= ? and start <= ?)',
+                                              teacher_id,
+                                              date.in_time_zone.at_beginning_of_day,
+                                              date.in_time_zone.at_end_of_day)
+    appointments = Appointment.includes(:teacher).where('teacher_id = ? and (end >= ? and start <= ?)',
+                                                        teacher_id,
+                                                        date.in_time_zone.at_beginning_of_day,
+                                                        date.in_time_zone.at_end_of_day).order('start')
+    available_sections.each do |available_section|
+      if available_section.start >= start_time
+        cacl_start_time = available_section.start
+      else
+        cacl_start_time = start_time
+      end
+      while available_section.end >= cacl_start_time + 30.minutes * section
+        cacl_end_time = cacl_start_time + 30.minutes * section
+        available_status = true
+        if !appointments.nil?
+          appointments.each do |appointment|
+            if appointment.start == cacl_start_time or appointment.end == cacl_end_time or (appointment.start < cacl_start_time and appointment.end > cacl_start_time) or (appointment.start < cacl_end_time and appointment.end > cacl_end_time)
+              available_status = false
+            end
+          end
+        end
+        if available_status
+          event_reuslt << {:status => 'available',
+                           :start => cacl_start_time,
+                           :end => cacl_end_time}
+        else
+          event_reuslt << {:status => 'unavailable',
+                           :start => cacl_start_time,
+                           :end => cacl_end_time}
+        end
+        cacl_start_time = cacl_start_time + 30.minutes
+      end
+    end
+    event_reuslt
   end
 end

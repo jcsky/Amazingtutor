@@ -46,9 +46,11 @@ ActiveRecord::Schema.define(version: 20160601062433) do
   create_table "educations", force: :cascade do |t|
     t.integer  "teacher_id"
     t.string   "school"
-    t.string   "major"
+    t.text     "major"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start"
+    t.datetime "end"
   end
 
   create_table "evaluations", force: :cascade do |t|
@@ -69,9 +71,11 @@ ActiveRecord::Schema.define(version: 20160601062433) do
   create_table "experiences", force: :cascade do |t|
     t.integer  "teacher_id"
     t.string   "company_name"
-    t.string   "description"
+    t.text     "description"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.datetime "start"
+    t.datetime "end"
   end
 
   create_table "languages", force: :cascade do |t|

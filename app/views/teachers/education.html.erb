@@ -17,6 +17,16 @@
         <%= f.add_nested_fields_link :educations, '+', class: 'btn btn-danger', role: 'button'  %>
         <%= f.nested_fields_for :educations do |ff| %>
         <%= ff.remove_nested_fields_link '--', class: 'btn btn-danger', role: 'button'%>
+
+        <div class="input-group clearfix">
+          <%= ff.label :start, "開始時間" %>
+          <%= ff.date_select :start, start_year: 1950, :class => "form-control" %>
+        </div>
+        <div class="input-group clearfix">
+          <%= ff.label :end, "結束時間" %>
+          <%= ff.date_select :end, start_year: 1950, :class => "form-control" %>
+        </div>
+
         <div class="input-group clearfix">
           <%= ff.label :school, "學校" %>
           <%= ff.text_field :school, :class => "form-control" %>
@@ -33,6 +43,15 @@
         <%= f.add_nested_fields_link :experiences, '+', class: 'btn btn-danger', role: 'button'  %>
         <%= f.nested_fields_for :experiences do |ff| %>
         <%= ff.remove_nested_fields_link '--', class: 'btn btn-danger', role: 'button'%>
+
+        <div class="input-group clearfix ">
+          <%= ff.label :start, "開始時間" %>
+          <%= ff.date_select :start, start_year: 1950, :class => "form-control selectpicker" %>
+        </div>
+        <div class="input-group clearfix">
+          <%= ff.label :end, "結束時間" %>
+          <%= ff.date_select :end, start_year: 1950, :class => "form-control" %>
+        </div>
         <div class="input-group clearfix">
           <%= ff.label :company_name, "單位名稱" %>
           <%= ff.text_field :company_name, :class => "form-control" %>
@@ -55,3 +74,38 @@
     </div>
   </div>
 </div>
+
+
+<script>
+var i =0;
+$("#teacher_educations_attributes_"+i+"_start_1i").select2();
+$("#teacher_educations_attributes_"+i+"_start_2i").select2();
+$("#teacher_educations_attributes_"+i+"_start_3i").select2();
+$("#teacher_educations_attributes_"+i+"_end_1i").select2();
+
+$('a[data-association-path="teacher_educations"]').on("click",function(){
+  $.fn.select2.defaults.reset();
+
+  console.log(++i);
+  // i+=1
+  $("#teacher_educations_attributes_"+i+"_start_1i").select2();
+  $("#teacher_educations_attributes_"+i+"_start_2i").select2();
+  $("#teacher_educations_attributes_"+i+"_start_3i").select2();
+  $("#teacher_educations_attributes_"+i+"_end_1i").select2();
+});
+  // });
+// $("#teacher_educations_attributes_"+(++i))+"_start_1i").selectpicker();
+// $("#teacher_educations_attributes_"+(++i))+"_start_2i").selectpicker();
+// $("#teacher_educations_attributes_"+(++i))+"_start_3i").selectpicker();
+// $("#teacher_educations_attributes_"+(++i))+"_end_1i").selectpicker();
+// $("#teacher_educations_attributes_"+(++i))+"_end_2i").selectpicker();
+// $("#teacher_educations_attributes_"+(++i))+"_end_3i").selectpicker();
+// $("#teacher_experiences_attributes_"+(++i))+"_start_1i").selectpicker();
+// $("#teacher_experiences_attributes_"+(++i))+"_start_2i").selectpicker();
+// $("#teacher_experiences_attributes_"+(++i))+"_start_3i").selectpicker();
+// $("#teacher_experiences_attributes_"+(++i))+"_end_1i").selectpicker();
+// $("#teacher_experiences_attributes_"+(++i))+"_end_2i").selectpicker();
+// $("#teacher_experiences_attributes_"+(++i))+"_end_3i").selectpicker();
+// });
+
+</script>
