@@ -1,35 +1,35 @@
 <% @teachers.each do |t| %>
-<% if t.check == "checked" %>
-<div class="container">
-  <div class="info">
-    <div class="row">
-      <div class="col-sm-5">
-        <div class="youtube-container">
-          <div class="youtube-player-<%= t.id %> youtube-player" data-id="<%= t.youtube_website %>"></div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-7">
-        <div class="col-xs-12 clearfix flexmodify">
-          <div class="info-mypic col-md-2 col-xs-3">
-            <%=   image_tag(t.user.image.url(:medium)) %>
-          </div>
-          <%= link_to profile_teacher_path(t)  do %>
-          <div class="info-eval col-md-7 col-xs-7">
-            <p><%= User.find(t.user_id).first_name %>
-              <%= User.find(t.user_id).last_name %></p>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star-half-o"></i>
-            <i class="fa fa-star-o"></i>
-            <span>(132)</span>
-          </div>
-              <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
-                <%= image_tag("flag.png") %>
+    <% if t.check == "checked" %>
+        <div class="container">
+          <div class="info">
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="youtube-container">
+                  <div class="youtube-player-<%= t.id %> youtube-player" data-id="<%= t.youtube_website %>"></div>
+                </div>
               </div>
-              </div>
-              <div class="col-xs-12 clearfix info-tag">
-                <i class="fa fa-comment-o"></i>
+              <div class="col-xs-12 col-sm-7">
+                <div class="col-xs-12 clearfix flexmodify">
+                  <div class="info-mypic col-md-2 col-xs-3">
+                    <%=   image_tag(t.user.image.url(:medium)) %>
+                  </div>
+                  <%= link_to profile_teacher_path(t)  do %>
+                      <div class="info-eval col-md-7 col-xs-7">
+                        <p><%= User.find(t.user_id).first_name %>
+                          <%= User.find(t.user_id).last_name %></p>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <span>(132)</span>
+                      </div>
+                      <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
+                        <%= image_tag("flag.png") %>
+                      </div>
+                      </div>
+                      <div class="col-xs-12 clearfix info-tag">
+                        <i class="fa fa-comment-o"></i>
                 <span>Speak
                 </span>
                 <span>
@@ -37,7 +37,7 @@
                       <%= x.language %>
                   <% end %>
                 </span><br>
-                <i class="fa fa-usd"></i>
+                        <i class="fa fa-usd"></i>
                 <span>Rate
                 </span>
                 <span class="moneyred">
@@ -47,19 +47,19 @@
                       <%= t.one_fee %>~<%= t.ten_fee/10 %>
                   <% end %>
                   TW/hour</span><br>
-                <i class="fa fa-rss"></i>
+                        <i class="fa fa-rss"></i>
                 <span>Trial
                 </span>
-                <span>Yes</span>
-              </div>
-              <div class="col-xs-12 info-pro">
-                <p class="teacherwallpa"><%= t.introduction %></p>
-              </div>
-          <% end %>
+                        <span>Yes</span>
+                      </div>
+                      <div class="col-xs-12 info-pro">
+                        <p class="teacherwallpa"><%= t.introduction %></p>
+                      </div>
+                  <% end %>
+                  </div>
+            </div>
           </div>
-    </div>
-  </div>
-</div>
+        </div>
     <% end %>
 <% end %>
 <script>

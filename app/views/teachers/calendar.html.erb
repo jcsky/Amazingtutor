@@ -51,7 +51,7 @@
       selectable: true,
       selectHelper: true,
       select: function (start, end) {
-        var c = confirm("是否設定可預約時段？")
+        var c = confirm("是否設定可預約時段？\n如果選擇已預約課程的區域內則為刪除.\n刪除內已有學生預約則無法刪除")
         var eventData;
         if (c) {
           //        做一個ajax
