@@ -79,6 +79,8 @@
       </div>
       <!-- /.container-fluid -->
     </nav>
+    <%= render partial: 'layouts/feeback_modal'  %>
+
     <div class="nav-top"></div>
   <!-- Google Tag Manager -->
   <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PK4JJZ"
@@ -90,52 +92,6 @@
   })(window,document,'script','dataLayer','GTM-PK4JJZ');</script>
   <!-- End Google Tag Manager -->
     <%= yield %>
-    <button type="button" class="message_button" data-toggle="modal" data-target="#message">
-      <i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>
-    </button>
-    <div class="modal fade message_modal" id="message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content message_content">
-          <div class="modal-header message_header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="message_modal_title" id="myModalLabel">Feedback</h4>
-          </div>
 
-          <%= form_for Message.new do |f| %>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row message_input">
-                <div class="col-xs-3"><%= f.label :problem, "Problem" %></div>
-                <div class="col-xs-9">  <%= select(:message,:problem,options_for_select([["BUG", "BUG"],["Suggestion", "Suggestion"], ["Question", "Question"]],"BUG"),{}, {:class=>"selectpicker show-menu-arrow" ,"data-width" =>"100%"} )%></div>
-              </div>
-              <div class="row message_input">
-                <div class="col-xs-3"><%= f.label :email, "Email" %></div>
-                <div class="col-xs-9"><%= f.email_field :email,value: current_user.try(:email),placeholder:"We will send messages back by this email. ", :class => "form-control" %></div>
-              </div>
-              <div class="row message_input">
-                <div class="col-xs-3"><%= f.label :message, "Explanation" %></div>
-                <div class="col-xs-9"><%= f.text_area :message,placeholder:"Message....", :class => "form-control" %></div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer message_footer">
-            <button type="button" class="message_cancel" data-dismiss="modal">Close</button>
-            <%= f.submit 'SAVE' ,class:"message_save"%>
-          </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
   </body>
 </html>
-
-
-<script>
-  // $('.message_save').click(function () {
-  //   console.log.alert('hello')
-  //   this.preventDefault();
-  //   this.sendContactForm();
-  // });
-</script>

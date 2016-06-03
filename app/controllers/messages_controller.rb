@@ -3,14 +3,21 @@ class MessagesController < ApplicationController
     if params[:message]
       @admin = User.where(email: 'admin@gmail.com')
       if current_user
-        Message.create(friend_id: @admin.ids.first, user_id: current_user.id,
+        message = Message.create(friend_id: @admin.ids.first, user_id: current_user.id,
                        message: params[:message][:message], problem: params[:message][:problem],
                        email: params[:message][:email])
       else
-        Message.create(friend_id: @admin.ids.first, message: params[:message][:message],
+        message = Message.create(friend_id: @admin.ids.first, message: params[:message][:message],
                        problem: params[:message][:problem], email: params[:message][:email])
       end
-      redirect_to :back
+
+      if message
+        # render :json => {':hello' => '123'}
+        render :json => {:success => true, :message => message.message}.to_json
+      else
+        render :json => {:error => true}.to_json
+      end
+
     end
   end
 
