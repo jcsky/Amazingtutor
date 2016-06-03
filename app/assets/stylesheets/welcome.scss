@@ -275,8 +275,17 @@ div.play-button {
 
 // Damon---Feeback_form
 .thankYouFeeback{
-  position: absolute;
-  width: 600px;
-  height: 471px;
+  width: 598px;
+  height: 382px;
   display: none;
+  text-align: center;
+  h3{
+    color: #FF5F5F;
+    margin-top: 19%;
+  }
+  h4{
+    color: #888888;
+    margin-top: 5%;
+    margin-bottom: 23%;
+  }
 }
