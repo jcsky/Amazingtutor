@@ -56,12 +56,12 @@
   <div class="profile-fix">
     <div class=" profile-container">
       <div class="private col-xs-12">
-
         <div class="col-xs-12 private-head">
           <h5>Private sesions</h5>
-          <p>whith Sarah</p>
+          <p>whith <%= @order.teacher.user.username %></p>
         </div>
 
+        <% unless @order.teacher.trial_fee.nil? || current_user.user_available_sections.where(teacher_id:params[:teacher_id]).first.try(:trailed) == true || @oreder.teacher.trial_fee == 0 %>
         <div class="col-xs-12 private-money">
           <div class="col-xs-6">
             <div class="payment-radio">
@@ -72,9 +72,10 @@
           </div>
           <div class="col-xs-6 text-right">
             <h5 class="moneyred"><%= number_to_currency(@order.teacher.trial_fee, precision: 2 ) %> USD</h5>
-            <p>30 mins</p>
+            <p>30 minutes</p>
           </div>
         </div>
+         <% end %>
 
         <div class="col-xs-12 private-money">
           <div class="col-xs-6">

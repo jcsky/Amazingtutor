@@ -2,7 +2,7 @@ RailsAdmin.config do |config|
 
   ### Popular gems integration
   config.authorize_with do
-      redirect_to main_app.root_path unless current_user.try(:admin?)
+      redirect_to main_app.root_path unless current_user.try(:admin_by_lululala?)
     end
   ## == Devise ==
   # config.authenticate_with do

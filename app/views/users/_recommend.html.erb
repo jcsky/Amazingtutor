@@ -1,0 +1,66 @@
+<% @teacher = Teacher.all.first %>
+<div class="scheduled-content scheduled-editprofile-fix">
+  <div class="scheduled-content-head">
+    <h4>Find a Tutor</h4>
+  </div>
+  <div class="text-center findtutor">
+    <h3>Hello
+      <%= current_user.display_name %></h3>
+    <h5>You haven’t booked your lesson yet. Come and find your tutor!</h5>
+    <p><%= link_to "Find a Tutor",teacherwall_path %></p>
+  </div>
+</div>
+<div class="scheduled-content scheduled-editprofile-fix suggestion">
+  <div class="scheduled-content-head">
+    <h4>Recommend Tutor</h4>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+
+      <%= link_to profile_teacher_path(@teacher)  do %>
+          <div class="col-xs-12 clearfix flexmodify">
+
+            <div class="info-mypic col-md-2 col-xs-3">
+              <%= image_tag(User.find(@teacher.user_id).image.url(:medium)) %>
+            </div>
+            <div class="info-eval col-md-7 col-xs-7">
+              <p><%= User.find(@teacher.user_id).first_name %>
+                <%= User.find(@teacher.user_id).last_name %></p>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star-half-o"></i>
+              <i class="fa fa-star-o"></i>
+              <span>(132)</span>
+            </div>
+            <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
+              <%= image_tag("flag.png") %>
+            </div>
+          </div>
+          <div class="col-xs-12 clearfix info-tag">
+            <i class="fa fa-comment-o"></i>
+          <span>Speak
+          </span>
+          <span>
+            <% @teacher.languages.each do |x| %>
+            <%= x.language %>
+            <% end %>
+          </span><br>
+            <i class="fa fa-usd"></i>
+          <span>Rate
+          </span>
+          <span class="moneyred">
+            <%= render partial: 'welcome/moneyred', locals: {t: @teacher} %>
+            <br>
+            <i class="fa fa-rss"></i>
+          <span>Trial
+          </span>
+          <span>Yes</span>
+          </div>
+          <div class="col-xs-12 info-pro">
+            <p><%= @teacher.introduction %></p>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

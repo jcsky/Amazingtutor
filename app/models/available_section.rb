@@ -124,14 +124,15 @@ class AvailableSection < ActiveRecord::Base
                          :borderColor => 'red',
                          :color => '#C73C3C',
                          :textColor => 'block',
-                         :backgroundColor => 'gray'}
+                         :backgroundColor => 'gray',
+                         :backgroundImage => 'repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px'}
       else
         event_reuslt << {:id => 'unavailable_for_booking',
                          :start => appointment.start.in_time_zone,
                          :end => appointment.end.in_time_zone,
                          :user_id => appointment.user_id,
                          :backgroundColor => '#C73C3C',
-                       :backgroundImage => 'repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px'}
+                         :backgroundImage => 'repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px'}
       end
 
     end

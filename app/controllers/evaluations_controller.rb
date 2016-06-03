@@ -12,7 +12,6 @@ class EvaluationsController < ApplicationController
 
 
   def create
-
     if params[:type].to_i == 0
       @evaluation = @appointment.evaluations.where(evaluatable_type: "User",
                                                     evaluatable_id: current_user.id, evaluated_id: @appointment.teacher_id ).first
@@ -43,7 +42,6 @@ class EvaluationsController < ApplicationController
 
   def show
     @evaluation = Evaluation.find(params[:id])
-
     respond_to do |format|
       format.html
       format.json {
@@ -64,5 +62,4 @@ class EvaluationsController < ApplicationController
   def evaluation_params
     params.require(:evaluation).permit(:comment, :rating)
   end
-
 end

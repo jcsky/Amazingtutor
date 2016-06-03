@@ -5,50 +5,33 @@
     </div>
     <div class="col-md-7">
       <div class="row">
-        <div class="col-xs-12">
-          <div class="mytutor-sort">
-            <div class="dropdown dropdown-language selsct_scheduled">
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Choose class status....
-                <span class="caret dropdown-language-span"></span>
-              </button>
-              <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
-                <li><%= link_to "ALL", mytutor_user_path( :mytutor=> 1 ) %></li>
-                <li><%= link_to "Scheduled", mytutor_user_path( :mytutor=> 2 ) %></li>
-                <li><%= link_to "UnScheduled", mytutor_user_path( :mytutor=> 3 ) %></li>
-                <li><%= link_to "Past", mytutor_user_path( :mytutor=> 4 ) %></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <% @appointments.select(:teacher_id).uniq.each do |a|%>
-        <div class="col-xs-12">
-          <div class="tutor-info">
-            <div class="clearfix tutor-top">
-              <div class="info-mypic col-xs-3 pull-left col-sm-2">
+        <% unless UserAvailableSection.where(user_id:current_user).count==0%>
+            <% UserAvailableSection.where(user_id:current_user).each do |a|%>
+                <div class="col-xs-12">
+                  <div class="tutor-info">
+                    <div class="clearfix tutor-top">
+                      <div class="info-mypic col-xs-3 pull-left col-sm-2">
+                        <%= user_headimage(a.teacher.user) %>
+                      </div>
+                      <div class="info-eval col-xs-7 col-sm-7">
+                        <p><%= a.teacher.user.last_name %> <%= a.teacher.user.first_name %></p>
+                        <div id="rateYo-<%= a.teacher_id %>" ></div>
+                        <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
 
-                <%= user_headimage(a.teacher.user) %>
-              </div>
-              <div class="info-eval col-xs-7 col-sm-7">
-                <p><%= a.teacher.user.last_name %> <%= a.teacher.user.first_name %></p>
-                <div id="rateYo-<%= a.teacher_id %>" ></div>
-                <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
-
-              </div>
-              <div class=" col-xs-2 info-flag col-sm-1 col-sm-push-1 info-flag-class-fix">
-                <%= image_tag("flag.png") %>
-              </div>
-            </div>
-            <div class="clearfix info-tag">
-              <i class="fa fa-comment-o"></i>
-              <span>Speak:</span>
+                      </div>
+                      <div class=" col-xs-2 info-flag col-sm-1 col-sm-push-1 info-flag-class-fix">
+                        <%= image_tag("flag.png") %>
+                      </div>
+                    </div>
+                    <div class="clearfix info-tag">
+                      <i class="fa fa-comment-o"></i>
+                      <span>Speak:</span>
               <span>
                 <% a.teacher.languages.each do |language| %>
                 <%= language.language %>
                 <% end %>
               </span><br>
-
-              <i class="fa fa-usd"></i>
+                      <i class="fa fa-usd"></i>
               <span>Rate
               </span>
               <span class="moneyred">  <% if a.teacher.ten_fee/10 < a.teacher.one_fee %>
@@ -56,11 +39,14 @@
               <% else %>
                 <%= a.teacher.one_fee %>~<%= a.teacher.ten_fee/10 %>
                 <% end %> TW/hour</span><br>
-              <h5><%= current_user.user_available_sections.first.available_section/2 %> UnScheduled</h5>
-              <button type="button" data-toggle="modal" data-target="#booknow-<%= a.teacher.id %>">Book Now</button>
-            </div>
-          </div>
-        </div>
+                      <h5><%= current_user.user_available_sections.first.available_section/2 %> UnScheduled</h5>
+                      <button type="button" data-toggle="modal" data-target="#booknow-<%= a.teacher.id %>">Book Now</button>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
+        <% else %>
+            <%= render partial: 'recommend' %>
         <% end %>
       </div>
     </div>
@@ -68,63 +54,60 @@
 </div>
 
 <% @teachers.each do |t|%>
-<div class="modal fade teacher-modal" data-calendar-url="<%= teacher_calendar_teacher_available_section_url(t.id)%>" data-teacher-id="<%= t.id %>" id="booknow-<%= t.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Booking Teacher</h4>
-      </div>
-      <div class="container-fluid">
-        <div class="calender-booking">
-          <h6>All time listed are in your local timezone</h6>
-          <div class="insert-calender">
-            <div id="calendar-<%= t.id %>"></div>
+    <div class="modal fade teacher-modal" data-calendar-url="<%= teacher_calendar_teacher_available_section_url(t.id)%>" data-teacher-id="<%= t.id %>" id="booknow-<%= t.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Booking Teacher</h4>
           </div>
-        </div>
-        <div class="select-list">
-            <h6>Only can pick classes after 12 hours from now</h6>
-          <div class="row">
-             <%#= form_for @appointment, :url => url_for(:controller => 'appointments', :action => 'create') do |x|%>
-            <div class="col-xs-4">
-              <div class="time">
-                <span>Type</span>
-                <%= select({},{},options_for_select([["Normal 1hour", "2"],["Trail 30mins", "1"]],{disabled:trail_check(current_user,t) }),{}, {id:"type_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow type-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+          <div class="container-fluid">
+            <div class="calender-booking">
+              <h6>All time listed are in your local timezone</h6>
+              <div class="insert-calender">
+                <div id="calendar-<%= t.id %>"></div>
               </div>
             </div>
-            <div class="col-xs-3">
-              <div class="day">
-                <span>Day</span>
+            <div class="select-list">
+              <h6>Only can pick classes after 12 hours from now</h6>
+              <div class="row">
+                <%#= form_for @appointment, :url => url_for(:controller => 'appointments', :action => 'create') do |x|%>
+                <div class="col-xs-4">
+                  <div class="time">
+                    <span>Type</span>
+                    <%= select({},{},options_for_select([["Normal 1hour", "2"],["Trail 30mins", "1"]],{disabled:trail_check(current_user,t) }),{}, {id:"type_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow type-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div class="day">
+                    <span>Day</span>
+                    <%= select({},{},t.find_available_days(), {:include_blank => "Select a day"}, {id:"day_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow day-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                    <%#= collection_select(:language_ids, Language.all, :id, :language,{}, { :class => "form-control",:id=>"language-select",:style=>"width:100%;" }) %>
+                  </div>
+                </div>
+                <div class="col-xs-5">
+                  <div class="time">
+                    <span>Time</span>
 
-                <%= select({},{},t.find_available_days(), {:include_blank => "Select a day"}, {id:"day_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow day-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
-                <%#= collection_select(:language_ids, Language.all, :id, :language,{}, { :class => "form-control",:id=>"language-select",:style=>"width:100%;" }) %>
-              </div>
-            </div>
-            <div class="col-xs-5">
-              <div class="time">
-                <span>Time</span>
-
-                <div id="times-select-<%= t.id %>">
-                  <%= select({},{},@times,{:include_blank => "Select day first"}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow time-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                    <div id="times-select-<%= t.id %>">
+                      <%= select({},{},@times,{:include_blank => "Select day first"}, {id:"times_select_#{t.id}" ,:class=>"selectpicker show-menu-arrow time-select" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
+                    </div>
+                  </div>
                 </div>
 
-                <%#= select({},{},t.find_available_times("Sun, 3 Jun 2016",2).map{|x| x[0].strftime('%R')+" - "+x[1].strftime('%R') },{}, {:class=>"selectpicker show-menu-arrow" ,"data-size" =>"5.5","data-width" =>"100%"} )%>
               </div>
             </div>
-
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn closebtn" data-dismiss="modal">Close</button>
+            <%#= x.submit 'Quick Book',:class=>"btn bookteacherbtn" %>
+            <button type="button" class="btn bookteacherbtn" data-dismiss="modal" id="book_pass_params">Quick Book</button>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn closebtn" data-dismiss="modal">Close</button>
-          <%#= x.submit 'Quick Book',:class=>"btn bookteacherbtn" %>
-          <button type="button" class="btn bookteacherbtn" data-dismiss="modal" id="book_pass_params">Quick Book</button>
-      </div>
     </div>
-  </div>
-</div>
 <% end %>
 
 <script>
@@ -168,8 +151,8 @@
           rendering: 'background'
         }
       ]
-      });
     });
+  });
 
   function update_times_select() {
     var teacher_modal = $(this).closest(".teacher-modal");
@@ -223,8 +206,8 @@
   });
 
 
-    <% @appointments.select(:teacher_id).uniq.each do |a|%>
-    $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
-    <% end %>
+  <% @appointments.select(:teacher_id).uniq.each do |a|%>
+  $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
+  <% end %>
 
 </script>

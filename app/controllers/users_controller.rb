@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 
   def classes
     @appointments = @user.appointments
-    @teacher = Teacher.where(:id => Teacher.all.first).first
   end
 
   def remark
@@ -37,7 +36,6 @@ class UsersController < ApplicationController
   end
 
   def create
-
   end
 
   def update
@@ -60,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def user_params

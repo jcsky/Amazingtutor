@@ -55,8 +55,9 @@ Rails.application.routes.draw do
     resources :evaluations
   end
 
-  resources :student_reservation do
-  end
+  resources :student_reservation
+  post 'free_trial' =>'student_reservation#free_trial'
+
   resources :teacher_calendars do
     get 'teacher_available_section' => 'teacher_calendars#teacher_available_section'
     get 'booked_section' => 'teacher_calendars#booked_section'

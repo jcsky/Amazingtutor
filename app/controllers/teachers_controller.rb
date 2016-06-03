@@ -80,7 +80,7 @@ class TeachersController < ApplicationController
   private
 
   def find_teacher
-    @teacher = Teacher.find(params[:id])
+    @teacher = current_user.teacher
   end
 
   def get_teacher

@@ -82,6 +82,7 @@ gem 'bootstrap-sass' ,' ~>3.3.6'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
 # 貨幣顯示轉換
 gem 'money'
 gem 'json'

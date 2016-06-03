@@ -5,6 +5,18 @@ class StudentReservationController < ApplicationController
 
   end
 
+  def free_trial
+    @teacher = Teacher.find(params[:teacher_id])
+    if @teacher.trial_fee == 0 && (current_user.user_available_sections.where(teacher_id: @teacher).first.nil? || current_user.user_available_sections.where(teacher_id: @teacher).first.trailed == false)
+    new_trial = current_user.user_available_sections.new(teacher_id:@teacher.id,trailed:true,available_section:1)
+    # byebug
+    if new_trial.save
+        redirect_to mytutor_user_path(current_user)
+      end
+    end
+
+  end
+
   def create
     ActiveRecord::Base.transaction do
       @reservation_section_params[:start] = @reservation_section_params[:start].to_time
@@ -15,8 +27,8 @@ class StudentReservationController < ApplicationController
                                                                             @reservation_section_params[:teacher_id])
       # 查詢該時段是不是已經被預約
       appointment_check = Appointment.appointment_check(@reservation_section_params[:start],
-                                                             @reservation_section_params[:end],
-                                                             @reservation_section_params[:teacher_id])
+                                                        @reservation_section_params[:end],
+                                                        @reservation_section_params[:teacher_id])
       # 減掉user_avaiable_section的數值
       credit = UserAvailableSection.lock.query_credit(@reservation_section_params[:teacher_id],current_user)
       calc_section = (@reservation_section_params[:end].to_time - @reservation_section_params[:start].to_time) / 30.minute

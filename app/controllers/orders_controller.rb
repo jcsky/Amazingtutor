@@ -10,18 +10,19 @@ class OrdersController < ApplicationController
   end
 
   def show
+    redirect_to :back if current_user.teacher.id == params[:teacher_id]
+
   end
 
   def new
+    redirect_to :back if current_user.teacher.id == params[:teacher_id]
     @order = Order.new
     @order.teacher_id = params[:teacher_id]
-
   end
 
   def create
      @user = current_user
      @order = @user.orders.create!( order_params )
-
       if @order.save
         redirect_to user_order_path(@order.user, @order)
       else

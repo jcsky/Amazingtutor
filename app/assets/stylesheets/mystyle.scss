@@ -91,6 +91,13 @@ body {
 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
   font-weight: lighter;
 }
+.profile-container .link_disable{
+  cursor:default;
+  background-color: #bbb;
+  &:hover{
+    background-color: #bbb;
+  }
+}
 // Small devices (tablets, 768px and up)
 @media (max-width: $screen-sm-min) {
   .container {
@@ -98,7 +105,7 @@ body {
     max-width: 400px;
   }
   .jumbotron .container{
-      max-width: 400px;
+    max-width: 400px;
   }
 }
 @media (min-width: $screen-sm-min)and (max-width: $screen-md-min) {
