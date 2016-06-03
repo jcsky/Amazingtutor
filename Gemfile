@@ -29,7 +29,7 @@ gem 'rest-client'
 gem 'capistrano-rails', :group => :development
 gem 'capistrano-passenger', :group => :development
 
-gem "mysql2", '~> 0.3.13', :group => :production
+gem "mysql2", '~> 0.3.18', :group => :production
 
 # 做假資料的套件
 gem 'faker'
