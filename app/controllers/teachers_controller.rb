@@ -103,7 +103,8 @@ class TeachersController < ApplicationController
   end
 
   def teacher_authority
-    if current_user.nil? || current_user.authority != 'teacher'
+    @teacher = Teacher.find(params[:id])
+    if current_user.nil? || current_user.authority != 'teacher' || current_user.try(:teacher).id != @teacher.id
       redirect_to root_path
     end
   end
