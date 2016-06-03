@@ -9,6 +9,7 @@ default: &default
   pool: 5
   timeout: 10000
 
+
 development:
   <<: *default
   database: db/development.sqlite3
@@ -21,5 +22,9 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  database: railstest
+  host: localhost
+  username: root
+  password: root
