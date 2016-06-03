@@ -29,7 +29,7 @@ gem 'rest-client'
 gem 'capistrano-rails', :group => :development
 gem 'capistrano-passenger', :group => :development
 
-#gem "mysql2", '~> 0.3.18', :group => :production
+gem "mysql2", '~> 0.3.18', :group => :production
 
 # 做假資料的套件
 gem 'faker'
@@ -106,8 +106,10 @@ group :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
 
+  gem "mysql2", '~> 0.3.18'
+
 end
 
 group :production do
-  gem "mysql2", '~> 0.3.18'
+  gem "mysql2"
 end
