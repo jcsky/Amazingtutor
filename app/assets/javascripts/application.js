@@ -3,7 +3,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require bootstrap-slider
-//= require nested_form_fields
+//= require jquery_nested_form
 //= require select2
 //= require select2-full
 //= require bootstrap-select.min
@@ -11,3 +11,4 @@
 //= require moment
 //= require fullcalendar
 //= require jstz.min
+//= require bootstrap-datepicker

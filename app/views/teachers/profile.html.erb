@@ -74,7 +74,7 @@
               <%= link_to "Book Now", new_session_path(:user),:class => "btn btn-primary btn-lg" %>
           <% else current_user %>
               <% if current_user == @teacher.user%>
-              <% elsif current_user.user_available_sections.where(:teacher_id=>@teacher).first.try(:trailed) == true %>
+              <% elsif current_user.user_available_sections.where(:teacher_id=>@teacher.id).first.try(:trailed) == true %>
                   <a class="btn btn-primary btn-lg link_disable">Already Tried</a>
               <% elsif  @teacher.trial_fee == 0 && (current_user.user_available_sections.where(teacher_id: @teacher).first.nil? || current_user.user_available_sections.where(teacher_id: @teacher).first.trailed == false )%>
                   <%= link_to "Book Now",free_trial_path(:teacher_id => @teacher.id) ,:method=>:post ,:class => "btn btn-primary btn-lg" %>
@@ -189,22 +189,30 @@
     <div class="col-xs-12 background-head">
       <h5>Background</h5>
     </div>
-    <div class="col-xs-12 background-content">
-      <%= @teacher.experiences.each do |e| %>
+    <% @teacher.experiences.each do |e| %>
+        <div class="col-xs-12 background-content">
           <h6 class="text-center"><%= e.start %> - <%= e.end %></h6>
           <h5>Experience</h5>
           <h6><%= e.description %></h6>
           <p><%= e.description %></p>
-      <% end %>
-    </div>
-    <div class="col-xs-12 background-content">
-      <%= @teacher.educations.each do |e| %>
+        </div>
+    <% end %>
+    <% @teacher.educations.each do |e| %>
+        <div class="col-xs-12 background-content">
           <h6 class="text-center"><%= e.start %> - <%= e.end %></h6>
           <h5>Education</h5>
           <h6><%= e.school %></h6>
           <p><%= e.major %></p>
-      <% end %>
-    </div>
+        </div>
+    <% end %>
+    <% @teacher.certificates.each do |e| %>
+        <div class="col-xs-12 background-content">
+          <h6 class="text-center"><%= e.start %> - <%= e.end %></h6>
+          <h5>Certificate</h5>
+          <h6>Certificate Name : <%= e.name %></h6>
+          <p>SCORE : <%= e.score %></p>
+        </div>
+    <% end %>
   </div>
 </div>
 
@@ -257,8 +265,8 @@
       //lulu setting
       buttonIcons: false,
       buttonText: {
-        prev: '<  Prev',
-        next: 'Next  >'
+        prev: '< Prev',
+        next: 'Next >'
       },
       header: {
         left: 'prev',

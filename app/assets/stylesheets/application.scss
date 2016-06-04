@@ -13,6 +13,7 @@
  *= require select2
  *= require select2-bootstrap
  *= require bootstrap-slider
+ *= require bootstrap-datepicker
  */
 
 @import "rateyo.min";
@@ -39,7 +40,6 @@
 @import "orders";
 @import "scholarship";
 @import "sorting";
-//@import "booking";
 
 
 //fullcalendar新增的 如果影響到畫面可以從這邊調整

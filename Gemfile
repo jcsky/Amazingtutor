@@ -15,7 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 # gem 'faker'
 #devise
-# gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-datepicker-rails'
 gem 'clipboard-rails', '~> 1.5', '>= 1.5.10'
 gem 'devise'
 # omniauth
@@ -58,7 +58,6 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'jquery-ui-rails'
 
 gem "nested_form"
-gem 'nested_form_fields'
 gem 'awesome_rails_console'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

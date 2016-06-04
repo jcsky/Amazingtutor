@@ -55,6 +55,8 @@ GEM
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.6.0.1)
+      railties (>= 3.0)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -185,10 +187,6 @@ GEM
     mysql2 (0.3.18)
     nenv (0.3.0)
     nested_form (0.3.2)
-    nested_form_fields (0.7.6)
-      coffee-rails (>= 3.2.1)
-      jquery-rails
-      rails (>= 3.2.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.1.1)
@@ -371,6 +369,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_rails_console
+  bootstrap-datepicker-rails
   bootstrap-sass (~> 3.3.6)
   bootstrap-slider-rails
   byebug
@@ -397,7 +396,6 @@ DEPENDENCIES
   money
   mysql2 (~> 0.3.18)
   nested_form
-  nested_form_fields
   omniauth-facebook
   omniauth-google-oauth2
   paperclip

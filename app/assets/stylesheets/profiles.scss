@@ -217,6 +217,23 @@
     color: #fff;
   }
 }
+.addtask{
+  float: right;
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  height: 30px;
+  width:120;
+  background-color: #FC6063;
+  i{
+    margin-right: 10px;
+  }
+}
+.removetask{
+  i{
+    margin-right:10px;
+  }
+}
 @media (max-width: $screen-xs-min) {
   .profile-container .profile-info {
     embed,
