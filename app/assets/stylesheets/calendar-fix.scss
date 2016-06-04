@@ -47,10 +47,19 @@
 .fc-bgevent-container .fc-bgevent {
   opacity: 0.6;
   // background-color: #e7e7e7;
-    // background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px);
+  // background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px);
 }
 .fc-unthemed .fc-today {
-	background: rgba(187, 187, 187,0.15);
+  background: rgba(187, 187, 187,0.15);
+}
+.fc-toolbar{
+  margin-top: 10px;
+ .fc-prev-button, .fc-next-button{
+   background-color: rgba(252, 96, 99, 0.57);
+   border-radius: 5px;
+   color: #ffffff;
+   font-weight: lighter;
+  }
 }
 @media (max-width: $screen-xs-min) {
   .calendar-drag-content {
