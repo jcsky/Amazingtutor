@@ -1,8 +1,7 @@
 class TeachersController < ApplicationController
   before_action :teacher_authority, except: [:profile, :index]
   before_action :get_teacher, except: :profile
-  before_action :find_teacher, only: [:classes, :profile]
-  before_action :get_hangouts_url
+  # before_action :get_hangouts_url
 
   # 只有user裡面的author得值要等於teacher才可以進來 但大家都有第一次可能進來沒有teacher
   # 所以全部要before_action先建好teacher 如果已經有了就用已經有的
@@ -26,6 +25,7 @@ class TeachersController < ApplicationController
   end
 
   def profile
+    @teacher = Teacher.find(params[:id])
     redirect_to root_path if @teacher.check != 'checked'
     @evaluations = Evaluation.all.where(evaluatable_type: 'User', evaluated_id: @teacher)
     @teacher = Teacher.find_by_id(params[:id])
@@ -79,10 +79,6 @@ class TeachersController < ApplicationController
 
   private
 
-  def find_teacher
-    @teacher = current_user.teacher
-  end
-
   def get_teacher
     @teacher = if current_user.teacher
                  current_user.teacher
@@ -104,9 +100,9 @@ class TeachersController < ApplicationController
 
   def teacher_authority
     @teacher = Teacher.find(params[:id])
-    if current_user.nil? || current_user.authority != 'teacher' || current_user.try(:teacher).id != @teacher.id
-      redirect_to root_path
-    end
+     if current_user.nil? || current_user.authority != 'teacher' || current_user.try(:teacher).id != @teacher.id
+       redirect_to root_path
+     end
   end
 
   def teacher_params

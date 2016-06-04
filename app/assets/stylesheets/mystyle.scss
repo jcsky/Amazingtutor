@@ -98,6 +98,9 @@ body {
     background-color: #bbb;
   }
 }
+.alert {
+  border:none;
+}
 // Small devices (tablets, 768px and up)
 @media (max-width: $screen-sm-min) {
   .container {

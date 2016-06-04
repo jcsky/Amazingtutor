@@ -8,13 +8,14 @@
         <div class="public-head">
           <h4>教學經驗</h4>
         </div>
+        <div class="alert alert-success">
+          <%= flash[:alert]  %>
+        </div>
         <div class="public-note">
           <h5>小提醒：請使用英文填寫，如工作經歷跟語言教學有關，會更吸引學員的目光唷!</h5>
         </div>
         <hr class="education_hr">
-        <div class="alert alert-success">
-          <%= flash[:alert]  %>
-        </div>
+
         <%= nested_form_for @teacher do |f| %>
             <h5 class="add_nested_fix">證照</h5>
 
