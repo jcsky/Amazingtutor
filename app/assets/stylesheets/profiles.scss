@@ -218,21 +218,30 @@
   }
 }
 .addtask{
-  float: right;
-  display: inline-block;
+  left: 80px;
+  display: inline;
   text-decoration: none;
-  color: #fff;
-  height: 30px;
-  width:120;
-  background-color: #FC6063;
+  position: relative;
+  bottom: 20px;
+
+  &:hover{
+    text-decoration: none;
+  }
+
   i{
     margin-right: 10px;
   }
 }
 .removetask{
+  &:hover{
+    text-decoration: none;
+  }
   i{
     margin-right:10px;
   }
+}
+.public-content .education_hr{
+  margin-top: 0;
 }
 @media (max-width: $screen-xs-min) {
   .profile-container .profile-info {
