@@ -1,14 +1,14 @@
 <div class="col-xs-12 scheduled-head">
   <div class="col-xs-4">
-    <h4>3</h4>
+    <h4><%= current_user.appointments.count %></h4>
     <p>Scheduled</p>
   </div>
   <div class="col-xs-4">
-    <h4>1</h4>
+    <h4><%= current_user.appointments.where("end < ?", Time.current.in_time_zone).count %></h4>
     <p>Past</p>
   </div>
   <div class="col-xs-4">
-    <h4>0</h4>
+    <h4><%= current_user.user_available_sections.count %></h4>
     <p>Unschedule</p>
   </div>
 </div>
