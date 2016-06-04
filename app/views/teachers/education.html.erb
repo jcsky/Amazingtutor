@@ -4,108 +4,135 @@
       <%= render "sidebar" %>
     </div>
     <div class="col-md-8">
+      <%= nested_form_for @teacher do |ff| %>
+          <%= ff.fields_for :certificates do |task_form| %>
+              <%= task_form.text_field :name %>
+              <%= task_form.link_to_remove "Remove this task" %>
+          <% end %>
+          <p><%= ff.link_to_add "Add a task", :certificates %></p>
+      <% end %>
+
       <div class="public-content">
         <%= form_for @teacher do |f| %>
-        <div class="public-head">
-          <h4>教學經驗</h4>
-        </div>
+            <div class="public-head">
+              <h4>教學經驗</h4>
+            </div>
 
-        <div class="alert alert-success">
-          <%= flash[:alert]  %>
-        </div>
-        <h5 class="add_nested_fix">學歷</h5>
-        <%= f.add_nested_fields_link :educations, '+', class: 'btn btn-danger', role: 'button'  %>
-        <%= f.nested_fields_for :educations do |ff| %>
-        <%= ff.remove_nested_fields_link '--', class: 'btn btn-danger', role: 'button'%>
+            <div class="alert alert-success">
+              <%= flash[:alert]  %>
+            </div>
 
-        <div class="input-group clearfix">
-          <%= ff.label :start, "開始時間" %>
-          <%= ff.date_select :start, start_year: 1950, :class => "form-control" %>
-        </div>
-        <div class="input-group clearfix">
-          <%= ff.label :end, "結束時間" %>
-          <%= ff.date_select :end, start_year: 1950, :class => "form-control" %>
-        </div>
 
-        <div class="input-group clearfix">
-          <%= ff.label :school, "學校" %>
-          <%= ff.text_field :school, :class => "form-control" %>
-        </div>
-        <div class="input-group clearfix">
-          <%= ff.label :major, "科系" %>
-          <%= ff.text_field :major, :class => "form-control" %>
-        </div>
 
+
+            <h5 class="add_nested_fix">證照</h5>
+            <%= f.add_nested_fields_link :certificates, '+', class: 'btn btn-danger', role: 'button'  %>
+            <%= f.nested_fields_for :certificates do |ff| %>
+                <%= ff.remove_nested_fields_link '--', class: 'btn btn-danger', role: 'button'%>
+
+                <div class="input-group clearfix">
+                  <%= ff.label :name, "證照名稱" %>
+                  <%= ff.text_field :name, :class => "form-control" %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :score, "分數" %>
+                  <%= ff.text_field :score, :class => "form-control" %>
+                </div>
+
+            <% end %>
+            <h5 class="add_nested_fix">學歷</h5>
+            <%= f.add_nested_fields_link :educations, '+', class: 'btn btn-danger', role: 'button'  %>
+            <%= f.nested_fields_for :educations do |ff| %>
+                <%= ff.remove_nested_fields_link '--', class: 'btn btn-danger', role: 'button'%>
+
+                <div class="input-group clearfix">
+                  <%= ff.label :start, "開始時間" %>
+                  <%= ff.date_select :start, start_year: 1950, :class => "form-control" %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :end, "結束時間" %>
+                  <%= ff.date_select :end, start_year: 1950, :class => "form-control" %>
+                </div>
+
+                <div class="input-group clearfix">
+                  <%= ff.label :school, "學    校" %>
+                  <%= ff.text_field :school, :class => "form-control" %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :major, "科    系" %>
+                  <%= ff.text_field :major, :class => "form-control" %>
+                </div>
+
+            <% end %>
+            <h6>小提醒：建議使用英文填寫，如學歷越詳細，學員能更了解教師唷!</h6>
+            <hr>
+            <h5 class="add_nested_fix">工作經驗</h5>
+            <%= f.add_nested_fields_link :experiences, '+', class: 'btn btn-danger', role: 'button'  %>
+            <%= f.nested_fields_for :experiences do |ff| %>
+                <%= ff.remove_nested_fields_link '--', class: 'btn btn-danger', role: 'button'%>
+
+                <div class="input-group clearfix ">
+                  <%= ff.label :start, "開始時間" %>
+                  <%= ff.date_select :start, start_year: 1950, :class => "form-control selectpicker" %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :end, "結束時間" %>
+                  <%= ff.date_select :end, start_year: 1950, :class => "form-control" %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :company_name, "單位名稱" %>
+                  <%= ff.text_field :company_name, :class => "form-control" %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :description, "服務內容" %>
+                  <%= ff.text_field :description, :class => "form-control" %>
+                </div>
+            <% end %>
+            <hr>
+            <div class="public-note">
+              <h5>小提醒：</h5>
+              <h6>小提醒：建議使用英文填寫，如工作經歷跟語言教學有關，會更吸引學員的目光唷!</h6>
+            </div>
+            </div>
+            <div class="public-save">
+              <%= f.submit 'SAVE', :class => "btn" %>
+            </div>
         <% end %>
-        <h6>小提醒：建議使用英文填寫，如學歷越詳細，學員能更了解教師唷!</h6>
-        <hr>
-        <h5 class="add_nested_fix">工作經驗</h5>
-        <%= f.add_nested_fields_link :experiences, '+', class: 'btn btn-danger', role: 'button'  %>
-        <%= f.nested_fields_for :experiences do |ff| %>
-        <%= ff.remove_nested_fields_link '--', class: 'btn btn-danger', role: 'button'%>
-
-        <div class="input-group clearfix ">
-          <%= ff.label :start, "開始時間" %>
-          <%= ff.date_select :start, start_year: 1950, :class => "form-control selectpicker" %>
         </div>
-        <div class="input-group clearfix">
-          <%= ff.label :end, "結束時間" %>
-          <%= ff.date_select :end, start_year: 1950, :class => "form-control" %>
-        </div>
-        <div class="input-group clearfix">
-          <%= ff.label :company_name, "單位名稱" %>
-          <%= ff.text_field :company_name, :class => "form-control" %>
-        </div>
-        <div class="input-group clearfix">
-          <%= ff.label :description, "服務內容" %>
-          <%= ff.text_field :description, :class => "form-control" %>
-        </div>
-        <% end %>
-        <hr>
-        <div class="public-note">
-          <h5>小提醒：</h5>
-          <h6>小提醒：建議使用英文填寫，如工作經歷跟語言教學有關，會更吸引學員的目光唷!</h6>
-        </div>
-      </div>
-      <div class="public-save">
-        <%= f.submit 'SAVE', :class => "btn" %>
-      </div>
-      <% end %>
-    </div>
   </div>
 </div>
 
 
 <script>
-var i =0;
-$("#teacher_educations_attributes_"+i+"_start_1i").select2();
-$("#teacher_educations_attributes_"+i+"_start_2i").select2();
-$("#teacher_educations_attributes_"+i+"_start_3i").select2();
-$("#teacher_educations_attributes_"+i+"_end_1i").select2();
-
-$('a[data-association-path="teacher_educations"]').on("click",function(){
-  $.fn.select2.defaults.reset();
-
-  console.log(++i);
-  // i+=1
+  var i =0;
   $("#teacher_educations_attributes_"+i+"_start_1i").select2();
   $("#teacher_educations_attributes_"+i+"_start_2i").select2();
   $("#teacher_educations_attributes_"+i+"_start_3i").select2();
   $("#teacher_educations_attributes_"+i+"_end_1i").select2();
-});
+
+  $('a[data-association-path="teacher_educations"]').on("click",function(){
+    $.fn.select2.defaults.reset();
+
+    console.log(++i);
+    // i+=1
+    $("#teacher_educations_attributes_"+i+"_start_1i").select2();
+    $("#teacher_educations_attributes_"+i+"_start_2i").select2();
+    $("#teacher_educations_attributes_"+i+"_start_3i").select2();
+    $("#teacher_educations_attributes_"+i+"_end_1i").select2();
+  });
   // });
-// $("#teacher_educations_attributes_"+(++i))+"_start_1i").selectpicker();
-// $("#teacher_educations_attributes_"+(++i))+"_start_2i").selectpicker();
-// $("#teacher_educations_attributes_"+(++i))+"_start_3i").selectpicker();
-// $("#teacher_educations_attributes_"+(++i))+"_end_1i").selectpicker();
-// $("#teacher_educations_attributes_"+(++i))+"_end_2i").selectpicker();
-// $("#teacher_educations_attributes_"+(++i))+"_end_3i").selectpicker();
-// $("#teacher_experiences_attributes_"+(++i))+"_start_1i").selectpicker();
-// $("#teacher_experiences_attributes_"+(++i))+"_start_2i").selectpicker();
-// $("#teacher_experiences_attributes_"+(++i))+"_start_3i").selectpicker();
-// $("#teacher_experiences_attributes_"+(++i))+"_end_1i").selectpicker();
-// $("#teacher_experiences_attributes_"+(++i))+"_end_2i").selectpicker();
-// $("#teacher_experiences_attributes_"+(++i))+"_end_3i").selectpicker();
-// });
+  // $("#teacher_educations_attributes_"+(++i))+"_start_1i").selectpicker();
+  // $("#teacher_educations_attributes_"+(++i))+"_start_2i").selectpicker();
+  // $("#teacher_educations_attributes_"+(++i))+"_start_3i").selectpicker();
+  // $("#teacher_educations_attributes_"+(++i))+"_end_1i").selectpicker();
+  // $("#teacher_educations_attributes_"+(++i))+"_end_2i").selectpicker();
+  // $("#teacher_educations_attributes_"+(++i))+"_end_3i").selectpicker();
+  // $("#teacher_experiences_attributes_"+(++i))+"_start_1i").selectpicker();
+  // $("#teacher_experiences_attributes_"+(++i))+"_start_2i").selectpicker();
+  // $("#teacher_experiences_attributes_"+(++i))+"_start_3i").selectpicker();
+  // $("#teacher_experiences_attributes_"+(++i))+"_end_1i").selectpicker();
+  // $("#teacher_experiences_attributes_"+(++i))+"_end_2i").selectpicker();
+  // $("#teacher_experiences_attributes_"+(++i))+"_end_3i").selectpicker();
+  // });
 
 </script>
