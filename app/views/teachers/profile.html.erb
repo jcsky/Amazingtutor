@@ -191,7 +191,7 @@
     </div>
     <% @teacher.experiences.each do |e| %>
         <div class="col-xs-12 background-content">
-          <h6 class="text-center"><%= e.start %> - <%= e.end %></h6>
+          <h6 class="text-center"><%= e.start %>&nbsp;<%= "-" if e.start %>&nbsp;<%= e.end %></h6>
           <h5>Experience</h5>
           <h6><%= e.description %></h6>
           <p><%= e.description %></p>
@@ -199,7 +199,7 @@
     <% end %>
     <% @teacher.educations.each do |e| %>
         <div class="col-xs-12 background-content">
-          <h6 class="text-center"><%= e.start %> - <%= e.end %></h6>
+          <h6 class="text-center"><%= e.start %>&nbsp;<%= "-" if e.start %>&nbsp;<%= e.end %></h6>
           <h5>Education</h5>
           <h6><%= e.school %></h6>
           <p><%= e.major %></p>
@@ -323,7 +323,7 @@
       eventSources: [
         {
           //teacher events source
-          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id)%>',
+          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id, protocol: 'https')%>'
           rendering: 'background'
         }
       ]

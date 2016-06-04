@@ -54,7 +54,7 @@
 </div>
 
 <% @teachers.each do |t|%>
-    <div class="modal fade teacher-modal" data-calendar-url="<%= teacher_calendar_teacher_available_section_url(t.id)%>" data-teacher-id="<%= t.id %>" id="booknow-<%= t.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade teacher-modal" data-calendar-url="<%= teacher_calendar_teacher_available_section_url(t.id, protocol: 'https')%>" data-teacher-id="<%= t.id %>" id="booknow-<%= t.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
