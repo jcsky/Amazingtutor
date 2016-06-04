@@ -203,6 +203,11 @@ div.play-button {
   .jumbotron-fix {
     margin: 0 auto;
   }
+  .flexmodify,
+  .info-pro,
+  .info-tag {
+    margin: 10px 0 0 20px;
+  }
 }
 @media (min-width: $screen-sm-min)and (max-width: $screen-md-min) {
   .info-pro {
@@ -224,7 +229,7 @@ div.play-button {
   .flexmodify,
   .info-pro,
   .info-tag {
-    margin: 10px 0 0 23px;
+    margin: 10px 0 0 20px;
   }
   .info-pro {
     margin-top: 3px;

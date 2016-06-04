@@ -1,10 +1,9 @@
 
       <div id="evaluation-white" class="evaluation-white">
-        <div class="evaluation col-xs-12">
+        <div class="evaluation col-xs-12 evaluation_spical_fix">
           <div class="evaluation-button clearfix">
 
             <% if current_user == @appointment.user %>
-              <%= link_to "Back", classes_user_path(@user) ,:class=>"pull-left"%>
               <div class="evaluation-block col-xs-10 col-xs-push-1">
                 <div class="evaluation-me text-center">
                   <%= user_headimage(@appointment.teacher.user) %>
@@ -42,7 +41,6 @@
           <% end %>
 
           <% if current_user == @appointment.teacher.user %>
-            <%= link_to "Back", classes_teacher_path(current_user.teacher.id) ,:class=>"pull-left"%>
               <div class="evaluation-block col-xs-10 col-xs-push-1">
                 <div class="evaluation-me text-center">
                   <%= user_headimage(@appointment.user) %>

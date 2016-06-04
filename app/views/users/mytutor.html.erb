@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-5 text-center  col-xs-12">
+    <div class="col-md-5 text-center ">
       <%= render "sidebar"%>
     </div>
     <div class="col-md-7">
-      <div class="row">
-        <% unless UserAvailableSection.where(user_id:current_user).count==0%>
-            <% UserAvailableSection.where(user_id:current_user).each do |a|%>
+      <div class="row_spical_fix">
+        <% if UserAvailableSection.where(user_id:current_user).count != 0 %>
+            <% UserAvailableSection.where(user_id:current_user).each do |a| %>
                 <div class="col-xs-12">
                   <div class="tutor-info">
                     <div class="clearfix tutor-top">
@@ -39,8 +39,16 @@
               <% else %>
                 <%= a.teacher.one_fee %>~<%= a.teacher.ten_fee/10 %>
                 <% end %> TW/hour</span><br>
-                      <h5><%= current_user.user_available_sections.first.available_section/2 %> UnScheduled</h5>
-                      <button type="button" data-toggle="modal" data-target="#booknow-<%= a.teacher.id %>">Book Now</button>
+                      <% if  a.available_section == 1 %>
+                      <h5>1 Trial</h5>
+                          <% else %>
+                      <h5><%= a.available_section/2 %> UnScheduled</h5>
+                          <% end %>
+                      <% if a.available_section == 0 %>
+                          <p><%= link_to "Find a Tutor",teacherwall_path %></p>
+                      <% else %>
+                          <button type="button" data-toggle="modal" data-target="#booknow-<%= a.teacher.id %>">Book Now</button>
+                      <% end %>
                     </div>
                   </div>
                 </div>
@@ -206,7 +214,7 @@
   });
 
 
-  <% @appointments.select(:teacher_id).uniq.each do |a|%>
+  <% UserAvailableSection.where(user_id:current_user).select(:teacher_id).uniq.each do |a|%>
   $("#rateYo-<%= a.teacher_id %>").rateYo({starWidth: "18px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
   <% end %>
 

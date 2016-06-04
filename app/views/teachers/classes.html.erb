@@ -20,20 +20,19 @@
               </ul>
             </div>
           </div>
-        </div>
+
       <% @teacher.appointments.each do |a|%>
 
         <div class="scheduled col-xs-12">
-          <div class="col-sm-5 scheduled-image img-responsive center-block">
+          <div class="col-sm-5 scheduled-image teacher_classes">
             <div class="scheduled-dark"></div>
             <div class="scheduled-white">
               <%= image_tag("scheduled.png") %>
             </div>
             <div class="scheduled-text">
               <h5>SCHEDULED</h5>
-              <h1><%= a.start.in_time_zone.strftime('%H:%M, %p') %></h1>
-              <p><%= a.start.in_time_zone.strftime('%a') %>, </p>
-              <h6><%= a.start.in_time_zone.strftime('%B%d, %Y') %></h6>
+              <h1><%= a.start.in_time_zone.strftime('%H:%M %p') %></h1>
+              <p><%= a.start.in_time_zone.strftime('%a %B %d %Y') %> </p>
             </div>
           </div>
           <div class="col-sm-7">
@@ -105,7 +104,7 @@
             </div>
           </div>
         </div>
-
+              </div>
       <% end %>
     </div>
   </div>

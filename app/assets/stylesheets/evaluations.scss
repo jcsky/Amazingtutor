@@ -61,8 +61,8 @@
   margin-bottom: 20px;
   position: fixed;
   top: 9%;
-  left: 60%;
-  transform: translate(-77%);
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .rate{
@@ -106,4 +106,8 @@
 
 .appointment-create{
   margin: 0 80px 30px 0px;
+}
+.evaluation_spical_fix{
+  background-color: transparent;
+  margin-top: 50px;
 }

@@ -150,9 +150,11 @@
 }
 .rating-content {
   margin-top: 10px;
-  p,
   span {
     font-size: 14px;
+  }
+  p{
+    font-size: 13px;
   }
   .rating_time{
     position: relative;
@@ -254,7 +256,10 @@
 .public-content .education_hr{
   margin-top: 0;
 }
-
+.row_spical_fix{
+  margin-right: -15px;
+  margin-left: -15px;
+}
 @media (max-width: $screen-xs-min) {
   .profile-container .profile-info {
     embed,

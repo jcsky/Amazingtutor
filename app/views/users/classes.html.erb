@@ -34,10 +34,8 @@
                       </div>
                       <div class="scheduled-text">
                         <h5>SCHEDULED</h5>
-                        <h4><%= a.start.in_time_zone.strftime('%H:%M, %p') %></h4>
-                        <p><%= a.start.in_time_zone.strftime('%a') %>,
-                        </p>
-                        <h6><%= a.start.in_time_zone.strftime('%B%d, %Y') %></h6>
+                        <h3><%= a.start.in_time_zone.strftime('%H:%M %p') %></h3>
+                        <span><%= a.start.in_time_zone.strftime('%a %B %d  %Y') %></span>
                       </div>
                     </div>
                     <div class="col-sm-7">
