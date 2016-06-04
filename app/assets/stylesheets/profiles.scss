@@ -154,9 +154,19 @@
   span {
     font-size: 14px;
   }
+  .rating_time{
+    position: relative;
+    top: -2px;
+  }
 }
 .rating-comment {
   margin-top: 8px;
+}
+
+.rating_star{
+  display: inline-block;
+  margin-top: 5px;
+  margin-left: -8px;
 }
 .language-select-fix {
   margin-right: 15px;
@@ -244,15 +254,7 @@
 .public-content .education_hr{
   margin-top: 0;
 }
-.rating_time{
-  position: relative;
-  top: -2px;
-}
-.rating_star{
-  display: inline-block;
-  margin-top: 5px;
-  margin-left: -8px;
-}
+
 @media (max-width: $screen-xs-min) {
   .profile-container .profile-info {
     embed,

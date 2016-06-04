@@ -232,7 +232,7 @@
                 <div class="rating_star">
                   <div id="rateYo-<%= e.id %>"></div>
                 </div>
-                <span rating_time>Decemeber 9,2016</span>
+                <span class="rating_time"><%= e.created_at.strftime('%B') %>&nbsp;&nbsp;<%= e.created_at.strftime('%C') %> ,<%= e.created_at.strftime('%G') %></span>
               </div>
               <div class="col-xs-12 rating-comment">
                 <p><%= e.comment %></p>
