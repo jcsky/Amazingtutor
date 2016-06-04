@@ -135,8 +135,9 @@
   margin-top: 15px;
   margin-bottom: 300px;
   img {
-    width: 30px;
+    width: 50px;
     height: auto;
+    border-radius: 50%;
   }
   i {
     color: #F7B952;
@@ -242,6 +243,15 @@
 }
 .public-content .education_hr{
   margin-top: 0;
+}
+.rating_time{
+  position: relative;
+  top: -2px;
+}
+.rating_star{
+  display: inline-block;
+  margin-top: 5px;
+  margin-left: -8px;
 }
 @media (max-width: $screen-xs-min) {
   .profile-container .profile-info {
