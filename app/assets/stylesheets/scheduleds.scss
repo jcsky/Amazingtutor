@@ -134,15 +134,28 @@
   border-radius: 5px;
   margin-top: 15px;
   text-align: left;
+  padding: 0 0;
   a {
     // display: block;
     text-decoration: none;
     line-height: 3;
     color: #6A6A6A;
+    margin-left: 10px;
+
   }
   i {
     color: #6A6A6A;
     margin: 0 10px;
+  }
+  .active {
+    a{
+      font-weight: bold;
+      color: #FF5F5F;
+    }
+
+    // border-style: solid;
+    // border-color: red;
+    // border-width: 1px;
   }
 }
 .scheduled-editprofile-fix {

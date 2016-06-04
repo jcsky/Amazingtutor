@@ -30,11 +30,11 @@
                 </div>
                 <%= ff.link_to_remove :class=> "removetask" do %>
                     <i class="fa fa-minus-square-o" aria-hidden="true"></i>刪除
-                    <% end %>
+                <% end %>
             <% end %>
             <%= f.link_to_add :certificates ,:class=>"addtask" do%>
-                  <i class="fa fa-plus-square-o" aria-hidden="true"></i>增加證照
-                  <% end %>
+                <i class="fa fa-plus-square-o" aria-hidden="true"></i>增加證照
+            <% end %>
 
             <hr>
             <h5 class="add_nested_fix">學歷</h5>
@@ -58,12 +58,12 @@
                 </div>
                 <%= ff.link_to_remove :class=> "removetask" do%>
                     <i class="fa fa-minus-square-o" aria-hidden="true"></i>刪除
-                    <% end %>
+                <% end %>
             <% end %>
             <p><%= f.link_to_add :educations ,:class=>"addtask" do%>
                   <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                   增加學歷
-                  <% end %>
+                  增加學歷
+              <% end %>
             </p>
             <hr>
 
@@ -88,18 +88,18 @@
                 </div>
                 <%= ff.link_to_remove :class=> "removetask" do%>
                     <i class="fa fa-minus-square-o" aria-hidden="true"></i>刪除
-                    <% end %>
+                <% end %>
             <% end %>
             <p><%= f.link_to_add :experiences ,:class=>"addtask" do%>
                   <i class="fa fa-plus-square-o" aria-hidden="true"></i>增加經驗
-                </p>
-                  <% end %>
-            <hr>
+                  </p>
+              <% end %>
+              <hr>
 
-            </div>
-            <div class="public-save">
-              <%= f.submit 'SAVE', :class => "btn" %>
-            </div>
+              </div>
+              <div class="public-save">
+                <%= f.submit 'SAVE', :class => "btn" %>
+              </div>
         <% end %>
         </div>
   </div>

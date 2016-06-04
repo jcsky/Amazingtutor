@@ -394,7 +394,7 @@ DEPENDENCIES
   kaminari
   momentjs-rails (>= 2.9.0)
   money
-  mysql2 (~> 0.3.18)
+  mysql2 (= 0.3.18)
   nested_form
   omniauth-facebook
   omniauth-google-oauth2
