@@ -34,4 +34,4 @@
 /lib/tasks/dev.rake.example
 .byebug_history
 
-/config/aws.yml
+/config/application.yml

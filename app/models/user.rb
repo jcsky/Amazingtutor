@@ -26,8 +26,6 @@ class User < ActiveRecord::Base
   validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ },
                                 size: { in: 0..1.megabytes }
 
-  validates :image, presence: true
-
   before_create :generate_authentication_token
 
   def generate_authentication_token
