@@ -17,8 +17,26 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :friends, through: :messages
 
-  has_attached_file :image, styles: { medium: '100x100#', thumb: '50x50#' }, default_url: 'logo.jpg'
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  has_attached_file :image, styles: {
+    medium: '300x300>',
+    thumb: '100x100>'
+  },
+  :url => ":s3_domain_url",
+  :path => 'users/:id/avatar/:style_:basename.:extension',
+  :storage => :s3,
+  region: 'ap-northeast-1',
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :s3_credentials => {
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
+    }
+
+
+  validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ },
+                                size: { in: 0..1.megabytes }
+
+  validates :image, presence: true
+
   before_create :generate_authentication_token
 
   def generate_authentication_token

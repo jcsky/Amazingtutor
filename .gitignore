@@ -33,3 +33,6 @@
 /config/secrets.yml.example
 /lib/tasks/dev.rake.example
 .byebug_history
+
+# Ignore application configuration
+/config/application.yml

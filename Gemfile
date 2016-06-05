@@ -50,7 +50,12 @@ gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
 
 
 #paperclip
-gem "paperclip"
+gem 'figaro'
+gem "paperclip", '~> 4.3.6'
+gem 'aws-sdk', '< 2.0'
+
+
+
 gem 'rails_admin'
 # fullcalendar
 gem 'fullcalendar-rails'
