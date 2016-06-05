@@ -47,7 +47,7 @@
                           <div class="info-eval col-xs-7">
                             <p><%= a.teacher.user.first_name %>
                               <%= a.teacher.user.last_name %></p>
-                            <div id="rateYo-<%= i %>"></div>
+                            <div class="index_rating_fix"><div id="rateYo-<%= i %>"></div></div>
                             <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: a.teacher_id ).count %>)</span>
                           </div>
                           <div class=" col-xs-2 ">
