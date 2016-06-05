@@ -64,7 +64,7 @@
       </div>
       <div class="col-sm-4 col-md-4">
         <p>Price US dollars</p>
-        <input id="priceslide" type="text" class="priceslide" value="" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="[10,20]" style="width:100% !important"/>
+        <input id="priceslide" type="text" class="priceslide" value="" data-slider-min="1" data-slider-max="100" data-slider-step="1" style="width:100% !important"/>
       </div>
     </div>
   </div>
@@ -76,7 +76,7 @@
 
   $(document).ready(function () {
     $("#js-example-basic-single").select2();
-    $('#priceslide').slider({value: [10,1000]}).on('slideStop', function (ev) {
+    $('#priceslide').slider({value: [1,100]}).on('slideStop', function (ev) {
 
       var price = $('#priceslide').data('slider').getValue();
 
