@@ -86,17 +86,17 @@ class TeachersController < ApplicationController
                  current_user.create_teacher
                end
   end
-
-  def get_hangouts_url
-    if @teacher.hangouts_url.blank?
-      charset = ""
-      url = ""
-      charset = (0...9).map { ('a'..'z').to_a[ rand(26)] }.join
-      url =  "https://talkgadget.google.com/hangouts/_/n"+charset+"aelp4l25okzw3tw4e?hl=en-US"
-      @teacher.hangouts_url = url
-      @teacher.save
-    end
-  end
+  #
+  # def get_hangouts_url
+  #   if current_user.teacher.hangouts_url.blank?
+  #     charset = ""
+  #     url = ""
+  #     charset = (0...9).map { ('a'..'z').to_a[ rand(26)] }.join
+  #     url =  "https://talkgadget.google.com/hangouts/_/n"+charset+"aelp4l25okzw3tw4e?hl=en-US"
+  #     current_user.teacher.hangouts_url = url
+  #     current_user.teacher.save
+  #   end
+  # end
 
   def teacher_authority
     @teacher = Teacher.find(params[:id])

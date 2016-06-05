@@ -53,13 +53,13 @@ class WelcomeController < ApplicationController
       cookies[:week] = nil
       @teachers = Teacher.all
     end
-    @teachers = @teachers.page(params[:page]).per(10)
-
-    if @teachers.last_page?
-       @next_page = nil
-    else
-       @next_page = @teachers.next_page
-    end
+    # @teachers = @teachers.page(params[:page]).per(10)
+    #
+    # if @teachers.last_page?
+    #    @next_page = nil
+    # else
+    #    @next_page = @teachers.next_page
+    # end
   end
 
   def apply_teacher
