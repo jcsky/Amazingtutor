@@ -13,7 +13,7 @@
         <%#= collection_select({},:language_ids, Language.all, :id, :language,{:prompt => "Teacher also know the ...."}, { :id => "index_languages",:style=>"width:100%;" }) %>
         <div class="dropdown dropdown-language">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Teacher also know the ....
+            <%= @language %>
             <span class="caret dropdown-language-span"></span>
           </button>
           <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
