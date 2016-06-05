@@ -17,7 +17,7 @@
                       <div class="info-eval col-md-7 col-xs-7">
                         <p><%= User.find(t.user_id).first_name %>
                           <%= User.find(t.user_id).last_name %></p>
-                        <div id="rateYo-<%= t.id %>" ></div>
+                        <div class="index_rating_fix"><div id="rateYo-<%= t.id %>" ></div></div>
             <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: t.id ).count %>)
                       </div>
                       <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">

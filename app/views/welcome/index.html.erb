@@ -11,9 +11,8 @@
     <div class="container">
       <div class="col-sm-4 col-md-4">
         <p>Tutor's Sub-languages</p>
-        <%#= collection_select({},:language_ids, Language.all, :id, :language,{:prompt => "Teacher also know the ...."}, { :id => "index_languages",:style=>"width:100%;" }) %>
         <div class="dropdown dropdown-language">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownlanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <%= @language %>
             <span class="caret dropdown-language-span"></span>
           </button>
@@ -36,7 +35,7 @@
       <div class="col-sm-4 col-md-4">
         <p>Availability</p>
         <div class="dropdown dropdown-language">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdowntime" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Choose time you want....
             <span class="caret dropdown-language-span"></span>
           </button>
@@ -65,7 +64,7 @@
       </div>
       <div class="col-sm-4 col-md-4">
         <p>Price US dollars</p>
-        <input id="priceslide" type="text" class="priceslide" value="" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="[10,20]" style="width:100% !important"/>
+        <input id="priceslide" type="text" class="priceslide" value="" data-slider-min="1" data-slider-max="100" data-slider-step="1" style="width:100% !important"/>
       </div>
     </div>
   </div>
@@ -74,9 +73,10 @@
   <%= render "teacher", :locals => {:teachers => @teachers} %>
 </div>
 <script>
+
   $(document).ready(function () {
     $("#js-example-basic-single").select2();
-    $('#priceslide').slider({value: [10,1000]}).on('slideStop', function (ev) {
+    $('#priceslide').slider({value: [1,100]}).on('slideStop', function (ev) {
 
       var price = $('#priceslide').data('slider').getValue();
 
@@ -89,5 +89,9 @@
         }
       });
     });
+    var language = '<%= show_language %>'+ '<span class="caret dropdown-language-span"></span>';
+    var time = '<%= show_week %>'+ '<span class="caret dropdown-language-span"></span>';
+    $('#dropdownlanguage').html(language);
+    $('#dropdowntime').html(time);
   });
 </script>

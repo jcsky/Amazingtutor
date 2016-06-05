@@ -188,6 +188,10 @@ div.play-button {
     height: 274px;
   }
 }
+.index_rating_fix{
+  margin-left: -5px;
+  display: inline-block;
+}
 /*#youtube-iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }*/
 // Small devices (tablets, 768px and up)
 @media (max-width: $screen-sm-min) {
