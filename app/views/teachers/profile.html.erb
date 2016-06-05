@@ -110,7 +110,7 @@
                     <h6>&nbsp;&nbsp;5 Session</h6>
                   </div>
                   <div class="col-xs-6 text-right ">
-                    <h5 class="moneyred"><%= number_to_currency( @teacher.five_fee/5, precision: 2 ) %>
+                    <h5 class="moneyred"><%= number_to_currency( @teacher.five_fee, precision: 2 ) %>
                       USD</h5>
                     <p>Per Hour</p>
                   </div>
@@ -136,7 +136,7 @@
                     <h6>&nbsp;&nbsp;5 Session</h6>
                   </div>
                   <div class="col-xs-6 text-right ">
-                    <h5 class="moneyred"><%= number_to_currency( @teacher.five_fee_exchange_to(current_user.currency)/5, precision: 2 ) %>
+                    <h5 class="moneyred"><%= number_to_currency( @teacher.five_fee_exchange_to(current_user.currency), precision: 2 ) %>
                       <%= current_user.currency %></h5>
                     <p>Per Hour</p>
                   </div>
