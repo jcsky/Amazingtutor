@@ -1,17 +1,17 @@
 <% unless current_user %>
-    <% if t.ten_fee/10 < t.one_fee %>
-      <%= number_to_currency(t.ten_fee/10,precision: 2 ) %>~<%= number_to_currency(t.one_fee, precision: 2) %>
+    <% if t.ten_fee < t.one_fee %>
+      <%= number_to_currency(t.ten_fee,precision: 2 ) %>~<%= number_to_currency(t.one_fee, precision: 2) %>
       USD/Hour
     <% else %>
-      <%= number_to_currency(t.one_fee, precision: 2) %>~<%= number_to_currency(t.ten_fee/10,precision: 2 ) %>
+      <%= number_to_currency(t.one_fee, precision: 2) %>~<%= number_to_currency(t.ten_fee,precision: 2 ) %>
       USD/Hour
     <% end %>
 <% else %>
-    <% if t.ten_fee/10 < t.one_fee %>
-      <%= number_to_currency(t.ten_fee_exchange_to(current_user.currency)/10,precision: 2 ) %>~<%= number_to_currency(t.one_fee_exchange_to(current_user.currency), precision: 2) %>
+    <% if t.ten_fee < t.one_fee %>
+      <%= number_to_currency(t.ten_fee_exchange_to(current_user.currency),precision: 2 ) %>~<%= number_to_currency(t.one_fee_exchange_to(current_user.currency), precision: 2) %>
       <%= current_user.currency %>/Hour
     <% else %>
-      <%= number_to_currency(t.one_fee_exchange_to(current_user.currency), precision: 2) %>~<%= number_to_currency(t.ten_fee_exchange_to(current_user.currency)/10,precision: 2 ) %>
+      <%= number_to_currency(t.one_fee_exchange_to(current_user.currency), precision: 2) %>~<%= number_to_currency(t.ten_fee_exchange_to(current_user.currency),precision: 2 ) %>
       <%= current_user.currency %>/Hour
     <% end %>
 <% end %>

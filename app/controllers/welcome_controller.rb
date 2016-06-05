@@ -89,7 +89,7 @@ class WelcomeController < ApplicationController
   def find_price_teacher
     @pricefir = params[:price].first.to_i
     @pricesec = params[:price].last.to_i
-    @teachers = Teacher.where('ten_fee/10 >= ? AND one_fee <= ?', @pricefir, @pricesec)
+    @teachers = Teacher.where('ten_fee >= ? AND one_fee <= ?', @pricefir, @pricesec)
     # @teachers = Teacher.where('(ten_fee/10 between ? and ?) AND (one_fee between ? and ?)', @pricefir, @pricesec)
   end
 
