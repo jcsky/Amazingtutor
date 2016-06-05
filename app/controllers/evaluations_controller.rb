@@ -21,7 +21,6 @@ class EvaluationsController < ApplicationController
           @evaluation = current_user.evaluations.create!(:comment => params[:comment], :rating => params[:rating],
                                                         :appointment_id => @appointment.id,
                                                         :evaluated_id => @appointment.teacher_id )
-
         end
       end
 

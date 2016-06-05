@@ -21,13 +21,14 @@ class OrdersController < ApplicationController
   end
 
   def create
+    # raise
      @user = current_user
      @order = @user.orders.create!( order_params )
       if @order.save
         redirect_to user_order_path(@order.user, @order)
       else
         render :new
-     end
+      end
   end
 
   def checkout_pay2go
@@ -37,7 +38,7 @@ class OrdersController < ApplicationController
       redirect_to :back, alert: 'already paid!'
     else
       @payment = Payment.create!( :order => @order,
-                                   :payment_method => params[:payment_method] )
+                                  :payment_method => params[:payment_method] )
       render :layout => false
     end
   end
