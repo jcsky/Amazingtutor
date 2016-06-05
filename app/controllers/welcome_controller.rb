@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  before_action :find_language, only: :index
+
   def mainindex
   end
 
@@ -9,10 +11,13 @@ class WelcomeController < ApplicationController
       cookies[:lan] = params[:language_id]
       cookies[:week] = nil
       find_language_teacher
+
     elsif params[:week] && params[:language_id].blank?
       cookies[:lan] = nil
       cookies[:week] = params[:week]
       find_week_teacher
+
+
     elsif params[:week] && params[:language_id]
       cookies[:lan] = params[:language_id]
       cookies[:week] = params[:week]
@@ -21,21 +26,25 @@ class WelcomeController < ApplicationController
       find_week_teacher
       @teacherb = @teachers
       @teachers = @teachera & @teacherb
+
     elsif params[:price]
       if cookies[:lan].blank? && cookies[:week].blank?
         find_price_teacher
+
       elsif cookies[:lan] && cookies[:week].blank?
         find_language_teacher
         @teachera = @teachers
         find_price_teacher
         @teacherb = @teachers
         @teachers = @teachera & @teacherb
+
       elsif cookies[:lan].blank? && cookies[:week]
         find_week_teacher
         @teachera = @teachers
         find_price_teacher
         @teacherb = @teachers
         @teachers = @teachera & @teacherb
+
       elsif cookies[:lan] && cookies[:week]
         find_language_teacher
         @teachera = @teachers
@@ -45,14 +54,17 @@ class WelcomeController < ApplicationController
         @teacherc = @teachers
         @teachers = @teachera & @teacherb & @teacherc
       end
+
       respond_to do |format|
         format.js { render 'teacher' }
       end
+
     elsif params[:week].blank? && params[:language_id].blank?
       cookies[:lan] = nil
       cookies[:week] = nil
       @teachers = Teacher.all
     end
+
     # @teachers = @teachers.page(params[:page]).per(10)
     #
     # if @teachers.last_page?
@@ -117,4 +129,13 @@ class WelcomeController < ApplicationController
     @teacher_id = AvailableSection.where(id: @as).pluck(:teacher_id).uniq
     @teachers = Teacher.where(id: @teacher_id).uniq
   end
+
+  def find_language
+    if params[:language_id]
+      @language = Language.find(params[:language_id]).language
+    else
+      @language = "Teacher also know the ...."
+    end
+  end
+
 end
