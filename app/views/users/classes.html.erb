@@ -42,7 +42,7 @@
                       <div class="col-xs-12">
                         <div class="clearfix flexmodify">
                           <div class="info-mypic col-xs-3 pull-left">
-                            <%= image_tag(a.teacher.user.image) %>
+                            <%= user_headimage(a.teacher.user) %>
                           </div>
                           <div class="info-eval col-xs-7">
                             <p><%= a.teacher.user.first_name %>
@@ -94,7 +94,7 @@
                       </div> -->
                         <div class="evaluation-block col-xs-10 col-xs-push-1">
                           <div class="evaluation-me text-center">
-                            <%= user_headimage(a.teacher.user) %>
+                            <%#= user_headimage(a.teacher.user) %>
                             <h4><%= a.teacher.user.first_name %>
                               <%= a.teacher.user.last_name %></h4>
                             <p>Wehope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>

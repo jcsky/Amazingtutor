@@ -34,7 +34,7 @@
             <%= f.file_field :image ,class:"filebutton" %>
           </div>
           <% if @user.image.exists? %>
-          <%= check_box_tag "_remove_image", "1" %>Remove image
+            <%= check_box_tag "_remove_image", "1" %>Remove image
           <% end %>
 
           <div class="input-group clearfix">
