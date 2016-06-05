@@ -2,6 +2,24 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/super', as: 'rails_admin'
 
+  def scheme
+    if @env['HTTPS'] == 'on'
+      'https'
+    elsif @env['HTTP_X_FORWARDED_SSL'] == 'on'
+      'https'
+    elsif @env['HTTP_X_FORWARDED_SCHEME']
+      @env['HTTP_X_FORWARDED_SCHEME']
+    elsif @env['HTTP_X_FORWARDED_PROTO']
+      @env['HTTP_X_FORWARDED_PROTO'].split(',')[0]
+    else
+      @env["rack.url_scheme"]
+    end
+  end
+
+  def ssl?
+    scheme == 'https'
+  end
+
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
     resources :appointments
   end
