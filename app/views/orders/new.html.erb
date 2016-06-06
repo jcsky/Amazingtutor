@@ -43,7 +43,15 @@
             <i class="fa fa-rss"></i>
             <span>Trial
             </span>
-            <span>Yes</span>
+            <span>
+              <% if @order.teacher.trial_fee == 0 %>
+                <%= "free" %>
+              <% elsif @order.teacher.trial_fee == nil %>
+                <%= "no" %>
+              <% else %>
+                <%= "yes" %>
+              <% end %>
+            </span>
           </div>
           <div class="col-xs-12 info-pro">
             <p><%= simple_format @order.teacher.introduction %></p>
