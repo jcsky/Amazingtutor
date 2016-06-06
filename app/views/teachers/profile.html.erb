@@ -292,7 +292,7 @@
           $('#calendar').fullCalendar('removeEvents', $(this).data().event.id);
         } else {
           $.ajax({
-            url: '<%= appointments_url %>',
+            url: '<%= appointments_path %>',
             data: {
               start: s.start.format("YYYY-MM-DD HH:mm:ss"),
               end: s.end.format("YYYY-MM-DD HH:mm:ss"),
@@ -323,7 +323,7 @@
       eventSources: [
         {
           //teacher events source
-          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id)%>',
+          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id , :protocol => "https")%>',
           rendering: 'background'
         }
       ]
