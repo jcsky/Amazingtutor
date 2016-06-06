@@ -21,13 +21,18 @@ class OrdersController < ApplicationController
   end
 
   def create
-     @user = current_user
-     @order = @user.orders.create!( order_params )
-      if @order.save
-        redirect_to user_order_path(@order.user, @order)
-      else
-        render :new
-     end
+    teacher = Teacher.find params[:order][:teacher_id]
+    if teacher.check_fee(params[:order][:amount],params[:order][:session]) == true
+      @user = current_user
+      @order = @user.orders.create!( order_params )
+       if @order.save
+         redirect_to user_order_path(@order.user, @order)
+       else
+         render :new
+       end
+    else
+      render :status => :expectation_failed, :text => "expectation_failed"
+    end
   end
 
   def checkout_pay2go
