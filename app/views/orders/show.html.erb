@@ -61,7 +61,7 @@
               <h5>Private sesions</h5>
               <p>whith <%= @order.teacher.user.username %></p>
             </div>
-            <% unless @order.teacher.trial_fee.nil? || current_user.user_available_sections.where(teacher_id:@order.teacher).first.try(:trailed) == true || @order.teacher.trial_fee == 0  %>
+            <% if @order.teacher.trial_fee != nil || current_user.user_available_sections.find_by(teacher_id:params[:teacher_id]).try(:trailed) == false || @order.teacher.trial_fee != 0 %>
                 <div class="col-xs-12 private-money">
                   <div class="col-xs-6">
                     <div class="payment-radio">

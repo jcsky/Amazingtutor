@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-5 text-center ">
+    <div class="col-md-3 text-center fixed">
       <%= render "sidebar"%>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7 col-md-push-5">
       <div class="row_spical_fix">
         <% if UserAvailableSection.where(user_id:current_user).count != 0 %>
             <% UserAvailableSection.where(user_id:current_user).each do |a| %>
@@ -26,17 +26,17 @@
                     <div class="clearfix info-tag">
                       <i class="fa fa-comment-o"></i>
                       <span>Speak:</span>
-              <span>
-                <% a.teacher.languages.each do |language| %>
-                <%= language.language %>
-                <% end %>
-              </span><br>
-                      <i class="fa fa-usd"></i>
-              <span>Rate
-              </span>
-              <span class="moneyred">
-                <%= render partial: 'welcome/moneyred', locals: {t: a.teacher} %>
-              </span><br>
+                      <span>
+                        <% a.teacher.languages.each do |language| %>
+                        <%= language.language %>
+                        <% end %>
+                      </span><br>
+                              <i class="fa fa-usd"></i>
+                      <span>Rate
+                      </span>
+                      <span class="moneyred">
+                        <%= render partial: 'welcome/moneyred', locals: {t: a.teacher} %>
+                      </span><br>
                       <% if  a.available_section == 1 %>
                       <h5>1 Trial</h5>
                           <% else %>
