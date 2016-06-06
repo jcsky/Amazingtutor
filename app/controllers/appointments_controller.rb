@@ -73,8 +73,6 @@ class AppointmentsController < ApplicationController
         #                                appointment.end,
         #                                appointment.teacher_id,
         #                                current_user)
-
-
         appointment.save
         # 扣掉預約後的堂數
         if appointment.appointment_url.blank?
@@ -99,9 +97,11 @@ class AppointmentsController < ApplicationController
     ActiveRecord::Base.transaction do
       appointment = current_user.appointments.find_by_id(destroy_appointment_params[:id])
       appointment.check_and_destroy!
-      users_available_section = current_user.user_available_section
-      UserAvailableSection.update_credit(users_available_section, users_available_section.section, 'plus')
+      users_available_section = current_user.user_available_sections.first
+      # raise
+      UserAvailableSection.update_credit(users_available_section, appointment.section, 'plus')
       users_available_section.trailed = false if appointment.section == 1
+      # byebug
     end
     redirect_to :back
   end
