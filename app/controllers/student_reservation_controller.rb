@@ -8,8 +8,9 @@ class StudentReservationController < ApplicationController
   def free_trial
     @teacher = Teacher.find(params[:teacher_id])
     if @teacher.trial_fee == 0 && (current_user.user_available_sections.where(teacher_id: @teacher).first.nil? || current_user.user_available_sections.where(teacher_id: @teacher).first.trailed == false)
-    new_trial = current_user.user_available_sections.new(teacher_id:@teacher.id,trailed:true,available_section:1)
-    # byebug
+    new_trial = current_user.user_available_sections.find_or_create_by(teacher_id:@teacher.id)
+    old_section = new_trial.available_section
+    new_trial.update(trailed:true,available_section:1+old_section)
     if new_trial.save
         redirect_to mytutor_user_path(current_user)
       end

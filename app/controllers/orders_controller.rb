@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
 
   def show
     redirect_to :back if current_user.teacher.id == params[:teacher_id]
-
   end
 
   def new
@@ -37,12 +36,11 @@ class OrdersController < ApplicationController
 
   def checkout_pay2go
     @order = current_user.orders.find(params[:id])
-
     if @order.paid?
       redirect_to :back, alert: 'already paid!'
     else
       @payment = Payment.create!( :order => @order,
-                                   :payment_method => params[:payment_method] )
+                                  :payment_method => params[:payment_method] )
       render :layout => false
     end
   end
