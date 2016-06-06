@@ -76,7 +76,6 @@ class AppointmentsController < ApplicationController
         #                                current_user)
         appointment.save
         # 扣掉預約後的堂數
-        UserMailer.notify_teacher_new_appointment(current_user, @teacher).deliver_now
 
         if appointment.appointment_url.blank?
           charset = ""
