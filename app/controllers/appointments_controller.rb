@@ -47,7 +47,6 @@ class AppointmentsController < ApplicationController
     unless current_user.nil?
       @user_available_sections = current_user.user_available_sections.find_by_teacher_id(set_appointment_new_params[:teacher_id])
     end
-
   end
 
   def create
@@ -88,9 +87,12 @@ class AppointmentsController < ApplicationController
           credit.trailed = nil
           credit.save!
         end
+
       end
     end
-    redirect_to appointments_path
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      end
   end
 
   def destroy

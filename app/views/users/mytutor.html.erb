@@ -117,7 +117,9 @@
 <% end %>
 
 <script>
-
+  $('.teacher-modal').on('hidden.bs.modal', function () {
+    window.location.href = "/users/"+<%= current_user.id %>+"/classes";
+  });
   $('.teacher-modal').on('shown.bs.modal', function () {
     var teacher_modal = $(this).closest(".teacher-modal")
     var tid = teacher_modal.data("teacher-id");
