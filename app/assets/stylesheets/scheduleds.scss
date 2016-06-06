@@ -153,17 +153,15 @@
     color: #6A6A6A;
     margin: 0 10px;
   }
-  .active {
-    a{
-      font-weight: bold;
-      color: #FF5F5F;
-    }
+}
 
-    // border-style: solid;
-    // border-color: red;
-    // border-width: 1px;
+.current_tab {
+  a{
+    font-weight: bold;
+    color: #FF5F5F  !important;
   }
 }
+
 .scheduled-editprofile-fix {
   label{
     display: inline-block;
