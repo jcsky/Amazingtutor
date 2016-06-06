@@ -57,7 +57,7 @@ module ApplicationHelper
       return: "#{Rails.application.secrets.app_host}/paypal/redirect",
       invoice: payment.id,
       amount: payment.order.amount,
-      currency_code: 'TWD',
+      currency_code: 'USD',
       item_name: 'Chinese Tutor Class',
       item_number: payment.id,
       quantity: '1',
