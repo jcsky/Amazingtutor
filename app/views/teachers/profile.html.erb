@@ -16,7 +16,7 @@
             <div class="info-eval col-xs-7 col-md-7">
               <p><%= User.find(@teacher.user).first_name %>
                 <%= User.find(@teacher.user).last_name %></p>
-              <div id="rateYo" ></div>
+              <div class="index_rating_fix"><div id="rateYo" ></div></div>
               <span>(132)</span>
             </div>
             <div class=" col-xs-2 info-flag col-md-1 col-md-push-1">
@@ -40,7 +40,15 @@
             <i class="fa fa-rss"></i>
             <span>Trial
             </span>
-            <span>Yes</span>
+            <span>
+              <% if @teacher.trial_fee == 0 %>
+                <%= "free" %>
+              <% elsif @teacher.trial_fee == nil %>
+                <%= "no" %>
+              <% else %>
+                <%= "yes" %>
+              <% end %>
+            </span>
           </div>
           <div class="col-xs-12 info-pro info-p-minfix">
             <p><%= simple_format @teacher.introduction %></p>
@@ -76,9 +84,9 @@
               <% if current_user == @teacher.user%>
               <% elsif current_user.user_available_sections.where(:teacher_id=>@teacher.id).first.try(:trailed) == true %>
                   <a class="btn btn-primary btn-lg link_disable">Already Tried</a>
-              <% elsif  @teacher.trial_fee == 0 && (current_user.user_available_sections.where(teacher_id: @teacher).first.nil? || current_user.user_available_sections.where(teacher_id: @teacher).first.trailed == false )%>
-                  <%= link_to "Book Now",free_trial_path(:teacher_id => @teacher.id),:method=>:post ,:class => "btn btn-primary btn-lg bootrialfree" %>
-              <% else %>
+              <% elsif  @teacher.trial_fee == 0 && (current_user.user_available_sections.find_by(teacher_id: @teacher).nil? || current_user.user_available_sections.find_by(teacher_id: @teacher).trailed == false )%>
+                  <%= link_to "Book Now",free_trial_path(:teacher_id => @teacher.id) ,:method=>:post ,:class => "btn btn-primary btn-lg" %>
+              <% elsif  current_user.user_available_sections.find_by(teacher_id: @teacher).try(:trailed) != nil %>
                   <%= link_to "Book Now", new_user_order_path(current_user, :teacher_id => params[:id]),:class => "btn btn-primary btn-lg" %>
               <% end %>
           <% end %>
@@ -191,7 +199,7 @@
     </div>
     <% @teacher.experiences.each do |e| %>
         <div class="col-xs-12 background-content">
-          <h6 class="text-center"><%= e.start %>&nbsp;<%= "-" if e.start %>&nbsp;<%= e.end %></h6>
+          <h6 class="text-center"><%= e.start %> - <%= e.end %></h6>
           <h5>Experience</h5>
           <h6><%= e.description %></h6>
           <p><%= e.description %></p>
@@ -199,7 +207,7 @@
     <% end %>
     <% @teacher.educations.each do |e| %>
         <div class="col-xs-12 background-content">
-          <h6 class="text-center"><%= e.start %>&nbsp;<%= "-" if e.start %>&nbsp;<%= e.end %></h6>
+          <h6 class="text-center"><%= e.start %>  <%= e.end %></h6>
           <h5>Education</h5>
           <h6><%= e.school %></h6>
           <p><%= e.major %></p>

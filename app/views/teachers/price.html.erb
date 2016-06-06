@@ -19,7 +19,7 @@
           <%= f.text_field :trial_fee, :placeholder=>"US$0", :class => "form-control" %>
         </div>
         <h6>小提醒：因體驗課為 30 分鐘，提供具親和力的價格，有助於提高學員體驗的意願。</h6>
-        <h6>(如可免費體驗則可設為 0 元)</h6> 
+        <h6>(如可免費體驗則可設為 0 元)</h6>
         <hr>
         <h5>正式上課</h5>
         <div class="input-group clearfix">
@@ -56,38 +56,42 @@
 </div>
 
 <script>
-  $(function () {
-    var onefee = $('#one_fee').val();
-    var fivefee = $('#five_fee').val() / 5;
-    var tenfee = $('#ten_fee').val() / 10;
+$(function () {
+
     $('#one_fee').focusout(function () {
-      onefee = $(this).val();
+      var onefee = parseInt($('#one_fee').val());
+      var fivefee = parseInt($('#five_fee').val()) ;
+      var tenfee = parseInt($('#ten_fee').val()) ;
       if (onefee < fivefee) {
-        onefee = fivefee
-        $('#one_fee').val(onefee);
+         onefee = fivefee;
+        $('#onefee').val(fivefee);
       } else if (onefee < tenfee) {
-        onefee = tenfee
-        $('#one_fee').val(onefee);
+        onefee = tenfee;
+        $('#onefee').val(tenfee);
       }
     });
     $('#five_fee').focusout(function () {
-      fivefee = $(this).val() / 5;
+      var onefee = parseInt($('#one_fee').val());
+      var fivefee = parseInt($('#five_fee').val()) ;
+      var tenfee = parseInt($('#ten_fee').val()) ;
       if (fivefee > onefee) {
-        fivefee = onefee
-        $('#five_fee').val(fivefee*5);
+        fivefee = onefee;
+        $('#five_fee').val(fivefee);
       } else if (fivefee < tenfee) {
-        fivefee = tenfee
-        $('#five_fee').val(fivefee*5);
+        fivefee = tenfee;
+        $('#five_fee').val(fivefee);
       }
     });
     $('#ten_fee').focusout(function () {
-      tenfee = $(this).val() / 10;
+      var onefee = parseInt($('#one_fee').val());
+      var fivefee = parseInt($('#five_fee').val()) ;
+      var tenfee = parseInt($('#ten_fee').val()) ;
       if (tenfee > onefee) {
-        tenfee = onefee
-        $('#ten_fee').val(tenfee*10);
+        tenfee = onefee ;
+        $('#ten_fee').val(tenfee);
       } else if (tenfee > fivefee) {
-        tenfee = fivefee
-        $('#ten_fee').val(tenfee*10);
+        tenfee = fivefee;
+        $('#ten_fee').val(tenfee);
       }
     });
   });

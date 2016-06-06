@@ -34,7 +34,6 @@ class Pay2goController < ApplicationController
           @teacher_available_section.save
         end
       end
-
       redirect_to mytutor_user_path(@order.user)
     end
 

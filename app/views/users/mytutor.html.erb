@@ -109,7 +109,7 @@
           <div class="modal-footer">
             <button type="button" class="btn closebtn" data-dismiss="modal">Close</button>
             <%#= x.submit 'Quick Book',:class=>"btn bookteacherbtn" %>
-            <button type="button" class="btn bookteacherbtn" data-dismiss="modal" id="book_pass_params">Quick Book</button>
+            <button type="button" class="btn bookteacherbtn book_pass_params" data-dismiss="modal">Quick Book</button>
           </div>
         </div>
       </div>
@@ -190,7 +190,7 @@
     update_times_select.bind(this)();
   });
 
-  $('#book_pass_params').click(function(){
+  $('.book_pass_params').click(function(){
     var teacher_modal = $(this).closest(".teacher-modal");
 
     var selected = teacher_modal.find(".day-select").find("option:selected").val();

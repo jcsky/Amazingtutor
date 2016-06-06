@@ -14,11 +14,10 @@ module UsersHelper
   end
 
   def trail_check(user,teacher)
-    # byebug
-    disable = []
-    disable << 1 if user.user_available_sections.where(:teacher_id=> teacher.id).first.trailed == true || user.user_available_sections.where(:teacher_id=> teacher.id).first.nil?
-    disable << 2 if user.user_available_sections.where(:teacher_id=> teacher.id).first.nil? || user.user_available_sections.where(:teacher_id=> teacher.id).first.available_section < 2
-    disable
+    disable_type = []
+    disable_type << 1 if user.user_available_sections.find_by(:teacher_id=> teacher.id).trailed.nil? || user.user_available_sections.find_by(:teacher_id=> teacher.id).nil? || user.user_available_sections.find_by(:teacher_id=> teacher.id).trailed == false
+    disable_type << 2 if user.user_available_sections.find_by(:teacher_id=> teacher.id).nil? || user.user_available_sections.find_by(:teacher_id=> teacher.id).available_section < 2
+    disable_type
   end
 
   def free_section_create(teacher_id)
