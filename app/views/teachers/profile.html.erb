@@ -76,9 +76,9 @@
               <% if current_user == @teacher.user%>
               <% elsif current_user.user_available_sections.where(:teacher_id=>@teacher.id).first.try(:trailed) == true %>
                   <a class="btn btn-primary btn-lg link_disable">Already Tried</a>
-              <% elsif  @teacher.trial_fee == 0 && (current_user.user_available_sections.where(teacher_id: @teacher).first.nil? || current_user.user_available_sections.where(teacher_id: @teacher).first.trailed == false )%>
+              <% elsif  @teacher.trial_fee == 0 && (current_user.user_available_sections.find_by(teacher_id: @teacher).nil? || current_user.user_available_sections.find_by(teacher_id: @teacher).trailed == false )%>
                   <%= link_to "Book Now",free_trial_path(:teacher_id => @teacher.id) ,:method=>:post ,:class => "btn btn-primary btn-lg" %>
-              <% else %>
+              <% elsif  current_user.user_available_sections.find_by(teacher_id: @teacher).try(:trailed) != nil %>
                   <%= link_to "Book Now", new_user_order_path(current_user, :teacher_id => params[:id]),:class => "btn btn-primary btn-lg" %>
               <% end %>
           <% end %>
