@@ -20,10 +20,24 @@ class OrdersController < ApplicationController
   end
 
   def create
+    session = params[:order][:session]
     teacher = Teacher.find params[:order][:teacher_id]
-    if teacher.check_fee(params[:order][:amount],params[:order][:session]) == true
+    email = params[:order][:email]
+
+    if session == "1"
+      amount = teacher.one_fee
+    elsif session == "5"
+      amount = teacher.five_fee
+    elsif session == "10"
+      amount = teacher.five_fee
+    end
+
+    if amount
       @user = current_user
-      @order = @user.orders.create!( order_params )
+      @order = @user.orders.create!( teacher: teacher,
+                                     amount: amount,
+                                     session: session,
+                                     email: email)
        if @order.save
          redirect_to user_order_path(@order.user, @order)
        else
@@ -31,6 +45,7 @@ class OrdersController < ApplicationController
        end
     else
       render :status => :expectation_failed, :text => "expectation_failed"
+    # if teacher.check_fee(params[:order][:amount],params[:order][:session]) == true
     end
   end
 

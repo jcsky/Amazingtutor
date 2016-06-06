@@ -40,15 +40,15 @@ class Teacher < ActiveRecord::Base
     Money.new(ten_fee*100, "USD").exchange_to(iso_to)
   end
 
-  def check_fee(fee,session)
-    fee = (fee.to_i)/(session.to_i)
-
-    if fee == self.one_fee || fee == self.five_fee || fee == self.ten_fee
-      return true
-    else
-      return false
-    end
-  end
+  # def check_fee(fee,session)
+  #   fee = (fee.to_i)/(session.to_i)
+  #
+  #   if fee == self.one_fee || fee == self.five_fee || fee == self.ten_fee
+  #     return true
+  #   else
+  #     return false
+  #   end
+  # end
 
   # def hangouts_url
   #   if self.hangouts_url.blank?
