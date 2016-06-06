@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
 
   def show
     redirect_to :back if current_user.teacher.id == params[:teacher_id]
-
   end
 
   def new

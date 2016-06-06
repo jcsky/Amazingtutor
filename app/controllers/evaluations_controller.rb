@@ -13,7 +13,6 @@ class EvaluationsController < ApplicationController
 
   def create
     if params[:type].to_i == 0
-
       if current_user.id == @appointment.user_id
         @evaluation = @appointment.evaluations.where(evaluatable_type: "User",
                                                       evaluatable_id: current_user.id, evaluated_id: @appointment.teacher_id ).first
