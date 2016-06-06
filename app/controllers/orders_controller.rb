@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
 
   def show
     redirect_to :root_path if current_user.teacher.try(:id) == params[:teacher_id].to_i
-    byebug
   end
 
   def new
