@@ -10,11 +10,12 @@ class OrdersController < ApplicationController
   end
 
   def show
-    redirect_to :back if current_user.teacher.try(:id) == params[:teacher_id]
+    redirect_to :root_path if current_user.teacher.try(:id) == params[:teacher_id].to_i
+    byebug
   end
 
   def new
-    redirect_to :back if current_user.teacher.try(:id) == params[:teacher_id]
+    redirect_to root_path if current_user.teacher.try(:id) == params[:teacher_id].to_i
     @order = Order.new
     @order.teacher_id = params[:teacher_id]
   end

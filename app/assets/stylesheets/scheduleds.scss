@@ -75,7 +75,7 @@
     }
   }
 }
-.gotocalss {
+.gotoclass {
   button[name="gotoclass"] {
     border: 1px solid #7EB0EA;
     border-radius: 23px;
@@ -86,7 +86,7 @@
     margin-top: 15px;
     font-size: 15px;
     font-weight: lighter;
-    transform: translateX(60%);
+    transform: translateX(50%);
     left: 50%;
     // margin: 10px auto;
   }
@@ -98,6 +98,11 @@
     outline: none;
   }
 }
+.teacherfix .conatiner-fluid{
+  button {
+    margin-left: -30px;
+  }
+}
 .ratingnow {
   button[name="rating"],#eval-send,button {
     border: 1px solid #FF6969;
@@ -107,7 +112,7 @@
     background-color: #fff;
     color: #FF6969;
     left: 50%;
-    transform: translateX(60%);
+    transform: translateX(50%);
     margin-top: 15px;
     font-size: 15px;
     font-weight: lighter;
@@ -176,6 +181,10 @@
 }
 .mytutor-sort {
   margin-top: 15px;
+}
+.teacher_sort {
+  margin-left: -15px;
+  margin-right: -15px;
 }
 .tutor-info {
   padding-top: 1px;
@@ -312,7 +321,7 @@ h5{
   min-width:inherit;
   input{
     background-color: transparent;
-    color: #bbb;
+    color: #f52d40;
     border: none;
     outline: 0;
   }
@@ -475,7 +484,7 @@ h5{
       }
     }
   }
-  .gotocalss,
+  .gotoclass,
   .ratingnow {
     button {
       margin-left: -50px;

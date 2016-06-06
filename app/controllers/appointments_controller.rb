@@ -98,10 +98,8 @@ class AppointmentsController < ApplicationController
       appointment = current_user.appointments.find_by_id(destroy_appointment_params[:id])
       appointment.check_and_destroy!
       users_available_section = current_user.user_available_sections.first
-      # raise
       UserAvailableSection.update_credit(users_available_section, appointment.section, 'plus')
       users_available_section.trailed = false if appointment.section == 1
-      # byebug
     end
     redirect_to :back
   end
