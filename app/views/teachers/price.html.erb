@@ -16,35 +16,35 @@
         <div class="input-group clearfix">
 
           <%= f.label :trial_fee, "體驗課" %>
-          <%= f.text_field :trial_fee, :placeholder=>"NT$000", :class => "form-control" %>
+          <%= f.text_field :trial_fee, :placeholder=>"US$0", :class => "form-control" %>
         </div>
-        <h6>小提醒：如果未填寫數字為不開放體驗，如輸入0為免費體驗</h6>
+        <h6>小提醒：因體驗課為 30 分鐘，提供具親和力的價格，有助於提高學員體驗的意願。</h6>
+        <h6>(如可免費體驗則可設為 0 元)</h6> 
         <hr>
         <h5>正式上課</h5>
         <div class="input-group clearfix">
-          <%= f.label :one_fee, "單堂課" %>
-          <%= f.text_field :one_fee, :placeholder=>"NT$000", :class => "form-control",id:"one_fee" %>
+          <%= f.label :one_fee, "1堂課" %>
+          <%= f.text_field :one_fee, :placeholder=>"US$0", :class => "form-control",id:"one_fee" %>
           <%#= f.label :one_fee %>
-          <%#= f.text_field :one_fee ,{class:"form-control", placeholder:"NT$000", "aria-describedby":basic-addon1}%>
+          <%#= f.text_field :one_fee ,{class:"form-control", placeholder:"US$0", "aria-describedby":basic-addon1}%>
         </div>
 
         <div class="input-group clearfix">
 
-          <%= f.label :five_fee, "五堂課" %>
-          <%= f.text_field :five_fee, :placeholder=>"NT$000",:class => "form-control",id:"five_fee" %>
+          <%= f.label :five_fee, "5堂課" %>
+          <%= f.text_field :five_fee, :placeholder=>"US$0",:class => "form-control",id:"five_fee" %>
         </div>
 
         <div class="input-group clearfix">
 
-          <%= f.label :ten_fee, "十堂課" %>
-          <%= f.text_field :ten_fee, :placeholder=>"NT$000", :class => "form-control" ,id:"ten_fee"%>
+          <%= f.label :ten_fee, "10堂課" %>
+          <%= f.text_field :ten_fee, :placeholder=>"US$0", :class => "form-control" ,id:"ten_fee"%>
         </div>
-          <h6> 小提醒：五堂課和十堂課的平均價格需低於或等於一堂課 (一堂課價 >= 五堂課平均價 >= 十堂課平均價)</h6>
+          <h6>小提醒：5、10堂課請輸入平均單價。</h6>
         <hr>
         <div class="public-note">
           <h5>小提醒：</h5>
-          <h6>1.如ㄚ填寫未開放，如學員喜歡您的課程建議開放五-十堂課程。</h6>
-          <h6>2.每一堂學員付費，須等到正式上課並給予評價後才會列入撥款， AmazingTutor 將在每月 15, 30日撥款，匯款帳戶設定請至 收款設定</h6>
+          <h6>每一堂學員付費，須等到正式上課並給予評價後才會列入撥款， AmazingTutor 將在每月 15, 30日撥款，匯款帳戶設定請至 收款設定</h6>
         </div>
       </div>
       <div class="public-save">
@@ -83,7 +83,7 @@
     $('#ten_fee').focusout(function () {
       tenfee = $(this).val() / 10;
       if (tenfee > onefee) {
-        tenfee = onefee 
+        tenfee = onefee
         $('#ten_fee').val(tenfee*10);
       } else if (tenfee > fivefee) {
         tenfee = fivefee

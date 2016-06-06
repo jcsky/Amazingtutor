@@ -72,6 +72,14 @@ select {
     margin-top: 30px;
   }
 }
+
+#one_fee{
+  margin-left: 23px;
+}
+#five_fee{
+  margin-left: 23px;
+}
+
 @media (max-width: $screen-xs-min) {
   .public-content {
     .input-group input,
