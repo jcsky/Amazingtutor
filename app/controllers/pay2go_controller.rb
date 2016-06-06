@@ -14,7 +14,7 @@ class Pay2goController < ApplicationController
       end
 
       @order = @payment.order
-      if !@payment.paid?
+      if @payment.paid?
 
         ActiveRecord::Base.transaction do
           @order.paid = true
