@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    redirect_to :back if current_user.teacher.id == params[:teacher_id]
+    redirect_to :back if current_user.teacher.try(:id) == params[:teacher_id]
     @order = Order.new
     @order.teacher_id = params[:teacher_id]
   end
