@@ -55,7 +55,7 @@
         if (c) {
           //        做一個ajax
           $.ajax({
-            url: '<%= teacher_calendars_url %>.json',
+            url: '<%= teacher_calendars_path %>.json',
             data: {
               start: start.format(),
               end: end.format()
@@ -83,7 +83,7 @@
       eventLimit: true, // allow "more" link when too many events
       eventSources: [
         {
-          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id)%>'
+          url: '<%= teacher_calendar_teacher_available_section_path(@teacher.id)%>'
         }
       ]
 
