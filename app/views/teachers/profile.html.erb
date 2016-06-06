@@ -323,7 +323,7 @@
       eventSources: [
         {
           //teacher events source
-          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id)%>',
+          url: '<%= teacher_calendar_teacher_available_section_url(@teacher.id , :protocol => "https")%>',
           rendering: 'background'
         }
       ]
