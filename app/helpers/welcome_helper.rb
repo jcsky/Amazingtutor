@@ -12,7 +12,7 @@ module WelcomeHelper
   end
 
   def show_language
-   lan = "ALL" if params[:language_id].nil?
+   lan = "All" if params[:language_id].nil?
    lan = Language.find(params[:language_id]).language if params[:language_id].present?
    lan
   end
