@@ -8,7 +8,7 @@
     <p>Past</p>
   </div>
   <div class="col-xs-4">
-    <h4><%= current_user.user_available_sections.count %></h4>
+    <h4><%= current_user.user_available_sections.where('available_section > ?', 0).count %></h4>
     <p>Unschedule</p>
   </div>
 </div>
