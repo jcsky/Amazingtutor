@@ -13,17 +13,15 @@
                 <span class="caret dropdown-language-span"></span>
               </button>
               <ul class="dropdown-menu dropdown-language-menu" aria-labelledby="dropdownMenu1">
-                <li><%= link_to "All", classes_teacher_path( :classes=> 1 ) %></li>
+                <li><%= link_to "All", classes_teacher_path %></li>
                 <li><%= link_to "Scheduled", classes_teacher_path( :classes=> 2 ) %></li>
-                <li><%= link_to "UnScheduled", classes_teacher_path( :classes=> 3 ) %></li>
-                <li><%= link_to "Past", classes_teacher_path( :classes=> 4 ) %></li>
+                <li><%= link_to "Past", classes_teacher_path( :classes=> 3 ) %></li>
               </ul>
             </div>
           </div>
         </div>
 
         <% @teacher.appointments.each do |a|%>
-
             <div class="scheduled col-xs-12">
               <div class="col-sm-5 scheduled-image teacher_classes">
                 <div class="scheduled-dark"></div>

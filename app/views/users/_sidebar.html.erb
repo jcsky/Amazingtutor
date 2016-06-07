@@ -1,18 +1,22 @@
 <div class="col-xs-12 scheduled-head">
+  <%= link_to  classes_user_path(current_user) ,class:"remove_a_style" do %>
   <div class="col-xs-4">
     <h4><%= current_user.appointments.count %></h4>
     <p>Scheduled</p>
   </div>
+      <% end %>
   <div class="col-xs-4">
 
     <h4><%= current_user.appointments.where("end < ?", Time.current.in_time_zone).count %></h4>
     <p>Past</p>
   </div>
+  <%= link_to  mytutor_user_path(current_user) ,class:"remove_a_style" do %>
   <div class="col-xs-4">
     <h4><%= count_num(current_user.user_available_sections) if current_user.user_available_sections != 0%></h4>
     <h4><%= "0" if current_user.user_available_sections.empty?%></h4>
     <p>Unschedule</p>
   </div>
+      <% end %>
 </div>
 <div class="col-xs-12 user-list">
   <div class = "<%= "current_tab" if current_page?(classes_user_path(current_user)) %>">
