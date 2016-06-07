@@ -15,12 +15,8 @@
             <div class="info-eval col-xs-7">
               <p><%= User.find(@order.teacher.user_id).first_name %>
                 <%= User.find(@order.teacher.user_id).last_name %></p>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-half-o"></i>
-              <i class="fa fa-star-o"></i>
-              <span>(132)</span>
+              <div class="index_rating_fix"><div id="rateYo_ordershow"></div></div>
+              <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: @order.teacher.id ).count %>)</span>
             </div>
             <div class=" col-xs-2 info-flag">
               <%= image_tag("flag.png") %>
@@ -155,6 +151,8 @@
   </div>
 
   <script>
+  $(document).ready(function () {
+
     $("#amount").val(<%= @order.teacher.one_fee %>);
     $("#radio-1-4").click(function () {
       $("#amount").val(<%= @order.teacher.trial_fee %>);
@@ -189,4 +187,7 @@
       iframe.setAttribute("id", "youtube-iframe");
       this.parentNode.replaceChild(iframe, this);
     }
+    $("#rateYo_ordershow").rateYo({starWidth: "15px", numStars: 5, fullStar: true, readOnly: true, rating: <%= @order.teacher.avg_rating %>});
+
+   });
   </script>
