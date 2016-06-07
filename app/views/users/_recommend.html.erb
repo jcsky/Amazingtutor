@@ -1,4 +1,4 @@
-<% @teacher = Teacher.all.first %>
+<% @teacher = (Teacher.ids - [current_user.teacher.id]).sample %>
 <div class="scheduled-content scheduled-editprofile-fix">
   <div class="scheduled-content-head">
     <h4>Find a Tutor</h4>
