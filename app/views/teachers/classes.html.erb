@@ -88,7 +88,9 @@
 
                   <div class="evaluation-block col-xs-10 col-xs-push-1">
                     <div class="evaluation-me text-center">
-                      <h4>Abner Chao</h4>
+                      <%= user_headimage(a.user) %>
+                      <h4><%= a.user.first_name %>
+                          <%= a.user.last_name %></h4>
                       <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
                     </div>
 

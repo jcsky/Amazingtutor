@@ -38,8 +38,6 @@
                         <% else %>
                             <h5 class="moneyred">COMPLETED</h5>
                         <% end %>
-                        <h3><%= a.start.in_time_zone.strftime('%H:%M %p') %></h3>
-                        <span><%= a.start.in_time_zone.strftime('%a %B %d  %Y') %></span>
                       </div>
                     </div>
                     <div class="col-sm-7">
@@ -98,14 +96,14 @@
                       </div> -->
                         <div class="evaluation-block col-xs-10 col-xs-push-1">
                           <div class="evaluation-me text-center">
-                            <%#= user_headimage(a.teacher.user) %>
+                            <%= user_headimage(a.teacher.user) %>
                             <h4><%= a.teacher.user.first_name %>
                               <%= a.teacher.user.last_name %></h4>
                             <p>We hope you had a great lesson! please leave your teacher a review on their profile for other students to see.</p>
                           </div>
                           <div id="ratebox">
                             <div id="ratebox_con">
-                              <div id="rateYo-<%= a.id %>" class="star-rating"></div>
+                              <div id="rateYox-<%= a.id %>" class="star-rating"></div>
                             </div>
                           </div>
 
@@ -152,16 +150,17 @@
     });
 
     <% if a.evaluations.where(evaluatable_type: "User").blank? %>
-    <% @raty = 0 %>
+      <% @raty = 0 %>
     <% else %>
-    <% @raty = a.evaluations.where(evaluatable_type: "User").first.rating %>
+      <% @raty = a.evaluations.where(evaluatable_type: "User").first.rating %>
     <% end %>
-
-    $("#rateYo-<%= a.id %>").rateYo({starWidth: "40px", numStars: 5, fullStar: true, readOnly: true, rating: <%= @raty %>});
 
     $("#rateYo-" + i).rateYo({starWidth: "15px", numStars: 5, fullStar: true, readOnly: true, rating: <%= a.teacher.avg_rating %>});
 
+    $("#rateYox-<%= a.id %>").rateYo({starWidth: "40px", numStars: 5, fullStar: true, readOnly: true, rating: <%= @raty %>});
+
     <% end %>
+
 
   });
 </script>
