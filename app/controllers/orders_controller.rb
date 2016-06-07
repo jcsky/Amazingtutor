@@ -77,9 +77,13 @@ class OrdersController < ApplicationController
   end
 
   def thankyou
-    @order = Order.find(params[:order])
-    if current_user.id == @order.user_id
-
+    order = Order.find(params[:order])
+    if current_user.id == order.user_id
+      if order.paid?
+        @order = order
+        @teacher_name = Teacher.find(@order.teacher_id).user.username
+      else
+      end
     else
       redirect_to root_path
     end

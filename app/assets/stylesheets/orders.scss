@@ -58,3 +58,20 @@
 .deletewhite {
   background-color: transparent;
 }
+
+.payment_message{
+  margin-left: 30%;
+  width: 550px;
+  height: 382px;
+  text-align: center;
+  background-color: white;
+  h2{
+    padding-top: 140px;
+    margin-top: 10%;
+    color: #FF5F5F;
+  }
+  h3{
+    color: #888888;
+    margin-top: 20px;
+  }
+}
