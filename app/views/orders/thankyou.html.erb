@@ -1,5 +1,31 @@
-<div class="thankyou">
-  <h3>Thank You!</h3>
-  <h4>you have purchased ​*number*​ of ​*name*​'s class(es)</h4>
-  <%= @order %>
-</div>
+<meta HTTP-EQUIV="REFRESH" content="1; url=<%= mytutor_user_path(current_user)%>">
+
+
+<% if @order %>
+  <div class="payment_message">
+    <h2>Payment Successful</h2>
+    <h3>you have purchased ​​<%= @order.session %> of ​<%= @teacher_name %> class<%="es" if @order.session.to_i > 1 %>.</h3>
+    <h3>Automatically jump to page...</h3>
+  </div>
+
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
+    event: 'payment_success',
+    'transactionId': '<%= @order.id %>',
+    'transactionTotal': <%= Money.new(@order.amount*100,"USD").exchange_to("TWD") %>,
+    'transactionProducts': [{
+        'name': '<%= @teacher_name %>',
+        'price': <%= Money.new(@order.amount*100,"USD").exchange_to("TWD") %>,
+        'quantity': <%= @order.session %>
+    }]
+  });
+  </script>
+
+<% else %>
+  <div class="payment_message">
+    <h2>Payment Failure</h2>
+    <h3>Please do the operation again.</h3>
+    <h3>Automatically jump to page...</h3>
+  </div>
+<% end %>
