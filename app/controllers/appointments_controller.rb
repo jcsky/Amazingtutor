@@ -91,13 +91,8 @@ class AppointmentsController < ApplicationController
         end
 
       end
-
-      UserMailer.delay_until(2.seconds.from_now).notify_teacher_new_appointment(current_user, @teacher.user)
-
     end
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      end
+    UserMailer.notify_teacher_new_appointment(current_user, @teacher.user).deliver_now
   end
 
   def destroy
