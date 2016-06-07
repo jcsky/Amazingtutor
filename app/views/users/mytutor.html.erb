@@ -114,9 +114,6 @@
 <% end %>
 
 <script>
-  $('.teacher-modal').on('hidden.bs.modal', function () {
-    window.location.href = "/users/"+<%= current_user.id %>+"/classes";
-  });
   $('.teacher-modal').on('shown.bs.modal', function () {
     var teacher_modal = $(this).closest(".teacher-modal")
     var tid = teacher_modal.data("teacher-id");
@@ -157,6 +154,7 @@
         }
       ]
     });
+    $('.book_pass_params').attr('disabled', true);
   });
 
   function update_times_select() {
@@ -180,13 +178,25 @@
       }
     });
   }
+  function check_book_now() {
+    var teacher_modal = $(this).closest(".teacher-modal");
+    var button = teacher_modal.find(".book_pass_params")
+    var day = teacher_modal.find(".day-select").find("option:selected").val();
+    if (day == ""  ){
+      button.attr('disabled', true);
+    }  if( day != ""){
+      button.attr('disabled', false);
+    }
+  }
 
   $('.type-select').on('change', function(){
     update_times_select.bind(this)();
   });
 
   $('.day-select').on('change', function(){
+    check_book_now.bind(this)();
     update_times_select.bind(this)();
+
   });
 
   $('.book_pass_params').click(function(){
@@ -206,6 +216,7 @@
         time: time
       }
     });
+    window.location.href = "/users/"+<%= current_user.id %>+"/classes";
   });
 
 
