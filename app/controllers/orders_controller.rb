@@ -10,7 +10,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    byebug
     redirect_to :root_path if current_user.teacher.try(:id) == params[:teacher_id].to_i
   end
 
@@ -57,7 +56,6 @@ class OrdersController < ApplicationController
     @order.amount = Money.new(@order.amount*100,"USD").exchange_to("TWD")
 
     puts @order.amount
-    byebug
     if @order.paid?
       redirect_to :back, alert: 'already paid!'
     else
