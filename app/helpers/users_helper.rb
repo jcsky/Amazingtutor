@@ -1,5 +1,14 @@
 module UsersHelper
 
+  def count_num(available_sections)
+    available_sections.each do |available_section|
+      @count_sections = 0
+      @count_sections += 1 if available_section.trailed == true
+      @count_sections += (available_section.available_section / 2).to_i
+    end
+    @count_sections
+  end
+
   def user_headimage(user)
     if user.image?
       image_url = user.image.url(:medium)

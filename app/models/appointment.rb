@@ -14,7 +14,6 @@ class Appointment < ActiveRecord::Base
     self.end = split.last.in_time_zone
   end
 
-
   def self.appointment_check(start_time, end_time, teacher_id)
     # 被包含在內 (start => ? and end <= ?)
     # 開始時間在內 (start > ?  and start < ?)
