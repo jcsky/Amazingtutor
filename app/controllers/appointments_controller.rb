@@ -89,7 +89,6 @@ class AppointmentsController < ApplicationController
           credit.trailed = nil
           credit.save!
         end
-
       end
     end
     UserMailer.notify_teacher_new_appointment(current_user, @teacher.user).deliver_now
