@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-5 text-center">
+    <div class="col-md-3 text-center fixed">
       <%= render "sidebar"%>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7 col-md-push-5">
       <% if @user.appointments.present? %>
           <div class="row">
             <div class="col-xs-12">
@@ -33,7 +33,11 @@
                         <%= image_tag("scheduled.png") %>
                       </div>
                       <div class="scheduled-text">
-                        <h5>SCHEDULED</h5>
+                        <% if a.end > Time.current.in_time_zone %>
+                            <h5>SCHEDULED</h5>
+                        <% else %>
+                            <h5 class="moneyred">COMPLETED</h5>
+                        <% end %>
                         <h3><%= a.start.in_time_zone.strftime('%H:%M %p') %></h3>
                         <span><%= a.start.in_time_zone.strftime('%a %B %d  %Y') %></span>
                       </div>

@@ -101,6 +101,9 @@ body {
 .alert {
   border:none;
 }
+.fixed{
+  position: fixed;
+}
 // Small devices (tablets, 768px and up)
 @media (max-width: $screen-sm-min) {
   .container {

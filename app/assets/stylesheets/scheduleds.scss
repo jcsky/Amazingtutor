@@ -205,7 +205,7 @@
       margin-left: 20px;
     }
   }
-  button {
+  button, a{
     border: none;
     width: 128px;
     height: 41px;
@@ -216,6 +216,12 @@
     right: 30px;
     bottom: 10px;
     border-radius: 5px;
+  }
+  a {
+    line-height: 2.7;
+    text-align: center;
+    text-decoration: none;
+
   }
 }
 .scheduled-content{
@@ -494,7 +500,7 @@ h5{
     .info-tag{
       margin-left: 20px;
     }
-    button{
+    button,a{
       bottom: 25px;
     }
   }
