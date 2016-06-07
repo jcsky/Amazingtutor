@@ -76,6 +76,14 @@ class OrdersController < ApplicationController
     end
   end
 
+  def thankyou
+    @order = Order.find(params[:order])
+    if current_user.id == @order.user_id
+
+    else
+      redirect_to root_path
+    end
+  end
 
    protected
 

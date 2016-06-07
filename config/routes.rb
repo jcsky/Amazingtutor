@@ -86,6 +86,9 @@ Rails.application.routes.draw do
   get  'apply_teacher'=> "welcome#apply_teacher"
   get  'teacherwall'=>"welcome#index"
   root 'welcome#mainindex'
+
+  get 'thankyou' => "orders#thankyou"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
