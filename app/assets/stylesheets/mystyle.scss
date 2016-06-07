@@ -104,6 +104,13 @@ body {
 .fixed{
   position: fixed;
 }
+.remove_a_style{
+  color: inherit;
+  text-decoration: none;
+  &:hover{
+    color: inherit;
+  }
+}
 // Small devices (tablets, 768px and up)
 @media (max-width: $screen-sm-min) {
   .container {
