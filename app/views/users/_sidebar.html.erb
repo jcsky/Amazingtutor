@@ -13,19 +13,19 @@
   </div>
 </div>
 <div class="col-xs-12 user-list">
-  <div class = "<%= "active" if current_page?(classes_user_path(current_user)) %>">
+  <div class = "<%= "current_tab" if current_page?(classes_user_path(current_user)) %>">
     <%= link_to "Class",classes_user_path(current_user) %>
   </div>
-  <div class = "<%= "active" if current_page?(mytutor_user_path(current_user)) %>">
+  <div class = "<%= "current_tab" if current_page?(mytutor_user_path(current_user)) %>">
     <%= link_to "MyTutor",mytutor_user_path(current_user) %>
   </div>
-  <div class = "<%= "active" if current_page?(remark_user_path(current_user)) %>">
+  <div class = "<%= "current_tab" if current_page?(remark_user_path(current_user)) %>">
     <%= link_to "FeedBack",remark_user_path(current_user) %>
   </div>
-  <div class = "<%= "active" if current_page?(profile_user_path(current_user)) %>">
+  <div class = "<%= "current_tab" if current_page?(profile_user_path(current_user)) %>">
     <%= link_to "EditProfile",profile_user_path(current_user) %>
   </div>
-  <div class = "<%= "active" if current_page?(edit_user_registration_path) %>">
+  <div class = "<%= "current_tab" if current_page?(edit_user_registration_path) %>">
     <%= link_to "ChangePassword",edit_user_registration_path %>
   </div>
 </div>

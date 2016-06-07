@@ -2,30 +2,30 @@
   <div class="sidebar-head">
     <%= link_to "課程相關" %>
   </div>
-  <div class="sidebar-big">
+  <div class="sidebar-big <%= "current_tab" if current_page?(classes_teacher_path(current_user.teacher)) %>">
     <%= link_to "課程清單" ,classes_teacher_path(current_user.teacher)%>
   </div>
-  <div class="sidebar-big">
+  <div class="sidebar-big <%= "current_tab" if current_page?(calendar_teacher_path(current_user.teacher)) %>">
     <%= link_to "授課時間" ,calendar_teacher_path(current_user.teacher)%>
   </div>
-  <div class="sidebar-big">
+  <div class="sidebar-big <%= "current_tab" if current_page?(price_teacher_path(current_user.teacher)) %>">
     <%= link_to "授課價格",price_teacher_path(current_user.teacher)%>
   </div>
-  <div class="sidebar-big sidebar-bottom">
+  <div class="sidebar-big sidebar-bottom <%= "current_tab" if current_page?(gathering_teacher_path(current_user.teacher)) %>">
     <%= link_to "收款設定",gathering_teacher_path(current_user.teacher)%>
   </div>
 </div>
 <div class="sidebar">
-  <div class="sidebar-head">
+  <div class="sidebar-head ">
     <%= link_to "資訊設定"%>
   </div>
-  <div class="sidebar-big">
+  <div class="sidebar-big <%= "current_tab" if current_page?(introduce_teacher_path(current_user.teacher)) %>">
     <%= link_to "基本資料",introduce_teacher_path(current_user.teacher)%>
   </div>
-  <div class="sidebar-big">
+  <div class="sidebar-big <%= "current_tab" if current_page?(education_teacher_path(current_user.teacher)) %>">
     <%= link_to "教學經驗",education_teacher_path(current_user.teacher)%>
   </div>
-  <div class="sidebar-big  sidebar-bottom">
+  <div class="sidebar-big  sidebar-bottom <%= "current_tab" if current_page?(youtube_teacher_path(current_user.teacher)) %>">
     <%= link_to "介紹影片",youtube_teacher_path(current_user.teacher)%>
   </div>
 </div>

@@ -50,6 +50,7 @@ class AppointmentsController < ApplicationController
   end
 
   def create
+    @teacher = Teacher.find(set_appointment_params[:teacher_id])
     appointment = Appointment.new(set_appointment_params)
     appointment.user = current_user
     appointment.section = (appointment.end.in_time_zone - appointment.start.in_time_zone) / 30.minute
@@ -74,6 +75,7 @@ class AppointmentsController < ApplicationController
         #                                current_user)
         appointment.save
         # 扣掉預約後的堂數
+
         if appointment.appointment_url.blank?
           charset = ""
           url = ""
@@ -89,6 +91,9 @@ class AppointmentsController < ApplicationController
         end
 
       end
+
+      UserMailer.delay_until(2.seconds.from_now).notify_teacher_new_appointment(current_user, @teacher.user)
+
     end
     respond_to do |format|
       format.html { redirect_to root_path }
