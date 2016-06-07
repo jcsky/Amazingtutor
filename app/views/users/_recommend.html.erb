@@ -1,4 +1,5 @@
-<% @teacher = Teacher.find((Teacher.ids - [current_user.teacher.id]).sample) %>
+<% @teachers = Teacher.where(check:"checked") %>
+<% @teacher = Teacher.find((@teachers.ids - [current_user.teacher.id]).sample) %>
 <div class="scheduled-content scheduled-editprofile-fix">
   <div class="scheduled-content-head">
     <h4>Find a Tutor</h4>

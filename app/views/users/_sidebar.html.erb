@@ -10,7 +10,7 @@
   </div>
   <div class="col-xs-4">
     <h4><%= count_num(current_user.user_available_sections) if current_user.user_available_sections != 0%></h4>
-    <h4><%= "0" if current_user.user_available_sections == 0%></h4>
+    <h4><%= "0" if current_user.user_available_sections.empty?%></h4>
     <p>Unschedule</p>
   </div>
 </div>
