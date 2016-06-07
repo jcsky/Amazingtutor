@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3 text-center">
+    <div class="col-md-5 text-center">
       <%= render "sidebar"%>
     </div>
     <div class="col-md-7">
       <% if @user.appointments.present? %>
-          <div class="row">
+          <div class="row_fix">
             <div class="col-xs-12">
               <div class="mytutor-sort">
                 <div class="dropdown dropdown-language selsct_scheduled">
@@ -22,7 +22,6 @@
               </div>
             </div>
             <div class="col-xs-12">
-
               <% i=0 %>
               <% @user.appointments.each do |a|%>
                   <% i+=1 %>
