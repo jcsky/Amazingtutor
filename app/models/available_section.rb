@@ -102,7 +102,7 @@ class AvailableSection < ActiveRecord::Base
   def self.teacher_available_section(teacher_id, user)
     # 設定只能預約三小時後的課程
     user_id = user.id if user
-    start_time = AvailableSection.time_shif_to_half_an_hour(Time.current + 3.hours)
+    start_time = AvailableSection.time_shif_to_half_an_hour(Time.current + 1.hours)
     event_reuslt = []
     availableSection=AvailableSection.where('teacher_id = ? and (end >= ? and start <= ?)',
                                             teacher_id,
@@ -125,8 +125,7 @@ class AvailableSection < ActiveRecord::Base
                          :borderColor => 'red',
                          :color => '#C73C3C',
                          :textColor => 'block',
-                         :backgroundColor => 'gray',
-                         :backgroundImage => 'repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px'}
+                         :backgroundColor => 'gray'}
       else
         event_reuslt << {:id => 'unavailable_for_booking',
                          :start => appointment.start.in_time_zone,
@@ -135,7 +134,6 @@ class AvailableSection < ActiveRecord::Base
                          :backgroundColor => '#C73C3C',
                          :backgroundImage => 'repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px'}
       end
-
     end
 
     availableSection.each do |availableSection|
@@ -171,17 +169,7 @@ class AvailableSection < ActiveRecord::Base
                          :backgroundColor => '#FF5F5F'}
       end
     end
-    # byebug
-    # event_reuslt.each do |event|
-    #   final_result = []
-    #   if event[:start] > Time.current.in_time_zone + 12.hours
-    #     final_result << event
-    #   elsif event[:start] < Time.current.in_time_zone + 12.hours || event[:end] > Time.current.in_time_zone + 12.hours
-    #     event[:start] = Time.current.in_time_zone + 12.hours
-    #   end
-    # end
-    # byebug
-        event_reuslt
+    event_reuslt
   end
 
 

@@ -76,7 +76,7 @@ class Teacher < ActiveRecord::Base
         @days << @start + i.days
       end
     end
-    @days.select{|x| x>= Time.current.in_time_zone + 12.hours }.map{|x|x.to_date}.uniq.sort
+    @days.select{|x| x>= Time.current.in_time_zone + 1.hours }.map{|x|x.to_date}.uniq.sort
   # @available_section_times.uniq.sort.select{|x| [x[0],x[1]] if x[0]>= Time.current.in_time_zone+12.hours }
   end
 

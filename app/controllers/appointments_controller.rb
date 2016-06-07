@@ -91,7 +91,8 @@ class AppointmentsController < ApplicationController
         end
       end
     end
-    UserMailer.notify_teacher_new_appointment(current_user, @teacher.user).deliver_now
+    UserMailer.notify_teacher_new_appointment(current_user, @teacher.user, appointment.start.in_time_zone).deliver_now
+    UserMailer.notify_student_new_appointment(current_user, @teacher.user, appointment.start.in_time_zone).deliver_now
   end
 
   def destroy
