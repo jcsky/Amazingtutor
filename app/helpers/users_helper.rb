@@ -24,7 +24,7 @@ module UsersHelper
 
   def trail_check(user,teacher)
     disable_type = []
-    disable_type << 1 if user.user_available_sections.find_by(:teacher_id=> teacher.id).trailed.nil? || user.user_available_sections.find_by(:teacher_id=> teacher.id).nil? || user.user_available_sections.find_by(:teacher_id=> teacher.id).trailed == false
+    disable_type << 1 if  user.user_available_sections.find_by(:teacher_id=> teacher.id).nil? || user.user_available_sections.find_by(:teacher_id=> teacher.id).trailed.nil? || user.user_available_sections.find_by(:teacher_id=> teacher.id).trailed == false
     disable_type << 2 if user.user_available_sections.find_by(:teacher_id=> teacher.id).nil? || user.user_available_sections.find_by(:teacher_id=> teacher.id).available_section < 2
     disable_type
   end
