@@ -13,7 +13,7 @@
                   <div class="info-mypic col-md-2 col-xs-3">
                     <%= user_headimage(t.user) %>
                   </div>
-                  <%= link_to profile_teacher_path(t)  do %>
+                  <%= link_to profile_teacher_path(t), :target => "_blank"  do %>
                       <div class="info-eval col-md-7 col-xs-7">
                         <p><%= User.find(t.user_id).first_name %>
                           <%= User.find(t.user_id).last_name %></p>

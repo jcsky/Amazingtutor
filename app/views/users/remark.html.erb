@@ -1,11 +1,12 @@
 <!-- 老師評語的CSS在welcome裡面 -->
 <div class="container">
   <div class="row">
-    <div class="col-md-5 text-center">
+    <div class="col-md-3 text-center fixed">
       <%= render "sidebar"%>
     </div>
 
-    <div class="col-md-7 ">
+    <div class="col-md-7 col-md-push-5 ">
+      <% if @evaluations.count != 0 %>
     <% i=0 %>
     <% @evaluations.each do |e| %>
     <% i+=1 %>
@@ -49,6 +50,10 @@
         </div>
       </div>
       <% end %>
+      <% else %>
+          <%= render partial: 'recommend' %>
+      <% end %>
+
     </div>
   </div>
 </div>

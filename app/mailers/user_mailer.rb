@@ -1,12 +1,15 @@
 class UserMailer < ApplicationMailer
-  default :from => "brvast <postmaster@sandbox6ef0b2af45344d7b968b59d4e0b91c6c.mailgun.org>"
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.user_mailer.notify_comment.subject
-  #
-  def notify_comment(user)
-        @user = user
-        mail(:to => user.email, :subject => "New CommentPro")
+  default :from => "amazingtutor <amazingtutor@amazingtutor.com>"
+
+  def notify_teacher_new_appointment(user, teacher_user)
+    @user = user
+    @teacher_user = teacher_user
+    if teacher_user.alternate_email
+      mail(:to => teacher_user.alternate_email, :subject => "You have a new appointment-AmazingTutor")
+    else
+      mail(:to => teacher_user.email, :subject => "You have a new appointment-AmazingTutor")
+    end
   end
+
+
 end
