@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    byebug
     redirect_to :root_path if current_user.teacher.try(:id) == params[:teacher_id].to_i
   end
 
@@ -27,9 +28,9 @@ class OrdersController < ApplicationController
     if session == "1"
       amount = teacher.one_fee
     elsif session == "5"
-      amount = teacher.five_fee
+      amount = teacher.five_fee*5
     elsif session == "10"
-      amount = teacher.five_fee
+      amount = teacher.ten_fee*10
     end
 
     if amount
@@ -51,6 +52,12 @@ class OrdersController < ApplicationController
 
   def checkout_pay2go
     @order = current_user.orders.find(params[:id])
+    puts @order.amount
+
+    @order.amount = Money.new(@order.amount*100,"USD").exchange_to("TWD")
+
+    puts @order.amount
+    byebug
     if @order.paid?
       redirect_to :back, alert: 'already paid!'
     else

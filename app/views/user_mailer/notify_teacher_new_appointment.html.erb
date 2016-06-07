@@ -1,8 +1,11 @@
+<b><p>Dear <%= @teacher.first_name @teacher.last_name  %></p></b>
+
 <p>
-Dear <%= @teacher %>
-
-Student <%= @user %> has booked your lesson.
+Student <%= @user.first_name @user.last_name %> has booked your lesson.
 Wish you a pleasant experience
+</p>
 
-AmazingTutor
+<p>
+<b>AmazingTutor</b>
+Email Address: amazingtutorlnc@gmail.com
 </p>
