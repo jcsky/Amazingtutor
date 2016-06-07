@@ -77,11 +77,13 @@
                                     </form>
                                 <% else %>
                                     <div class="rated">
-                                      <button id="rating-<%= a.id %>" name="rating">Rated</button>
+                                      <button id="rating-<%= a.id %>" name="rated">Rated</button>
                                     </div>
                                 <% end %>
                             <% elsif Time.current.in_time_zone <= a.start.in_time_zone-10.minutes %>
-                                <button type="submit" name="gotoclass">Please wait</button>
+                              <div class="wait">
+                                <button type="submit" name="wait" >Please wait</button>
+                              </div>
                             <% end %>
                           </div>
                         </div>
