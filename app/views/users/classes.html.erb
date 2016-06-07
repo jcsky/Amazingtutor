@@ -38,6 +38,8 @@
                         <% else %>
                             <h5 class="moneyred">COMPLETED</h5>
                         <% end %>
+                        <h1><%= a.start.in_time_zone.strftime('%H:%M %p') %></h1>
+                        <p><%= a.start.in_time_zone.strftime('%a %B %d %Y') %> </p>
                       </div>
                     </div>
                     <div class="col-sm-7">
