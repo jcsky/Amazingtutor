@@ -67,7 +67,7 @@ class TeacherCalendarsController < ApplicationController
   # end
 
   def teacher_available_section
-    @event_result = AvailableSection.teacher_available_section(params[:teacher_calendar_id], current_user.id)
+    @event_result = AvailableSection.teacher_available_section(params[:teacher_calendar_id], current_user)
   end
 
   # def booked_section

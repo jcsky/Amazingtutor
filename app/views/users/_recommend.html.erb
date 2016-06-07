@@ -28,11 +28,8 @@
             <div class="info-eval col-md-7 col-xs-7">
               <p><%= User.find(@teacher.user_id).first_name %>
                 <%= User.find(@teacher.user_id).last_name %></p>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star-half-o"></i>
-              <i class="fa fa-star-o"></i>
+                <div class="index_rating_fix"><div id="rateYo_recommend"></div></div>
+                <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: @teacher.id ).count %>)</span>
             </div>
             <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
               <%= image_tag("flag.png") %>
@@ -66,3 +63,14 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  $(document).ready(function () {
+
+    $("#rateYo_recommend").rateYo({starWidth: "15px", numStars: 5, fullStar: true, readOnly: true, rating: <%= @teacher.avg_rating %>});
+  });
+</script>
+
+
+

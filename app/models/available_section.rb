@@ -99,8 +99,9 @@ class AvailableSection < ActiveRecord::Base
   #                          Time.now.in_time_zone.at_beginning_of_day,
   #                          14.days.from_now.in_time_zone.at_end_of_day)
   # end
-  def self.teacher_available_section(teacher_id, user_id)
+  def self.teacher_available_section(teacher_id, user)
     # 設定只能預約三小時後的課程
+    user_id = user.id if user
     start_time = AvailableSection.time_shif_to_half_an_hour(Time.current + 3.hours)
     event_reuslt = []
     availableSection=AvailableSection.where('teacher_id = ? and (end >= ? and start <= ?)',
