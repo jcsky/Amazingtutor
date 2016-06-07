@@ -171,22 +171,18 @@ class AvailableSection < ActiveRecord::Base
                          :backgroundColor => '#FF5F5F'}
       end
     end
-    byebug
-    # limit = Time.current.in_time_zone + 12.hours
-      # event_reuslt =  event_reuslt.map {|a|a if !(a[:start]< limit && a[:end]<limit) }.compact.each {|a|a[:start]= limit if !(a[:start]< limit && a[:end]>limit)}
-        # event_reuslt.map {|a|a. }
-    event_reuslt.each do |event|
-      final_result = []
-      if event[:start] > Time.current.in_time_zone + 12.hours
-        final_result << event
-      elsif event[:start] < Time.current.in_time_zone + 12.hours || event[:end] > Time.current.in_time_zone + 12.hours
-
-      end
-    end
-
-
-
-
+    # byebug
+    # # limit = Time.current.in_time_zone + 12.hours
+    #   # event_reuslt =  event_reuslt.map {|a|a if !(a[:start]< limit && a[:end]<limit) }.compact.each {|a|a[:start]= limit if !(a[:start]< limit && a[:end]>limit)}
+    #     # event_reuslt.map {|a|a. }
+    # event_reuslt.each do |event|
+    #   final_result = []
+    #   if event[:start] > Time.current.in_time_zone + 12.hours
+    #     final_result << event
+    #   elsif event[:start] < Time.current.in_time_zone + 12.hours || event[:end] > Time.current.in_time_zone + 12.hours
+    #
+    #   end
+    # end
         event_reuslt
   end
 
