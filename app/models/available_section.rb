@@ -134,7 +134,6 @@ class AvailableSection < ActiveRecord::Base
                          :backgroundColor => '#C73C3C',
                          :backgroundImage => 'repeating-linear-gradient(45deg, transparent, transparent 10px, #fff 10px, #fff 15px'}
       end
-
     end
 
     availableSection.each do |availableSection|
