@@ -17,7 +17,7 @@
               <p><%= User.find(@teacher.user).first_name %>
                 <%= User.find(@teacher.user).last_name %></p>
               <div class="index_rating_fix"><div id="rateYo" ></div></div>
-              <span>(132)</span>
+              <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: @teacher.id ).count %>)</span>
             </div>
             <div class=" col-xs-2 info-flag col-md-1 col-md-push-1">
               <%= image_tag("flag.png") %>
