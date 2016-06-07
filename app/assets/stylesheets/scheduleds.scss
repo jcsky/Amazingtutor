@@ -253,10 +253,10 @@
   .filebutton{
     position: absolute;
     width: 40%;
-    opacity: 0;
+    //opacity: 0;
     left: 50%;
     transform: translateX(-50%);
-    height: 130px;
+    height: 156px;
     display: inline;
     cursor: pointer;
     bottom: 0;
@@ -300,6 +300,7 @@ h5{
 }
 }
 .userimage{
+  margin-top:15px;
   img{
     height: 100px;
     width: 100px;
