@@ -62,7 +62,7 @@
 
           <div class="input-group clearfix">
             <%= f.label :location, "Location" %>
-            <%= f.select(:location, IsoCountryCodes.for_select, {}, class: 'form-control' ) %>
+            <%= f.select(:location, IsoCountryCodes.for_select, {:prompt => "--Select county--"}, class: 'form-control' ) %>
           </div>
           <div class="input-group clearfix">
             <%= f.label :currency, "Currency" %>

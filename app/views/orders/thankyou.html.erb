@@ -5,7 +5,7 @@
   <div class="payment_message">
     <h2>Payment Successful</h2>
     <h3>you have purchased ​​<%= @order.session %> of ​<%= @teacher_name %> class<%="es" if @order.session.to_i > 1 %>.</h3>
-    <h3>Automatically jump to page...</h3>
+    <h3>automatically redirect to page...</h3>
   </div>
 
   <script>
@@ -26,6 +26,6 @@
   <div class="payment_message">
     <h2>Payment Failure</h2>
     <h3>Please do the operation again.</h3>
-    <h3>Automatically jump to page...</h3>
+    <h3>automatically redirect to page...</h3>
   </div>
 <% end %>
