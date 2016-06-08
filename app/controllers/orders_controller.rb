@@ -30,6 +30,8 @@ class OrdersController < ApplicationController
       amount = teacher.five_fee*5
     elsif session == "10"
       amount = teacher.ten_fee*10
+    elsif session == "trial"
+      amount = teacher.trial_fee
     end
 
     if amount
