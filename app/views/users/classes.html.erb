@@ -77,7 +77,9 @@
                                     </form>
                                 <% else %>
                                     <div class="rated">
-                                      <button id="rating-<%= a.id %>" name="rated">Rated</button>
+                                      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rating-<%= a.id %>" name="rated">
+  Rated
+</button>
                                     </div>
                                 <% end %>
                             <% elsif Time.current.in_time_zone <= a.start.in_time_zone-10.minutes %>
@@ -90,8 +92,12 @@
                       </div>
                     </div>
                   </div>
-                  <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
-                  <div id="evaluation-white-<%= a.id %>" class="evaluation-white">
+
+
+
+            <div class="modal fade" id="rating-<%= a.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
                     <div class="evaluation col-xs-12">
                       <div class="evaluation-button clearfix">
                         <%= link_to "Back" ,classes_user_path ,:class=>"pull-left"%>
@@ -122,6 +128,9 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+
               <% end %>
             </div>
           </div>
@@ -133,6 +142,8 @@
 </div>
 
 
+
+
 <script>
   var i = 0;
   $(document).ready(function () {
@@ -140,17 +151,6 @@
     <% @user.appointments.each do |a|%>
 
     i += 1;
-
-    $('#pop-black-<%= a.id %>').hide();
-    $('#evaluation-white-<%= a.id %>').hide();
-    $('#rating-<%= a.id %>').click(function (e) {
-      $('#pop-black-<%= a.id %>').fadeIn(1);
-      $('#evaluation-white-<%= a.id %>').fadeIn(300);
-    });
-    $('#pop-black-<%= a.id %>').click(function (e) {
-      $('#evaluation-white-<%= a.id %>').fadeOut(1);
-      $('#pop-black-<%= a.id %>').fadeOut(1);
-    });
 
     <% if a.evaluations.where(evaluatable_type: "User").blank? %>
       <% @raty = 0 %>
