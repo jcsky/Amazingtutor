@@ -201,26 +201,32 @@
     <div class="col-xs-12 background-head">
       <h5>Background</h5>
     </div>
-    <h5><%= "EXPERIENCE" if @teacher.educations.count != 0 %></h5>
+    <div class="col-xs-12 background-content">
+      <%= content_tag(:h3,"EDUCATION") if @teacher.educations.count != 0 %>
+      <% @teacher.educations.each do |e| %>
+
+          <% if e.start.present?  %>
+              <h5 class="text-center"><%= e.start.split('/').last %>  -  <%= e.end ? e.end.split('/').last : "NOW" %></h5>
+          <% end %>
+          <h3>School Name :<%= e.school %></h3>
+          <h5>Major : <%= e.major %></h5>
+
+      <% end %>
+      </div>
+
+    <div class="col-xs-12 background-content">
+   <%=  content_tag(:h3,"EXPERIENCE") if @teacher.educations.count != 0 %>
     <% @teacher.experiences.each do |e| %>
-        <div class="col-xs-12 background-content">
-          <% if e.start  %>
-          <h6 class="text-center"><%= e.start %>  ~  <%= e.end ? e.end : "NOW" %></h6>
+
+          <% if e.start.present?  %>
+          <h5 class="text-center"><%= e.start.split('/').last %>  -  <%= e.end ? e.end.split('/').last : "NOW" %></h5>
           <% end %>
-          <h6><%= e.company_name %></h6>
-          <p><%= e.description %></p>
-        </div>
+          <h3><%= e.company_name %></h3>
+          <h5><%= e.description %></h5>
+
     <% end %>
-    <h5><%= "EDUCATION" if @teacher.educations.count != 0 %></h5>
-    <% @teacher.educations.each do |e| %>
-        <div class="col-xs-12 background-content">
-          <% if e.start  %>
-          <h6 class="text-center"><%= e.start %>  ~  <%= e.end ? e.end : "NOW" %></h6>
-          <% end %>
-          <h6>School Name :<%= e.school %></h6>
-          <p>Major : <%= e.major %></p>
-        </div>
-    <% end %>
+    </div>
+
     <%# @teacher.certificates.each do |e| %>
         <!--<div class="col-xs-12 background-content">-->
           <!--<h5>Certificate</h5>-->
@@ -276,6 +282,7 @@
 </script>
 
 <script>
+
   $(document).ready(function () {
     $('#calendar').fullCalendar({
       //lulu setting
@@ -326,7 +333,6 @@
               // 'background',                };                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
               $('#calendar').fullCalendar('refetchEvents')
             },
-
             error: function (xhr, ajaxOptions, thrownError) {
               alert(xhr.status);
               alert(thrownError);
@@ -346,7 +352,6 @@
         }
       ]
     });
-
   });
 
   (function () {
