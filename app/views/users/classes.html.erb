@@ -152,17 +152,6 @@
 
     i += 1;
 
-    $('#pop-black-<%= a.id %>').hide();
-    $('#evaluation-white-<%= a.id %>').hide();
-    $('#rating-<%= a.id %>').click(function (e) {
-      $('#pop-black-<%= a.id %>').fadeIn(1);
-      $('#evaluation-white-<%= a.id %>').fadeIn(300);
-    });
-    $('#pop-black-<%= a.id %>').click(function (e) {
-      $('#evaluation-white-<%= a.id %>').fadeOut(1);
-      $('#pop-black-<%= a.id %>').fadeOut(1);
-    });
-
     <% if a.evaluations.where(evaluatable_type: "User").blank? %>
       <% @raty = 0 %>
     <% else %>
