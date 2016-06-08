@@ -15,7 +15,6 @@ class StudentReservationController < ApplicationController
         redirect_to mytutor_user_path(current_user)
       end
     end
-
   end
 
   def create

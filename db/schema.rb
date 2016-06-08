@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160604044354) do
+ActiveRecord::Schema.define(version: 20160608031051) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "teacher_id"
     t.integer  "section"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.datetime "start"
     t.datetime "end"
     t.integer  "user_id"
     t.string   "appointment_url"
+    t.integer  "user_available_section_id"
   end
 
   add_index "appointments", ["user_id"], name: "index_appointments_on_user_id"
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160604044354) do
     t.datetime "updated_at",   null: false
     t.string   "start"
     t.string   "end"
+    t.string   "position"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -178,6 +180,7 @@ ActiveRecord::Schema.define(version: 20160604044354) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.boolean  "trailed",           default: false
+    t.integer  "appointment"
   end
 
   create_table "users", force: :cascade do |t|
@@ -217,8 +220,8 @@ ActiveRecord::Schema.define(version: 20160604044354) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.string   "authentication_token"
     t.boolean  "admin_by_lululala"
+    t.string   "authentication_token"
     t.string   "fb_pic"
     t.string   "google_pic"
     t.string   "alternate_email"

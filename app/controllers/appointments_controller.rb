@@ -11,18 +11,14 @@ class AppointmentsController < ApplicationController
   end
 
   def show
-
     @user = current_user
-
     @evaluationsArray = Evaluation.where(evaluatable_type: 'User',
                                          evaluatable_id: current_user, appointment_id: @appointment)
-
     @raty = if @evaluationsArray.blank?
               0
             else
               @evaluationsArray.first.rating
             end
-
     @evaluationsArrayTa = Evaluation.where(evaluatable_type: 'Teacher',
                                            evaluatable_id: current_user.teacher, appointment_id: @appointment)
 
