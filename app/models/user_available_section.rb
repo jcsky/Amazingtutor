@@ -1,7 +1,7 @@
 class UserAvailableSection < ActiveRecord::Base
   belongs_to :user
   belongs_to :teacher
-  has_many :appointment
+  # has_many :appointment
   def self.query_credit(teacher_id , student)
     UserAvailableSection.where(:user_id => student.id,
                                :teacher_id => teacher_id).first

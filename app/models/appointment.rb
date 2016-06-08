@@ -3,7 +3,7 @@ class Appointment < ActiveRecord::Base
   belongs_to :teacher
   has_many :evaluations
   has_one :available_section
-  has_one :user_available_section
+  # has_one :user_available_section
   def book_section
     [:start, :end].join('~')
   end
