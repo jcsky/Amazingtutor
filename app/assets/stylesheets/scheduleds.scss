@@ -182,10 +182,7 @@
 .mytutor-sort {
   margin-top: 15px;
 }
-.teacher_sort {
-  margin-left: -15px;
-  margin-right: -15px;
-}
+
 .tutor-info {
   padding-top: 1px;
   margin-top: 15px;
@@ -518,5 +515,9 @@ h5{
     .scheduled-dark{
       width: 225px;
     }
+  }
+  .teacher_sort {
+    margin-left: -15px;
+    margin-right: -15px;
   }
 }
