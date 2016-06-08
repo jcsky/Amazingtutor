@@ -77,7 +77,10 @@
                                     </form>
                                 <% else %>
                                     <div class="rated">
-                                      <button id="rating-<%= a.id %>" name="rated">Rated</button>
+                                      <button id="rating-<%= a.id %>" name="rated"></button>
+                                      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="rating-<%= a.id %>">
+  Rated
+</button>
                                     </div>
                                 <% end %>
                             <% elsif Time.current.in_time_zone <= a.start.in_time_zone-10.minutes %>
@@ -90,7 +93,20 @@
                       </div>
                     </div>
                   </div>
-                  <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
+
+<div class="modal fade" id="rating-<%= a.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+
+
+ <div id="pop-black-<%= a.id %>" class="pop-bg"></div>
                   <div id="evaluation-white-<%= a.id %>" class="evaluation-white">
                     <div class="evaluation col-xs-12">
                       <div class="evaluation-button clearfix">
@@ -122,6 +138,23 @@
                       </div>
                     </div>
                   </div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
               <% end %>
             </div>
           </div>
@@ -141,16 +174,7 @@
 
     i += 1;
 
-    $('#pop-black-<%= a.id %>').hide();
-    $('#evaluation-white-<%= a.id %>').hide();
-    $('#rating-<%= a.id %>').click(function (e) {
-      $('#pop-black-<%= a.id %>').fadeIn(1);
-      $('#evaluation-white-<%= a.id %>').fadeIn(300);
-    });
-    $('#pop-black-<%= a.id %>').click(function (e) {
-      $('#evaluation-white-<%= a.id %>').fadeOut(1);
-      $('#pop-black-<%= a.id %>').fadeOut(1);
-    });
+
 
     <% if a.evaluations.where(evaluatable_type: "User").blank? %>
       <% @raty = 0 %>
