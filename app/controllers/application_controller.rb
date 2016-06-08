@@ -38,4 +38,14 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(_resource)
     session[:previous_url] || root_path
   end
+
+  def amazing_crypt(action,object)
+    key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
+    crypt = ActiveSupport::MessageEncryptor.new(key)
+    if action == "encrypt"
+      result = crypt.encrypt_and_sign(object)
+    elsif action == "decrypt"
+      result = crypt.decrypt_and_verify(object)
+    end
+  end
 end

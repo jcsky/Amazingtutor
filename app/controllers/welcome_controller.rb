@@ -78,11 +78,7 @@ class WelcomeController < ApplicationController
   end
 
   def scholarship
-    key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
-    crypt = ActiveSupport::MessageEncryptor.new(key)
-    @encrypted_data = crypt.encrypt_and_sign(current_user.email) if current_user
-    # decrypted_data = crypt.decrypt_and_verify(encrypted_data)
-    byebug
+    @encrypted_data = amazing_crypt("encrypt",current_user.email) if current_user
   end
 
   private
@@ -117,15 +113,7 @@ class WelcomeController < ApplicationController
     @asmid = AvailableSection.select(:start,:end).where('start < ? AND end > ?', @thedaytime, @thedaytimeend)
     @asend = AvailableSection.select(:start,:end).where('end > ? AND end < ? AND start < ?', @thedaytime, @thedaytimeend, @thedaytime)
     @asout = AvailableSection.select(:start,:end).where('start > ? AND end < ?', @thedaytime, @thedaytimeend)
-    # 兩個end 和兩個start的需要再做判斷  end的要補 start start要補end
     @as = @asfront.ids + @asmid.ids + @asend.ids + @asout.ids
-    # s > oneday.beggin  and e < oneday.end
-    # s > oneday.beggin  and s < oneday.end
-    # e > oneday.beggin  and e < oneday.end
-    # s < oneday.beggin  and e > oneday.end
-    # @asbefore = AvailableSection.select(:start,:end).where.not('end < ?', @thedaytime)
-    # @asafter = AvailableSection.select(:start,:end).where.not('start > ?', @thedaytimeend)
-    # @as = @asbefore + @asafter
     @as.uniq
     @teacher_id = AvailableSection.where(id: @as).pluck(:teacher_id).uniq
     @teachers = Teacher.where(id: @teacher_id).uniq

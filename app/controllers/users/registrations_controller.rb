@@ -38,9 +38,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.save!
       if cookies[:scholarship]
         begin
-          key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
-          crypt = ActiveSupport::MessageEncryptor.new(key)
-          @decrypted_data = crypt.decrypt_and_verify(cookies[:scholarship])
+          @decrypted_data = amazing_crypt("decrypt",cookies[:scholarship])
           @old_user = User.where(email: @decrypted_data).first
           Scholarship.create(new_user_id: resource.id, user_id: @old_user.id, bonus: "90")
         rescue
