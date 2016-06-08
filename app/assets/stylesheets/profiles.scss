@@ -140,6 +140,34 @@
     color: #F7B952;
   }
 }
+.background-content{
+  padding: 0 25px;
+  h3{
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  h4{
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  h5{
+    font-weight: lighter;
+    text-transform: capitalize;
+  }
+  p{
+    font-size: 14px;
+    word-break: break-all;
+  }
+  .background_time{
+    margin-top: 20px;
+    h5{
+      display: inline;
+    }
+  }
+}
 .rating-head {
   background-color: #F0F0F0;
   border-top-left-radius: 5px;

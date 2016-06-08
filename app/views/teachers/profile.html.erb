@@ -196,6 +196,51 @@
   </div>
 </div>
 
+<div class="profile-container">
+  <div class="background  col-xs-12">
+    <div class="col-xs-12 background-head">
+      <h5>Background</h5>
+    </div>
+    <div class="col-xs-12 background-content">
+      <%= content_tag(:h3,"Education") if @teacher.educations.count != 0 %>
+      <% @teacher.educations.each do |e| %>
+
+          <% if e.start.present?  %>
+              <div class="background_time">
+                <%= content_tag(:h5,e.start.split('/').last,class:"") %>  -  <%= e.end ? content_tag(:h5,e.end.split('/').last) : "NOW" %>
+              </div>
+          <% end %>
+          <%= content_tag(:h4,e.school) if e.school %>
+          <%= content_tag(:h5,content_tag(:i,e.major)) if e.major%>
+
+      <% end %>
+
+     <%=  content_tag(:h3,"Work Experience") if @teacher.experiences.count != 0 %>
+     <% @teacher.experiences.each do |e| %>
+
+          <% if e.start.present?  %>
+              <div class="background_time">
+              <%= content_tag(:h5,e.start.split('/').last,class:"") %>  -  <%= e.end ? content_tag(:h5,e.end.split('/').last) : "NOW" %>
+              </div>
+          <% end %>
+          <%= content_tag(:h4,e.company_name)  if e.company_name %>
+          <%= content_tag(:h5,content_tag(:i,e.position))  if e.position %>
+          <%= content_tag(:p,e.description) if e.description %>
+
+      <% end %>
+      </div>
+
+    <%# @teacher.certificates.each do |e| %>
+        <!--<div class="col-xs-12 background-content">-->
+          <!--<h5>Certificate</h5>-->
+          <!--<h6>Certificate Name : <%#= e.name %></h6>-->
+          <!--<%# if e.score %>-->
+          <!--<p>Certificate Score : <%#= e.score %></p>-->
+              <!--<%# end %>-->
+        <!--</div>-->
+    <%# end %>
+  </div>
+</div>
 
 <div class="profile-container">
   <% if teacher_evaluations(@teacher) %>
