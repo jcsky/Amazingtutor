@@ -205,23 +205,28 @@
       <%= content_tag(:h3,"Education") if @teacher.educations.count != 0 %>
       <% @teacher.educations.each do |e| %>
 
-          <% if e.start.present?  %>
+         <% if e.start.present?  %>
               <div class="background_time">
                 <%= content_tag(:h5,e.start.split('/').last,class:"") %>  -  <%= e.end ? content_tag(:h5,e.end.split('/').last) : "NOW" %>
               </div>
+              <% else %>
+          <div class="content20"></div>
           <% end %>
+
           <%= content_tag(:h4,e.school) if e.school %>
           <%= content_tag(:h5,content_tag(:i,e.major)) if e.major%>
 
       <% end %>
 
-     <%=  content_tag(:h3,"Work Experience") if @teacher.experiences.count != 0 %>
+     <%=  content_tag(:h3,"Work Experience",class:"margin50" ) if @teacher.experiences.count != 0 %>
      <% @teacher.experiences.each do |e| %>
 
           <% if e.start.present?  %>
               <div class="background_time">
               <%= content_tag(:h5,e.start.split('/').last,class:"") %>  -  <%= e.end ? content_tag(:h5,e.end.split('/').last) : "NOW" %>
               </div>
+          <% else %>
+              <div class="content20"></div>
           <% end %>
           <%= content_tag(:h4,e.company_name)  if e.company_name %>
           <%= content_tag(:h5,content_tag(:i,e.position))  if e.position %>

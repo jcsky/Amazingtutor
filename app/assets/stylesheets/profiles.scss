@@ -152,6 +152,7 @@
     font-size: 16px;
     font-weight: bold;
     text-transform: capitalize;
+    line-height: 0.5;
   }
   h5{
     font-weight: lighter;
@@ -166,6 +167,12 @@
     h5{
       display: inline;
     }
+  }
+  .margin50{
+    margin-top: 40px;
+  }
+  .content20{
+    height: 5px;
   }
 }
 .rating-head {
