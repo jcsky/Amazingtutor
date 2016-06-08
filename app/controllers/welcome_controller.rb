@@ -5,56 +5,29 @@ class WelcomeController < ApplicationController
   end
 
   def index
-    # @teacher = Teacher.all
-    # render layout: 'welcome'
     if params[:language_id] && params[:week].blank?
       cookies[:lan] = params[:language_id]
       cookies[:week] = nil
       find_language_teacher
-
     elsif params[:week] && params[:language_id].blank?
       cookies[:lan] = nil
       cookies[:week] = params[:week]
       find_week_teacher
 
-
     elsif params[:week] && params[:language_id]
       cookies[:lan] = params[:language_id]
       cookies[:week] = params[:week]
-      find_language_teacher
-      @teachera = @teachers
-      find_week_teacher
-      @teacherb = @teachers
-      @teachers = @teachera & @teacherb
-
+      @teachers = find_language_teacher & find_week_teacher
     elsif params[:price]
       if cookies[:lan].blank? && cookies[:week].blank?
         find_price_teacher
-
       elsif cookies[:lan] && cookies[:week].blank?
-        find_language_teacher
-        @teachera = @teachers
-        find_price_teacher
-        @teacherb = @teachers
-        @teachers = @teachera & @teacherb
-
+        @teachers = find_language_teacher & find_price_teacher
       elsif cookies[:lan].blank? && cookies[:week]
-        find_week_teacher
-        @teachera = @teachers
-        find_price_teacher
-        @teacherb = @teachers
-        @teachers = @teachera & @teacherb
-
+        @teachers = find_week_teacher & find_price_teacher
       elsif cookies[:lan] && cookies[:week]
-        find_language_teacher
-        @teachera = @teachers
-        find_week_teacher
-        @teacherb = @teachers
-        find_price_teacher
-        @teacherc = @teachers
-        @teachers = @teachera & @teacherb & @teacherc
+        @teachers = find_language_teacher & find_week_teacher & find_price_teacher
       end
-
       respond_to do |format|
         format.js { render 'teacher' }
       end
@@ -83,16 +56,16 @@ class WelcomeController < ApplicationController
 
   private
 
+  def find_language
+    params[:language_id] ? @language = Language.find(params[:language_id]).language : @language = "Teacher also know the ...."
+  end
+
   def find_price_teacher
-    @pricefir = params[:price].first.to_i
-    @pricesec = params[:price].last.to_i
-    @teachers = Teacher.where('ten_fee >= ? AND one_fee <= ?', @pricefir, @pricesec)
-    # @teachers = Teacher.where('(ten_fee/10 between ? and ?) AND (one_fee between ? and ?)', @pricefir, @pricesec)
+    @teachers = Teacher.where('ten_fee >= ? AND one_fee <= ?', params[:price].first.to_i, params[:price].last.to_i)
   end
 
   def find_language_teacher
-    @lan_id = cookies[:lan]
-    @teachers = Teacher.includes(:teacher_languageships).where(teacher_languageships: { language_id: @lan_id }).uniq
+    @teachers = Teacher.includes(:teacher_languageships).where(teacher_languageships: { language_id: cookies[:lan] }).uniq
   end
 
   def find_week_teacher
@@ -109,22 +82,12 @@ class WelcomeController < ApplicationController
       @thedaytime +=  7.day
       @thedaytimeend = @thedaytime.end_of_day
     end
-    @asfront = AvailableSection.select(:start,:end).where('start > ? AND start < ? AND end > ?', @thedaytime, @thedaytimeend,@thedaytimeend)
-    @asmid = AvailableSection.select(:start,:end).where('start < ? AND end > ?', @thedaytime, @thedaytimeend)
-    @asend = AvailableSection.select(:start,:end).where('end > ? AND end < ? AND start < ?', @thedaytime, @thedaytimeend, @thedaytime)
-    @asout = AvailableSection.select(:start,:end).where('start > ? AND end < ?', @thedaytime, @thedaytimeend)
-    @as = @asfront.ids + @asmid.ids + @asend.ids + @asout.ids
-    @as.uniq
+    @as = (AvailableSection.where('start > ? AND start < ? AND end > ?', @thedaytime, @thedaytimeend,@thedaytimeend) +
+           AvailableSection.where('start < ? AND end > ?', @thedaytime, @thedaytimeend) +
+           AvailableSection.where('end > ? AND end < ? AND start < ?', @thedaytime, @thedaytimeend, @thedaytime) +
+           AvailableSection.where('start > ? AND end < ?', @thedaytime, @thedaytimeend) ).uniq
     @teacher_id = AvailableSection.where(id: @as).pluck(:teacher_id).uniq
-    @teachers = Teacher.where(id: @teacher_id).uniq
-  end
-
-  def find_language
-    if params[:language_id]
-      @language = Language.find(params[:language_id]).language
-    else
-      @language = "Teacher also know the ...."
-    end
+    @teachers = Teacher.where(id: @teacher_id)
   end
 
 end

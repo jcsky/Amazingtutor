@@ -61,10 +61,10 @@ class Teacher < ActiveRecord::Base
 
   def appointment_check(start_time, end_time)
     self.appointments.where("(start >= ? and end <= ?) or (start >= ?  and start < ?) or (end > ?  and end <= ?) or (start < ? and end > ?)",
-                      start_time, end_time,
-                      start_time, end_time,
-                      start_time, end_time,
-                      start_time, end_time).exists?
+                            start_time, end_time,
+                            start_time, end_time,
+                            start_time, end_time,
+                            start_time, end_time).exists?
   end
 
   def find_available_days
@@ -77,7 +77,7 @@ class Teacher < ActiveRecord::Base
       end
     end
     @days.select{|x| x>= Time.current.in_time_zone + 1.hours }.map{|x|x.to_date}.uniq.sort
-  # @available_section_times.uniq.sort.select{|x| [x[0],x[1]] if x[0]>= Time.current.in_time_zone+12.hours }
+    # @available_section_times.uniq.sort.select{|x| [x[0],x[1]] if x[0]>= Time.current.in_time_zone+12.hours }
   end
 
   def find_available_times(pickedday= Time.current.in_time_zone,section=2)
@@ -89,47 +89,31 @@ class Teacher < ActiveRecord::Base
     available_sections.each do |available_section|
       for i in 0..((available_section.end - available_section.start) / 24.hours).to_i+1
         @forday = available_section.start.to_date + i.days
-
         if @forday == @pickedday.to_date
           if available_section.start >= @pickedday_start && available_section.start < @pickedday_end && available_section.end > @pickedday_end
             block = (((@pickedday_end + 1) - available_section.start) / 30.minute).to_i - 1
             x = available_section.start
-
-            for i in 0..block
-              @available_section_times << [ x , x + (section* 30.minute)]
-               x += 30.minute
-            end
-            @available_section_times.pop if section == 2
-
           end
           if available_section.start <  @pickedday_start && available_section.end > @pickedday_end
             block = (((@pickedday_end + 1) - @pickedday_start) / 30.minute).to_i - 1
             x = @pickedday_start
-            for i in 0..block
-              @available_section_times << [ x , x + (section* 30.minute)]
-                x += 30.minute
-            end
-            @available_section_times.pop if section == 2
           end
 
           if available_section.end > @pickedday_start && available_section.end <= @pickedday_end && available_section.start < @pickedday_start
             block = ((available_section.end - @pickedday_start) / 30.minute).to_i - 1
             x = @pickedday_start
-            for i in 0..block
-              @available_section_times << [ x , x + (section* 30.minute)]
-                x += 30.minute
-            end
-            @available_section_times.pop if section == 2
           end
           if available_section.start >= @pickedday_start && available_section.end < @pickedday_end
             block = ((available_section.end - available_section.start) / 30.minute).to_i - 1
-             x = available_section.start
+            x = available_section.start
+          end
+          unless block.nil?
             for i in 0..block
               @available_section_times << [ x , x + (section* 30.minute)]
-                x += 30.minute
+              x += 30.minute
             end
-            @available_section_times.pop if section == 2
           end
+          @available_section_times.pop if section == 2 && block != nil
         end
       end
     end
@@ -137,7 +121,4 @@ class Teacher < ActiveRecord::Base
     @available_section_times.uniq.select{|x| x unless self.appointment_check(x[0], x[1])}.sort.select{|x| x[0]>= Time.current.in_time_zone + 1.hours}.map{|x| x[0].strftime('%R %p')+" - "+x[1].strftime('%R %p') }
   end
   # @available_section_times.uniq.select{|x| x unless self.appointment_check(x[0], x[1])}.sort.select{|x| x[0]>= Time.current.in_time_zone+12.hours }.map{|x| x[0].strftime('%r')+" - "+x[1].strftime('%r') }
-
 end
-# find_available_times   有bug 每天的開頭那個物件找不到時間 還有如果選正常課的 最後只剩半小時不能選
-# 方法裡面在call 方法？    有必要用到module???
