@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default :from => "amazingtutor <amazingtutor@amazingtutor.com>"
+  default :from => "AmazingTutor <amazingtutor@amazingtutor.com>"
 
   def notify_teacher_new_appointment(user, teacher_user, startTime)
     @user = user
