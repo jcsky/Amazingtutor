@@ -82,6 +82,7 @@ class WelcomeController < ApplicationController
     crypt = ActiveSupport::MessageEncryptor.new(key)
     @encrypted_data = crypt.encrypt_and_sign(current_user.email) if current_user
     # decrypted_data = crypt.decrypt_and_verify(encrypted_data)
+    byebug
   end
 
   private

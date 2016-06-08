@@ -1,8 +1,8 @@
 <% @teachers = Teacher.where(check:"checked") %>
 <% id = current_user.teacher.id if current_user.teacher%>
 <% @teacher = Teacher.find((@teachers.ids - [id]).sample) %>
-<div class="scheduled-content scheduled-editprofile-fix">
-  <div class="scheduled-content-head">
+<div class="scheduled-content scheduled-editprofile-fix  col-xs-12">
+  <div class="scheduled-content-head recommend_head">
     <h4>Find a Tutor</h4>
   </div>
   <div class="text-center findtutor">
@@ -12,8 +12,8 @@
     <p><%= link_to "Find a Tutor",teacherwall_path %></p>
   </div>
 </div>
-<div class="scheduled-content scheduled-editprofile-fix suggestion">
-  <div class="scheduled-content-head">
+<div class="scheduled-content scheduled-editprofile-fix suggestion  col-xs-12">
+  <div class="scheduled-content-head recommend_head">
     <h4>Recommend Tutor</h4>
   </div>
   <div class="row">

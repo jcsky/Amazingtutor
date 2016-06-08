@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3 text-center fixed">
+    <div class="col-md-5 text-center">
       <%= render "sidebar"%>
     </div>
-    <div class="col-md-7 col-md-push-5">
+    <div class="col-md-7">
       <% if @user.appointments.present? %>
-          <div class="row">
+          <div class="row_fix">
             <div class="col-xs-12">
               <div class="mytutor-sort">
                 <div class="dropdown dropdown-language selsct_scheduled">
@@ -22,7 +22,6 @@
               </div>
             </div>
             <div class="col-xs-12">
-
               <% i=0 %>
               <% @user.appointments.each do |a|%>
                   <% i+=1 %>
@@ -78,11 +77,13 @@
                                     </form>
                                 <% else %>
                                     <div class="rated">
-                                      <button id="rating-<%= a.id %>" name="rating">Rated</button>
+                                      <button id="rating-<%= a.id %>" name="rated">Rated</button>
                                     </div>
                                 <% end %>
                             <% elsif Time.current.in_time_zone <= a.start.in_time_zone-10.minutes %>
-                                <button type="submit" name="gotoclass">Please wait</button>
+                              <div class="wait">
+                                <button type="submit" name="wait" >Please wait</button>
+                              </div>
                             <% end %>
                           </div>
                         </div>
