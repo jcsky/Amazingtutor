@@ -20,7 +20,9 @@
             <h5 class="add_nested_fix">證照</h5>
 
             <%= f.fields_for :certificates do |ff| %>
-
+                <%= ff.link_to_remove :class=> "removetask" do %>
+                    <span class="moneyred closexx">&times;</span>
+                <% end %>
                 <div class="input-group clearfix">
                   <%= ff.label :name, "證照名稱" %>
                   <%= ff.text_field :name, :class => "form-control"  %>
@@ -29,17 +31,16 @@
                   <%= ff.label :score, "證照分數" %>
                   <%= ff.text_field :score , :class => "form-control" %>
                 </div>
-                <%= ff.link_to_remove :class=> "removetask" do %>
-                    <i class="fa fa-minus-square-o" aria-hidden="true"></i>刪除
-                <% end %>
+
             <% end %>
-            <%= f.link_to_add :certificates ,:class=>"addtask" do%>
-                <i class="fa fa-plus-square-o" aria-hidden="true"></i>新增證照
-            <% end %>
+            <%= f.link_to_add :certificates ,:class=>"addtask moneyred" do%>新增證照<% end %>
 
             <hr>
             <h5 class="add_nested_fix">學歷</h5>
             <%= f.fields_for :educations do |ff| %>
+                <%= ff.link_to_remove :class=> "removetask" do%>
+                    <span class="moneyred closexx">&times;</span>
+                <% end %>
                 <div class="input-group clearfix">
                   <%= ff.label :start, "開始時間" %>
                   <%= ff.text_field :start, "data-provide" => 'datepicker',:class => "form-control "  %>
@@ -57,20 +58,16 @@
                   <%= ff.label :major, "科系全名" %>
                   <%= ff.text_field :major, :class => "form-control " %>
                 </div>
-                <%= ff.link_to_remove :class=> "removetask" do%>
-                    <i class="fa fa-minus-square-o" aria-hidden="true"></i>刪除
-                <% end %>
+
             <% end %>
-            <p><%= f.link_to_add :educations ,:class=>"addtask" do%>
-                  <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                  新增教育背景
-              <% end %>
-            </p>
+            <p><%= f.link_to_add :educations ,:class=>"addtask moneyred" do%>新增教育背景<% end %></p>
             <hr>
 
             <h5 class="add_nested_fix">工作經驗</h5>
             <%= f.fields_for :experiences do |ff| %>
-
+                <%= ff.link_to_remove :class=> "removetask" do%>
+                    <span class="moneyred closexx">&times;</span>
+                <% end %>
                 <div class="input-group clearfix ">
                   <%= ff.label :start, "開始時間" %>
                   <%= ff.text_field :start, "data-provide" => 'datepicker',:class => "form-control "  %>
@@ -87,14 +84,10 @@
                   <%= ff.label :description, "服務內容" %>
                   <%= ff.text_area :description, :class => "form-control " %>
                 </div>
-                <%= ff.link_to_remove :class=> "removetask" do%>
-                    <i class="fa fa-minus-square-o" aria-hidden="true"></i>刪除
-                <% end %>
+
             <% end %>
-            <p><%= f.link_to_add :experiences ,:class=>"addtask" do%>
-                  <i class="fa fa-plus-square-o" aria-hidden="true"></i>新增工作經驗
-                  </p>
-              <% end %>
+            <p><%= f.link_to_add :experiences ,:class=>"addtask moneyred" do%>新增工作經驗<% end %></p>
+
               <hr>
 
               </div>

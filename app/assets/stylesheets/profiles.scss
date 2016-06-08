@@ -263,12 +263,10 @@
   }
 }
 .addtask{
-  left: 80px;
+  left: 70px;
   display: inline;
   text-decoration: none;
   position: relative;
-  bottom: 20px;
-
   &:hover{
     text-decoration: none;
   }
@@ -278,6 +276,8 @@
   }
 }
 .removetask{
+  float: right;
+
   &:hover{
     text-decoration: none;
   }
@@ -287,6 +287,11 @@
 }
 .public-content .education_hr{
   margin-top: 0;
+}
+.closexx{
+  font-size: 30px;
+  font-weight: lighter;
+  margin-right: 10px;
 }
 .row_spical_fix{
   margin-right: -15px;
