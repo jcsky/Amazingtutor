@@ -9,7 +9,7 @@
         </div>
         <div class="col-xs-12 col-sm-7 col-md-12">
           <div class="col-xs-12 clearfix flexmodify">
-            <div class="info-mypic col-xs-3 pull-left">
+            <div class="info-mypic col-xs-2 pull-left">
               <%= user_headimage(@order.teacher.user) %>
             </div>
             <div class="info-eval col-xs-7">
@@ -17,9 +17,6 @@
                 <%= User.find(@order.teacher.user_id).last_name %></p>
               <div class="index_rating_fix"><div id="rateYo_ordernew"></div></div>
               <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: @order.teacher.id ).count %>)</span>
-            </div>
-            <div class=" col-xs-2 info-flag">
-              <%= image_tag("flag.png") %>
             </div>
           </div>
           <div class="col-xs-12 clearfix info-tag">
@@ -30,24 +27,11 @@
               <% @order.teacher.languages.each do |x| %>
               <%= x.language %>
               <% end %></span><br>
-            <i class="fa fa-usd"></i>
-            <span>Rate
-            </span>
-            <span class="moneyred">
-              <%= render partial: 'welcome/moneyred', locals: {t: @order.teacher} %>
-            </span><br>
-            <i class="fa fa-rss"></i>
-            <span>Trial
-            </span>
-            <span>
-              <% if @order.teacher.trial_fee == 0 %>
-                <%= "free" %>
-              <% elsif @order.teacher.trial_fee == nil %>
-                <%= "no" %>
-              <% else %>
-                <%= "yes" %>
-              <% end %>
-            </span>
+            <i class="fa fa-globe" aria-hidden="true"></i>
+            <span>From: Taiwan</span>
+            <br>
+
+
           </div>
           <div class="col-xs-12 info-pro">
             <p><%= simple_format @order.teacher.introduction %></p>

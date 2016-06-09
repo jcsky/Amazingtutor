@@ -7,7 +7,7 @@ module WelcomeHelper
     week = "Thursday" if params[:week] == "4"
     week = "Friday" if  params[:week] == "5"
     week = "Saturday" if params[:week] == "6"
-    week = "Sunday" if params[:week] == " 7"
+    week = "Sunday" if params[:week] == "7"
     week
   end
 

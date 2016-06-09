@@ -78,8 +78,8 @@
                                 <% else %>
                                     <div class="rated">
                                       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rating-<%= a.id %>" name="rated">
-  Rated
-</button>
+                                      Rated
+                                    </button>
                                     </div>
                                 <% end %>
                             <% elsif Time.current.in_time_zone <= a.start.in_time_zone-10.minutes %>
