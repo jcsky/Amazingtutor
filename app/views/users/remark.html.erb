@@ -6,11 +6,16 @@
     </div>
 
     <div class="col-md-7">
+      <div class="row_spical_fix">
       <% if @evaluations.count != 0 %>
     <% i=0 %>
     <% @evaluations.each do |e| %>
     <% i+=1 %>
-      <div class="scheduled-content col-xs-12 remark">
+
+                <div class="col-xs-12">
+
+
+      <div class="scheduled-content remark">
         <div class="clearfix flexmodify">
           <div class="info-mypic col-xs-3  col-sm-2">
             <%= user_headimage(User.find(e.appointment.teacher.user)) %>
@@ -49,11 +54,15 @@
           <p><%= e.comment %></p>
         </div>
       </div>
+                </div>
+
       <% end %>
       <% else %>
+            <div class="col-xs-12">
           <%= render partial: 'recommend' %>
+            </div>
       <% end %>
-
+      </div>
     </div>
   </div>
 </div>

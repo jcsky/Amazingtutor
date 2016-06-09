@@ -5,82 +5,87 @@
     </div>
 
     <div class="col-md-7">
+      <div class="row_spical_fix">
+        <div class="col-xs-12">
       <div class="scheduled-content scheduled-editprofile-fix">
         <div class="scheduled-content-head">
           <h4>Facebook Google connect</h4>
         </div>
-      <div class="facegoogle">
-        <%= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
-        <%= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
+        <div class="facegoogle">
+          <%= button_to "Connect to Facebook", user_facebook_omniauth_authorize_path %>
+          <%= button_to "Connect to Google+", user_google_oauth2_omniauth_authorize_path %>
+        </div>
       </div>
-    </div>
+        </div>
+        <div class="col-xs-12">
       <div class="scheduled-content scheduled-editprofile-fix">
         <div class="scheduled-content-head">
           <h4>Edit Profile</h4>
         </div>
         <div class="row">
           <div class="col-xs-12">
-        <div class="alert alert-success" role="alert">
-          <%= flash[:success]  %>
-              </div>
-       </div>
+            <div class="alert alert-success" role="alert">
+              <%= flash[:success]  %>
+            </div>
+          </div>
         </div>
 
         <div class="form-group userimage">
           <%= form_for @user do |f| %>
-          <%= user_headimage(current_user) %>
-          <div class="filebuttondiv">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-            <span>Edit Profile Photo</span>
-            <%= f.file_field :image ,class:"filebutton" %>
-          </div>
-          <% if @user.image.exists? %>
-            <%= check_box_tag "_remove_image", "1" %>Remove image
-          <% end %>
+              <%= user_headimage(current_user) %>
+              <div class="filebuttondiv">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                <span>Edit Profile Photo</span>
+                <%= f.file_field :image ,class:"filebutton" %>
+              </div>
+              <% if @user.image.exists? %>
+                  <%= check_box_tag "_remove_image", "1" %>Remove image
+              <% end %>
               <h5 class=" moneyred text-center">User image need to under 1MB and rectangle shape.</h5>
-          <div class="input-group clearfix">
-            <%= f.label :alternate_email, "Email" %>
-            <%= f.email_field :alternate_email, :class => "form-control" %>
-          </div>
-          <p class="text-center moneyred">Note : This email will receive system email</p>
-          <div class="input-group clearfix">
-            <%= f.label :username, "User Name" %>
-            <%= f.text_field :username, :class => "form-control" %>
-          </div>
-          <div class="input-group clearfix ">
-            <%= f.label :first_name, "First Name" %>
-            <%= f.text_field :first_name, :class => "form-control" %>
-          </div>
-          <div class="input-group clearfix">
-            <%= f.label :last_name, "Last Name" %>
-            <%= f.text_field :last_name, :class => "form-control" %>
-          </div>
-          <div class="input-group clearfix birthday-fix">
-            <%= f.label :birthday, "Birthday" %>
-            <%= f.date_select :birthday,start_year: 1950, :class => 'datepicker' %>
-          </div>
+              <div class="input-group clearfix">
+                <%= f.label :alternate_email, "Email" %>
+                <%= f.email_field :alternate_email, :class => "form-control" %>
+              </div>
+              <p class="text-center moneyred">Note : This email will receive system email</p>
+              <div class="input-group clearfix">
+                <%= f.label :username, "User Name" %>
+                <%= f.text_field :username, :class => "form-control" %>
+              </div>
+              <div class="input-group clearfix ">
+                <%= f.label :first_name, "First Name" %>
+                <%= f.text_field :first_name, :class => "form-control" %>
+              </div>
+              <div class="input-group clearfix">
+                <%= f.label :last_name, "Last Name" %>
+                <%= f.text_field :last_name, :class => "form-control" %>
+              </div>
+              <div class="input-group clearfix birthday-fix">
+                <%= f.label :birthday, "Birthday" %>
+                <%= f.date_select :birthday,start_year: 1950, :class => 'datepicker' %>
+              </div>
 
-          <div class="input-group clearfix">
-            <%= f.label :location, "Location" %>
-            <%= f.select(:location, IsoCountryCodes.for_select, {:prompt => "--Select county--"}, class: 'form-control' ) %>
-          </div>
-          <div class="input-group clearfix">
-            <%= f.label :currency, "Currency" %>
-            <%= f.select(:currency ,options_for_select(["USD"]),{}, :class => "form-control" )%>
-          </div>
+              <div class="input-group clearfix">
+                <%= f.label :location, "Location" %>
+                <%= f.select(:location, IsoCountryCodes.for_select, {:prompt => "--Select county--"}, class: 'form-control' ) %>
+              </div>
+              <div class="input-group clearfix">
+                <%= f.label :currency, "Currency" %>
+                <%= f.select(:currency ,options_for_select(["USD"]),{}, :class => "form-control" )%>
+              </div>
 
-          <div class="input-group clearfix">
-            <%= f.label :time_zone, "TimeZone" %>
-            <%= f.time_zone_select(:time_zone ,ActiveSupport::TimeZone.us_zones,{}, :class => "form-control" )%>
-          </div>
+              <div class="input-group clearfix">
+                <%= f.label :time_zone, "TimeZone" %>
+                <%= f.time_zone_select(:time_zone ,ActiveSupport::TimeZone.us_zones,{}, :class => "form-control" )%>
+              </div>
+
+              <div class="editprofile-save">
+                <%= f.submit 'SAVE' %>
+              </div>
+          <% end %>
         </div>
       </div>
-      <div class="editprofile-save">
-        <%= f.submit 'SAVE' %>
+        </div>
       </div>
-      <% end %>
-
-      <!--for lululala edit view-->
     </div>
   </div>
 </div>

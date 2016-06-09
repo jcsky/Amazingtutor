@@ -1,8 +1,8 @@
 <% @teachers = Teacher.where(check:"checked") %>
 <% id = current_user.teacher.id if current_user.teacher%>
 <% @teacher = Teacher.find((@teachers.ids - [id]).sample) %>
-<div class="scheduled-content scheduled-editprofile-fix  col-xs-12">
-  <div class="scheduled-content-head recommend_head">
+<div class="scheduled-content scheduled-editprofile-fix">
+  <div class="scheduled-content-head">
     <h4>Find a Tutor</h4>
   </div>
   <div class="text-center findtutor">
@@ -12,8 +12,8 @@
     <p><%= link_to "Find a Tutor",teacherwall_path %></p>
   </div>
 </div>
-<div class="scheduled-content scheduled-editprofile-fix suggestion  col-xs-12">
-  <div class="scheduled-content-head recommend_head">
+<div class="scheduled-content scheduled-editprofile-fix recommend ">
+  <div class="scheduled-content-head">
     <h4>Recommend Tutor</h4>
   </div>
   <div class="row">
@@ -31,30 +31,33 @@
                 <div class="index_rating_fix"><div id="rateYo_recommend"></div></div>
                 <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: @teacher.id ).count %>)</span>
             </div>
-            <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
-              <%= image_tag("flag.png") %>
+            <div class="trial_button_fix">
+              <div class=" col-xs-2 <%= "green_trial_butoon" if @teacher.trial_fee == 0 %> <%= "red_trial_butoon" if @teacher.trial_fee > 0 %>  col-md-2">
+                <%= button_to profile_teacher_path(@teacher) do %>
+                    <%= "FREE Trial" if @teacher.trial_fee == 0%>
+                    <%= @teacher.trial_fee.to_s + " USD Trial" if @teacher.trial_fee > 0 %>
+                <% end %>
+              </div>
             </div>
           </div>
           <div class="col-xs-12 clearfix info-tag">
             <i class="fa fa-comment-o"></i>
-          <span>Speak
-          </span>
-          <span>
-            <% @teacher.languages.each do |x| %>
-            <%= x.language %>
-            <% end %>
-          </span><br>
-            <i class="fa fa-usd"></i>
-          <span>Rate
-          </span>
-          <span class="moneyred">
-            <%= render partial: 'welcome/moneyred', locals: {t: @teacher} %>
+                        <span>Speak:
+                        </span>
+                        <span>
+                          <% @teacher.languages.each do |x| %>
+                          <%= x.language %>
+                          <% end %>
+                        </span><br>
+            <i class="fa fa-globe" aria-hidden="true"></i>
+            <span>From: Taiwan</span>
             <br>
-            </span>
-            <i class="fa fa-rss"></i>
-          <span>Trial
-          </span>
-          <span class="moneyred">Yes</span>
+            <i class="fa fa-usd"></i>
+                        <span>Rate:
+                        </span>
+                        <span class="moneyred">
+                          <%= render partial: 'welcome/moneyred', locals: {t: @teacher} %>
+                        </span><br>
           </div>
           <div class="col-xs-12 info-pro">
             <p><%= @teacher.introduction %></p>

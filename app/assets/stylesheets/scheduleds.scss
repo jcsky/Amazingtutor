@@ -301,14 +301,14 @@
 }
 .mytutor-sort .selsct_scheduled{
   button{
-  height: 40px;}
+    height: 40px;}
 }
 .findtutor{
   padding: 0 30px;
 
   h3,h5,p{
     font-weight: lighter;
-      line-height: 1.5;
+    line-height: 1.5;
   }
   p{
     font-size: 16px;
@@ -323,9 +323,9 @@
     border-radius: 5px;
     line-height: 40px;
   }
-h5{
-  margin:  20px 0;
-}
+  h5{
+    margin:  20px 0;
+  }
 }
 .userimage{
   margin-top:15px;
@@ -334,7 +334,8 @@ h5{
     width: 100px;
   }
 }
-.suggestion{
+.recommend{
+  margin-bottom:20px !important;
   a{
     color: inherit;
   }
@@ -391,7 +392,7 @@ h5{
 @media (max-width: $screen-sm-min) {
   .editprofile-save{
     input,button{
-    width: 100%;}
+      width: 100%;}
   }
   .gotoclass,
   .ratingnow {
@@ -412,7 +413,7 @@ h5{
         margin-right: 40px;
       }
       .bootstrap-select{
-      width: 100px;
+        width: 100px;
       }
     }
   }
@@ -445,11 +446,11 @@ h5{
     .input-group {
       width: 600px;
     }
-      .birthday-fix{
-        label{
-          margin-right: 60px;
-        }
+    .birthday-fix{
+      label{
+        margin-right: 60px;
       }
+    }
     .input-group .form-control {
       width: 500px;
     }
@@ -476,18 +477,18 @@ h5{
 
 @media (min-width: $screen-md-min) {
   .scheduled-white {
-      overflow: hidden;
-      width: 202px;
-      border-bottom-left-radius:5px;
-      border-top-left-radius:5px;
-      // position: relative;
+    overflow: hidden;
+    width: 202px;
+    border-bottom-left-radius:5px;
+    border-top-left-radius:5px;
+    // position: relative;
     img {
       position: relative;
       left: -50%;
       width: auto;
       height: 137px;
       background-position: center center;
-        }
+    }
   }
   .scheduled-text {
     h1 {

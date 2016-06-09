@@ -14,14 +14,19 @@
                     <%= user_headimage(t.user) %>
                   </div>
                   <%= link_to profile_teacher_path(t), :target => "_blank"  do %>
-                      <div class="info-eval col-md-7 col-xs-7">
+                      <div class="info-eval col-md-6 col-xs-6">
                         <p><%= User.find(t.user_id).first_name %>
                           <%= User.find(t.user_id).last_name %></p>
                         <div class="index_rating_fix"><div id="rateYo-<%= t.id %>" ></div></div>
                           <span>(<%= Evaluation.where(evaluatable_type: "User", evaluated_id: t.id ).count %>)
                       </div>
-                      <div class=" col-xs-2 info-flag col-md-push-2 col-md-1">
-                        <%= image_tag("flag.png") %>
+                      <div class="trial_button_fix">
+                      <div class=" col-xs-2 <%= "green_trial_butoon" if t.trial_fee == 0 %> <%= "red_trial_butoon" if t.trial_fee > 0 %> col-md-push-1 col-md-2">
+                        <%= button_to profile_teacher_path(t) do %>
+                            <%= "FREE Trial" if t.trial_fee == 0%>
+                            <%= t.trial_fee.to_s + " USD Trial" if t.trial_fee > 0 %>
+                        <% end %>
+                      </div>
                       </div>
                       </div>
                       <div class="col-xs-12 clearfix info-tag">
@@ -33,24 +38,15 @@
                           <%= x.language %>
                           <% end %>
                         </span><br>
+                        <i class="fa fa-globe" aria-hidden="true"></i>
+                        <span>From: Taiwan</span>
+                        <br>
                         <i class="fa fa-usd"></i>
                         <span>Rate:
                         </span>
                         <span class="moneyred">
                           <%= render partial: 'moneyred', locals: {t: t} %>
                         </span><br>
-                        <i class="fa fa-rss"></i>
-                        <span>Trial:
-                        </span>
-                        <span>
-                          <% if t.trial_fee == 0 %>
-                            <%= "free" %>
-                          <% elsif t.trial_fee == nil %>
-                            <%= "no" %>
-                          <% else %>
-                            <%= "yes" %>
-                          <% end %>
-                        </span>
                       </div>
                       <div class="col-xs-12 info-pro">
                         <p class="teacherwallpa"><%= t.introduction %></p>
