@@ -108,13 +108,12 @@
           <div class="modal-footer">
             <button type="button" class="btn closebtn" data-dismiss="modal">Close</button>
             <%#= x.submit 'Quick Book',:class=>"btn bookteacherbtn" %>
-            <button type="button" class="btn bookteacherbtn book_pass_params" data-dismiss="modal">Quick Book</button>
+            <button type="button" class="btn bookteacherbtn book_pass_params" data-dismiss="modal" id="book_teacher_click">Quick Book</button>
           </div>
         </div>
       </div>
     </div>
 <% end %>
-
 <script>
   $('.teacher-modal').on('shown.bs.modal', function () {
     var teacher_modal = $(this).closest(".teacher-modal")

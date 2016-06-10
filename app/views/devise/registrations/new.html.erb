@@ -22,8 +22,8 @@
     <hr>
     <div class="facegoogle">
       <%- if devise_mapping.omniauthable? %>
-      <%= link_to "Log in with Facebook", omniauth_authorize_path(resource_name, resource_class.omniauth_providers.first) %>
-      <%= link_to "Log in with Google", omniauth_authorize_path(resource_name, resource_class.omniauth_providers.last) %>
+      <%= link_to "Log in with Facebook", omniauth_authorize_path(resource_name, resource_class.omniauth_providers.first), :id => 'facebook_signup' %>
+      <%= link_to "Log in with Google", omniauth_authorize_path(resource_name, resource_class.omniauth_providers.last), :id => 'google_signup' %>
       <% end -%>
     </div>
     <p class="or">or</p>
