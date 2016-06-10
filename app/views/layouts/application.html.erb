@@ -30,7 +30,11 @@
         <div class="collapse navbar-collapse clearfix" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <%= link_to("Find a tutor", teacherwall_path)%>
+              <% if current_user %>
+                  <%= link_to "Find a tutor",teacherwall_path %>
+              <% else %>
+                  <%= link_to "Find a tutor",new_user_registration_path %>
+              <% end %>
             </li>
             <li>
               <%#= link_to("Scholarship", scholarship_path) unless current_user.nil?%>

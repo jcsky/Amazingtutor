@@ -19,7 +19,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
-        respond_with resource, location: after_sign_up_path_for(resource)
+        # respond_with resource, location: after_sign_up_path_for(resource)
+        redirect_to teacherwall_path
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
@@ -38,7 +39,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.save!
       if cookies[:scholarship]
         begin
-          @decrypted_data = amazing_crypt("decrypt",cookies[:scholarship])
+          key = OpenSSL::Digest::SHA256.new('amazing_scholarship_tutor_lululala').digest
+          crypt = ActiveSupport::MessageEncryptor.new(key)
+          @decrypted_data = crypt.decrypt_and_verify(cookies[:scholarship])
           @old_user = User.where(email: @decrypted_data).first
           Scholarship.create(new_user_id: resource.id, user_id: @old_user.id, bonus: "90")
         rescue
