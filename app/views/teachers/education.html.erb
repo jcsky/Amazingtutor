@@ -43,20 +43,20 @@
                 <% end %>
                 <div class="input-group clearfix">
                   <%= ff.label :start, "開始時間" %>
-                  <%= ff.text_field :start, "data-provide" => 'datepicker',:class => "form-control "  %>
+                  <%= ff.text_field :start, "data-provide" => 'datepicker',:class => "form-control ", required: true  %>
                 </div>
                 <div class="input-group clearfix">
                   <%= ff.label :end, "結束時間" %>
-                  <%= ff.text_field :end, "data-provide" => 'datepicker',:class => "form-control "  %>
+                  <%= ff.text_field :end, "data-provide" => 'datepicker',:class => "form-control " , required: true %>
                 </div>
 
                 <div class="input-group clearfix">
                   <%= ff.label :school, "學校名稱" %>
-                  <%= ff.text_field :school, :class => "form-control " %>
+                  <%= ff.text_field :school, :class => "form-control ", required: true %>
                 </div>
                 <div class="input-group clearfix">
                   <%= ff.label :major, "科系全名" %>
-                  <%= ff.text_field :major, :class => "form-control " %>
+                  <%= ff.text_field :major, :class => "form-control ", required: true %>
                 </div>
 
             <% end %>
@@ -70,19 +70,19 @@
                 <% end %>
                 <div class="input-group clearfix ">
                   <%= ff.label :start, "開始時間" %>
-                  <%= ff.text_field :start, "data-provide" => 'datepicker',:class => "form-control "  %>
+                  <%= ff.text_field :start, "data-provide" => 'datepicker',:class => "form-control " , required: true %>
                 </div>
                 <div class="input-group clearfix">
                   <%= ff.label :end, "結束時間" %>
-                  <%= ff.text_field :end, "data-provide" => 'datepicker',:class => "form-control "  %>
+                  <%= ff.text_field :end, "data-provide" => 'datepicker',:class => "form-control " , required: true %>
                 </div>
                 <div class="input-group clearfix">
                   <%= ff.label :company_name, "單位名稱" %>
-                  <%= ff.text_field :company_name, :class => "form-control " %>
+                  <%= ff.text_field :company_name, :class => "form-control ", required: true %>
                 </div>
                 <div class="input-group clearfix">
                   <%= ff.label :description, "服務內容" %>
-                  <%= ff.text_area :description, :class => "form-control " %>
+                  <%= ff.text_area :description, :class => "form-control " , required: true%>
                 </div>
 
             <% end %>

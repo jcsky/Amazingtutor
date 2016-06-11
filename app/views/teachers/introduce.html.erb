@@ -15,14 +15,14 @@
         <div class="input-group clearfix language-select-fix">
 
           <label for="#your-input" class="pull-left ">第二外語</label>
-          <%= f.collection_select(:language_ids, Language.all, :id, :language,{}, {:multiple => true, :class => "form-control",:id=>"language-select",:style=>"width:80%;" }) %>
+          <%= f.collection_select(:language_ids, Language.all, :id, :language,{}, {:multiple => true, :class => "form-control",:id=>"language-select",:style=>"width:80%;" , required: true}) %>
         </div>
         <h6>小提醒：如果您會其他外語歡迎填寫，這樣對學員來說會格外親切
         </h6>
         <hr>
         <div class="input-group clearfix intro-textarea-fix">
           <%= f.label :introduction, "自我介紹" %>
-          <%= f.text_area :introduction, :class => "form-control" %>
+          <%= f.text_area :introduction, :class => "form-control", required: true %>
         </div>
         <hr>
         <div class="public-note">

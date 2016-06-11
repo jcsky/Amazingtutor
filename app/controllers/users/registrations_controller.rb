@@ -5,9 +5,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     super
-    if params[:scholarship]
-      cookies[:scholarship] = params[:scholarship]
-    end
+      cookies[:scholarship] = params[:scholarship] if params[:scholarship]
+      cookies[:apply] = params[:apply] if params[:apply]
   end
 
   # POST /resource
@@ -20,7 +19,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         # respond_with resource, location: after_sign_up_path_for(resource)
-        redirect_to teacherwall_path
+        if cookies[:apply] == "teacher"
+          cookies[:apply] = nil
+          redirect_to apply_teacher_file_path
+        else
+          redirect_to teacherwall_path
+        end
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!

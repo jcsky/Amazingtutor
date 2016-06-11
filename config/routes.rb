@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     end
     resources :available_section
   end
+  get 'apply_teacher_file' => 'teachers#apply_teacher_file'
 
   resources :appointments do
     resources :evaluations
@@ -86,7 +87,6 @@ Rails.application.routes.draw do
   get  'apply_teacher'=> "welcome#apply_teacher"
   get  'teacherwall'=>"welcome#index"
   root 'welcome#mainindex'
-
   get 'thankyou' => "orders#thankyou"
 
   # The priority is based upon order of creation: first created -> highest priority.

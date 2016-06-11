@@ -6,64 +6,63 @@
     <div class="col-md-8">
       <div class=" public-content">
         <%= form_for @teacher do |f| %>
-        <div class="public-head">
-          <h4>價格</h4>
-        </div>
-        <h5>試上課程</h5>
-        <div class="alert alert-success" role="alert">
-          <%= flash[:alert]  %>
-        </div>
-        <div class="input-group clearfix">
+            <div class="public-head">
+              <h4>價格</h4>
+            </div>
+            <div class="alert alert-success" role="alert">
+              <%= flash[:alert]  %>
+            </div>
+            <h5>試上課程</h5>
+            <div class="input-group clearfix">
+              <%= f.label :trial_fee, "體驗課" %>
+              <%= f.text_field :trial_fee, :placeholder=>"US$ 0", :class => "form-control" %>
+            </div>
+            <h6>小提醒：因體驗課為 30 分鐘，提供具親和力的價格，有助於提高學員體驗的意願。</h6>
+            <h6>(如可免費體驗則可設為 0 元)</h6>
+            <hr>
+            <h5>正式上課</h5>
+            <div class="input-group clearfix">
+              <%= f.label :one_fee, "1堂課" %>
+              <%= f.text_field :one_fee, :placeholder=>"US$ 0", :class => "form-control",id:"one_fee", required: true %>
+              <%#= f.label :one_fee %>
+              <%#= f.text_field :one_fee ,{class:"form-control", placeholder:"US$0", "aria-describedby":basic-addon1}%>
+            </div>
 
-          <%= f.label :trial_fee, "體驗課" %>
-          <%= f.text_field :trial_fee, :placeholder=>"US$0", :class => "form-control" %>
-        </div>
-        <h6>小提醒：因體驗課為 30 分鐘，提供具親和力的價格，有助於提高學員體驗的意願。</h6>
-        <h6>(如可免費體驗則可設為 0 元)</h6>
-        <hr>
-        <h5>正式上課</h5>
-        <div class="input-group clearfix">
-          <%= f.label :one_fee, "1堂課" %>
-          <%= f.text_field :one_fee, :placeholder=>"US$0", :class => "form-control",id:"one_fee" %>
-          <%#= f.label :one_fee %>
-          <%#= f.text_field :one_fee ,{class:"form-control", placeholder:"US$0", "aria-describedby":basic-addon1}%>
-        </div>
+            <div class="input-group clearfix">
 
-        <div class="input-group clearfix">
+              <%= f.label :five_fee, "5堂課" %>
+              <%= f.text_field :five_fee, :placeholder=>"US$ 0",:class => "form-control",id:"five_fee" , required: true%>
+            </div>
 
-          <%= f.label :five_fee, "5堂課" %>
-          <%= f.text_field :five_fee, :placeholder=>"US$0",:class => "form-control",id:"five_fee" %>
-        </div>
+            <div class="input-group clearfix">
 
-        <div class="input-group clearfix">
-
-          <%= f.label :ten_fee, "10堂課" %>
-          <%= f.text_field :ten_fee, :placeholder=>"US$0", :class => "form-control" ,id:"ten_fee"%>
+              <%= f.label :ten_fee, "10堂課" %>
+              <%= f.text_field :ten_fee, :placeholder=>"US$ 0", :class => "form-control" ,id:"ten_fee", required: true%>
+            </div>
+            <h6>小提醒：5、10堂課請輸入平均單價。</h6>
+            <hr>
+            <div class="public-note">
+              <h5>小提醒：</h5>
+              <h6>每一堂學員付費，須等到正式上課並給予評價後才會列入撥款， AmazingTutor 將在每月 15, 30日撥款，匯款帳戶設定請至 收款設定</h6>
+            </div>
+            </div>
+            <div class="public-save">
+              <%= f.submit 'SAVE', {:class => "btn" ,:id=>"pricesubbmit"} %>
+            </div>
+        <% end %>
         </div>
-          <h6>小提醒：5、10堂課請輸入平均單價。</h6>
-        <hr>
-        <div class="public-note">
-          <h5>小提醒：</h5>
-          <h6>每一堂學員付費，須等到正式上課並給予評價後才會列入撥款， AmazingTutor 將在每月 15, 30日撥款，匯款帳戶設定請至 收款設定</h6>
-        </div>
-      </div>
-      <div class="public-save">
-        <%= f.submit 'SAVE', {:class => "btn" ,:id=>"pricesubbmit"} %>
-      </div>
-      <% end %>
-    </div>
   </div>
 </div>
 
 <script>
-$(function () {
+  $(function () {
 
     $('#one_fee').focusout(function () {
       var onefee = parseInt($('#one_fee').val());
       var fivefee = parseInt($('#five_fee').val()) ;
       var tenfee = parseInt($('#ten_fee').val()) ;
       if (onefee < fivefee) {
-         onefee = fivefee;
+        onefee = fivefee;
         $('#onefee').val(fivefee);
       } else if (onefee < tenfee) {
         onefee = tenfee;

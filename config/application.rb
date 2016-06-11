@@ -41,7 +41,9 @@ module Amazingtutor
     config.eager_load_paths += %W( #{config.root}/app/jobs )
 
     config.active_record.raise_in_transactional_callbacks = true
-
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      html_tag
+    }
 
 
   end

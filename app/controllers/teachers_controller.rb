@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :teacher_authority, except: [:profile, :index]
+  before_action :teacher_authority, except: [:profile, :index , :apply_teacher_file,:update]
   before_action :get_teacher, except: :profile
   # before_action :get_hangouts_url
 
@@ -53,7 +53,12 @@ class TeachersController < ApplicationController
   def hangouts_url
   end
 
+  def apply_teacher_file
+  end
+
+
   def update
+    teacher_authority_without_authority
     if params[:teacher][:youtube]
       if params[:teacher][:youtube].include?('https://www.youtube.com/watch')
         @teacher.youtube = params[:teacher][:youtube]
@@ -71,10 +76,10 @@ class TeachersController < ApplicationController
         redirect_to :back
         flash[:alert] = 'Save success'
       else
-        flash[:alert] = 'Save fail'
+        flash[:alert] = 'Save fail ! Maybe some inputs empty.'
+        redirect_to :back
       end
     end
-
   end
 
   private
@@ -97,6 +102,13 @@ class TeachersController < ApplicationController
   #     current_user.teacher.save
   #   end
   # end
+
+  def teacher_authority_without_authority
+    @teacher = Teacher.find(params[:id])
+    if current_user.nil? || current_user.try(:teacher).id != @teacher.id
+      redirect_to root_path
+    end
+  end
 
   def teacher_authority
     @teacher = Teacher.find(params[:id])

@@ -1,0 +1,199 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-push-2">
+      <div class="public-content form-group">
+        <%= form_for @teacher do |f| %>
+            <div class="public-head">
+              <h4>基本資料</h4>
+            </div>
+            <div class="alert alert-success">
+              <%= flash[:alert]  %>
+            </div>
+            <div class="input-group clearfix language-select-fix">
+
+              <label for="#your-input" class="pull-left ">第二外語</label>
+              <%= f.collection_select(:language_ids, Language.all, :id, :language,{}, {:multiple => true, :class => "form-control",:id=>"language-select",:style=>"width:80%;" }) %>
+            </div>
+            <h6>小提醒：如果您會其他外語歡迎填寫，這樣對學員來說會格外親切
+            </h6>
+            <hr>
+            <div class="input-group clearfix intro-textarea-fix">
+              <%= f.label :introduction, "自我介紹" %>
+              <%= f.text_area :introduction, :class => "form-control" %>
+            </div>
+            <hr>
+            <div class="public-note">
+              <h5>小提醒：</h5>
+              <h6>小提醒：大部分的學員對於老師的教學方式、教學背景、已經經歷 會有濃厚的興趣，趕緊寫下你的寶貴經驗吧!</h6>
+            </div>
+            </div>
+            <div class="public-save">
+              <%= f.submit 'SAVE', :class => "btn" %>
+            </div>
+        <% end %>
+        </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-push-2">
+      <div class="public-content">
+        <div class="public-head">
+          <h4>教學經驗</h4>
+        </div>
+        <div class="alert alert-success">
+          <%= flash[:alert]  %>
+        </div>
+        <div class="public-note">
+          <h5>小提醒：請使用英文填寫，如工作經歷跟語言教學有關，會更吸引學員的目光唷!</h5>
+        </div>
+        <hr class="education_hr">
+
+        <%= nested_form_for @teacher do |f| %>
+            <h5 class="add_nested_fix">證照</h5>
+
+            <%= f.fields_for :certificates do |ff| %>
+                <%= ff.link_to_remove :class=> "removetask" do %>
+                    <span class="moneyred closexx">&times;</span>
+                <% end %>
+                <div class="input-group clearfix">
+                  <%= ff.label :name, "證照名稱" %>
+                  <%= ff.text_field :name, :class => "form-control"  %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :score, "證照分數" %>
+                  <%= ff.text_field :score , {:class => "form-control " , required: true }%>
+                </div>
+
+            <% end %>
+            <%= f.link_to_add :certificates ,:class=>"addtask moneyred" do%>新增證照<% end %>
+
+            <hr>
+            <h5 class="add_nested_fix">學歷</h5>
+            <%= f.fields_for :educations do |ff| %>
+                <%= ff.link_to_remove :class=> "removetask" do%>
+                    <span class="moneyred closexx">&times;</span>
+                <% end %>
+                <div class="input-group clearfix">
+                  <%= ff.label :start, "開始時間" %>
+                  <%= ff.text_field :start, "data-provide" => 'datepicker',:class => "form-control "  %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :end, "結束時間" %>
+                  <%= ff.text_field :end, "data-provide" => 'datepicker',:class => "form-control "  %>
+                </div>
+
+                <div class="input-group clearfix">
+                  <%= ff.label :school, "學校名稱" %>
+                  <%= ff.text_field :school, :class => "form-control " %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :major, "科系全名" %>
+                  <%= ff.text_field :major, :class => "form-control " %>
+                </div>
+
+            <% end %>
+            <p><%= f.link_to_add :educations ,:class=>"addtask moneyred" do%>新增教育背景<% end %></p>
+            <hr>
+
+            <h5 class="add_nested_fix">工作經驗</h5>
+            <%= f.fields_for :experiences do |ff| %>
+                <%= ff.link_to_remove :class=> "removetask" do%>
+                    <span class="moneyred closexx">&times;</span>
+                <% end %>
+                <div class="input-group clearfix ">
+                  <%= ff.label :start, "開始時間" %>
+                  <%= ff.text_field :start, "data-provide" => 'datepicker',:class => "form-control "  %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :end, "結束時間" %>
+                  <%= ff.text_field :end, "data-provide" => 'datepicker',:class => "form-control "  %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :company_name, "單位名稱" %>
+                  <%= ff.text_field :company_name, :class => "form-control " %>
+                </div>
+                <div class="input-group clearfix">
+                  <%= ff.label :description, "服務內容" %>
+                  <%= ff.text_area :description, :class => "form-control " %>
+                </div>
+
+            <% end %>
+            <p><%= f.link_to_add :experiences ,:class=>"addtask moneyred" do%>新增工作經驗<% end %></p>
+
+            <hr>
+
+            </div>
+            <div class="public-save">
+              <%= f.submit 'SAVE', :class => "btn" %>
+            </div>
+        <% end %>
+        </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-push-2">
+      <div class="public-content youtube-fix">
+        <div class="public-head">
+          <h4>介紹影片</h4>
+        </div>
+        <h5>個人短片簡介</h5>
+        <div class="container-fluid">
+          <div class="alert alert-success">
+            <%= flash[:alert]  %>
+          </div>
+          <%= form_for @teacher do |f| %>
+              <iframe src="<%= youtube_website %>?playlist=&version=3&controls=0&fs=0&rel=0&showinfo=0&iv_load_policy=3&theme=light" frameborder="0" allowfullscreen></iframe>
+              <div class="row">
+                <div class="col-xs-3">
+                  <h5>Youtube 連結</h5>
+                </div>
+                <div class="col-xs-9"><%= f.text_field :youtube, :placeholder => "https://www.youtube.com/watch?xxxxxxxxx", :class => "form-control" %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <h5>短片檢查列表</h5>
+                </div>
+                <div class="col-xs-9">
+                  <h6>・我們喜歡特寫，但建議您坐在離網路攝影機有一臂之遙的位置。</h6>
+                  <h6>・您只有3分鐘的時間，所以盡量言簡意賅。</h6>
+                  <h6>・盡量讓光線從前方照過來，而不是從後方。</h6>
+                  <h6>・眼望鏡頭，製造情感交流。</h6>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <h5>教師專業介紹</h5>
+                </div>
+                <div class="col-xs-9">
+                  <h6>・我們喜歡聽到您來自哪裡、教育背景、以及教學經驗。</h6>
+                  <h6>・除了經歷外您會透過什麼樣的方式來給學員教學體驗？</h6>
+                  <h6>・我們喜歡跟您的興趣以及愛好有所連結。</h6>
+                </div>
+              </div>
+              </div>
+              </div>
+              <div class="public-save">
+                <%= f.submit 'SAVE', :class => "btn" %>
+              </div>
+          <% end %>
+          </div>
+  </div>
+</div>
+
+
+<script>
+  $("#language-select").select2({placeholder: "Select a language"});
+  $(document).on('nested:fieldAdded', function(event){
+    // this field was just inserted into your form
+    var field = event.field;
+    // it's a jQuery object already! Now you can find date input
+    var dateField = field.find('.date');
+    // and activate datepicker on it
+    dateField.datepicker();
+  })
+</script>
