@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container p_display_inline">
   <div class="row">
     <div class="col-md-4">
       <%= render "sidebar" %>
@@ -17,7 +17,7 @@
         <hr class="education_hr">
 
         <%= nested_form_for @teacher do |f| %>
-            <h5 class="add_nested_fix">證照</h5>
+            <h5 class="add_nested_fix">證照執照</h5>
 
             <%= f.fields_for :certificates do |ff| %>
                 <%= ff.link_to_remove :class=> "removetask" do %>
@@ -36,7 +36,7 @@
             <%= f.link_to_add :certificates ,:class=>"addtask moneyred" do%>新增證照<% end %>
 
             <hr>
-            <h5 class="add_nested_fix">學歷</h5>
+            <h5 class="add_nested_fix">學歷背景</h5>
             <%= f.fields_for :educations do |ff| %>
                 <%= ff.link_to_remove :class=> "removetask" do%>
                     <span class="moneyred closexx">&times;</span>

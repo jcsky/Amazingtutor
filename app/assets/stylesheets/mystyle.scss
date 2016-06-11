@@ -114,6 +114,11 @@ body {
 .row_fix{
   margin:0 -15px;
 }
+.p_display_inline{
+  p {
+    display: inline;
+  }
+}
 // Small devices (tablets, 768px and up)
 @media (max-width: $screen-sm-min) {
   .container {
