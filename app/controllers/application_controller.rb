@@ -36,8 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(_resource)
-    session[:previous_url] || teacherwall_path
-    byebug
+    session[:previous_url]  || (apply_teacher_file_path if cookies[:apply] == "teacher") || teacherwall_path
   end
 
   def amazing_crypt(action,object)
