@@ -131,7 +131,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-
   h3{
     font-weight: lighter;
   }
@@ -166,5 +165,61 @@
   h3 {
     margin: 20px;
     font-weight: lighter;
+  }
+}
+.get_start_down{
+  display: none;
+}
+@media (max-width: $screen-sm-min ) {
+  .get_start_down{
+    display: block;
+    text-align: center;
+    a{
+      text-decoration: none;
+      background-color: #FF5F5F;
+      width: 100%;
+      height: 57px;
+      color: #fff;
+      display: block;
+      line-height: 57px;
+      font-size: 24px;
+      margin: 30px auto;
+      font-weight: lighter;
+      margin:0;
+    }
+  }
+  .main-head{
+    background: linear-gradient(
+                    rgba(0, 0, 0, 0.5),
+                    rgba(0, 0, 0, 0.5)
+    ),image-url("index_background.jpg") ;
+    //background-size: cover;
+    .main_head_link{
+      background-color: transparent;
+     border-radius: 0;
+    }
+    .main_head_content{
+      top: 76.5%;
+    }
+    height: 400px;
+    a{
+      display: none;
+    }
+    h1{
+      padding-top: 15px;
+      margin:20px auto;
+    }
+    h3{
+      padding-bottom: 15px;
+    }
+  }
+  .main_footer{
+    height: 400px;
+    .main_head_content{
+
+    }
+   a{
+     display: none;
+   }
   }
 }

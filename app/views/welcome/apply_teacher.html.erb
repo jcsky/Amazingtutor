@@ -2,7 +2,11 @@
   <div class="content-apply">
     <h2>申請華語教師 在家教中文</h2>
     <h4>在家教華語 每週增加上萬元收入</h4>
-    <button>立即申請</button>
+    <% if current_user %>
+        <%= link_to "立即申請" ,apply_teacher_file_path %>
+    <% else %>
+        <%= link_to "立即申請" ,new_user_registration_path(apply: "teacher") %>
+    <% end %>
   </div>
 </section>
 <section class="reason">

@@ -1,7 +1,7 @@
 <section class="main-head">
   <div class="container-fluid main_head_content">
     <div class="row">
-      <div class="col-md-4 col-md-push-1 main_head_link">
+      <div class="col-md-4 col-md-push-1 main_head_link col-sm-6 col-sm-push-1">
         <h1>Learn to speak Chinese in 30 minutes</h1>
         <h3>one-on-one mandarin lessons from native speakers</h3>
         <% if current_user %>
@@ -13,6 +13,13 @@
     </div>
   </div>
 </section>
+<section class="get_start_down">
+  <% if current_user %>
+      <%= link_to "Get Start Now",teacherwall_path %>
+  <% else %>
+      <%= link_to "Get Start Now",new_user_registration_path %>
+  <% end %>
+</section>
 <section class="teacherwall">
   <div class="container-fluid">
     <div class="row">
@@ -21,9 +28,9 @@
         <h3>All of our teachers have a certificate, degree or experience in Chinese teaching.</h3>
       </div>
     </div>
-    <div class="row">
+    <div class="row-fluid">
       <div class="col-xs-10 col-xs-push-1">
-        <div class="row">
+        <div class="row-fluid">
           <div class="col-md-4 col-xs-6 teacherpic">
             <%= link_to profile_teacher_path(273) do %>
                 <%= image_tag("6.jpg") %>
@@ -133,4 +140,11 @@
       </div>
     </div>
   </div>
+</section>
+<section class="get_start_down">
+  <% if current_user %>
+      <%= link_to "Get Start Now",teacherwall_path %>
+  <% else %>
+      <%= link_to "Get Start Now",new_user_registration_path %>
+  <% end %>
 </section>
