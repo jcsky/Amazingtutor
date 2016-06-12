@@ -5,7 +5,7 @@
     <% if current_user %>
         <%= link_to "立即申請" ,apply_teacher_file_path %>
     <% else %>
-        <%= link_to "立即申請" ,new_user_registration_path(apply: "teacher") %>
+        <%= link_to "立即申請" ,new_user_registration_path %>
     <% end %>
   </div>
 </section>
@@ -157,7 +157,7 @@
     <% if current_user %>
         <%= link_to "立即申請" ,apply_teacher_file_path,class:"apply_now" %>
     <% else %>
-        <%= link_to "立即申請" ,new_user_registration_path(apply: "teacher"),class:"apply_now" %>
+        <%= link_to "立即申請" ,new_user_registration_path,class:"apply_now" %>
     <% end %>
   </div>
 </section>

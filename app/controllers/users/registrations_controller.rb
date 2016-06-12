@@ -6,7 +6,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     super
       cookies[:scholarship] = params[:scholarship] if params[:scholarship]
-      cookies[:apply] = params[:apply] if params[:apply]
   end
 
   # POST /resource
@@ -19,8 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         # respond_with resource, location: after_sign_up_path_for(resource)
-        if cookies[:apply] == "teacher"
-          cookies[:apply] = nil
+        if session[:previous_url] == "/apply_teacher"
           redirect_to apply_teacher_file_path
         else
           redirect_to teacherwall_path
