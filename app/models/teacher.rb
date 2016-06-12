@@ -115,13 +115,10 @@ class Teacher < ActiveRecord::Base
           # if @available_section_times.present?
           # @available_section_times.pop if @available_section_times.last.last > available_section.end
           #   end
-          byebug
           @available_section_times.pop if section == 2 && block != nil
-          byebug
         end
       end
     end
-
     @available_section_times.uniq.select{|x| x unless self.appointment_check(x[0], x[1])}.sort.select{|x| x[0]>= Time.current.in_time_zone + 1.hours}.map{|x| x[0].strftime('%R %p')+" - "+x[1].strftime('%R %p') }
   end
   # @available_section_times.uniq.select{|x| x unless self.appointment_check(x[0], x[1])}.sort.select{|x| x[0]>= Time.current.in_time_zone+12.hours }.map{|x| x[0].strftime('%r')+" - "+x[1].strftime('%r') }
