@@ -50,6 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         end
       end
     end
+    cookies[:scholarship] = nil
   end
 
   # GET /resource/edit
