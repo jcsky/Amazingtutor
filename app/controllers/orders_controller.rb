@@ -35,11 +35,10 @@ class OrdersController < ApplicationController
     end
 
     if amount
-      @user = current_user
-      @order = @user.orders.create!( teacher: teacher,
-                                     amount: amount,
-                                     session: session,
-                                     email: email)
+      @order = current_user.orders.create!( teacher: teacher,
+                                            amount: amount,
+                                            session: session,
+                                            email: email)
        if @order.save
          redirect_to user_order_path(@order.user, @order)
        else
