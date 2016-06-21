@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'iso_country_codes'
-gem 'country_select'
+gem 'country_select' # seems no use
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
@@ -78,13 +78,6 @@ gem 'bootstrap-sass' ,' ~>3.3.6'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-
 # 貨幣顯示轉換
 gem 'money'
 gem 'json'
@@ -93,7 +86,6 @@ gem 'google_currency'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
   gem 'growl'
@@ -106,10 +98,4 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-
-
 end
-
-

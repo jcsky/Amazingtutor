@@ -14,221 +14,221 @@
 ActiveRecord::Schema.define(version: 20160608031051) do
 
   create_table "appointments", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.integer  "section"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "teacher_id",      limit: 4
+    t.integer  "section",         limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.datetime "start"
     t.datetime "end"
-    t.integer  "user_id"
-    t.string   "appointment_url"
+    t.integer  "user_id",         limit: 4
+    t.string   "appointment_url", limit: 255
   end
 
-  add_index "appointments", ["user_id"], name: "index_appointments_on_user_id"
+  add_index "appointments", ["user_id"], name: "index_appointments_on_user_id", using: :btree
 
   create_table "available_sections", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.integer  "appointment_id"
+    t.integer  "teacher_id",     limit: 4
+    t.integer  "appointment_id", limit: 4
     t.datetime "start"
     t.datetime "end"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "certificates", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.string   "name"
-    t.string   "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "teacher_id", limit: 4
+    t.string   "name",       limit: 255
+    t.string   "score",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "educations", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.string   "school"
-    t.text     "major"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "start"
-    t.string   "end"
+    t.integer  "teacher_id", limit: 4
+    t.string   "school",     limit: 255
+    t.text     "major",      limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "start",      limit: 255
+    t.string   "end",        limit: 255
   end
 
   create_table "evaluations", force: :cascade do |t|
-    t.string   "comment"
-    t.integer  "rating",           default: 5
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "appointment_id"
-    t.integer  "evaluatable_id"
-    t.string   "evaluatable_type"
-    t.integer  "evaluated_id"
+    t.string   "comment",          limit: 255
+    t.integer  "rating",           limit: 4,   default: 5
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "appointment_id",   limit: 4
+    t.integer  "evaluatable_id",   limit: 4
+    t.string   "evaluatable_type", limit: 255
+    t.integer  "evaluated_id",     limit: 4
   end
 
-  add_index "evaluations", ["appointment_id"], name: "index_evaluations_on_appointment_id"
-  add_index "evaluations", ["evaluatable_id"], name: "index_evaluations_on_evaluatable_id"
-  add_index "evaluations", ["evaluated_id"], name: "index_evaluations_on_evaluated_id"
+  add_index "evaluations", ["appointment_id"], name: "index_evaluations_on_appointment_id", using: :btree
+  add_index "evaluations", ["evaluatable_id"], name: "index_evaluations_on_evaluatable_id", using: :btree
+  add_index "evaluations", ["evaluated_id"], name: "index_evaluations_on_evaluated_id", using: :btree
 
   create_table "experiences", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.string   "company_name"
-    t.text     "description"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "start"
-    t.string   "end"
-    t.string   "position"
+    t.integer  "teacher_id",   limit: 4
+    t.string   "company_name", limit: 255
+    t.text     "description",  limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "start",        limit: 255
+    t.string   "end",          limit: 255
+    t.string   "position",     limit: 255
   end
 
   create_table "languages", force: :cascade do |t|
-    t.string   "language"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "language",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.text     "message"
-    t.string   "problem"
-    t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",    limit: 4
+    t.integer  "friend_id",  limit: 4
+    t.text     "message",    limit: 65535
+    t.string   "problem",    limit: 255
+    t.string   "email",      limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "teacher_id"
-    t.integer  "section"
-    t.integer  "amount"
-    t.string   "status"
-    t.string   "payment_status"
-    t.string   "attendance_status"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.boolean  "paid",                  default: false
-    t.string   "email"
-    t.string   "session"
+    t.integer  "user_id",               limit: 4
+    t.integer  "teacher_id",            limit: 4
+    t.integer  "section",               limit: 4
+    t.integer  "amount",                limit: 4
+    t.string   "status",                limit: 255
+    t.string   "payment_status",        limit: 255
+    t.string   "attendance_status",     limit: 255
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.boolean  "paid",                                default: false
+    t.string   "email",                 limit: 255
+    t.string   "session",               limit: 255
     t.datetime "paid_at"
-    t.string   "paypal_status"
-    t.string   "paypal_transaction_id"
-    t.text     "paypal_params"
+    t.string   "paypal_status",         limit: 255
+    t.string   "paypal_transaction_id", limit: 255
+    t.text     "paypal_params",         limit: 65535
   end
 
   create_table "payments", force: :cascade do |t|
-    t.integer  "order_id"
-    t.string   "payment_method"
-    t.integer  "amount"
-    t.boolean  "paid",           default: false
-    t.text     "params"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "order_id",       limit: 4
+    t.string   "payment_method", limit: 255
+    t.integer  "amount",         limit: 4
+    t.boolean  "paid",                         default: false
+    t.text     "params",         limit: 65535
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
-  add_index "payments", ["order_id"], name: "index_payments_on_order_id"
+  add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
 
   create_table "remarks", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.integer  "user_id"
-    t.text     "desciption"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "teacher_id", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.text     "desciption", limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "scholarships", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "new_user_id"
-    t.string   "bonus"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "user_id",     limit: 4
+    t.integer  "new_user_id", limit: 4
+    t.string   "bonus",       limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "second_tongues", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "language"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",    limit: 4
+    t.string   "language",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "teacher_languageships", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.integer  "language_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "teacher_id",  limit: 4
+    t.integer  "language_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "youtube"
-    t.text     "introduction"
-    t.integer  "trial_fee"
-    t.integer  "one_fee"
-    t.integer  "five_fee"
-    t.integer  "ten_fee"
-    t.string   "gathering_way"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "avg_rating",    default: 0
-    t.string   "check"
-    t.string   "hangouts_url"
+    t.integer  "user_id",       limit: 4
+    t.string   "youtube",       limit: 255
+    t.text     "introduction",  limit: 65535
+    t.integer  "trial_fee",     limit: 4
+    t.integer  "one_fee",       limit: 4
+    t.integer  "five_fee",      limit: 4
+    t.integer  "ten_fee",       limit: 4
+    t.string   "gathering_way", limit: 255
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "avg_rating",    limit: 4,     default: 0
+    t.string   "check",         limit: 255
+    t.string   "hangouts_url",  limit: 255
   end
 
   create_table "user_available_sections", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "teacher_id"
-    t.integer  "available_section", default: 0
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "trailed",           default: false
+    t.integer  "user_id",           limit: 4
+    t.integer  "teacher_id",        limit: 4
+    t.integer  "available_section", limit: 4, default: 0
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.boolean  "trailed",                     default: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email"
-    t.string   "encrypted_password",     default: "",    null: false
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255
+    t.string   "encrypted_password",     limit: 255,   default: "",    null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "username"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "location"
-    t.string   "currency",               default: "USD"
-    t.string   "tongue"
-    t.string   "born_form"
-    t.string   "live_in"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "username",               limit: 255
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
+    t.string   "location",               limit: 255
+    t.string   "currency",               limit: 255,   default: "USD"
+    t.string   "tongue",                 limit: 255
+    t.string   "born_form",              limit: 255
+    t.string   "live_in",                limit: 255
     t.boolean  "gender"
-    t.string   "time_zone"
-    t.integer  "user_id"
+    t.string   "time_zone",              limit: 255
+    t.integer  "user_id",                limit: 4
     t.datetime "birthday"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "fb_uid"
-    t.string   "fb_token"
-    t.text     "fb_raw_data"
-    t.string   "google_uid"
-    t.string   "google_token"
-    t.text     "google_raw_data"
-    t.string   "locale"
-    t.string   "authority"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.string   "fb_uid",                 limit: 255
+    t.string   "fb_token",               limit: 255
+    t.text     "fb_raw_data",            limit: 65535
+    t.string   "google_uid",             limit: 255
+    t.string   "google_token",           limit: 255
+    t.text     "google_raw_data",        limit: 65535
+    t.string   "locale",                 limit: 255
+    t.string   "authority",              limit: 255
+    t.string   "image_file_name",        limit: 255
+    t.string   "image_content_type",     limit: 255
+    t.integer  "image_file_size",        limit: 4
     t.datetime "image_updated_at"
-    t.string   "authentication_token"
+    t.string   "authentication_token",   limit: 255
     t.boolean  "admin_by_lululala"
-    t.string   "fb_pic"
-    t.string   "google_pic"
-    t.string   "alternate_email"
+    t.string   "fb_pic",                 limit: 255
+    t.string   "google_pic",             limit: 255
+    t.string   "alternate_email",        limit: 255
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["fb_uid"], name: "index_users_on_fb_uid"
-  add_index "users", ["google_uid"], name: "index_users_on_google_uid"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["user_id"], name: "index_users_on_user_id"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["fb_uid"], name: "index_users_on_fb_uid", using: :btree
+  add_index "users", ["google_uid"], name: "index_users_on_google_uid", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["user_id"], name: "index_users_on_user_id", using: :btree
 
 end

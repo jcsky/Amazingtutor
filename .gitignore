@@ -18,19 +18,16 @@
 
 /public/system/
 
-.idea/
-
 /config/facebook.yml
 /config/google.yml
-.byebug_history
 /config/secrets.yml
 /config/pay2go.yml
 /config/pay2go.yml.example
 /config/email.yml
 /config/pay2go.yml
-/db/seeds.rb.example
 /config/secrets.yml.example
+/config/application.yml
+
+/db/seeds.rb.example
 /lib/tasks/dev.rake.example
 .byebug_history
-
-/config/application.yml
