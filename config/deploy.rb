@@ -4,7 +4,7 @@
 lock '3.4.1'
 
 set :application, 'Amazingtutor'
-set :repo_url, 'git@github.com:Shih-Yi/Amazingtutor.git'
+set :repo_url, 'git@github.com:jcsky/Amazingtutor.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
